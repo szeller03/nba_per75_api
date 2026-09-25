@@ -34,8 +34,8 @@ ROOT = next(
     (p for p in _ROOT_CANDIDATES if (p / "data").exists()),
     _ESTABLISHED_ROOT,
 )
-HOST = "127.0.0.1"
-PORT = 8000
+HOST = os.environ.get("HOST", "127.0.0.1")
+PORT = int(os.environ.get("PORT", "8000"))
 
 # --- SDI v4 revised top-level weights ---
 SDI_V4_TOP_LEVEL_WEIGHTS = {
