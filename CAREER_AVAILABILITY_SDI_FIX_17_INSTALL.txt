@@ -1,0 +1,43 @@
+WEBSITE240 — CAREER AVAILABILITY + SDI FIX 17
+
+Replace:
+  local_api/nba_per75_local_api.py
+
+Add/replace:
+  data/precomputed_sdi_v4/regular_career_sdi_v4_wowy_v2.csv
+
+WHAT THIS FIXES
+1. Career statistics no longer treat untracked historical seasons as zero.
+   The canonical one-row-per-player-season profile layer is used to determine
+   whether a statistic was actually recorded.
+2. Per-75 counting statistics are recomputed from recorded raw totals and
+   recorded estimated possessions only.
+3. FG%, 2P%, 3P%, FT%, TS%, rTS, AST:TOV, FTr and 3PAr use their natural
+   recorded denominators.
+4. OREB%, DREB%, AST%, STL%, BLK%, TOV%, PER, BPM, OBPM and DBPM use only
+   observed seasons and are minutes-weighted.
+5. OWS, DWS and VORP are summed from observed career seasons.
+6. Wilt's career BLK/75 therefore uses only his recorded 1972-73 blocks:
+   approximately 4.05 BLK/75, rather than 0.30.
+7. Career 2P% is reconstructed from 2P/2PA instead of remaining blank.
+8. Career SDI endpoint now prefers the complete WOWY-aware v2 cache.
+9. Career Player Profile six-dimension axes use the authoritative WOWY-aware
+   career SDI category values, so the UI does not reconstruct them from an
+   incomplete career percentile layer.
+
+EXAMPLES (Wilt)
+  BLK/75: 4.05
+  2P%: populated from career 2P/2PA
+  rTS: approximately +7.43
+  Career SDI: 77.25
+  Scoring Efficiency SDI category: 59.88
+
+SCOPE
+This is a targeted API/data correction only. It does NOT modify headshots,
+sitewide load performance, 5-Year Peak selection, playoff peaks, or frontend
+layout.
+
+IMPORTANT
+The API expects the existing canonical file:
+  player_profiles_v1/player_season_profiles.csv
+which is already part of the Website240 site. Do not remove that directory.

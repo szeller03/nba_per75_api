@@ -1,0 +1,7 @@
+/* Low-risk browser rendering optimizations. No visual redesign. */
+.board-table table { contain: layout style; }
+.team-t50-table table { contain: layout style; }
+.global-search { contain: layout style; }
+@media (prefers-reduced-motion: reduce) {
+  .card, .feature, .match-card, .nav-link { transition: none !important; }
+}

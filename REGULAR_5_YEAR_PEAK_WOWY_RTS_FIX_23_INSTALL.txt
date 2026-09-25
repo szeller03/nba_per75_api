@@ -1,0 +1,5 @@
+WEBSITE240 — REGULAR 5-YEAR PEAK WOWY + CURRENT SDI FIX 23
+
+Corrects the peak-window selection rule. A qualifying season may NEVER be skipped. The only permitted six-calendar-year exception is exactly five qualifying seasons plus one non-qualifying calendar year. Five consecutive qualifying seasons are also eligible.
+
+Current SDI formula: Scoring Volume 20%, Defense 20%, Rebounding 10.5%, Creation & Playmaking 18%, Scoring Efficiency 18%, Impact & Value 13.5%; Efficiency overall = 100% rTS; Creation ball security = 100% AST:TOV; WOWY Offense 30% Creation, WOWY Defense 40% Defense, WOWY Net 100% Impact & Value.

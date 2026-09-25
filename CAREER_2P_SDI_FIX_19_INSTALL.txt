@@ -1,0 +1,36 @@
+WEBSITE240 — CAREER / 2P% / CREATION SDI FIX 19
+
+This is a replacement for the previous Fix 18 patch. Apply Fix 19 only.
+
+FIXES
+1. Career statistics use the audited availability-aware career table.
+   - Restores historical 2PA/75 and other recorded pre-1979 per-75 values.
+   - Restores career 2P% and its career percentile.
+   - Missing tracking years are not treated as zero.
+
+2. Historical season 2P% percentiles.
+   - Adds the audited pre-1979 season-relative 2P% percentile layer.
+   - Season values remain compared against that specific season's population, not an all-season historical population.
+
+3. Historical season 2PA/75.
+   - When the precomputed per-75 field is absent but raw attempts and estimated possessions exist, the API calculates the recorded 2PA/75 value.
+
+4. Career Creation / Playmaking.
+   - The locked top-level Creation / Playmaking weight remains 18% of SDI.
+   - Creation Output remains 38.5% of the category: AST/75 80% + AST% 20%.
+   - Ball Security remains 31.5% of the category, but AST:TOV is now 100% of that group.
+   - TOV% is removed from this category. It was double-counting turnover cost already represented by AST:TOV and was disproportionately suppressing elite high-assist creators.
+   - WOWY Offense remains 30% of Creation / Playmaking.
+   - All other locked top-level SDI weights remain unchanged.
+
+5. Career row / SDI rendering.
+   - Career table uses the primary Career profile response directly in Career context.
+   - Career six-dimension values use the authoritative career SDI category axes.
+
+KEY QA
+- Magic Johnson Creation / Playmaking: ~98 instead of ~88.
+- Magic Johnson Career SDI: ~80.5 instead of ~79.0.
+- Wilt Career 2PA/75: ~14.53.
+- Wilt Career 2P%: ~53.97%.
+- Wilt pre-1979 season 2P% percentiles are restored.
+- No 5-Year Peak rebuild is included in this patch.

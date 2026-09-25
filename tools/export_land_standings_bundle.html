@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><title>NBA PER-75 Land Standings Exporter</title>
+<style>body{font:16px system-ui;max-width:800px;margin:40px auto;padding:0 20px;background:#111;color:#eee}button{padding:12px 18px;font-weight:700}pre{white-space:pre-wrap}</style>
+<h1>NBA PER-75 — Land of Basketball Standings Exporter</h1>
+<p>Open this file in a browser, then click Export. It will request each historical standings page from the browser session and download one JSON bundle. If the site asks for a challenge, complete it in the browser and run again.</p>
+<button id="go">Export 75 seasons</button><pre id="out"></pre>
+<script>
+const seasons=[];for(let y=1952;y<=2026;y++)seasons.push(`${y-1}-${String(y).slice(-2)}`);
+const url=s=>{let [a,b]=s.split('-');let ey=String(y=>y)(+a);return `https://www.landofbasketball.com/yearbyyear/${a}_${+a+1}_standings.htm`};
+async function run(){let out=document.getElementById('out');let pages=[];for(let i=0;i<seasons.length;i++){let s=seasons[i], [a]=s.split('-'),ey=+a+1;out.textContent=`Fetching ${i+1}/${seasons.length}: ${s}`;try{let r=await fetch(`https://www.landofbasketball.com/yearbyyear/${a}_${ey}_standings.htm`,{credentials:'include'});if(!r.ok)throw new Error(r.status);pages.push({season:s,url:r.url,html:await r.text()});}catch(e){pages.push({season:s,error:String(e)});}await new Promise(r=>setTimeout(r,700));}let blob=new Blob([JSON.stringify({version:1,pages},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='land_standings_bundle.json';a.click();out.textContent=`Done. Exported ${pages.filter(x=>x.html).length}/${pages.length} pages. Check the JSON before building.`;}
+document.getElementById('go').onclick=run;
+</script>

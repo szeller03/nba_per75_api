@@ -1,0 +1,12 @@
+Statistic,Category,Domain
+FGA_per75,Offensive Role / Usage,Context
+FTA_per75,Offensive Role / Usage,Context
+FTr,Offensive Role / Usage,Context
+3PAr,Offensive Role / Usage,Context
+TOV_pct,Offensive Role / Usage,Context
+3PAr,Shot Profile,Context
+FTr,Shot Profile,Context
+2PA_per75,Shot Profile,Context
+3PA_per75,Shot Profile,Context
+PF_per75,Availability / Foul Context,Context
+TOV_pct,Availability / Foul Context,Context

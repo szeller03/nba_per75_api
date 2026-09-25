@@ -1,0 +1,37 @@
+WEBSITE240 — CAREER / 2P% / CREATION SDI FIX 20
+
+IMPORTANT: This package preserves the WEBSITE240 directory structure. Copy/merge the contents of NBA_Per75_Website240/ into the existing NBA_Per75_Website240/ root. Do not copy the files from the package root into arbitrary locations.
+
+FIXES
+1. CAREER PROFILE LOAD
+   - Player profile and spider requests no longer use Promise.all. A spider failure/timeout can no longer prevent the Career statistics row from rendering.
+   - Career statistics and six-dimension values render from the primary Career profile response.
+
+2. CAREER STATISTICS
+   - Uses the audited availability-aware career table.
+   - Restores Wilt 2PA/75 (~14.53), 2P% (~53.97%), and other pre-1979 recorded rates.
+   - WOWY Offense/Defense/Net are included as first-class Career statistics.
+
+3. 2P% PERCENTILES
+   - Pre-1979 season-relative 2P% percentile layer is included.
+   - Career 2P% percentile is calculated from the qualified career population.
+   - Percentiles remain season-relative for individual seasons, not all-history-relative.
+
+4. CREATION / PLAYMAKING
+   - Authoritative Career SDI cache uses AST:TOV as the sole Ball Security input instead of double-counting TOV%.
+   - Creation Output remains AST/75 80% + AST% 20%.
+   - WOWY Offense remains 30% of Creation / Playmaking.
+   - Magic Johnson Career Creation / Playmaking is ~98, not ~88.
+   - Magic Career SDI is ~80.85 in the supplied authoritative cache.
+
+5. CAREER SDI
+   - Career six-dimensional values are read from regular_career_sdi_v4_wowy_v5.csv.
+   - Wilt Career Defense is ~73.36; his one recorded BLK season is not allowed to create a 100 Defense axis.
+
+6. NO 5-YEAR PEAK REBUILD
+   - 5-Year Peak remains untouched in this patch.
+
+KEY QA DATA IN PACKAGE
+Wilt: 2PA/75 14.5324; 2P% .539686; Career Defense 73.3622; Career SDI 77.2454.
+Oscar: 2PA/75 14.0097; 2P% .486524.
+Magic: Career Creation 98.0127; Career SDI 80.8490.

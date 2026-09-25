@@ -1,0 +1,36 @@
+WEBSITE240 FIX 21 — HISTORICAL 2PA + SDI EFFICIENCY / CREATION
+
+This patch is cumulative from Website240 Career/2P/Creation Fix 20.
+
+FIXES:
+1. Historical seasonal 2PA/75 values are restored. Before the three-point era,
+   2PA is derived from fully recorded FGA (or FGA - 3PA where 3PA is recorded).
+2. Historical seasonal 2PA/75 percentiles are added for 1951-52 through 1978-79,
+   using the same season-relative percentile convention as the existing modern
+   percentile layer.
+3. Historical 2P% and 2P% percentiles remain intact.
+4. Scoring Efficiency SDI removes raw TS% entirely:
+      Overall Efficiency = 100% rTS
+   The Overall Efficiency subcategory remains 60% of Scoring Efficiency; the
+   Component Efficiency subcategory remains 40% (2P%, 3P%, FT%).
+5. Creation / Playmaking Ball Security / Creation Cost uses AST:TOV at 100%.
+   TOV% remains a standalone statistic but is no longer a second turnover penalty
+   inside Creation / Playmaking.
+6. Rebuilt regular-season WOWY SDI season cache and MP-weighted career SDI cache
+   using the revised formula.
+7. API explicitly prefers the new rTS-aware caches so an older local cache cannot
+   silently override this formula.
+
+EXPECTED CHECKS:
+- Wilt seasonal 2PA/75 now displays in early seasons and has a season percentile.
+- Oscar seasonal 2PA/75 now displays in early seasons and has a season percentile.
+- Wilt career 2PA/75 remains approximately 14.53.
+- Wilt career 2P% remains approximately 53.97%.
+- Magic Career Creation / Playmaking should remain strongly elite (about 97),
+  without TOV% double-penalizing his creation.
+- Raw TS% no longer contributes to Scoring Efficiency SDI.
+
+NOT CHANGED:
+- 5-Year Peak has NOT been rebuilt yet.
+- Team ORtg / DRtg remain available as team statistics.
+- No headshot assets are changed.

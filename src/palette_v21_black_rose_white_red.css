@@ -1,0 +1,117 @@
+/* NBA PER-75 v21 — palette-only pass
+   Black + Rose Gold + White + Red. No layout, routing, data, or behavior changes. */
+:root{
+  --palette-black:#090809;
+  --palette-black-2:#111011;
+  --palette-black-3:#181417;
+  --palette-rose:#F4CBC6;
+  --palette-rose-soft:rgba(244,203,198,.18);
+  --palette-rose-line:rgba(244,203,198,.34);
+  --palette-white:#F7F4F2;
+  --palette-red:#AD343E;
+  --palette-red-soft:rgba(173,52,62,.18);
+}
+
+html,body,#root{background:var(--palette-black)!important;color:var(--palette-white)!important}
+body{--bg:var(--palette-black)!important;--surface:var(--palette-black-2)!important;--surface2:var(--palette-black-3)!important;--text:var(--palette-white)!important;--muted:#d0c7c8!important;--line:var(--palette-rose-line)!important;--accent:var(--palette-red)!important}
+
+/* Shared site surfaces */
+.page,.content,.main-content,.section,.panel,.controls,.feature-card,.select-card,.method-card,
+.hero-search,.search-panel,.placeholder-card,.distribution,.scatter,.axisbox,.axis-selector,
+.big-board-meta,.comparison-table-wrap,.comparison-panel,.comparison-card,.explorer-panel,
+.team-panel,.team-card,.team-profile-card,.team-profile-panel,.team-profile-summary,
+.team-analytics-hero,.team-database-section,.team-database-table,.team-leaderboard-wrap,
+.t50-intro,.t50-matchup,.t50-results,.t50-live-ranking,.t50-player-card,.t50-mode-card{
+  background-color:var(--palette-black-2)!important;
+  color:var(--palette-white)!important;
+  border-color:var(--palette-rose-line)!important;
+}
+
+/* Data surfaces stay black. */
+.board-table,.board-table table,.comparison-table,.comparison-table-wrap table,
+.team-database-table table,.team-leaderboard-table,.tablewrap,.tablewrap table,
+.stat-table,.distribution,.scatter,.explorer-chart,.chart,.chart-card,.plot,.plot-card,
+.big-board-row,.big-board-header,.team-leaderboard-row,.team-leaderboard-head,
+.team-database-row,.team-database-header{
+  background-color:#000!important;
+  color:var(--palette-white)!important;
+}
+
+/* Do not turn normal data values black. */
+.page,.page *{--palette-value:var(--palette-white)}
+.page .big-board-row,.page .big-board-row *,.page .team-leaderboard-row,.page .team-leaderboard-row *,
+.page .team-database-row,.page .team-database-row *, .page table td,.page table td *{
+  color:var(--palette-white);
+}
+
+/* Inputs / controls */
+input,select,textarea,.control,.controls input,.controls select,.select-card input{
+  background:#000!important;color:var(--palette-white)!important;border-color:var(--palette-rose-line)!important;
+}
+select option,select optgroup{background:#000!important;color:#fff!important}
+
+/* Rose-gold structural language; preserve red as the stronger existing accent. */
+.page h1,.page h2,.page h3,.page .section-label,.page .profile-section h3,
+.page .big-board-header,.page .team-leaderboard-head,.page .table-head,
+.page .table-header,.page .axis-selector-head strong{color:var(--palette-white)!important}
+.page .section-label,.page .profile-section h3,.page .profile-table-title{border-color:var(--palette-rose-line)!important}
+.page .btn,.page .back-tabs button.active,.page .cat-tabs button.active,.page .topbar .nav-link.active,
+.page .profile-controls button.active,.page .context-button.active{
+  border-color:var(--palette-rose)!important;
+}
+
+/* Player Profile palette only. Preserve its existing geometry/flip behavior. */
+.player-profile .profile-card,.player-profile .backface,.player-profile .profile-back-top,
+.player-profile .profile-identity,.player-profile .profile-controls-area,.player-profile .profile-context,
+.player-profile .sixbox,.player-profile .career-note,.player-profile .profile-sdi-section .category-card,
+.player-profile .spider-card,.player-profile .spider-config-panel{
+  background-color:var(--palette-black-2)!important;color:var(--palette-white)!important;
+}
+.player-profile .tablewrap,.player-profile .tablewrap table,
+.player-profile .tablewrap thead,.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,.player-profile .tablewrap td,
+.player-profile .tablewrap th{background-color:#000!important;color:var(--palette-white)!important}
+.player-profile .tablewrap th{color:var(--palette-white)!important;font-weight:900!important}
+
+/* Season selection: muted gold, deliberately not bright yellow. */
+.player-profile .tablewrap tbody tr.season-selected,
+.player-profile .tablewrap tbody tr.season-selected:hover,
+.player-profile tr.season-selected,
+.player-profile tr.season-selected:hover{
+  background:#7A5B24!important;
+  box-shadow:inset 4px 0 0 #9A7832, inset 0 1px 0 rgba(244,203,198,.12), inset 0 -1px 0 rgba(244,203,198,.12)!important;
+}
+.player-profile tr.season-selected>td,
+.player-profile tr.season-selected>td:first-child,
+.player-profile tr.season-selected>td *{background:transparent!important;color:#fff!important}
+.player-profile .season-selected-mark{color:#F4CBC6!important}
+
+/* Rose-gold profile borders and context controls; red remains available elsewhere. */
+.player-profile .profile-card,.player-profile .profile-header,.player-profile .sixbox,
+.player-profile .spider-card{border-color:var(--palette-rose-line)!important}
+.player-profile .back-tabs button.active{background:var(--palette-rose)!important;color:#111!important;border-color:var(--palette-rose)!important}
+.player-profile .back-tabs button:not(.active){background:#000!important;color:var(--palette-white)!important;border-color:var(--palette-rose-line)!important}
+
+/* Spider: only the percentile geometry gets rose gold; labels remain white. */
+.player-profile .sdi-radar-label{fill:var(--palette-white)!important;color:var(--palette-white)!important}
+.player-profile .sdi-radar-line,.player-profile .sdi-radar-dot{stroke:var(--palette-rose)!important}
+.player-profile .sdi-radar-dot{fill:var(--palette-rose)!important}
+.player-profile .sdi-radar-fill{fill:rgba(244,203,198,.12)!important}
+.player-profile .spider-line{stroke:var(--palette-rose)!important}
+
+/* Rose-gold outlines and accents across the other sections. */
+.big-board-row,.team-leaderboard-row,.team-database-row,.team-card,.comparison-card,
+.axis-chip,.method-card,.feature-card,.select-card,.search-panel,.hero-search{
+  border-color:var(--palette-rose-line)!important;
+}
+.big-board-row:hover,.team-leaderboard-row:hover,.team-database-row:hover,.team-card:hover,
+.comparison-card:hover,.feature-card:hover,.select-card:hover{background:#181417!important}
+
+/* Keep existing red data/status accents intact. */
+.relative-negative{color:#ff9d9d!important}
+.relative-positive{color:#9bd7ff!important}
+
+/* Site header/navigation uses the new palette without changing layout. */
+.site-header,.topbar,.main-nav{background:rgba(9,8,9,.96)!important;color:var(--palette-white)!important;border-color:var(--palette-rose-line)!important}
+.main-nav .nav-link,.topbar .nav-link{color:var(--palette-white)!important}
+.main-nav .nav-link.active,.topbar .nav-link.active{color:var(--palette-rose)!important}

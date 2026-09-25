@@ -1,0 +1,13 @@
+CAREER SDI v3 — WEBSITE240
+
+This patch replaces the prior career SDI cache with an authoritative career SDI layer using the current locked SDI formula.
+
+Formula: Scoring Volume 20%, Defense 20%, Rebounding 10.5%, Creation & Playmaking 18%, Scoring Efficiency 18%, Impact & Value 13.5%. Efficiency uses 100% rTS for Overall Efficiency. Creation Ball Security uses 100% AST:TOV. WOWY Offense is 30% of Creation, WOWY Defense is 40% of Defense, WOWY Net is 100% of Impact & Value.
+
+Career evidence rule: a statistic must be observed in at least 3 qualifying regular-season player-seasons to enter the career SDI. Missing/insufficiently tracked statistics are excluded rather than treated as zero or full-strength evidence. Thus Wilt’s one recorded BLK season does not create a career BLK benefit in Defense, and Shaq’s untracked 3P% does not penalize him.
+
+Career SDI population includes every player with at least one qualifying regular-season season in the authoritative season-SDI universe (2095 players). Career statistic percentiles remain separate from season percentiles.
+
+Install: merge the NBA_Per75_Website240 folder into the existing Website240 project. The API now reads data/precomputed_sdi_v4/regular_career_sdi_v4_wowy_v6.csv for career SDI, profile career category axes, and career SDI ranking.
+
+Validated examples: Wilt Career SDI 85.72; Career Defense 80.06 with BLK evidence count 1 excluded. Magic Creation 97.48. Curry Efficiency 95.37. Giannis Career SDI 86.48. Hakeem Career Defense 96.42.

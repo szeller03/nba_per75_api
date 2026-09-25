@@ -1,0 +1,6088 @@
+{
+  "extract_only": [
+    "eFG%",
+    "TOV%"
+  ],
+  "ftr_touched": false,
+  "seasons": {
+    "1951-52|Regular Season": {},
+    "1952-53|Regular Season": {},
+    "1953-54|Regular Season": {},
+    "1954-55|Regular Season": {},
+    "1955-56|Regular Season": {},
+    "1956-57|Regular Season": {},
+    "1957-58|Regular Season": {},
+    "1958-59|Regular Season": {},
+    "1959-60|Regular Season": {},
+    "1960-61|Regular Season": {},
+    "1961-62|Regular Season": {},
+    "1962-63|Regular Season": {},
+    "1963-64|Regular Season": {},
+    "1964-65|Regular Season": {},
+    "1965-66|Regular Season": {},
+    "1966-67|Regular Season": {},
+    "1967-68|Regular Season": {},
+    "1968-69|Regular Season": {
+      "Philadelphia 76ers*": {
+        "efgpct": 45.4,
+        "tovpct": 13.6
+      }
+    },
+    "1969-70|Regular Season": {
+      "Philadelphia 76ers*": {
+        "efgpct": 46.9,
+        "tovpct": 15.2
+      }
+    },
+    "1970-71|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 46.5,
+        "tovpct": 16.5
+      },
+      "Baltimore Bullets*": {
+        "efgpct": 44.2,
+        "tovpct": 14.2
+      },
+      "Boston Celtics": {
+        "efgpct": 44.2,
+        "tovpct": 14.4
+      },
+      "Buffalo Braves": {
+        "efgpct": 43.6,
+        "tovpct": 16.4
+      },
+      "Chicago Bulls*": {
+        "efgpct": 45.2,
+        "tovpct": 13.3
+      },
+      "Cincinnati Royals": {
+        "efgpct": 45.4,
+        "tovpct": 14.2
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 42.4,
+        "tovpct": 15.3
+      },
+      "Detroit Pistons": {
+        "efgpct": 44.9,
+        "tovpct": 15.5
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 15.0
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 50.9,
+        "tovpct": 16.0
+      },
+      "New York Knicks*": {
+        "efgpct": 45.0,
+        "tovpct": 11.8
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 45.0,
+        "tovpct": 15.0
+      },
+      "Phoenix Suns": {
+        "efgpct": 43.7,
+        "tovpct": 14.6
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 43.5,
+        "tovpct": 12.7
+      },
+      "San Diego Rockets": {
+        "efgpct": 42.1,
+        "tovpct": 15.0
+      },
+      "San Francisco Warriors*": {
+        "efgpct": 44.800000000000004,
+        "tovpct": 16.1
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 45.6,
+        "tovpct": 15.3
+      }
+    },
+    "1971-72|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 46.0,
+        "tovpct": 17.2
+      },
+      "Baltimore Bullets*": {
+        "efgpct": 45.0,
+        "tovpct": 15.2
+      },
+      "Boston Celtics*": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 14.4
+      },
+      "Buffalo Braves": {
+        "efgpct": 45.1,
+        "tovpct": 17.3
+      },
+      "Chicago Bulls*": {
+        "efgpct": 45.1,
+        "tovpct": 12.6
+      },
+      "Cincinnati Royals": {
+        "efgpct": 45.9,
+        "tovpct": 16.2
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 42.8,
+        "tovpct": 14.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 45.4,
+        "tovpct": 17.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 43.9,
+        "tovpct": 13.6
+      },
+      "Houston Rockets": {
+        "efgpct": 43.4,
+        "tovpct": 13.3
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.0,
+        "tovpct": 14.8
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.8,
+        "tovpct": 15.8
+      },
+      "New York Knicks*": {
+        "efgpct": 45.9,
+        "tovpct": 13.7
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 44.4,
+        "tovpct": 16.0
+      },
+      "Phoenix Suns": {
+        "efgpct": 45.7,
+        "tovpct": 14.9
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 44.2,
+        "tovpct": 16.2
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 16.3
+      }
+    },
+    "1972-73|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 46.1,
+        "tovpct": 16.0
+      },
+      "Baltimore Bullets*": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 15.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 44.800000000000004,
+        "tovpct": 15.1
+      },
+      "Buffalo Braves": {
+        "efgpct": 44.9,
+        "tovpct": 18.6
+      },
+      "Chicago Bulls*": {
+        "efgpct": 44.4,
+        "tovpct": 13.4
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 43.5,
+        "tovpct": 16.6
+      },
+      "Detroit Pistons": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 16.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 45.5,
+        "tovpct": 14.5
+      },
+      "Houston Rockets": {
+        "efgpct": 45.7,
+        "tovpct": 14.1
+      },
+      "Kansas City-Omaha Kings": {
+        "efgpct": 47.8,
+        "tovpct": 16.9
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 47.8,
+        "tovpct": 17.2
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.1,
+        "tovpct": 16.0
+      },
+      "New York Knicks*": {
+        "efgpct": 46.7,
+        "tovpct": 13.7
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 42.0,
+        "tovpct": 15.7
+      },
+      "Phoenix Suns": {
+        "efgpct": 45.5,
+        "tovpct": 15.1
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 15.9
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 44.9,
+        "tovpct": 16.8
+      }
+    },
+    "1973-74|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 46.5,
+        "tovpct": 17.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 45.6,
+        "tovpct": 16.8
+      },
+      "Buffalo Braves*": {
+        "efgpct": 48.0,
+        "tovpct": 17.3
+      },
+      "Capital Bullets*": {
+        "efgpct": 44.1,
+        "tovpct": 15.3
+      },
+      "Chicago Bulls*": {
+        "efgpct": 44.6,
+        "tovpct": 16.8
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 43.9,
+        "tovpct": 15.3
+      },
+      "Detroit Pistons*": {
+        "efgpct": 45.9,
+        "tovpct": 17.2
+      },
+      "Golden State Warriors": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 15.8
+      },
+      "Houston Rockets": {
+        "efgpct": 48.0,
+        "tovpct": 16.8
+      },
+      "Kansas City-Omaha Kings": {
+        "efgpct": 45.9,
+        "tovpct": 17.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 17.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.2,
+        "tovpct": 16.9
+      },
+      "New York Knicks*": {
+        "efgpct": 46.5,
+        "tovpct": 15.1
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 43.2,
+        "tovpct": 16.2
+      },
+      "Phoenix Suns": {
+        "efgpct": 46.0,
+        "tovpct": 16.1
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 46.7,
+        "tovpct": 17.5
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 44.5,
+        "tovpct": 15.3
+      }
+    },
+    "1974-75|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 43.8,
+        "tovpct": 14.8
+      },
+      "Boston Celtics*": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 15.8
+      },
+      "Buffalo Braves*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 16.8
+      },
+      "Chicago Bulls*": {
+        "efgpct": 44.7,
+        "tovpct": 15.5
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.2,
+        "tovpct": 15.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 46.6,
+        "tovpct": 16.4
+      },
+      "Golden State Warriors*": {
+        "efgpct": 46.5,
+        "tovpct": 16.3
+      },
+      "Houston Rockets*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 17.8
+      },
+      "Kansas City-Omaha Kings*": {
+        "efgpct": 44.9,
+        "tovpct": 15.8
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 45.0,
+        "tovpct": 17.3
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 15.9
+      },
+      "New Orleans Jazz": {
+        "efgpct": 44.0,
+        "tovpct": 17.5
+      },
+      "New York Knicks*": {
+        "efgpct": 45.0,
+        "tovpct": 14.2
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 44.5,
+        "tovpct": 16.0
+      },
+      "Phoenix Suns": {
+        "efgpct": 44.7,
+        "tovpct": 17.2
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 48.0,
+        "tovpct": 18.4
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 45.6,
+        "tovpct": 15.9
+      },
+      "Washington Bullets*": {
+        "efgpct": 46.2,
+        "tovpct": 15.7
+      }
+    },
+    "1975-76|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 45.0,
+        "tovpct": 15.6
+      },
+      "Boston Celtics*": {
+        "efgpct": 44.6,
+        "tovpct": 15.4
+      },
+      "Buffalo Braves*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 17.3
+      },
+      "Chicago Bulls": {
+        "efgpct": 41.4,
+        "tovpct": 14.3
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 45.4,
+        "tovpct": 13.5
+      },
+      "Detroit Pistons*": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 16.0
+      },
+      "Golden State Warriors*": {
+        "efgpct": 46.2,
+        "tovpct": 15.3
+      },
+      "Houston Rockets": {
+        "efgpct": 48.5,
+        "tovpct": 16.9
+      },
+      "Kansas City Kings": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 16.0
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 46.5,
+        "tovpct": 15.8
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 46.5,
+        "tovpct": 16.4
+      },
+      "New Orleans Jazz": {
+        "efgpct": 44.7,
+        "tovpct": 16.2
+      },
+      "New York Knicks": {
+        "efgpct": 45.6,
+        "tovpct": 14.3
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 44.7,
+        "tovpct": 16.4
+      },
+      "Phoenix Suns*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 18.3
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 46.9,
+        "tovpct": 18.3
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 15.6
+      },
+      "Washington Bullets*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 16.9
+      }
+    },
+    "1976-77|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 45.7,
+        "tovpct": 17.7
+      },
+      "Boston Celtics*": {
+        "efgpct": 44.5,
+        "tovpct": 16.1
+      },
+      "Buffalo Braves": {
+        "efgpct": 45.0,
+        "tovpct": 16.5
+      },
+      "Chicago Bulls*": {
+        "efgpct": 45.2,
+        "tovpct": 16.0
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 44.9,
+        "tovpct": 13.7
+      },
+      "Denver Nuggets*": {
+        "efgpct": 48.1,
+        "tovpct": 18.8
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.3,
+        "tovpct": 16.6
+      },
+      "Golden State Warriors*": {
+        "efgpct": 47.5,
+        "tovpct": 15.6
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.3,
+        "tovpct": 16.2
+      },
+      "Indiana Pacers": {
+        "efgpct": 44.9,
+        "tovpct": 15.4
+      },
+      "Kansas City Kings": {
+        "efgpct": 46.0,
+        "tovpct": 15.4
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 47.8,
+        "tovpct": 15.3
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 15.8
+      },
+      "New Orleans Jazz": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 16.6
+      },
+      "New York Knicks": {
+        "efgpct": 48.6,
+        "tovpct": 16.6
+      },
+      "New York Nets": {
+        "efgpct": 42.9,
+        "tovpct": 16.5
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.0,
+        "tovpct": 18.3
+      },
+      "Phoenix Suns": {
+        "efgpct": 47.0,
+        "tovpct": 18.1
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.1,
+        "tovpct": 16.9
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 48.5,
+        "tovpct": 16.8
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 45.0,
+        "tovpct": 16.8
+      },
+      "Washington Bullets*": {
+        "efgpct": 47.0,
+        "tovpct": 16.5
+      }
+    },
+    "1977-78|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 46.0,
+        "tovpct": 16.1
+      },
+      "Boston Celtics": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 16.1
+      },
+      "Buffalo Braves": {
+        "efgpct": 46.6,
+        "tovpct": 15.9
+      },
+      "Chicago Bulls": {
+        "efgpct": 47.3,
+        "tovpct": 17.0
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 45.4,
+        "tovpct": 13.8
+      },
+      "Denver Nuggets*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 16.8
+      },
+      "Detroit Pistons": {
+        "efgpct": 47.8,
+        "tovpct": 17.9
+      },
+      "Golden State Warriors": {
+        "efgpct": 46.7,
+        "tovpct": 15.0
+      },
+      "Houston Rockets": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 13.9
+      },
+      "Indiana Pacers": {
+        "efgpct": 45.0,
+        "tovpct": 15.6
+      },
+      "Kansas City Kings": {
+        "efgpct": 46.6,
+        "tovpct": 16.2
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.3
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 15.9
+      },
+      "New Jersey Nets": {
+        "efgpct": 44.3,
+        "tovpct": 16.4
+      },
+      "New Orleans Jazz": {
+        "efgpct": 46.2,
+        "tovpct": 16.2
+      },
+      "New York Knicks*": {
+        "efgpct": 48.8,
+        "tovpct": 16.7
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.6,
+        "tovpct": 16.7
+      },
+      "Phoenix Suns*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 16.6
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.3,
+        "tovpct": 16.3
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.0,
+        "tovpct": 16.3
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 44.7,
+        "tovpct": 15.8
+      },
+      "Washington Bullets*": {
+        "efgpct": 46.1,
+        "tovpct": 15.3
+      }
+    },
+    "1978-79|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 47.3,
+        "tovpct": 15.2
+      },
+      "Boston Celtics": {
+        "efgpct": 48.0,
+        "tovpct": 17.0
+      },
+      "Chicago Bulls": {
+        "efgpct": 48.9,
+        "tovpct": 18.3
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 13.9
+      },
+      "Denver Nuggets*": {
+        "efgpct": 48.1,
+        "tovpct": 16.3
+      },
+      "Detroit Pistons": {
+        "efgpct": 47.5,
+        "tovpct": 15.4
+      },
+      "Golden State Warriors": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.3
+      },
+      "Houston Rockets*": {
+        "efgpct": 49.7,
+        "tovpct": 15.1
+      },
+      "Indiana Pacers": {
+        "efgpct": 47.5,
+        "tovpct": 15.2
+      },
+      "Kansas City Kings*": {
+        "efgpct": 49.2,
+        "tovpct": 15.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.7,
+        "tovpct": 15.9
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 50.3,
+        "tovpct": 15.4
+      },
+      "New Jersey Nets*": {
+        "efgpct": 46.0,
+        "tovpct": 17.7
+      },
+      "New Orleans Jazz": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 17.1
+      },
+      "New York Knicks": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.9
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.8,
+        "tovpct": 17.4
+      },
+      "Phoenix Suns*": {
+        "efgpct": 51.2,
+        "tovpct": 17.1
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.3,
+        "tovpct": 16.5
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.6,
+        "tovpct": 15.8
+      },
+      "San Diego Clippers": {
+        "efgpct": 48.3,
+        "tovpct": 15.6
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 15.7
+      },
+      "Washington Bullets*": {
+        "efgpct": 48.5,
+        "tovpct": 13.7
+      }
+    },
+    "1979-80|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 46.5,
+        "tovpct": 15.4
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.1,
+        "tovpct": 15.4
+      },
+      "Chicago Bulls": {
+        "efgpct": 48.9,
+        "tovpct": 17.2
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 13.2
+      },
+      "Denver Nuggets": {
+        "efgpct": 46.9,
+        "tovpct": 15.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 48.3,
+        "tovpct": 16.9
+      },
+      "Golden State Warriors": {
+        "efgpct": 48.4,
+        "tovpct": 15.5
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.5
+      },
+      "Indiana Pacers": {
+        "efgpct": 47.9,
+        "tovpct": 14.8
+      },
+      "Kansas City Kings*": {
+        "efgpct": 48.0,
+        "tovpct": 14.5
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 53.0,
+        "tovpct": 16.5
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.1,
+        "tovpct": 15.0
+      },
+      "New Jersey Nets": {
+        "efgpct": 46.6,
+        "tovpct": 16.6
+      },
+      "New York Knicks": {
+        "efgpct": 49.8,
+        "tovpct": 15.7
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 49.4,
+        "tovpct": 17.2
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.8,
+        "tovpct": 16.4
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 16.1
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.2,
+        "tovpct": 15.2
+      },
+      "San Diego Clippers": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.6
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 47.4,
+        "tovpct": 14.9
+      },
+      "Utah Jazz": {
+        "efgpct": 50.0,
+        "tovpct": 16.7
+      },
+      "Washington Bullets*": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 13.7
+      }
+    },
+    "1980-81|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 48.0,
+        "tovpct": 16.7
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.9,
+        "tovpct": 16.2
+      },
+      "Chicago Bulls*": {
+        "efgpct": 50.4,
+        "tovpct": 17.2
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 14.2
+      },
+      "Dallas Mavericks": {
+        "efgpct": 46.6,
+        "tovpct": 15.2
+      },
+      "Denver Nuggets": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 13.4
+      },
+      "Detroit Pistons": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 18.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 49.3,
+        "tovpct": 15.6
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.9,
+        "tovpct": 14.9
+      },
+      "Indiana Pacers*": {
+        "efgpct": 48.4,
+        "tovpct": 15.1
+      },
+      "Kansas City Kings*": {
+        "efgpct": 50.3,
+        "tovpct": 15.1
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 15.8
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 50.0,
+        "tovpct": 15.7
+      },
+      "New Jersey Nets": {
+        "efgpct": 47.8,
+        "tovpct": 16.6
+      },
+      "New York Knicks*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.0
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 51.5,
+        "tovpct": 17.3
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.2,
+        "tovpct": 17.1
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 49.8,
+        "tovpct": 15.2
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.2,
+        "tovpct": 15.4
+      },
+      "San Diego Clippers": {
+        "efgpct": 48.6,
+        "tovpct": 14.5
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 47.0,
+        "tovpct": 15.7
+      },
+      "Utah Jazz": {
+        "efgpct": 49.1,
+        "tovpct": 15.5
+      },
+      "Washington Bullets": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.4
+      }
+    },
+    "1981-82|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.6
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.2,
+        "tovpct": 14.7
+      },
+      "Chicago Bulls": {
+        "efgpct": 50.5,
+        "tovpct": 17.3
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.6,
+        "tovpct": 13.7
+      },
+      "Dallas Mavericks": {
+        "efgpct": 47.3,
+        "tovpct": 13.7
+      },
+      "Denver Nuggets*": {
+        "efgpct": 52.2,
+        "tovpct": 14.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 48.5,
+        "tovpct": 16.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 50.2,
+        "tovpct": 14.5
+      },
+      "Houston Rockets*": {
+        "efgpct": 47.9,
+        "tovpct": 13.7
+      },
+      "Indiana Pacers": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 14.6
+      },
+      "Kansas City Kings": {
+        "efgpct": 49.7,
+        "tovpct": 15.5
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 14.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 50.9,
+        "tovpct": 16.5
+      },
+      "New Jersey Nets*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 16.6
+      },
+      "New York Knicks": {
+        "efgpct": 49.5,
+        "tovpct": 15.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 52.1,
+        "tovpct": 15.5
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.5,
+        "tovpct": 15.9
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 50.7,
+        "tovpct": 14.4
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.0,
+        "tovpct": 13.0
+      },
+      "San Diego Clippers": {
+        "efgpct": 50.7,
+        "tovpct": 16.2
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.1,
+        "tovpct": 14.1
+      },
+      "Utah Jazz": {
+        "efgpct": 49.6,
+        "tovpct": 14.5
+      },
+      "Washington Bullets*": {
+        "efgpct": 47.8,
+        "tovpct": 14.7
+      }
+    },
+    "1982-83|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 15.0
+      },
+      "Boston Celtics*": {
+        "efgpct": 49.4,
+        "tovpct": 15.2
+      },
+      "Chicago Bulls": {
+        "efgpct": 48.3,
+        "tovpct": 16.9
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.7,
+        "tovpct": 16.4
+      },
+      "Dallas Mavericks": {
+        "efgpct": 48.9,
+        "tovpct": 13.5
+      },
+      "Denver Nuggets*": {
+        "efgpct": 49.5,
+        "tovpct": 14.0
+      },
+      "Detroit Pistons": {
+        "efgpct": 48.1,
+        "tovpct": 15.1
+      },
+      "Golden State Warriors": {
+        "efgpct": 48.5,
+        "tovpct": 15.9
+      },
+      "Houston Rockets": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 15.9
+      },
+      "Indiana Pacers": {
+        "efgpct": 48.3,
+        "tovpct": 15.2
+      },
+      "Kansas City Kings": {
+        "efgpct": 50.0,
+        "tovpct": 16.4
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 15.9
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.1,
+        "tovpct": 15.1
+      },
+      "New Jersey Nets*": {
+        "efgpct": 49.4,
+        "tovpct": 18.7
+      },
+      "New York Knicks*": {
+        "efgpct": 48.4,
+        "tovpct": 16.2
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 50.1,
+        "tovpct": 16.3
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.9,
+        "tovpct": 16.0
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.8,
+        "tovpct": 15.4
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.0,
+        "tovpct": 15.1
+      },
+      "San Diego Clippers": {
+        "efgpct": 47.9,
+        "tovpct": 15.7
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.6,
+        "tovpct": 15.5
+      },
+      "Utah Jazz": {
+        "efgpct": 48.3,
+        "tovpct": 16.7
+      },
+      "Washington Bullets": {
+        "efgpct": 47.3,
+        "tovpct": 16.6
+      }
+    },
+    "1983-84|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.4
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.4,
+        "tovpct": 14.6
+      },
+      "Chicago Bulls": {
+        "efgpct": 47.5,
+        "tovpct": 16.3
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 14.0
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.3,
+        "tovpct": 13.6
+      },
+      "Denver Nuggets*": {
+        "efgpct": 49.8,
+        "tovpct": 12.8
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 12.7
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.9
+      },
+      "Houston Rockets": {
+        "efgpct": 49.7,
+        "tovpct": 15.6
+      },
+      "Indiana Pacers": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.9
+      },
+      "Kansas City Kings*": {
+        "efgpct": 49.0,
+        "tovpct": 15.3
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 53.6,
+        "tovpct": 16.1
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.7,
+        "tovpct": 15.0
+      },
+      "New Jersey Nets*": {
+        "efgpct": 50.1,
+        "tovpct": 16.1
+      },
+      "New York Knicks*": {
+        "efgpct": 49.9,
+        "tovpct": 16.7
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 49.7,
+        "tovpct": 16.9
+      },
+      "Phoenix Suns*": {
+        "efgpct": 51.4,
+        "tovpct": 15.1
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.7,
+        "tovpct": 15.1
+      },
+      "San Antonio Spurs": {
+        "efgpct": 51.1,
+        "tovpct": 14.0
+      },
+      "San Diego Clippers": {
+        "efgpct": 49.8,
+        "tovpct": 15.3
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.0,
+        "tovpct": 14.3
+      },
+      "Utah Jazz*": {
+        "efgpct": 50.5,
+        "tovpct": 15.2
+      },
+      "Washington Bullets*": {
+        "efgpct": 48.9,
+        "tovpct": 15.5
+      }
+    },
+    "1984-85|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 48.9,
+        "tovpct": 15.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 51.5,
+        "tovpct": 13.8
+      },
+      "Chicago Bulls*": {
+        "efgpct": 50.2,
+        "tovpct": 15.4
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 47.8,
+        "tovpct": 14.1
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 49.9,
+        "tovpct": 12.5
+      },
+      "Denver Nuggets*": {
+        "efgpct": 49.1,
+        "tovpct": 13.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.3,
+        "tovpct": 13.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.0,
+        "tovpct": 14.4
+      },
+      "Houston Rockets*": {
+        "efgpct": 50.7,
+        "tovpct": 16.0
+      },
+      "Indiana Pacers": {
+        "efgpct": 47.8,
+        "tovpct": 16.1
+      },
+      "Kansas City Kings": {
+        "efgpct": 50.8,
+        "tovpct": 15.9
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 49.9,
+        "tovpct": 16.4
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 55.1,
+        "tovpct": 15.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.7,
+        "tovpct": 14.2
+      },
+      "New Jersey Nets*": {
+        "efgpct": 49.3,
+        "tovpct": 13.8
+      },
+      "New York Knicks": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.2
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 49.7,
+        "tovpct": 16.0
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.7,
+        "tovpct": 16.3
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.6,
+        "tovpct": 14.8
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.7,
+        "tovpct": 15.6
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 15.9
+      },
+      "Utah Jazz*": {
+        "efgpct": 48.3,
+        "tovpct": 15.8
+      },
+      "Washington Bullets*": {
+        "efgpct": 48.6,
+        "tovpct": 13.4
+      }
+    },
+    "1985-86|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 49.3,
+        "tovpct": 15.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 14.1
+      },
+      "Chicago Bulls*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 14.7
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 49.0,
+        "tovpct": 14.6
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 51.0,
+        "tovpct": 13.3
+      },
+      "Denver Nuggets*": {
+        "efgpct": 47.5,
+        "tovpct": 13.0
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.8,
+        "tovpct": 13.3
+      },
+      "Golden State Warriors": {
+        "efgpct": 48.8,
+        "tovpct": 13.9
+      },
+      "Houston Rockets*": {
+        "efgpct": 49.6,
+        "tovpct": 13.6
+      },
+      "Indiana Pacers": {
+        "efgpct": 48.3,
+        "tovpct": 15.7
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 15.3
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 53.2,
+        "tovpct": 14.9
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 50.1,
+        "tovpct": 13.9
+      },
+      "New Jersey Nets*": {
+        "efgpct": 48.9,
+        "tovpct": 15.9
+      },
+      "New York Knicks": {
+        "efgpct": 46.6,
+        "tovpct": 15.2
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 49.0,
+        "tovpct": 16.1
+      },
+      "Phoenix Suns": {
+        "efgpct": 50.6,
+        "tovpct": 17.7
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.1,
+        "tovpct": 15.2
+      },
+      "Sacramento Kings*": {
+        "efgpct": 49.2,
+        "tovpct": 15.7
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.9,
+        "tovpct": 16.5
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 47.8,
+        "tovpct": 15.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 49.0,
+        "tovpct": 15.5
+      },
+      "Washington Bullets*": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.2
+      }
+    },
+    "1986-87|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 49.0,
+        "tovpct": 13.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 53.2,
+        "tovpct": 14.0
+      },
+      "Chicago Bulls*": {
+        "efgpct": 47.8,
+        "tovpct": 13.4
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 16.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.3,
+        "tovpct": 12.3
+      },
+      "Denver Nuggets*": {
+        "efgpct": 47.8,
+        "tovpct": 11.8
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.2,
+        "tovpct": 14.5
+      },
+      "Golden State Warriors*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.7
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.3,
+        "tovpct": 14.3
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.8,
+        "tovpct": 13.4
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 45.7,
+        "tovpct": 15.0
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 14.0
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.0
+      },
+      "New Jersey Nets": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 16.4
+      },
+      "New York Knicks": {
+        "efgpct": 48.3,
+        "tovpct": 15.0
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 49.7,
+        "tovpct": 16.1
+      },
+      "Phoenix Suns": {
+        "efgpct": 50.1,
+        "tovpct": 15.3
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 51.0,
+        "tovpct": 15.3
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.0,
+        "tovpct": 14.2
+      },
+      "San Antonio Spurs": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.2
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.5,
+        "tovpct": 15.0
+      },
+      "Utah Jazz*": {
+        "efgpct": 47.3,
+        "tovpct": 14.1
+      },
+      "Washington Bullets*": {
+        "efgpct": 45.7,
+        "tovpct": 13.3
+      }
+    },
+    "1987-88|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 49.1,
+        "tovpct": 13.0
+      },
+      "Boston Celtics*": {
+        "efgpct": 54.1,
+        "tovpct": 14.1
+      },
+      "Chicago Bulls*": {
+        "efgpct": 49.4,
+        "tovpct": 13.6
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 50.0,
+        "tovpct": 15.5
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 48.5,
+        "tovpct": 13.2
+      },
+      "Denver Nuggets*": {
+        "efgpct": 48.6,
+        "tovpct": 11.7
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.7,
+        "tovpct": 14.2
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.4,
+        "tovpct": 14.3
+      },
+      "Houston Rockets*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 13.9
+      },
+      "Indiana Pacers": {
+        "efgpct": 49.2,
+        "tovpct": 14.1
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 44.9,
+        "tovpct": 15.7
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.5,
+        "tovpct": 13.9
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.5,
+        "tovpct": 13.6
+      },
+      "New Jersey Nets": {
+        "efgpct": 47.8,
+        "tovpct": 16.0
+      },
+      "New York Knicks*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 15.5
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 48.5,
+        "tovpct": 15.2
+      },
+      "Phoenix Suns": {
+        "efgpct": 49.4,
+        "tovpct": 14.6
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 49.9,
+        "tovpct": 13.5
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.1,
+        "tovpct": 14.8
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.9,
+        "tovpct": 14.1
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.1,
+        "tovpct": 13.9
+      },
+      "Utah Jazz*": {
+        "efgpct": 50.0,
+        "tovpct": 15.4
+      },
+      "Washington Bullets*": {
+        "efgpct": 47.0,
+        "tovpct": 14.4
+      }
+    },
+    "1988-89|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 48.0,
+        "tovpct": 13.5
+      },
+      "Boston Celtics*": {
+        "efgpct": 49.8,
+        "tovpct": 14.0
+      },
+      "Charlotte Hornets": {
+        "efgpct": 47.0,
+        "tovpct": 13.7
+      },
+      "Chicago Bulls*": {
+        "efgpct": 50.7,
+        "tovpct": 14.4
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 51.4,
+        "tovpct": 14.2
+      },
+      "Dallas Mavericks": {
+        "efgpct": 48.4,
+        "tovpct": 13.5
+      },
+      "Denver Nuggets*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 11.8
+      },
+      "Detroit Pistons*": {
+        "efgpct": 50.2,
+        "tovpct": 14.4
+      },
+      "Golden State Warriors*": {
+        "efgpct": 48.0,
+        "tovpct": 14.2
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.6,
+        "tovpct": 15.9
+      },
+      "Indiana Pacers": {
+        "efgpct": 50.2,
+        "tovpct": 16.3
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.8,
+        "tovpct": 16.5
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 14.0
+      },
+      "Miami Heat": {
+        "efgpct": 45.9,
+        "tovpct": 17.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.7
+      },
+      "New Jersey Nets": {
+        "efgpct": 47.4,
+        "tovpct": 15.0
+      },
+      "New York Knicks*": {
+        "efgpct": 51.2,
+        "tovpct": 15.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 50.0,
+        "tovpct": 12.8
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.9,
+        "tovpct": 12.8
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.8,
+        "tovpct": 13.9
+      },
+      "Sacramento Kings": {
+        "efgpct": 47.8,
+        "tovpct": 14.2
+      },
+      "San Antonio Spurs": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 16.8
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.6,
+        "tovpct": 14.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 49.1,
+        "tovpct": 16.4
+      },
+      "Washington Bullets": {
+        "efgpct": 46.7,
+        "tovpct": 13.0
+      }
+    },
+    "1989-90|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 49.6,
+        "tovpct": 13.5
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.6,
+        "tovpct": 13.4
+      },
+      "Charlotte Hornets": {
+        "efgpct": 47.0,
+        "tovpct": 13.2
+      },
+      "Chicago Bulls*": {
+        "efgpct": 51.6,
+        "tovpct": 13.4
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 48.5,
+        "tovpct": 13.5
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.6
+      },
+      "Denver Nuggets*": {
+        "efgpct": 47.8,
+        "tovpct": 11.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.0,
+        "tovpct": 13.4
+      },
+      "Golden State Warriors": {
+        "efgpct": 50.1,
+        "tovpct": 14.3
+      },
+      "Houston Rockets*": {
+        "efgpct": 49.1,
+        "tovpct": 15.5
+      },
+      "Indiana Pacers*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 14.6
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 48.8,
+        "tovpct": 16.3
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.2,
+        "tovpct": 13.2
+      },
+      "Miami Heat": {
+        "efgpct": 46.7,
+        "tovpct": 15.9
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.8,
+        "tovpct": 13.9
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 45.1,
+        "tovpct": 13.3
+      },
+      "New Jersey Nets": {
+        "efgpct": 43.5,
+        "tovpct": 13.9
+      },
+      "New York Knicks*": {
+        "efgpct": 50.1,
+        "tovpct": 14.8
+      },
+      "Orlando Magic": {
+        "efgpct": 46.7,
+        "tovpct": 13.9
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 50.2,
+        "tovpct": 12.9
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.9,
+        "tovpct": 13.3
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.6,
+        "tovpct": 13.4
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.4,
+        "tovpct": 13.5
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 48.8,
+        "tovpct": 14.7
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 49.4,
+        "tovpct": 14.0
+      },
+      "Utah Jazz*": {
+        "efgpct": 52.2,
+        "tovpct": 15.5
+      },
+      "Washington Bullets": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 12.4
+      }
+    },
+    "1990-91|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 12.9
+      },
+      "Boston Celtics*": {
+        "efgpct": 52.0,
+        "tovpct": 14.0
+      },
+      "Charlotte Hornets": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 13.9
+      },
+      "Chicago Bulls*": {
+        "efgpct": 52.1,
+        "tovpct": 12.8
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 14.1
+      },
+      "Dallas Mavericks": {
+        "efgpct": 48.5,
+        "tovpct": 13.3
+      },
+      "Denver Nuggets": {
+        "efgpct": 45.7,
+        "tovpct": 11.9
+      },
+      "Detroit Pistons*": {
+        "efgpct": 47.4,
+        "tovpct": 13.1
+      },
+      "Golden State Warriors*": {
+        "efgpct": 50.4,
+        "tovpct": 13.7
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.9,
+        "tovpct": 14.5
+      },
+      "Indiana Pacers*": {
+        "efgpct": 51.1,
+        "tovpct": 14.4
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.7
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 50.0,
+        "tovpct": 13.2
+      },
+      "Miami Heat": {
+        "efgpct": 46.9,
+        "tovpct": 16.0
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.9,
+        "tovpct": 14.3
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 45.6,
+        "tovpct": 11.5
+      },
+      "New Jersey Nets": {
+        "efgpct": 45.5,
+        "tovpct": 14.4
+      },
+      "New York Knicks*": {
+        "efgpct": 49.8,
+        "tovpct": 15.1
+      },
+      "Orlando Magic": {
+        "efgpct": 47.3,
+        "tovpct": 14.3
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.9,
+        "tovpct": 13.4
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.6,
+        "tovpct": 13.5
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.9,
+        "tovpct": 13.4
+      },
+      "Sacramento Kings": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 14.1
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.4,
+        "tovpct": 15.2
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 50.1,
+        "tovpct": 14.8
+      },
+      "Utah Jazz*": {
+        "efgpct": 50.3,
+        "tovpct": 14.6
+      },
+      "Washington Bullets": {
+        "efgpct": 47.0,
+        "tovpct": 14.3
+      }
+    },
+    "1991-92|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 48.1,
+        "tovpct": 13.0
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.0,
+        "tovpct": 12.7
+      },
+      "Charlotte Hornets": {
+        "efgpct": 48.5,
+        "tovpct": 13.0
+      },
+      "Chicago Bulls*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 11.8
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 50.6,
+        "tovpct": 11.8
+      },
+      "Dallas Mavericks": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 13.1
+      },
+      "Denver Nuggets": {
+        "efgpct": 45.1,
+        "tovpct": 14.9
+      },
+      "Detroit Pistons*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 13.5
+      },
+      "Golden State Warriors*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 13.6
+      },
+      "Houston Rockets": {
+        "efgpct": 49.9,
+        "tovpct": 15.0
+      },
+      "Indiana Pacers*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 14.7
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 48.3,
+        "tovpct": 13.6
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 46.5,
+        "tovpct": 12.0
+      },
+      "Miami Heat*": {
+        "efgpct": 47.9,
+        "tovpct": 14.6
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 48.6,
+        "tovpct": 14.2
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 46.7,
+        "tovpct": 12.4
+      },
+      "New Jersey Nets*": {
+        "efgpct": 47.3,
+        "tovpct": 14.1
+      },
+      "New York Knicks*": {
+        "efgpct": 49.1,
+        "tovpct": 13.7
+      },
+      "Orlando Magic": {
+        "efgpct": 46.7,
+        "tovpct": 14.6
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 48.8,
+        "tovpct": 13.8
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.8,
+        "tovpct": 13.1
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 49.5,
+        "tovpct": 13.6
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.3
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 48.5,
+        "tovpct": 13.9
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 48.9,
+        "tovpct": 14.0
+      },
+      "Utah Jazz*": {
+        "efgpct": 50.4,
+        "tovpct": 13.7
+      },
+      "Washington Bullets": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 13.3
+      }
+    },
+    "1992-93|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 49.3,
+        "tovpct": 14.0
+      },
+      "Boston Celtics*": {
+        "efgpct": 49.5,
+        "tovpct": 12.9
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 49.9,
+        "tovpct": 13.8
+      },
+      "Chicago Bulls*": {
+        "efgpct": 49.9,
+        "tovpct": 12.0
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 12.5
+      },
+      "Dallas Mavericks": {
+        "efgpct": 45.5,
+        "tovpct": 15.1
+      },
+      "Denver Nuggets": {
+        "efgpct": 47.0,
+        "tovpct": 14.5
+      },
+      "Detroit Pistons": {
+        "efgpct": 47.3,
+        "tovpct": 12.5
+      },
+      "Golden State Warriors": {
+        "efgpct": 50.2,
+        "tovpct": 14.9
+      },
+      "Houston Rockets*": {
+        "efgpct": 51.5,
+        "tovpct": 14.5
+      },
+      "Indiana Pacers*": {
+        "efgpct": 49.8,
+        "tovpct": 13.5
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 49.3,
+        "tovpct": 13.9
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 48.6,
+        "tovpct": 13.7
+      },
+      "Miami Heat": {
+        "efgpct": 48.1,
+        "tovpct": 13.9
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 49.5,
+        "tovpct": 14.8
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 47.9,
+        "tovpct": 15.9
+      },
+      "New Jersey Nets*": {
+        "efgpct": 47.3,
+        "tovpct": 14.4
+      },
+      "New York Knicks*": {
+        "efgpct": 47.9,
+        "tovpct": 14.1
+      },
+      "Orlando Magic": {
+        "efgpct": 50.9,
+        "tovpct": 15.5
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 47.9,
+        "tovpct": 14.4
+      },
+      "Phoenix Suns*": {
+        "efgpct": 52.1,
+        "tovpct": 14.2
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 12.6
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.1,
+        "tovpct": 14.1
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.7,
+        "tovpct": 13.6
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 50.2,
+        "tovpct": 13.5
+      },
+      "Utah Jazz*": {
+        "efgpct": 49.8,
+        "tovpct": 13.8
+      },
+      "Washington Bullets": {
+        "efgpct": 48.0,
+        "tovpct": 14.2
+      }
+    },
+    "1993-94|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 48.0,
+        "tovpct": 13.6
+      },
+      "Boston Celtics": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 13.5
+      },
+      "Charlotte Hornets": {
+        "efgpct": 50.0,
+        "tovpct": 13.6
+      },
+      "Chicago Bulls*": {
+        "efgpct": 49.3,
+        "tovpct": 14.6
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 12.8
+      },
+      "Dallas Mavericks": {
+        "efgpct": 44.9,
+        "tovpct": 15.0
+      },
+      "Denver Nuggets*": {
+        "efgpct": 47.8,
+        "tovpct": 15.3
+      },
+      "Detroit Pistons": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 13.7
+      },
+      "Golden State Warriors*": {
+        "efgpct": 51.2,
+        "tovpct": 14.9
+      },
+      "Houston Rockets*": {
+        "efgpct": 50.7,
+        "tovpct": 15.0
+      },
+      "Indiana Pacers*": {
+        "efgpct": 50.0,
+        "tovpct": 16.0
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 48.4,
+        "tovpct": 15.4
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 46.6,
+        "tovpct": 12.8
+      },
+      "Miami Heat*": {
+        "efgpct": 48.8,
+        "tovpct": 14.3
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.7
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 16.4
+      },
+      "New Jersey Nets*": {
+        "efgpct": 46.1,
+        "tovpct": 12.7
+      },
+      "New York Knicks*": {
+        "efgpct": 48.3,
+        "tovpct": 15.1
+      },
+      "Orlando Magic*": {
+        "efgpct": 51.4,
+        "tovpct": 14.4
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 47.8,
+        "tovpct": 15.0
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.9,
+        "tovpct": 13.9
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 12.5
+      },
+      "Sacramento Kings": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.2
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.4,
+        "tovpct": 13.6
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 50.1,
+        "tovpct": 13.7
+      },
+      "Utah Jazz*": {
+        "efgpct": 49.0,
+        "tovpct": 13.3
+      },
+      "Washington Bullets": {
+        "efgpct": 48.4,
+        "tovpct": 15.3
+      }
+    },
+    "1994-95|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.9
+      },
+      "Boston Celtics*": {
+        "efgpct": 49.1,
+        "tovpct": 14.3
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 51.7,
+        "tovpct": 14.3
+      },
+      "Chicago Bulls*": {
+        "efgpct": 50.9,
+        "tovpct": 14.5
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 14.2
+      },
+      "Dallas Mavericks": {
+        "efgpct": 46.6,
+        "tovpct": 13.9
+      },
+      "Denver Nuggets*": {
+        "efgpct": 51.1,
+        "tovpct": 15.6
+      },
+      "Detroit Pistons": {
+        "efgpct": 49.9,
+        "tovpct": 15.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 50.8,
+        "tovpct": 15.9
+      },
+      "Houston Rockets*": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 15.0
+      },
+      "Indiana Pacers*": {
+        "efgpct": 50.7,
+        "tovpct": 15.5
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 14.6
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 50.0,
+        "tovpct": 13.4
+      },
+      "Miami Heat": {
+        "efgpct": 49.9,
+        "tovpct": 14.4
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 49.6,
+        "tovpct": 15.5
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 47.5,
+        "tovpct": 16.2
+      },
+      "New Jersey Nets": {
+        "efgpct": 46.7,
+        "tovpct": 14.4
+      },
+      "New York Knicks*": {
+        "efgpct": 50.8,
+        "tovpct": 15.1
+      },
+      "Orlando Magic*": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 14.0
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 47.5,
+        "tovpct": 15.3
+      },
+      "Phoenix Suns*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 12.7
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.3,
+        "tovpct": 13.0
+      },
+      "Sacramento Kings": {
+        "efgpct": 49.6,
+        "tovpct": 16.2
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.6,
+        "tovpct": 13.8
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 52.7,
+        "tovpct": 14.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 53.5,
+        "tovpct": 14.8
+      },
+      "Washington Bullets": {
+        "efgpct": 49.2,
+        "tovpct": 14.3
+      }
+    },
+    "1995-96|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 49.0,
+        "tovpct": 14.0
+      },
+      "Boston Celtics": {
+        "efgpct": 49.4,
+        "tovpct": 14.1
+      },
+      "Charlotte Hornets": {
+        "efgpct": 51.4,
+        "tovpct": 14.1
+      },
+      "Chicago Bulls*": {
+        "efgpct": 51.7,
+        "tovpct": 13.1
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 51.0,
+        "tovpct": 13.7
+      },
+      "Dallas Mavericks": {
+        "efgpct": 47.0,
+        "tovpct": 13.3
+      },
+      "Denver Nuggets": {
+        "efgpct": 48.1,
+        "tovpct": 14.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 50.4,
+        "tovpct": 14.6
+      },
+      "Golden State Warriors": {
+        "efgpct": 48.9,
+        "tovpct": 14.8
+      },
+      "Houston Rockets*": {
+        "efgpct": 51.2,
+        "tovpct": 14.1
+      },
+      "Indiana Pacers*": {
+        "efgpct": 50.9,
+        "tovpct": 15.5
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 51.1,
+        "tovpct": 15.3
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.5,
+        "tovpct": 13.3
+      },
+      "Miami Heat*": {
+        "efgpct": 50.1,
+        "tovpct": 16.0
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 49.5,
+        "tovpct": 15.0
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.0,
+        "tovpct": 16.0
+      },
+      "New Jersey Nets": {
+        "efgpct": 44.5,
+        "tovpct": 15.1
+      },
+      "New York Knicks*": {
+        "efgpct": 50.9,
+        "tovpct": 14.9
+      },
+      "Orlando Magic*": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 13.2
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 47.4,
+        "tovpct": 16.0
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.8,
+        "tovpct": 13.5
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 49.4,
+        "tovpct": 15.2
+      },
+      "Sacramento Kings*": {
+        "efgpct": 49.3,
+        "tovpct": 16.0
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.6,
+        "tovpct": 13.6
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 52.6,
+        "tovpct": 16.2
+      },
+      "Toronto Raptors": {
+        "efgpct": 49.9,
+        "tovpct": 17.2
+      },
+      "Utah Jazz*": {
+        "efgpct": 51.7,
+        "tovpct": 14.1
+      },
+      "Vancouver Grizzlies": {
+        "efgpct": 45.6,
+        "tovpct": 15.5
+      },
+      "Washington Bullets": {
+        "efgpct": 52.1,
+        "tovpct": 15.0
+      }
+    },
+    "1996-97|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 49.8,
+        "tovpct": 14.6
+      },
+      "Boston Celtics": {
+        "efgpct": 47.4,
+        "tovpct": 14.5
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 14.3
+      },
+      "Chicago Bulls*": {
+        "efgpct": 51.1,
+        "tovpct": 12.5
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 49.3,
+        "tovpct": 15.0
+      },
+      "Dallas Mavericks": {
+        "efgpct": 46.9,
+        "tovpct": 15.4
+      },
+      "Denver Nuggets": {
+        "efgpct": 48.6,
+        "tovpct": 15.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 51.2,
+        "tovpct": 13.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 49.3,
+        "tovpct": 15.8
+      },
+      "Houston Rockets*": {
+        "efgpct": 52.0,
+        "tovpct": 15.6
+      },
+      "Indiana Pacers": {
+        "efgpct": 49.0,
+        "tovpct": 15.5
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.7
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.6,
+        "tovpct": 13.7
+      },
+      "Miami Heat*": {
+        "efgpct": 50.7,
+        "tovpct": 15.5
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 49.6,
+        "tovpct": 15.1
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 48.5,
+        "tovpct": 14.4
+      },
+      "New Jersey Nets": {
+        "efgpct": 45.6,
+        "tovpct": 13.9
+      },
+      "New York Knicks*": {
+        "efgpct": 50.1,
+        "tovpct": 17.0
+      },
+      "Orlando Magic*": {
+        "efgpct": 48.1,
+        "tovpct": 14.5
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 47.0,
+        "tovpct": 15.3
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.8,
+        "tovpct": 13.4
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.3,
+        "tovpct": 15.4
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.5,
+        "tovpct": 15.0
+      },
+      "San Antonio Spurs": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 14.7
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 51.0,
+        "tovpct": 14.2
+      },
+      "Toronto Raptors": {
+        "efgpct": 48.1,
+        "tovpct": 15.2
+      },
+      "Utah Jazz*": {
+        "efgpct": 53.0,
+        "tovpct": 14.7
+      },
+      "Vancouver Grizzlies": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 15.3
+      },
+      "Washington Bullets*": {
+        "efgpct": 50.5,
+        "tovpct": 14.6
+      }
+    },
+    "1997-98|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 48.1,
+        "tovpct": 14.1
+      },
+      "Boston Celtics": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 14.6
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 49.5,
+        "tovpct": 14.6
+      },
+      "Chicago Bulls*": {
+        "efgpct": 47.3,
+        "tovpct": 13.3
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 47.8,
+        "tovpct": 16.5
+      },
+      "Dallas Mavericks": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 13.6
+      },
+      "Denver Nuggets": {
+        "efgpct": 44.0,
+        "tovpct": 15.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 14.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 42.699999999999996,
+        "tovpct": 15.1
+      },
+      "Houston Rockets*": {
+        "efgpct": 49.6,
+        "tovpct": 14.8
+      },
+      "Indiana Pacers*": {
+        "efgpct": 50.2,
+        "tovpct": 14.0
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 14.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.9,
+        "tovpct": 14.0
+      },
+      "Miami Heat*": {
+        "efgpct": 49.4,
+        "tovpct": 14.5
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 47.5,
+        "tovpct": 15.8
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 48.3,
+        "tovpct": 12.7
+      },
+      "New Jersey Nets*": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 12.9
+      },
+      "New York Knicks*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.7
+      },
+      "Orlando Magic": {
+        "efgpct": 45.2,
+        "tovpct": 14.5
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 46.2,
+        "tovpct": 15.4
+      },
+      "Phoenix Suns*": {
+        "efgpct": 50.0,
+        "tovpct": 14.0
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 15.8
+      },
+      "Sacramento Kings": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 14.3
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.3,
+        "tovpct": 15.6
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 52.1,
+        "tovpct": 13.4
+      },
+      "Toronto Raptors": {
+        "efgpct": 46.2,
+        "tovpct": 15.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 51.0,
+        "tovpct": 14.8
+      },
+      "Vancouver Grizzlies": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 15.8
+      },
+      "Washington Wizards": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 13.0
+      }
+    },
+    "1998-99|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 43.6,
+        "tovpct": 14.5
+      },
+      "Boston Celtics": {
+        "efgpct": 46.9,
+        "tovpct": 14.8
+      },
+      "Charlotte Hornets": {
+        "efgpct": 48.5,
+        "tovpct": 15.5
+      },
+      "Chicago Bulls": {
+        "efgpct": 42.4,
+        "tovpct": 15.1
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 15.9
+      },
+      "Dallas Mavericks": {
+        "efgpct": 45.9,
+        "tovpct": 13.2
+      },
+      "Denver Nuggets": {
+        "efgpct": 45.9,
+        "tovpct": 13.9
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.0,
+        "tovpct": 15.6
+      },
+      "Golden State Warriors": {
+        "efgpct": 43.4,
+        "tovpct": 14.1
+      },
+      "Houston Rockets*": {
+        "efgpct": 50.6,
+        "tovpct": 15.8
+      },
+      "Indiana Pacers*": {
+        "efgpct": 48.6,
+        "tovpct": 12.8
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 45.4,
+        "tovpct": 14.9
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.8,
+        "tovpct": 14.1
+      },
+      "Miami Heat*": {
+        "efgpct": 49.4,
+        "tovpct": 15.3
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.9,
+        "tovpct": 14.3
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 43.9,
+        "tovpct": 11.7
+      },
+      "New Jersey Nets": {
+        "efgpct": 43.4,
+        "tovpct": 13.7
+      },
+      "New York Knicks*": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 15.9
+      },
+      "Orlando Magic*": {
+        "efgpct": 45.6,
+        "tovpct": 15.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 43.9,
+        "tovpct": 15.3
+      },
+      "Phoenix Suns*": {
+        "efgpct": 48.1,
+        "tovpct": 13.0
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 47.3,
+        "tovpct": 14.5
+      },
+      "Sacramento Kings*": {
+        "efgpct": 47.9,
+        "tovpct": 14.7
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 47.9,
+        "tovpct": 14.6
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 48.1,
+        "tovpct": 14.3
+      },
+      "Toronto Raptors": {
+        "efgpct": 45.0,
+        "tovpct": 15.0
+      },
+      "Utah Jazz*": {
+        "efgpct": 48.5,
+        "tovpct": 16.0
+      },
+      "Vancouver Grizzlies": {
+        "efgpct": 44.7,
+        "tovpct": 16.0
+      },
+      "Washington Wizards": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 14.1
+      }
+    },
+    "1999-00|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 46.0,
+        "tovpct": 14.1
+      },
+      "Boston Celtics": {
+        "efgpct": 47.4,
+        "tovpct": 13.8
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 47.5,
+        "tovpct": 13.7
+      },
+      "Chicago Bulls": {
+        "efgpct": 44.3,
+        "tovpct": 18.0
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 15.6
+      },
+      "Dallas Mavericks": {
+        "efgpct": 49.0,
+        "tovpct": 12.6
+      },
+      "Denver Nuggets": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.0
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.2,
+        "tovpct": 14.3
+      },
+      "Golden State Warriors": {
+        "efgpct": 44.4,
+        "tovpct": 13.9
+      },
+      "Houston Rockets": {
+        "efgpct": 49.4,
+        "tovpct": 15.8
+      },
+      "Indiana Pacers*": {
+        "efgpct": 50.3,
+        "tovpct": 13.3
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 14.9
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 48.4,
+        "tovpct": 12.7
+      },
+      "Miami Heat*": {
+        "efgpct": 49.5,
+        "tovpct": 14.5
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.4,
+        "tovpct": 13.8
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 48.5,
+        "tovpct": 12.9
+      },
+      "New Jersey Nets": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 12.6
+      },
+      "New York Knicks*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.4
+      },
+      "Orlando Magic": {
+        "efgpct": 47.3,
+        "tovpct": 15.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 45.7,
+        "tovpct": 14.2
+      },
+      "Phoenix Suns*": {
+        "efgpct": 49.1,
+        "tovpct": 15.2
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.1,
+        "tovpct": 14.5
+      },
+      "Sacramento Kings*": {
+        "efgpct": 48.6,
+        "tovpct": 13.9
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 48.8,
+        "tovpct": 14.3
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 12.9
+      },
+      "Toronto Raptors*": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 12.7
+      },
+      "Utah Jazz*": {
+        "efgpct": 49.0,
+        "tovpct": 14.3
+      },
+      "Vancouver Grizzlies": {
+        "efgpct": 47.4,
+        "tovpct": 15.8
+      },
+      "Washington Wizards": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.8
+      }
+    },
+    "2000-01|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 45.6,
+        "tovpct": 15.5
+      },
+      "Boston Celtics": {
+        "efgpct": 47.3,
+        "tovpct": 14.7
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 45.7,
+        "tovpct": 13.7
+      },
+      "Chicago Bulls": {
+        "efgpct": 45.0,
+        "tovpct": 15.1
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 45.9,
+        "tovpct": 15.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 49.8,
+        "tovpct": 13.1
+      },
+      "Denver Nuggets": {
+        "efgpct": 47.0,
+        "tovpct": 12.8
+      },
+      "Detroit Pistons": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 14.2
+      },
+      "Golden State Warriors": {
+        "efgpct": 42.9,
+        "tovpct": 13.9
+      },
+      "Houston Rockets": {
+        "efgpct": 49.2,
+        "tovpct": 14.0
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.5
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.9
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.8,
+        "tovpct": 13.3
+      },
+      "Miami Heat*": {
+        "efgpct": 46.9,
+        "tovpct": 13.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.9,
+        "tovpct": 12.8
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 13.0
+      },
+      "New Jersey Nets": {
+        "efgpct": 45.2,
+        "tovpct": 13.9
+      },
+      "New York Knicks*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.6
+      },
+      "Orlando Magic*": {
+        "efgpct": 47.4,
+        "tovpct": 13.8
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 14.7
+      },
+      "Phoenix Suns*": {
+        "efgpct": 46.0,
+        "tovpct": 14.1
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 49.7,
+        "tovpct": 14.8
+      },
+      "Sacramento Kings*": {
+        "efgpct": 48.4,
+        "tovpct": 13.4
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.6,
+        "tovpct": 13.6
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 49.1,
+        "tovpct": 14.3
+      },
+      "Toronto Raptors*": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 12.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 49.7,
+        "tovpct": 15.1
+      },
+      "Vancouver Grizzlies": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 14.9
+      },
+      "Washington Wizards": {
+        "efgpct": 46.0,
+        "tovpct": 15.7
+      }
+    },
+    "2001-02|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.6
+      },
+      "Boston Celtics*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 12.8
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 46.6,
+        "tovpct": 13.3
+      },
+      "Chicago Bulls": {
+        "efgpct": 45.6,
+        "tovpct": 14.6
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 13.8
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.7,
+        "tovpct": 11.3
+      },
+      "Denver Nuggets": {
+        "efgpct": 45.5,
+        "tovpct": 13.6
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.7,
+        "tovpct": 14.3
+      },
+      "Golden State Warriors": {
+        "efgpct": 45.2,
+        "tovpct": 14.7
+      },
+      "Houston Rockets": {
+        "efgpct": 46.5,
+        "tovpct": 13.4
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 14.2
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 13.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.8,
+        "tovpct": 11.8
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 46.2,
+        "tovpct": 15.4
+      },
+      "Miami Heat": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 14.6
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 50.7,
+        "tovpct": 13.6
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 49.0,
+        "tovpct": 12.5
+      },
+      "New Jersey Nets*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 13.4
+      },
+      "New York Knicks": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 14.0
+      },
+      "Orlando Magic*": {
+        "efgpct": 49.3,
+        "tovpct": 12.6
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 45.2,
+        "tovpct": 14.6
+      },
+      "Phoenix Suns": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 13.6
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.5,
+        "tovpct": 13.5
+      },
+      "Sacramento Kings*": {
+        "efgpct": 49.7,
+        "tovpct": 12.4
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.2,
+        "tovpct": 13.8
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 50.5,
+        "tovpct": 13.2
+      },
+      "Toronto Raptors*": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 13.6
+      },
+      "Utah Jazz*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 15.4
+      },
+      "Washington Wizards": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 12.5
+      }
+    },
+    "2002-03|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 15.7
+      },
+      "Boston Celtics*": {
+        "efgpct": 47.0,
+        "tovpct": 13.4
+      },
+      "Chicago Bulls": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 15.4
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 44.4,
+        "tovpct": 16.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 49.8,
+        "tovpct": 10.9
+      },
+      "Denver Nuggets": {
+        "efgpct": 42.8,
+        "tovpct": 17.1
+      },
+      "Detroit Pistons*": {
+        "efgpct": 47.3,
+        "tovpct": 13.3
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 13.9
+      },
+      "Houston Rockets": {
+        "efgpct": 47.4,
+        "tovpct": 14.8
+      },
+      "Indiana Pacers*": {
+        "efgpct": 46.9,
+        "tovpct": 13.7
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 46.7,
+        "tovpct": 14.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 48.6,
+        "tovpct": 13.3
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 14.2
+      },
+      "Miami Heat": {
+        "efgpct": 43.9,
+        "tovpct": 13.8
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 50.0,
+        "tovpct": 12.2
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 48.8,
+        "tovpct": 12.9
+      },
+      "New Jersey Nets*": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 13.8
+      },
+      "New Orleans Hornets*": {
+        "efgpct": 46.5,
+        "tovpct": 13.9
+      },
+      "New York Knicks": {
+        "efgpct": 48.6,
+        "tovpct": 13.4
+      },
+      "Orlando Magic*": {
+        "efgpct": 47.8,
+        "tovpct": 13.3
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 46.6,
+        "tovpct": 13.7
+      },
+      "Phoenix Suns*": {
+        "efgpct": 47.3,
+        "tovpct": 13.7
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.9,
+        "tovpct": 14.5
+      },
+      "Sacramento Kings*": {
+        "efgpct": 49.9,
+        "tovpct": 13.3
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.7,
+        "tovpct": 15.1
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 12.8
+      },
+      "Toronto Raptors": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 13.6
+      },
+      "Utah Jazz*": {
+        "efgpct": 48.6,
+        "tovpct": 16.0
+      },
+      "Washington Wizards": {
+        "efgpct": 46.0,
+        "tovpct": 13.0
+      }
+    },
+    "2003-04|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 46.5,
+        "tovpct": 15.4
+      },
+      "Boston Celtics*": {
+        "efgpct": 48.6,
+        "tovpct": 15.4
+      },
+      "Chicago Bulls": {
+        "efgpct": 44.6,
+        "tovpct": 14.9
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 45.1,
+        "tovpct": 13.7
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 49.5,
+        "tovpct": 11.1
+      },
+      "Denver Nuggets*": {
+        "efgpct": 46.7,
+        "tovpct": 14.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 46.1,
+        "tovpct": 14.7
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.5,
+        "tovpct": 14.1
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.4,
+        "tovpct": 16.4
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.1
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 45.300000000000004,
+        "tovpct": 15.0
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 48.1,
+        "tovpct": 12.8
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 47.9,
+        "tovpct": 13.9
+      },
+      "Miami Heat*": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 13.5
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 12.7
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 48.6,
+        "tovpct": 12.4
+      },
+      "New Jersey Nets*": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.4
+      },
+      "New Orleans Hornets*": {
+        "efgpct": 46.0,
+        "tovpct": 14.1
+      },
+      "New York Knicks*": {
+        "efgpct": 47.4,
+        "tovpct": 15.1
+      },
+      "Orlando Magic": {
+        "efgpct": 46.1,
+        "tovpct": 12.8
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 45.6,
+        "tovpct": 15.5
+      },
+      "Phoenix Suns": {
+        "efgpct": 47.5,
+        "tovpct": 14.3
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 47.8,
+        "tovpct": 14.4
+      },
+      "Sacramento Kings*": {
+        "efgpct": 50.7,
+        "tovpct": 13.0
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 47.3,
+        "tovpct": 14.1
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 50.1,
+        "tovpct": 13.9
+      },
+      "Toronto Raptors": {
+        "efgpct": 45.4,
+        "tovpct": 14.1
+      },
+      "Utah Jazz": {
+        "efgpct": 45.6,
+        "tovpct": 16.1
+      },
+      "Washington Wizards": {
+        "efgpct": 45.4,
+        "tovpct": 16.0
+      }
+    },
+    "2004-05|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 14.9
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.1,
+        "tovpct": 14.7
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 45.5,
+        "tovpct": 13.3
+      },
+      "Chicago Bulls*": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 15.5
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.0,
+        "tovpct": 13.0
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 49.2,
+        "tovpct": 12.5
+      },
+      "Denver Nuggets*": {
+        "efgpct": 48.3,
+        "tovpct": 13.8
+      },
+      "Detroit Pistons*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 13.3
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.5,
+        "tovpct": 12.3
+      },
+      "Houston Rockets*": {
+        "efgpct": 48.6,
+        "tovpct": 13.5
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 14.1
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 14.9
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 48.5,
+        "tovpct": 13.4
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 48.9,
+        "tovpct": 14.3
+      },
+      "Miami Heat*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 13.1
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 47.5,
+        "tovpct": 13.0
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.9,
+        "tovpct": 12.7
+      },
+      "New Jersey Nets*": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 13.7
+      },
+      "New Orleans Hornets": {
+        "efgpct": 44.6,
+        "tovpct": 14.2
+      },
+      "New York Knicks": {
+        "efgpct": 48.5,
+        "tovpct": 13.8
+      },
+      "Orlando Magic": {
+        "efgpct": 47.8,
+        "tovpct": 14.6
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 47.5,
+        "tovpct": 14.2
+      },
+      "Phoenix Suns*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 12.4
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 48.4,
+        "tovpct": 15.2
+      },
+      "Sacramento Kings*": {
+        "efgpct": 49.6,
+        "tovpct": 12.0
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 49.2,
+        "tovpct": 13.2
+      },
+      "Seattle SuperSonics*": {
+        "efgpct": 49.5,
+        "tovpct": 13.0
+      },
+      "Toronto Raptors": {
+        "efgpct": 49.2,
+        "tovpct": 12.5
+      },
+      "Utah Jazz": {
+        "efgpct": 46.9,
+        "tovpct": 15.0
+      },
+      "Washington Wizards*": {
+        "efgpct": 47.4,
+        "tovpct": 12.9
+      }
+    },
+    "2005-06|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 48.6,
+        "tovpct": 14.7
+      },
+      "Boston Celtics": {
+        "efgpct": 50.4,
+        "tovpct": 15.7
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 13.0
+      },
+      "Chicago Bulls*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.9
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 49.2,
+        "tovpct": 13.3
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 49.5,
+        "tovpct": 13.1
+      },
+      "Denver Nuggets*": {
+        "efgpct": 48.8,
+        "tovpct": 13.7
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.7,
+        "tovpct": 11.2
+      },
+      "Golden State Warriors": {
+        "efgpct": 47.9,
+        "tovpct": 13.0
+      },
+      "Houston Rockets": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.3
+      },
+      "Indiana Pacers*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 14.8
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.5,
+        "tovpct": 13.1
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 49.6,
+        "tovpct": 13.9
+      },
+      "Miami Heat*": {
+        "efgpct": 51.7,
+        "tovpct": 13.9
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.2,
+        "tovpct": 13.8
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.0,
+        "tovpct": 14.2
+      },
+      "New Jersey Nets*": {
+        "efgpct": 47.8,
+        "tovpct": 13.3
+      },
+      "New Orleans/Oklahoma City Hornets": {
+        "efgpct": 46.400000000000006,
+        "tovpct": 12.9
+      },
+      "New York Knicks": {
+        "efgpct": 48.1,
+        "tovpct": 16.5
+      },
+      "Orlando Magic": {
+        "efgpct": 49.6,
+        "tovpct": 14.7
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.3
+      },
+      "Phoenix Suns*": {
+        "efgpct": 53.7,
+        "tovpct": 12.2
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 47.4,
+        "tovpct": 14.5
+      },
+      "Sacramento Kings*": {
+        "efgpct": 49.2,
+        "tovpct": 13.9
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 13.6
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 50.4,
+        "tovpct": 13.7
+      },
+      "Toronto Raptors": {
+        "efgpct": 50.0,
+        "tovpct": 12.4
+      },
+      "Utah Jazz": {
+        "efgpct": 46.7,
+        "tovpct": 15.0
+      },
+      "Washington Wizards*": {
+        "efgpct": 48.4,
+        "tovpct": 12.8
+      }
+    },
+    "2006-07|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 15.1
+      },
+      "Boston Celtics": {
+        "efgpct": 47.9,
+        "tovpct": 15.4
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 48.0,
+        "tovpct": 13.9
+      },
+      "Chicago Bulls*": {
+        "efgpct": 49.3,
+        "tovpct": 14.7
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 48.4,
+        "tovpct": 13.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.9,
+        "tovpct": 13.4
+      },
+      "Denver Nuggets*": {
+        "efgpct": 50.1,
+        "tovpct": 14.6
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.8,
+        "tovpct": 12.0
+      },
+      "Golden State Warriors*": {
+        "efgpct": 51.2,
+        "tovpct": 14.1
+      },
+      "Houston Rockets*": {
+        "efgpct": 49.9,
+        "tovpct": 13.6
+      },
+      "Indiana Pacers": {
+        "efgpct": 47.4,
+        "tovpct": 15.1
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 48.1,
+        "tovpct": 14.5
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.1,
+        "tovpct": 14.3
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 50.4,
+        "tovpct": 15.2
+      },
+      "Miami Heat*": {
+        "efgpct": 50.6,
+        "tovpct": 14.3
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 50.4,
+        "tovpct": 14.1
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 49.0,
+        "tovpct": 14.8
+      },
+      "New Jersey Nets*": {
+        "efgpct": 50.4,
+        "tovpct": 14.2
+      },
+      "New Orleans/Oklahoma City Hornets": {
+        "efgpct": 47.9,
+        "tovpct": 13.6
+      },
+      "New York Knicks": {
+        "efgpct": 49.4,
+        "tovpct": 15.9
+      },
+      "Orlando Magic*": {
+        "efgpct": 50.0,
+        "tovpct": 16.3
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 48.0,
+        "tovpct": 14.6
+      },
+      "Phoenix Suns*": {
+        "efgpct": 55.1,
+        "tovpct": 13.4
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 48.3,
+        "tovpct": 14.5
+      },
+      "Sacramento Kings": {
+        "efgpct": 49.1,
+        "tovpct": 13.5
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 52.1,
+        "tovpct": 13.6
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 49.9,
+        "tovpct": 14.5
+      },
+      "Toronto Raptors*": {
+        "efgpct": 50.4,
+        "tovpct": 13.0
+      },
+      "Utah Jazz*": {
+        "efgpct": 50.2,
+        "tovpct": 14.5
+      },
+      "Washington Wizards*": {
+        "efgpct": 49.1,
+        "tovpct": 12.6
+      }
+    },
+    "2007-08|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 48.3,
+        "tovpct": 14.0
+      },
+      "Boston Celtics*": {
+        "efgpct": 52.2,
+        "tovpct": 14.7
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 49.2,
+        "tovpct": 13.9
+      },
+      "Chicago Bulls": {
+        "efgpct": 47.0,
+        "tovpct": 13.4
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 48.0,
+        "tovpct": 13.1
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.2,
+        "tovpct": 12.3
+      },
+      "Denver Nuggets*": {
+        "efgpct": 51.0,
+        "tovpct": 12.9
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.5,
+        "tovpct": 11.4
+      },
+      "Golden State Warriors": {
+        "efgpct": 51.1,
+        "tovpct": 11.5
+      },
+      "Houston Rockets*": {
+        "efgpct": 49.2,
+        "tovpct": 13.0
+      },
+      "Indiana Pacers": {
+        "efgpct": 49.8,
+        "tovpct": 13.5
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 46.5,
+        "tovpct": 13.7
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 52.5,
+        "tovpct": 12.9
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 50.0,
+        "tovpct": 14.0
+      },
+      "Miami Heat": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.4
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 13.7
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.4,
+        "tovpct": 13.6
+      },
+      "New Jersey Nets": {
+        "efgpct": 48.1,
+        "tovpct": 14.2
+      },
+      "New Orleans Hornets*": {
+        "efgpct": 51.2,
+        "tovpct": 11.4
+      },
+      "New York Knicks": {
+        "efgpct": 47.5,
+        "tovpct": 13.4
+      },
+      "Orlando Magic*": {
+        "efgpct": 53.7,
+        "tovpct": 13.6
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 13.4
+      },
+      "Phoenix Suns*": {
+        "efgpct": 55.1,
+        "tovpct": 13.4
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 48.9,
+        "tovpct": 12.6
+      },
+      "Sacramento Kings": {
+        "efgpct": 50.3,
+        "tovpct": 14.8
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.4,
+        "tovpct": 12.6
+      },
+      "Seattle SuperSonics": {
+        "efgpct": 46.7,
+        "tovpct": 14.3
+      },
+      "Toronto Raptors*": {
+        "efgpct": 51.1,
+        "tovpct": 11.4
+      },
+      "Utah Jazz*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 13.6
+      },
+      "Washington Wizards*": {
+        "efgpct": 48.9,
+        "tovpct": 12.5
+      }
+    },
+    "2008-09|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 50.4,
+        "tovpct": 12.5
+      },
+      "Boston Celtics*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 15.0
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 49.4,
+        "tovpct": 15.1
+      },
+      "Chicago Bulls*": {
+        "efgpct": 49.3,
+        "tovpct": 13.3
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 51.9,
+        "tovpct": 12.5
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.4,
+        "tovpct": 12.1
+      },
+      "Denver Nuggets*": {
+        "efgpct": 51.2,
+        "tovpct": 14.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 48.3,
+        "tovpct": 11.7
+      },
+      "Golden State Warriors": {
+        "efgpct": 49.7,
+        "tovpct": 12.9
+      },
+      "Houston Rockets*": {
+        "efgpct": 50.1,
+        "tovpct": 13.6
+      },
+      "Indiana Pacers": {
+        "efgpct": 50.1,
+        "tovpct": 13.1
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 48.1,
+        "tovpct": 14.0
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 12.3
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 48.6,
+        "tovpct": 14.8
+      },
+      "Miami Heat*": {
+        "efgpct": 50.0,
+        "tovpct": 12.1
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 48.3,
+        "tovpct": 13.1
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.1,
+        "tovpct": 13.3
+      },
+      "New Jersey Nets": {
+        "efgpct": 49.7,
+        "tovpct": 12.7
+      },
+      "New Orleans Hornets*": {
+        "efgpct": 50.1,
+        "tovpct": 12.5
+      },
+      "New York Knicks": {
+        "efgpct": 50.3,
+        "tovpct": 12.9
+      },
+      "Oklahoma City Thunder": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.8
+      },
+      "Orlando Magic*": {
+        "efgpct": 52.0,
+        "tovpct": 13.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.5,
+        "tovpct": 13.4
+      },
+      "Phoenix Suns": {
+        "efgpct": 54.50000000000001,
+        "tovpct": 14.4
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 51.1,
+        "tovpct": 12.5
+      },
+      "Sacramento Kings": {
+        "efgpct": 49.1,
+        "tovpct": 14.3
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 11.7
+      },
+      "Toronto Raptors": {
+        "efgpct": 49.4,
+        "tovpct": 12.8
+      },
+      "Utah Jazz*": {
+        "efgpct": 50.4,
+        "tovpct": 13.6
+      },
+      "Washington Wizards": {
+        "efgpct": 48.0,
+        "tovpct": 13.2
+      }
+    },
+    "2009-10|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 50.6,
+        "tovpct": 11.4
+      },
+      "Boston Celtics*": {
+        "efgpct": 52.2,
+        "tovpct": 14.5
+      },
+      "Charlotte Bobcats*": {
+        "efgpct": 49.0,
+        "tovpct": 15.1
+      },
+      "Chicago Bulls*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 13.3
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 53.2,
+        "tovpct": 13.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.6,
+        "tovpct": 12.3
+      },
+      "Denver Nuggets*": {
+        "efgpct": 50.9,
+        "tovpct": 12.7
+      },
+      "Detroit Pistons": {
+        "efgpct": 47.4,
+        "tovpct": 12.8
+      },
+      "Golden State Warriors": {
+        "efgpct": 51.4,
+        "tovpct": 13.1
+      },
+      "Houston Rockets": {
+        "efgpct": 49.4,
+        "tovpct": 13.2
+      },
+      "Indiana Pacers": {
+        "efgpct": 49.1,
+        "tovpct": 13.8
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 49.1,
+        "tovpct": 14.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.6,
+        "tovpct": 12.4
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 49.4,
+        "tovpct": 13.7
+      },
+      "Miami Heat*": {
+        "efgpct": 49.6,
+        "tovpct": 12.8
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 12.3
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 47.8,
+        "tovpct": 14.6
+      },
+      "New Jersey Nets": {
+        "efgpct": 45.800000000000004,
+        "tovpct": 13.7
+      },
+      "New Orleans Hornets": {
+        "efgpct": 50.6,
+        "tovpct": 12.7
+      },
+      "New York Knicks": {
+        "efgpct": 50.9,
+        "tovpct": 13.0
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 49.4,
+        "tovpct": 13.9
+      },
+      "Orlando Magic*": {
+        "efgpct": 53.6,
+        "tovpct": 13.6
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 49.6,
+        "tovpct": 13.7
+      },
+      "Phoenix Suns*": {
+        "efgpct": 54.6,
+        "tovpct": 13.6
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 49.9,
+        "tovpct": 12.1
+      },
+      "Sacramento Kings": {
+        "efgpct": 49.1,
+        "tovpct": 13.6
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.5,
+        "tovpct": 12.9
+      },
+      "Toronto Raptors": {
+        "efgpct": 52.1,
+        "tovpct": 12.7
+      },
+      "Utah Jazz*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 14.2
+      },
+      "Washington Wizards": {
+        "efgpct": 48.1,
+        "tovpct": 13.9
+      }
+    },
+    "2010-11|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 50.1,
+        "tovpct": 13.5
+      },
+      "Boston Celtics*": {
+        "efgpct": 51.9,
+        "tovpct": 14.5
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 14.1
+      },
+      "Chicago Bulls*": {
+        "efgpct": 50.1,
+        "tovpct": 13.5
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 13.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 52.5,
+        "tovpct": 13.6
+      },
+      "Denver Nuggets*": {
+        "efgpct": 52.6,
+        "tovpct": 13.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 49.5,
+        "tovpct": 12.5
+      },
+      "Golden State Warriors": {
+        "efgpct": 51.0,
+        "tovpct": 13.3
+      },
+      "Houston Rockets": {
+        "efgpct": 50.3,
+        "tovpct": 12.3
+      },
+      "Indiana Pacers*": {
+        "efgpct": 48.6,
+        "tovpct": 14.1
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 49.6,
+        "tovpct": 15.1
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 50.2,
+        "tovpct": 12.3
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 49.3,
+        "tovpct": 13.0
+      },
+      "Miami Heat*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 13.5
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 46.7,
+        "tovpct": 13.0
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.3,
+        "tovpct": 15.1
+      },
+      "New Jersey Nets": {
+        "efgpct": 47.4,
+        "tovpct": 13.4
+      },
+      "New Orleans Hornets*": {
+        "efgpct": 49.3,
+        "tovpct": 12.8
+      },
+      "New York Knicks*": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 12.6
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 50.1,
+        "tovpct": 13.1
+      },
+      "Orlando Magic*": {
+        "efgpct": 52.1,
+        "tovpct": 14.3
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 49.4,
+        "tovpct": 12.3
+      },
+      "Phoenix Suns": {
+        "efgpct": 52.2,
+        "tovpct": 13.2
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 48.6,
+        "tovpct": 12.6
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.0,
+        "tovpct": 14.4
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 52.7,
+        "tovpct": 12.8
+      },
+      "Toronto Raptors": {
+        "efgpct": 49.1,
+        "tovpct": 13.7
+      },
+      "Utah Jazz": {
+        "efgpct": 49.8,
+        "tovpct": 13.5
+      },
+      "Washington Wizards": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 13.9
+      }
+    },
+    "2011-12|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 50.0,
+        "tovpct": 13.4
+      },
+      "Boston Celtics*": {
+        "efgpct": 49.6,
+        "tovpct": 14.7
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 43.9,
+        "tovpct": 13.9
+      },
+      "Chicago Bulls*": {
+        "efgpct": 49.0,
+        "tovpct": 13.2
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 46.300000000000004,
+        "tovpct": 14.3
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 48.9,
+        "tovpct": 13.4
+      },
+      "Denver Nuggets*": {
+        "efgpct": 51.6,
+        "tovpct": 14.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 15.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 50.5,
+        "tovpct": 13.3
+      },
+      "Houston Rockets": {
+        "efgpct": 49.2,
+        "tovpct": 13.5
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.4,
+        "tovpct": 13.1
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 50.2,
+        "tovpct": 12.7
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 49.1,
+        "tovpct": 14.2
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 47.3,
+        "tovpct": 13.6
+      },
+      "Miami Heat*": {
+        "efgpct": 50.5,
+        "tovpct": 14.5
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 48.1,
+        "tovpct": 12.9
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 14.0
+      },
+      "New Jersey Nets": {
+        "efgpct": 47.3,
+        "tovpct": 14.3
+      },
+      "New Orleans Hornets": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 15.2
+      },
+      "New York Knicks*": {
+        "efgpct": 49.2,
+        "tovpct": 14.9
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 51.6,
+        "tovpct": 15.3
+      },
+      "Orlando Magic*": {
+        "efgpct": 50.6,
+        "tovpct": 14.5
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 48.0,
+        "tovpct": 10.9
+      },
+      "Phoenix Suns": {
+        "efgpct": 49.9,
+        "tovpct": 13.3
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 48.8,
+        "tovpct": 13.4
+      },
+      "Sacramento Kings": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 13.0
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 12.8
+      },
+      "Toronto Raptors": {
+        "efgpct": 47.5,
+        "tovpct": 14.8
+      },
+      "Utah Jazz*": {
+        "efgpct": 48.1,
+        "tovpct": 13.0
+      },
+      "Washington Wizards": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 14.2
+      }
+    },
+    "2012-13|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 51.7,
+        "tovpct": 14.2
+      },
+      "Boston Celtics*": {
+        "efgpct": 50.3,
+        "tovpct": 14.1
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 49.8,
+        "tovpct": 14.0
+      },
+      "Charlotte Bobcats": {
+        "efgpct": 46.0,
+        "tovpct": 13.2
+      },
+      "Chicago Bulls*": {
+        "efgpct": 47.0,
+        "tovpct": 13.6
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.3,
+        "tovpct": 13.0
+      },
+      "Dallas Mavericks": {
+        "efgpct": 50.6,
+        "tovpct": 13.0
+      },
+      "Denver Nuggets*": {
+        "efgpct": 51.5,
+        "tovpct": 13.6
+      },
+      "Detroit Pistons": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 14.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 50.6,
+        "tovpct": 14.0
+      },
+      "Houston Rockets*": {
+        "efgpct": 52.5,
+        "tovpct": 14.9
+      },
+      "Indiana Pacers*": {
+        "efgpct": 47.9,
+        "tovpct": 14.3
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 52.6,
+        "tovpct": 13.9
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 51.2,
+        "tovpct": 13.9
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 47.199999999999996,
+        "tovpct": 13.3
+      },
+      "Miami Heat*": {
+        "efgpct": 55.2,
+        "tovpct": 13.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 47.599999999999994,
+        "tovpct": 12.7
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 47.3,
+        "tovpct": 13.8
+      },
+      "New Orleans Hornets": {
+        "efgpct": 48.9,
+        "tovpct": 14.0
+      },
+      "New York Knicks*": {
+        "efgpct": 51.5,
+        "tovpct": 11.7
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 52.7,
+        "tovpct": 14.4
+      },
+      "Orlando Magic": {
+        "efgpct": 48.5,
+        "tovpct": 13.7
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 48.1,
+        "tovpct": 12.5
+      },
+      "Phoenix Suns": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 14.3
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 49.8,
+        "tovpct": 13.9
+      },
+      "Sacramento Kings": {
+        "efgpct": 49.1,
+        "tovpct": 13.4
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 53.1,
+        "tovpct": 14.0
+      },
+      "Toronto Raptors": {
+        "efgpct": 48.8,
+        "tovpct": 13.0
+      },
+      "Utah Jazz": {
+        "efgpct": 49.2,
+        "tovpct": 13.8
+      },
+      "Washington Wizards": {
+        "efgpct": 47.5,
+        "tovpct": 14.2
+      }
+    },
+    "2013-14|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 51.5,
+        "tovpct": 14.3
+      },
+      "Boston Celtics": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 14.2
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 51.4,
+        "tovpct": 14.1
+      },
+      "Charlotte Bobcats*": {
+        "efgpct": 48.1,
+        "tovpct": 11.7
+      },
+      "Chicago Bulls*": {
+        "efgpct": 47.099999999999994,
+        "tovpct": 14.2
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 47.9,
+        "tovpct": 13.0
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 52.6,
+        "tovpct": 12.7
+      },
+      "Denver Nuggets": {
+        "efgpct": 49.7,
+        "tovpct": 14.0
+      },
+      "Detroit Pistons": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 12.9
+      },
+      "Golden State Warriors*": {
+        "efgpct": 51.7,
+        "tovpct": 13.8
+      },
+      "Houston Rockets*": {
+        "efgpct": 53.1,
+        "tovpct": 14.6
+      },
+      "Indiana Pacers*": {
+        "efgpct": 49.0,
+        "tovpct": 14.3
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 52.6,
+        "tovpct": 12.7
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 50.5,
+        "tovpct": 13.7
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 49.4,
+        "tovpct": 13.1
+      },
+      "Miami Heat*": {
+        "efgpct": 55.400000000000006,
+        "tovpct": 14.6
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 47.9,
+        "tovpct": 14.1
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 48.6,
+        "tovpct": 12.2
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 49.5,
+        "tovpct": 12.9
+      },
+      "New York Knicks": {
+        "efgpct": 50.5,
+        "tovpct": 12.5
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 52.0,
+        "tovpct": 14.0
+      },
+      "Orlando Magic": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 13.9
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 47.5,
+        "tovpct": 14.8
+      },
+      "Phoenix Suns": {
+        "efgpct": 51.9,
+        "tovpct": 14.0
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.4,
+        "tovpct": 12.4
+      },
+      "Sacramento Kings": {
+        "efgpct": 48.4,
+        "tovpct": 13.9
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 53.7,
+        "tovpct": 13.5
+      },
+      "Toronto Raptors*": {
+        "efgpct": 49.8,
+        "tovpct": 13.2
+      },
+      "Utah Jazz": {
+        "efgpct": 48.4,
+        "tovpct": 13.9
+      },
+      "Washington Wizards*": {
+        "efgpct": 50.6,
+        "tovpct": 13.6
+      }
+    },
+    "2014-15|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 52.7,
+        "tovpct": 13.5
+      },
+      "Boston Celtics*": {
+        "efgpct": 48.9,
+        "tovpct": 12.5
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 49.1,
+        "tovpct": 13.0
+      },
+      "Charlotte Hornets": {
+        "efgpct": 45.6,
+        "tovpct": 11.2
+      },
+      "Chicago Bulls*": {
+        "efgpct": 48.9,
+        "tovpct": 12.9
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 52.0,
+        "tovpct": 13.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 51.5,
+        "tovpct": 11.9
+      },
+      "Denver Nuggets": {
+        "efgpct": 47.9,
+        "tovpct": 12.7
+      },
+      "Detroit Pistons": {
+        "efgpct": 48.199999999999996,
+        "tovpct": 12.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 54.0,
+        "tovpct": 13.1
+      },
+      "Houston Rockets*": {
+        "efgpct": 51.2,
+        "tovpct": 15.0
+      },
+      "Indiana Pacers": {
+        "efgpct": 48.4,
+        "tovpct": 13.1
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 53.300000000000004,
+        "tovpct": 11.6
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 47.3,
+        "tovpct": 12.1
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 48.9,
+        "tovpct": 12.6
+      },
+      "Miami Heat": {
+        "efgpct": 50.0,
+        "tovpct": 14.5
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 49.9,
+        "tovpct": 15.5
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 46.800000000000004,
+        "tovpct": 13.7
+      },
+      "New Orleans Pelicans*": {
+        "efgpct": 50.1,
+        "tovpct": 12.5
+      },
+      "New York Knicks": {
+        "efgpct": 47.0,
+        "tovpct": 14.0
+      },
+      "Oklahoma City Thunder": {
+        "efgpct": 49.2,
+        "tovpct": 13.1
+      },
+      "Orlando Magic": {
+        "efgpct": 49.4,
+        "tovpct": 14.0
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 45.9,
+        "tovpct": 16.0
+      },
+      "Phoenix Suns": {
+        "efgpct": 50.1,
+        "tovpct": 13.7
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 50.8,
+        "tovpct": 12.6
+      },
+      "Sacramento Kings": {
+        "efgpct": 49.0,
+        "tovpct": 14.8
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 51.7,
+        "tovpct": 13.1
+      },
+      "Toronto Raptors*": {
+        "efgpct": 50.8,
+        "tovpct": 12.0
+      },
+      "Utah Jazz": {
+        "efgpct": 49.4,
+        "tovpct": 14.6
+      },
+      "Washington Wizards*": {
+        "efgpct": 49.9,
+        "tovpct": 14.0
+      }
+    },
+    "2015-16|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 51.6,
+        "tovpct": 13.8
+      },
+      "Boston Celtics*": {
+        "efgpct": 48.8,
+        "tovpct": 12.1
+      },
+      "Brooklyn Nets": {
+        "efgpct": 49.2,
+        "tovpct": 13.6
+      },
+      "Charlotte Hornets*": {
+        "efgpct": 50.2,
+        "tovpct": 11.7
+      },
+      "Chicago Bulls": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 12.6
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 12.7
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 50.2,
+        "tovpct": 12.0
+      },
+      "Denver Nuggets": {
+        "efgpct": 48.9,
+        "tovpct": 13.2
+      },
+      "Detroit Pistons*": {
+        "efgpct": 49.1,
+        "tovpct": 12.2
+      },
+      "Golden State Warriors*": {
+        "efgpct": 56.3,
+        "tovpct": 13.5
+      },
+      "Houston Rockets*": {
+        "efgpct": 51.6,
+        "tovpct": 14.2
+      },
+      "Indiana Pacers*": {
+        "efgpct": 49.7,
+        "tovpct": 13.5
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 12.1
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 46.0,
+        "tovpct": 12.5
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 47.699999999999996,
+        "tovpct": 12.3
+      },
+      "Miami Heat*": {
+        "efgpct": 50.8,
+        "tovpct": 13.3
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 49.9,
+        "tovpct": 14.2
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 49.8,
+        "tovpct": 13.9
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 49.8,
+        "tovpct": 12.3
+      },
+      "New York Knicks": {
+        "efgpct": 48.3,
+        "tovpct": 12.6
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 14.0
+      },
+      "Orlando Magic": {
+        "efgpct": 50.0,
+        "tovpct": 12.8
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 14.8
+      },
+      "Phoenix Suns": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 15.2
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 51.1,
+        "tovpct": 13.2
+      },
+      "Sacramento Kings": {
+        "efgpct": 51.0,
+        "tovpct": 14.2
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 52.6,
+        "tovpct": 12.4
+      },
+      "Toronto Raptors*": {
+        "efgpct": 50.4,
+        "tovpct": 12.3
+      },
+      "Utah Jazz": {
+        "efgpct": 50.1,
+        "tovpct": 14.2
+      },
+      "Washington Wizards": {
+        "efgpct": 51.1,
+        "tovpct": 13.1
+      }
+    },
+    "2016-17|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 50.4,
+        "tovpct": 14.2
+      },
+      "Boston Celtics*": {
+        "efgpct": 52.5,
+        "tovpct": 12.2
+      },
+      "Brooklyn Nets": {
+        "efgpct": 50.7,
+        "tovpct": 14.7
+      },
+      "Charlotte Hornets": {
+        "efgpct": 50.1,
+        "tovpct": 10.7
+      },
+      "Chicago Bulls*": {
+        "efgpct": 48.699999999999996,
+        "tovpct": 12.3
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 54.7,
+        "tovpct": 12.6
+      },
+      "Dallas Mavericks": {
+        "efgpct": 50.5,
+        "tovpct": 11.6
+      },
+      "Denver Nuggets": {
+        "efgpct": 53.0,
+        "tovpct": 13.2
+      },
+      "Detroit Pistons": {
+        "efgpct": 49.2,
+        "tovpct": 10.9
+      },
+      "Golden State Warriors*": {
+        "efgpct": 56.3,
+        "tovpct": 13.2
+      },
+      "Houston Rockets*": {
+        "efgpct": 54.50000000000001,
+        "tovpct": 13.3
+      },
+      "Indiana Pacers*": {
+        "efgpct": 51.6,
+        "tovpct": 12.8
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 53.7,
+        "tovpct": 12.0
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 50.1,
+        "tovpct": 13.5
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 49.1,
+        "tovpct": 12.1
+      },
+      "Miami Heat": {
+        "efgpct": 51.2,
+        "tovpct": 12.4
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 52.7,
+        "tovpct": 13.2
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 51.1,
+        "tovpct": 12.9
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 50.4,
+        "tovpct": 11.7
+      },
+      "New York Knicks": {
+        "efgpct": 49.6,
+        "tovpct": 12.4
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 50.0,
+        "tovpct": 13.2
+      },
+      "Orlando Magic": {
+        "efgpct": 48.9,
+        "tovpct": 12.1
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 50.1,
+        "tovpct": 14.9
+      },
+      "Phoenix Suns": {
+        "efgpct": 49.3,
+        "tovpct": 13.4
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 52.0,
+        "tovpct": 12.5
+      },
+      "Sacramento Kings": {
+        "efgpct": 51.6,
+        "tovpct": 13.7
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 12.6
+      },
+      "Toronto Raptors*": {
+        "efgpct": 51.7,
+        "tovpct": 11.8
+      },
+      "Utah Jazz*": {
+        "efgpct": 52.6,
+        "tovpct": 13.2
+      },
+      "Washington Wizards*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 12.8
+      }
+    },
+    "2017-18|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 51.2,
+        "tovpct": 14.1
+      },
+      "Boston Celtics*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 12.9
+      },
+      "Brooklyn Nets": {
+        "efgpct": 51.4,
+        "tovpct": 13.6
+      },
+      "Charlotte Hornets": {
+        "efgpct": 50.8,
+        "tovpct": 11.4
+      },
+      "Chicago Bulls": {
+        "efgpct": 49.7,
+        "tovpct": 12.6
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 54.7,
+        "tovpct": 12.6
+      },
+      "Dallas Mavericks": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 11.5
+      },
+      "Denver Nuggets": {
+        "efgpct": 53.6,
+        "tovpct": 13.4
+      },
+      "Detroit Pistons": {
+        "efgpct": 51.2,
+        "tovpct": 12.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 56.89999999999999,
+        "tovpct": 14.1
+      },
+      "Houston Rockets*": {
+        "efgpct": 55.1,
+        "tovpct": 12.7
+      },
+      "Indiana Pacers*": {
+        "efgpct": 52.5,
+        "tovpct": 12.3
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 52.7,
+        "tovpct": 13.2
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 51.7,
+        "tovpct": 13.8
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 50.0,
+        "tovpct": 14.0
+      },
+      "Miami Heat*": {
+        "efgpct": 52.0,
+        "tovpct": 13.3
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 53.1,
+        "tovpct": 12.9
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 52.300000000000004,
+        "tovpct": 11.4
+      },
+      "New Orleans Pelicans*": {
+        "efgpct": 54.1,
+        "tovpct": 13.3
+      },
+      "New York Knicks": {
+        "efgpct": 51.0,
+        "tovpct": 13.3
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 51.4,
+        "tovpct": 12.4
+      },
+      "Orlando Magic": {
+        "efgpct": 51.2,
+        "tovpct": 13.3
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 53.5,
+        "tovpct": 14.6
+      },
+      "Phoenix Suns": {
+        "efgpct": 49.5,
+        "tovpct": 13.9
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 51.1,
+        "tovpct": 12.3
+      },
+      "Sacramento Kings": {
+        "efgpct": 50.2,
+        "tovpct": 12.8
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 50.7,
+        "tovpct": 12.2
+      },
+      "Toronto Raptors*": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 12.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 52.7,
+        "tovpct": 13.7
+      },
+      "Washington Wizards*": {
+        "efgpct": 52.5,
+        "tovpct": 13.3
+      }
+    },
+    "2018-19|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 52.2,
+        "tovpct": 14.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 11.5
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 52.0,
+        "tovpct": 13.0
+      },
+      "Charlotte Hornets": {
+        "efgpct": 51.4,
+        "tovpct": 10.9
+      },
+      "Chicago Bulls": {
+        "efgpct": 50.5,
+        "tovpct": 12.7
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 50.3,
+        "tovpct": 12.2
+      },
+      "Dallas Mavericks": {
+        "efgpct": 51.9,
+        "tovpct": 12.7
+      },
+      "Denver Nuggets*": {
+        "efgpct": 52.7,
+        "tovpct": 11.9
+      },
+      "Detroit Pistons*": {
+        "efgpct": 50.9,
+        "tovpct": 12.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 56.49999999999999,
+        "tovpct": 12.6
+      },
+      "Houston Rockets*": {
+        "efgpct": 54.2,
+        "tovpct": 12.0
+      },
+      "Indiana Pacers*": {
+        "efgpct": 53.0,
+        "tovpct": 12.4
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 12.7
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 52.7,
+        "tovpct": 13.4
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 50.8,
+        "tovpct": 12.9
+      },
+      "Miami Heat": {
+        "efgpct": 51.5,
+        "tovpct": 13.1
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 55.00000000000001,
+        "tovpct": 12.0
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 51.1,
+        "tovpct": 11.4
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 12.6
+      },
+      "New York Knicks": {
+        "efgpct": 49.0,
+        "tovpct": 12.4
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 51.4,
+        "tovpct": 11.7
+      },
+      "Orlando Magic*": {
+        "efgpct": 51.800000000000004,
+        "tovpct": 11.9
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 53.2,
+        "tovpct": 12.9
+      },
+      "Phoenix Suns": {
+        "efgpct": 51.4,
+        "tovpct": 13.8
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 12.1
+      },
+      "Sacramento Kings": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 11.5
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 11.0
+      },
+      "Toronto Raptors*": {
+        "efgpct": 54.300000000000004,
+        "tovpct": 12.4
+      },
+      "Utah Jazz*": {
+        "efgpct": 53.800000000000004,
+        "tovpct": 13.4
+      },
+      "Washington Wizards": {
+        "efgpct": 53.1,
+        "tovpct": 12.3
+      }
+    },
+    "2019-20|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 51.5,
+        "tovpct": 13.8
+      },
+      "Boston Celtics*": {
+        "efgpct": 53.1,
+        "tovpct": 12.2
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 52.0,
+        "tovpct": 13.1
+      },
+      "Charlotte Hornets": {
+        "efgpct": 50.4,
+        "tovpct": 13.3
+      },
+      "Chicago Bulls": {
+        "efgpct": 51.5,
+        "tovpct": 13.7
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 52.2,
+        "tovpct": 14.6
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 54.50000000000001,
+        "tovpct": 11.2
+      },
+      "Denver Nuggets*": {
+        "efgpct": 53.5,
+        "tovpct": 12.3
+      },
+      "Detroit Pistons": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 13.8
+      },
+      "Golden State Warriors": {
+        "efgpct": 49.7,
+        "tovpct": 13.2
+      },
+      "Houston Rockets*": {
+        "efgpct": 53.7,
+        "tovpct": 12.6
+      },
+      "Indiana Pacers*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 12.0
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 53.5,
+        "tovpct": 12.6
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 54.2,
+        "tovpct": 13.3
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 13.2
+      },
+      "Miami Heat*": {
+        "efgpct": 54.7,
+        "tovpct": 13.5
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 55.2,
+        "tovpct": 12.9
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 51.4,
+        "tovpct": 13.0
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 13.9
+      },
+      "New York Knicks": {
+        "efgpct": 50.1,
+        "tovpct": 12.6
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 53.0,
+        "tovpct": 12.4
+      },
+      "Orlando Magic*": {
+        "efgpct": 50.6,
+        "tovpct": 11.5
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 12.7
+      },
+      "Phoenix Suns": {
+        "efgpct": 53.2,
+        "tovpct": 13.0
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 53.300000000000004,
+        "tovpct": 11.2
+      },
+      "Sacramento Kings": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 13.0
+      },
+      "San Antonio Spurs": {
+        "efgpct": 53.1,
+        "tovpct": 11.2
+      },
+      "Toronto Raptors*": {
+        "efgpct": 53.6,
+        "tovpct": 13.1
+      },
+      "Utah Jazz*": {
+        "efgpct": 54.900000000000006,
+        "tovpct": 13.7
+      },
+      "Washington Wizards": {
+        "efgpct": 52.300000000000004,
+        "tovpct": 12.2
+      }
+    },
+    "2020-21|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 11.9
+      },
+      "Boston Celtics*": {
+        "efgpct": 54.300000000000004,
+        "tovpct": 12.5
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 57.49999999999999,
+        "tovpct": 12.2
+      },
+      "Charlotte Hornets": {
+        "efgpct": 53.2,
+        "tovpct": 13.3
+      },
+      "Chicago Bulls": {
+        "efgpct": 54.7,
+        "tovpct": 13.6
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 50.8,
+        "tovpct": 13.9
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 55.00000000000001,
+        "tovpct": 11.1
+      },
+      "Denver Nuggets*": {
+        "efgpct": 55.7,
+        "tovpct": 12.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 51.9,
+        "tovpct": 13.5
+      },
+      "Golden State Warriors": {
+        "efgpct": 55.1,
+        "tovpct": 13.3
+      },
+      "Houston Rockets": {
+        "efgpct": 52.1,
+        "tovpct": 13.0
+      },
+      "Indiana Pacers": {
+        "efgpct": 54.2,
+        "tovpct": 11.9
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 56.39999999999999,
+        "tovpct": 12.2
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 53.6,
+        "tovpct": 13.6
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 52.800000000000004,
+        "tovpct": 11.6
+      },
+      "Miami Heat*": {
+        "efgpct": 54.6,
+        "tovpct": 13.1
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 56.599999999999994,
+        "tovpct": 12.0
+      },
+      "Minnesota Timberwolves": {
+        "efgpct": 52.0,
+        "tovpct": 12.4
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 53.7,
+        "tovpct": 12.7
+      },
+      "New York Knicks*": {
+        "efgpct": 52.400000000000006,
+        "tovpct": 11.9
+      },
+      "Oklahoma City Thunder": {
+        "efgpct": 50.9,
+        "tovpct": 14.2
+      },
+      "Orlando Magic": {
+        "efgpct": 49.0,
+        "tovpct": 11.5
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 54.1,
+        "tovpct": 12.8
+      },
+      "Phoenix Suns*": {
+        "efgpct": 56.39999999999999,
+        "tovpct": 11.5
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 54.0,
+        "tovpct": 9.9
+      },
+      "Sacramento Kings": {
+        "efgpct": 54.900000000000006,
+        "tovpct": 12.0
+      },
+      "San Antonio Spurs": {
+        "efgpct": 51.7,
+        "tovpct": 10.2
+      },
+      "Toronto Raptors": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 11.9
+      },
+      "Utah Jazz*": {
+        "efgpct": 56.3,
+        "tovpct": 12.7
+      },
+      "Washington Wizards*": {
+        "efgpct": 53.1,
+        "tovpct": 12.3
+      }
+    },
+    "2021-22|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 54.300000000000004,
+        "tovpct": 10.8
+      },
+      "Boston Celtics*": {
+        "efgpct": 54.2,
+        "tovpct": 12.4
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 54.0,
+        "tovpct": 12.5
+      },
+      "Charlotte Hornets": {
+        "efgpct": 54.400000000000006,
+        "tovpct": 11.6
+      },
+      "Chicago Bulls*": {
+        "efgpct": 54.1,
+        "tovpct": 11.8
+      },
+      "Cleveland Cavaliers": {
+        "efgpct": 53.800000000000004,
+        "tovpct": 13.2
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 53.800000000000004,
+        "tovpct": 11.7
+      },
+      "Denver Nuggets*": {
+        "efgpct": 55.60000000000001,
+        "tovpct": 13.2
+      },
+      "Detroit Pistons": {
+        "efgpct": 49.4,
+        "tovpct": 12.6
+      },
+      "Golden State Warriors*": {
+        "efgpct": 55.2,
+        "tovpct": 13.5
+      },
+      "Houston Rockets": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 14.5
+      },
+      "Indiana Pacers": {
+        "efgpct": 53.1,
+        "tovpct": 12.7
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 53.1,
+        "tovpct": 12.5
+      },
+      "Los Angeles Lakers": {
+        "efgpct": 53.7,
+        "tovpct": 12.8
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 52.2,
+        "tovpct": 11.2
+      },
+      "Miami Heat*": {
+        "efgpct": 54.7,
+        "tovpct": 13.4
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 54.6,
+        "tovpct": 11.9
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 12.4
+      },
+      "New Orleans Pelicans*": {
+        "efgpct": 51.7,
+        "tovpct": 12.5
+      },
+      "New York Knicks": {
+        "efgpct": 51.300000000000004,
+        "tovpct": 12.0
+      },
+      "Oklahoma City Thunder": {
+        "efgpct": 49.7,
+        "tovpct": 12.5
+      },
+      "Orlando Magic": {
+        "efgpct": 50.3,
+        "tovpct": 13.0
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 11.6
+      },
+      "Phoenix Suns*": {
+        "efgpct": 54.900000000000006,
+        "tovpct": 11.6
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 51.5,
+        "tovpct": 13.0
+      },
+      "Sacramento Kings": {
+        "efgpct": 52.5,
+        "tovpct": 12.5
+      },
+      "San Antonio Spurs": {
+        "efgpct": 52.7,
+        "tovpct": 11.1
+      },
+      "Toronto Raptors*": {
+        "efgpct": 51.0,
+        "tovpct": 11.0
+      },
+      "Utah Jazz*": {
+        "efgpct": 55.50000000000001,
+        "tovpct": 12.7
+      },
+      "Washington Wizards": {
+        "efgpct": 53.2,
+        "tovpct": 12.1
+      }
+    },
+    "2022-23|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 54.1,
+        "tovpct": 11.2
+      },
+      "Boston Celtics*": {
+        "efgpct": 56.599999999999994,
+        "tovpct": 12.0
+      },
+      "Brooklyn Nets*": {
+        "efgpct": 56.2,
+        "tovpct": 12.7
+      },
+      "Charlotte Hornets": {
+        "efgpct": 51.6,
+        "tovpct": 12.3
+      },
+      "Chicago Bulls": {
+        "efgpct": 55.00000000000001,
+        "tovpct": 12.2
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 55.60000000000001,
+        "tovpct": 12.3
+      },
+      "Dallas Mavericks": {
+        "efgpct": 56.49999999999999,
+        "tovpct": 11.4
+      },
+      "Denver Nuggets*": {
+        "efgpct": 57.3,
+        "tovpct": 13.1
+      },
+      "Detroit Pistons": {
+        "efgpct": 52.0,
+        "tovpct": 13.3
+      },
+      "Golden State Warriors*": {
+        "efgpct": 57.099999999999994,
+        "tovpct": 14.1
+      },
+      "Houston Rockets": {
+        "efgpct": 51.6,
+        "tovpct": 14.0
+      },
+      "Indiana Pacers": {
+        "efgpct": 54.50000000000001,
+        "tovpct": 13.0
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 55.1,
+        "tovpct": 12.8
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 54.2,
+        "tovpct": 12.3
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 54.0,
+        "tovpct": 11.7
+      },
+      "Miami Heat*": {
+        "efgpct": 53.0,
+        "tovpct": 12.4
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 55.50000000000001,
+        "tovpct": 12.7
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 56.00000000000001,
+        "tovpct": 13.6
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 54.300000000000004,
+        "tovpct": 12.9
+      },
+      "New York Knicks*": {
+        "efgpct": 54.1,
+        "tovpct": 11.4
+      },
+      "Oklahoma City Thunder": {
+        "efgpct": 53.1,
+        "tovpct": 11.2
+      },
+      "Orlando Magic": {
+        "efgpct": 53.2,
+        "tovpct": 13.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 56.3,
+        "tovpct": 12.6
+      },
+      "Phoenix Suns*": {
+        "efgpct": 53.5,
+        "tovpct": 12.0
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 54.900000000000006,
+        "tovpct": 13.1
+      },
+      "Sacramento Kings*": {
+        "efgpct": 57.199999999999996,
+        "tovpct": 12.0
+      },
+      "San Antonio Spurs": {
+        "efgpct": 52.5,
+        "tovpct": 13.0
+      },
+      "Toronto Raptors": {
+        "efgpct": 51.7,
+        "tovpct": 10.3
+      },
+      "Utah Jazz": {
+        "efgpct": 54.7,
+        "tovpct": 13.3
+      },
+      "Washington Wizards": {
+        "efgpct": 55.00000000000001,
+        "tovpct": 12.7
+      }
+    },
+    "2023-24|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 11.6
+      },
+      "Boston Celtics*": {
+        "efgpct": 57.8,
+        "tovpct": 10.8
+      },
+      "Brooklyn Nets": {
+        "efgpct": 53.1,
+        "tovpct": 11.8
+      },
+      "Charlotte Hornets": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 12.6
+      },
+      "Chicago Bulls": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 11.0
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 55.7,
+        "tovpct": 12.4
+      },
+      "Dallas Mavericks*": {
+        "efgpct": 56.2,
+        "tovpct": 11.2
+      },
+      "Denver Nuggets*": {
+        "efgpct": 56.2,
+        "tovpct": 11.5
+      },
+      "Detroit Pistons": {
+        "efgpct": 52.6,
+        "tovpct": 13.5
+      },
+      "Golden State Warriors": {
+        "efgpct": 55.7,
+        "tovpct": 12.5
+      },
+      "Houston Rockets": {
+        "efgpct": 52.900000000000006,
+        "tovpct": 11.2
+      },
+      "Indiana Pacers*": {
+        "efgpct": 57.8,
+        "tovpct": 11.3
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 56.10000000000001,
+        "tovpct": 12.0
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 56.599999999999994,
+        "tovpct": 12.5
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 50.9,
+        "tovpct": 13.4
+      },
+      "Miami Heat*": {
+        "efgpct": 53.800000000000004,
+        "tovpct": 11.7
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 56.8,
+        "tovpct": 11.5
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 55.900000000000006,
+        "tovpct": 13.0
+      },
+      "New Orleans Pelicans*": {
+        "efgpct": 55.800000000000004,
+        "tovpct": 11.8
+      },
+      "New York Knicks*": {
+        "efgpct": 54.0,
+        "tovpct": 11.9
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 57.3,
+        "tovpct": 11.4
+      },
+      "Orlando Magic*": {
+        "efgpct": 54.1,
+        "tovpct": 13.3
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 53.2,
+        "tovpct": 10.7
+      },
+      "Phoenix Suns*": {
+        "efgpct": 56.49999999999999,
+        "tovpct": 13.4
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 50.3,
+        "tovpct": 13.4
+      },
+      "Sacramento Kings": {
+        "efgpct": 55.60000000000001,
+        "tovpct": 11.6
+      },
+      "San Antonio Spurs": {
+        "efgpct": 53.2,
+        "tovpct": 13.2
+      },
+      "Toronto Raptors": {
+        "efgpct": 53.5,
+        "tovpct": 12.4
+      },
+      "Utah Jazz": {
+        "efgpct": 53.900000000000006,
+        "tovpct": 13.6
+      },
+      "Washington Wizards": {
+        "efgpct": 53.800000000000004,
+        "tovpct": 12.2
+      }
+    },
+    "2024-25|Regular Season": {
+      "Atlanta Hawks": {
+        "efgpct": 54.6,
+        "tovpct": 13.2
+      },
+      "Boston Celtics*": {
+        "efgpct": 56.10000000000001,
+        "tovpct": 10.8
+      },
+      "Brooklyn Nets": {
+        "efgpct": 51.6,
+        "tovpct": 13.7
+      },
+      "Charlotte Hornets": {
+        "efgpct": 50.3,
+        "tovpct": 13.7
+      },
+      "Chicago Bulls": {
+        "efgpct": 55.300000000000004,
+        "tovpct": 12.7
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 57.8,
+        "tovpct": 11.6
+      },
+      "Dallas Mavericks": {
+        "efgpct": 54.900000000000006,
+        "tovpct": 12.5
+      },
+      "Denver Nuggets*": {
+        "efgpct": 57.3,
+        "tovpct": 12.5
+      },
+      "Detroit Pistons*": {
+        "efgpct": 54.7,
+        "tovpct": 13.0
+      },
+      "Golden State Warriors*": {
+        "efgpct": 53.6,
+        "tovpct": 12.3
+      },
+      "Houston Rockets*": {
+        "efgpct": 52.300000000000004,
+        "tovpct": 11.8
+      },
+      "Indiana Pacers*": {
+        "efgpct": 56.2,
+        "tovpct": 11.8
+      },
+      "Los Angeles Clippers*": {
+        "efgpct": 55.400000000000006,
+        "tovpct": 13.4
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 55.7,
+        "tovpct": 12.7
+      },
+      "Memphis Grizzlies*": {
+        "efgpct": 55.400000000000006,
+        "tovpct": 13.1
+      },
+      "Miami Heat*": {
+        "efgpct": 54.400000000000006,
+        "tovpct": 12.4
+      },
+      "Milwaukee Bucks*": {
+        "efgpct": 56.8,
+        "tovpct": 12.2
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 55.400000000000006,
+        "tovpct": 13.0
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 51.9,
+        "tovpct": 12.8
+      },
+      "New York Knicks*": {
+        "efgpct": 55.60000000000001,
+        "tovpct": 11.9
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 56.00000000000001,
+        "tovpct": 10.3
+      },
+      "Orlando Magic*": {
+        "efgpct": 51.0,
+        "tovpct": 12.9
+      },
+      "Philadelphia 76ers": {
+        "efgpct": 52.7,
+        "tovpct": 12.3
+      },
+      "Phoenix Suns": {
+        "efgpct": 56.10000000000001,
+        "tovpct": 12.8
+      },
+      "Portland Trail Blazers": {
+        "efgpct": 52.1,
+        "tovpct": 13.8
+      },
+      "Sacramento Kings": {
+        "efgpct": 54.800000000000004,
+        "tovpct": 11.8
+      },
+      "San Antonio Spurs": {
+        "efgpct": 54.400000000000006,
+        "tovpct": 12.3
+      },
+      "Toronto Raptors": {
+        "efgpct": 52.2,
+        "tovpct": 13.3
+      },
+      "Utah Jazz": {
+        "efgpct": 53.300000000000004,
+        "tovpct": 14.9
+      },
+      "Washington Wizards": {
+        "efgpct": 51.2,
+        "tovpct": 13.6
+      }
+    },
+    "2025-26|Regular Season": {
+      "Atlanta Hawks*": {
+        "efgpct": 55.400000000000006,
+        "tovpct": 12.3
+      },
+      "Boston Celtics*": {
+        "efgpct": 55.300000000000004,
+        "tovpct": 11.2
+      },
+      "Brooklyn Nets": {
+        "efgpct": 52.0,
+        "tovpct": 14.3
+      },
+      "Charlotte Hornets": {
+        "efgpct": 55.2,
+        "tovpct": 13.5
+      },
+      "Chicago Bulls": {
+        "efgpct": 54.7,
+        "tovpct": 13.3
+      },
+      "Cleveland Cavaliers*": {
+        "efgpct": 56.10000000000001,
+        "tovpct": 12.2
+      },
+      "Dallas Mavericks": {
+        "efgpct": 52.7,
+        "tovpct": 12.6
+      },
+      "Denver Nuggets*": {
+        "efgpct": 57.699999999999996,
+        "tovpct": 11.5
+      },
+      "Detroit Pistons*": {
+        "efgpct": 54.6,
+        "tovpct": 13.0
+      },
+      "Golden State Warriors": {
+        "efgpct": 54.900000000000006,
+        "tovpct": 13.8
+      },
+      "Houston Rockets*": {
+        "efgpct": 54.2,
+        "tovpct": 13.3
+      },
+      "Indiana Pacers": {
+        "efgpct": 53.300000000000004,
+        "tovpct": 12.8
+      },
+      "Los Angeles Clippers": {
+        "efgpct": 55.900000000000006,
+        "tovpct": 13.2
+      },
+      "Los Angeles Lakers*": {
+        "efgpct": 57.3,
+        "tovpct": 13.2
+      },
+      "Memphis Grizzlies": {
+        "efgpct": 53.300000000000004,
+        "tovpct": 13.0
+      },
+      "Miami Heat": {
+        "efgpct": 54.2,
+        "tovpct": 11.6
+      },
+      "Milwaukee Bucks": {
+        "efgpct": 56.49999999999999,
+        "tovpct": 13.9
+      },
+      "Minnesota Timberwolves*": {
+        "efgpct": 55.900000000000006,
+        "tovpct": 12.9
+      },
+      "New Orleans Pelicans": {
+        "efgpct": 52.7,
+        "tovpct": 12.2
+      },
+      "New York Knicks*": {
+        "efgpct": 55.7,
+        "tovpct": 12.1
+      },
+      "Oklahoma City Thunder*": {
+        "efgpct": 56.10000000000001,
+        "tovpct": 11.2
+      },
+      "Orlando Magic*": {
+        "efgpct": 53.1,
+        "tovpct": 12.4
+      },
+      "Philadelphia 76ers*": {
+        "efgpct": 53.0,
+        "tovpct": 11.9
+      },
+      "Phoenix Suns*": {
+        "efgpct": 53.7,
+        "tovpct": 12.8
+      },
+      "Portland Trail Blazers*": {
+        "efgpct": 53.400000000000006,
+        "tovpct": 14.6
+      },
+      "Sacramento Kings": {
+        "efgpct": 52.5,
+        "tovpct": 12.6
+      },
+      "San Antonio Spurs*": {
+        "efgpct": 55.900000000000006,
+        "tovpct": 11.8
+      },
+      "Toronto Raptors*": {
+        "efgpct": 54.6,
+        "tovpct": 12.2
+      },
+      "Utah Jazz": {
+        "efgpct": 53.6,
+        "tovpct": 13.2
+      },
+      "Washington Wizards": {
+        "efgpct": 53.5,
+        "tovpct": 13.6
+      }
+    }
+  },
+  "source": "Basketball-Reference cached season summary Advanced Stats / Offense Four Factors",
+  "version": "offline-bref-offensive-four-factors-v1"
+}

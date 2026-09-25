@@ -1,0 +1,22 @@
+WEBSITE240 — CAREER/WOWY CORRECTION 16
+
+1. Replace src/App.jsx with the supplied file. Player Profile/Comparison no longer list player ORtg or DRtg; Team ORtg/DRtg controls remain intact.
+2. Replace local_api/nba_per75_local_api.py with the supplied file.
+3. Add data/precomputed_sdi_v4/regular_career_sdi_v4_wowy_v2.csv. The API now uses this canonical WOWY-aware career SDI layer.
+
+Career stat fixes:
+- Per-75 rates are recomputed from recorded seasons only and possession-weighted.
+- Percentage stats use their natural attempt denominator when available.
+- Missing/unrecorded seasons are excluded rather than treated as zero.
+- Thus Wilt's BPG/75 is based on his recorded block season(s), not diluted across his full career.
+- 2P% is reconstructed from recorded 2P/2PA season data when the legacy career file lacks it, so career 2P% percentiles can populate.
+
+Career SDI fixes:
+- Replaces the prior WOWY career cache that had missing Scoring Volume, Scoring Efficiency, and Rebounding category values for some players and consequently renormalized the top-level SDI around only the remaining categories.
+- Uses the complete WOWY-aware six-category season layer with locked top-level weights: 20% Scoring Volume, 18% Scoring Efficiency, 18% Creation/Playmaking, 10.5% Rebounding, 20% Defense, 13.5% Impact/Value.
+- Wilt's resulting career SDI is 77.25 using the complete six-category layer.
+
+5-Year Peak:
+- NOT rebuilt in this correction. The existing peak cache still needs to be rebuilt so its window selection is based on the new WOWY-aware season SDI rather than the pre-WOWY canonical window.
+
+Headshots and all other site data are untouched.

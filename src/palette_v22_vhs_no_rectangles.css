@@ -1,0 +1,164 @@
+/* NBA PER-75 v22 — palette-only correction
+   Preserve the existing VHS background and geometry. Remove only the broad
+   palette surfaces that were masking it; replace legacy navy/brown surfaces
+   without changing layout or behavior. */
+:root{
+  --v22-black:#090809;
+  --v22-black-soft:#121013;
+  --v22-black-raised:#191417;
+  --v22-rose:#F4CBC6;
+  --v22-rose-line:rgba(244,203,198,.30);
+  --v22-white:#F7F4F2;
+  --v22-red:#AD343E;
+}
+
+/* Restore the VHS texture as the actual sitewide foundation. */
+html,body,#root{
+  background-color:#070607!important;
+  background-image:url('./assets/sitewide-vhs-bg.png')!important;
+  background-position:center center!important;
+  background-repeat:repeat!important;
+  background-size:720px 720px!important;
+  background-attachment:fixed!important;
+  color:var(--v22-white)!important;
+}
+
+/* Structural wrappers should not become giant opaque rectangles. */
+.page,.content,.main-content,.page > .section,.page > section,
+.section:not(.panel),.content > .section,.main-content > .section{
+  background:transparent!important;
+  background-color:transparent!important;
+}
+
+/* Keep actual intentional cards/panels dark, but not blue. */
+.panel,.controls,.feature-card,.select-card,.method-card,.hero-search,.search-panel,
+.placeholder-card,.distribution,.scatter,.axisbox,.axis-selector,.big-board-meta,
+.comparison-panel,.comparison-card,.explorer-panel,.team-panel,.team-card,
+.team-profile-card,.team-profile-panel,.team-profile-summary,.team-analytics-hero,
+.team-database-section,.team-database-table,.t50-intro,.t50-matchup,.t50-results,
+.t50-live-ranking,.t50-player-card{
+  background-color:rgba(18,16,19,.88)!important;
+  background-image:none!important;
+  color:var(--v22-white)!important;
+  border-color:var(--v22-rose-line)!important;
+}
+
+/* Replace legacy navy/blue UI surfaces with black/plum, without touching values. */
+.topbar,.site-header,.main-nav,
+.global-search,.control,.controls input,.controls select,
+.player-search-row,.player-search-avatar,.result-avatar,
+.spider-mode button,.axis-chip,.career-note,.big-board-meta,
+.big-board-header,.big-board-row,
+.team-profile-panel,.team-profile-summary,
+.t50-mode-card,.t50-player-card,.t50-live-head input,
+.player-profile .profile-header,.player-profile .profile-headshot,
+.player-profile .profile-spider-section .spider-card,
+.player-profile .profile-sdi-section .category-card,
+.player-profile .profile-stats-section .stat-table,
+.player-profile .profile-stats-section .stat-row,
+.player-profile .sixbox,.player-profile .sdi-snapshot>div,
+.player-profile .career-note,.player-profile .axis-selector,
+.player-profile .axis-chip{
+  background-color:var(--v22-black-soft)!important;
+  background-image:none!important;
+}
+
+/* Data tables/charts are black, but their surrounding pages remain transparent. */
+.board-table,.board-table table,.comparison-table,.comparison-table-wrap table,
+.team-database-table table,.team-leaderboard-table,.tablewrap,.tablewrap table,
+.stat-table,.explorer-chart,.chart,.chart-card,.plot,.plot-card,
+.big-board-row,.big-board-header,.team-leaderboard-row,.team-leaderboard-head,
+.team-database-row,.team-database-header,
+.player-profile .tablewrap,.player-profile .tablewrap table,
+.player-profile .tablewrap thead,.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,.player-profile .tablewrap td,
+.player-profile .tablewrap th{
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Do not recolor data values black. */
+.page,.page *{--site-text-v22:var(--v22-white)}
+.board-table,.board-table *,.comparison-table,.comparison-table *,
+.team-database-table,.team-database-table *,.team-leaderboard-table,.team-leaderboard-table *,
+.big-board-row,.big-board-row *,.team-leaderboard-row,.team-leaderboard-row *,
+.team-database-row,.team-database-row *,table td,table td *{
+  color:var(--v22-white);
+}
+
+/* Headers: white and rose-gold structure, never legacy cream/brown. */
+.page h1,.page h2,.page h3,.page h4,.page h5,
+.section-label,.table-head,.table-header,.big-board-header,
+.team-leaderboard-head,.team-database-header,.panel-head h2,
+.team-section-head h1,.team-hero h1{
+  color:var(--v22-white)!important;
+}
+
+.page .section-label,.page .profile-section h3,.page .profile-table-title,
+.big-board-table,.comparison-table-wrap,.team-database-table,.team-leaderboard-table,
+.team-panel,.team-card,.comparison-card,.feature-card,.select-card,.method-card,
+.search-panel,.hero-search,.panel,.controls{
+  border-color:var(--v22-rose-line)!important;
+}
+
+/* Team pages had a separate old parchment/brown theme; replace only its colors. */
+.team-page{
+  background:transparent!important;
+  color:var(--v22-white)!important;
+}
+.team-page .team-panel,.team-page .metric-card,.team-page .context-card,
+.team-page .hero-logo,.team-page .team-search,.team-page .season-toolbar select,
+.team-page .segmented,.team-page .team-row-head{
+  background-color:rgba(18,16,19,.90)!important;
+  background-image:none!important;
+  color:var(--v22-white)!important;
+  border-color:var(--v22-rose-line)!important;
+}
+.team-page .team-row{color:var(--v22-white)!important;border-bottom-color:rgba(244,203,198,.14)!important}
+.team-page .team-row-head{color:var(--v22-rose)!important}
+.team-page .segmented button{color:var(--v22-white)!important}
+.team-page .segmented button.active{background:var(--v22-red)!important;color:#fff!important}
+.team-page .back-button,.team-page .eyebrow,.team-page .team-section-head p,
+.team-page .team-hero p,.team-page .metric-card span,.team-page .metric-card small,
+.team-page .context-card span,.team-page .season-count,.team-page .team-loading,
+.team-page .team-empty{color:rgba(247,244,242,.72)!important}
+.team-page .champion-pill{background:var(--v22-rose)!important;color:#1a1012!important}
+
+/* Team comparison's separate warm/brown surfaces. */
+.team-comparison-page,.team-comparison-page *{
+  --tc-bg:transparent!important;
+}
+.team-comparison-page{background:transparent!important;color:var(--v22-white)!important}
+.team-comparison-page .panel,.team-comparison-page .card,
+.team-comparison-page .table,.team-comparison-page .table-wrap,
+.team-comparison-page .comparison-card{
+  background-color:rgba(18,16,19,.90)!important;
+  background-image:none!important;
+  color:var(--v22-white)!important;
+  border-color:var(--v22-rose-line)!important;
+}
+
+/* Existing red remains red; rose gold is the structural warm accent. */
+.player-profile .back-tabs button.active,.page .profile-controls button.active,
+.page .context-button.active,.page .cat-tabs button.active,.page .topbar .nav-link.active{
+  background:var(--v22-rose)!important;
+  color:#171013!important;
+  border-color:var(--v22-rose)!important;
+}
+
+/* Profile outline and interior stay dark; do not create extra rectangular paint layers. */
+.player-profile .profile-card,.player-profile .backface,
+.player-profile .profile-header,.player-profile .profile-spider-section .spider-card,
+.player-profile .sixbox,.player-profile .spider-card{
+  background-color:var(--v22-black-soft)!important;
+  background-image:none!important;
+  border-color:var(--v22-rose-line)!important;
+}
+
+/* Preserve the VHS background around profile surfaces. */
+.player-profile,.player-profile .profile-stage,.player-profile .profile-card-wrap,
+.player-profile .profile-backface-wrap{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}

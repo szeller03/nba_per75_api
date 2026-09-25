@@ -1,0 +1,228 @@
+{
+  "version": "SDI_v4_NEW_LOCKED_2026-09",
+  "regular_season": {
+    "top_level_weights": {
+      "Scoring Volume": 0.22,
+      "Efficiency": 0.2,
+      "Creation / Playmaking": 0.2,
+      "Rebounding": 0.105,
+      "Defense": 0.22,
+      "Impact / Value": 0.055
+    },
+    "category_formulas": {
+      "Scoring Volume": {
+        "Primary Scoring Output": {
+          "weight": 0.35,
+          "statistics": {
+            "PTS_per75": 1.0
+          }
+        },
+        "Scoring Composition": {
+          "weight": 0.65,
+          "statistics": {
+            "FGA_per75": 0.55,
+            "FTA_per75": 0.45
+          }
+        }
+      },
+      "Efficiency": {
+        "Overall Efficiency": {
+          "weight": 0.6,
+          "statistics": {
+            "TS_pct": 0.25,
+            "rTS": 0.75
+          }
+        },
+        "Component Efficiency": {
+          "weight": 0.4,
+          "statistics": {
+            "2P_pct": 0.5,
+            "3P_pct": 0.4,
+            "FT_pct": 0.1
+          }
+        }
+      },
+      "Creation / Playmaking": {
+        "Creation Output": {
+          "weight": 0.385,
+          "statistics": {
+            "AST_per75": 0.8,
+            "AST_pct": 0.2
+          }
+        },
+        "Ball Security / Creation Cost": {
+          "weight": 0.315,
+          "statistics": {
+            "AST_TOV": 0.6,
+            "TOV_pct": 0.4
+          }
+        },
+        "WOWY Offensive Impact": {
+          "weight": 0.3,
+          "statistics": {
+            "WOWY_Offense": 1.0
+          }
+        }
+      },
+      "Rebounding": {
+        "Rebounding Production": {
+          "weight": 0.75,
+          "statistics": {
+            "ORB_per75": 0.45,
+            "DRB_per75": 0.35,
+            "TRB_per75": 0.2
+          }
+        },
+        "Rebounding Rate": {
+          "weight": 0.25,
+          "statistics": {
+            "OREB_pct": 0.45,
+            "DREB_pct": 0.35,
+            "TRB_pct": 0.2
+          }
+        }
+      },
+      "Defense": {
+        "Defensive Activity": {
+          "weight": 0.35,
+          "statistics": {
+            "STL_per75": 0.4,
+            "BLK_per75": 0.6
+          }
+        },
+        "Defensive Activity Rate": {
+          "weight": 0.25,
+          "statistics": {
+            "STL_pct": 0.4,
+            "BLK_pct": 0.6
+          }
+        },
+        "WOWY Defensive Impact": {
+          "weight": 0.4,
+          "statistics": {
+            "WOWY_Defense": 1.0
+          }
+        }
+      },
+      "Impact / Value": {
+        "WOWY Overall Impact": {
+          "weight": 1.0,
+          "statistics": {
+            "WOWY_Net": 1.0
+          }
+        }
+      }
+    }
+  },
+  "playoffs": {
+    "top_level_weights": {
+      "Scoring Volume": 0.23280423280423282,
+      "Efficiency": 0.21164021164021166,
+      "Creation / Playmaking": 0.21164021164021166,
+      "Rebounding": 0.11111111111111112,
+      "Defense": 0.23280423280423282
+    },
+    "removed_category": "Impact / Value",
+    "removed_components": [
+      "WOWY_Offense",
+      "WOWY_Defense",
+      "WOWY_Net"
+    ],
+    "renormalization": {
+      "Creation / Playmaking": {
+        "original_available_total": 0.7,
+        "Creation Output": 0.55,
+        "Ball Security / Creation Cost": 0.45
+      },
+      "Defense": {
+        "original_available_total": 0.6,
+        "Defensive Activity": 0.5833333333333334,
+        "Defensive Activity Rate": 0.4166666666666667
+      }
+    },
+    "category_formulas": {
+      "Scoring Volume": {
+        "Primary Scoring Output": {
+          "weight": 0.35,
+          "statistics": {
+            "PTS_per75": 1.0
+          }
+        },
+        "Scoring Composition": {
+          "weight": 0.65,
+          "statistics": {
+            "FGA_per75": 0.55,
+            "FTA_per75": 0.45
+          }
+        }
+      },
+      "Efficiency": {
+        "Overall Efficiency": {
+          "weight": 0.6,
+          "statistics": {
+            "TS_pct": 0.25,
+            "rTS": 0.75
+          }
+        },
+        "Component Efficiency": {
+          "weight": 0.4,
+          "statistics": {
+            "2P_pct": 0.5,
+            "3P_pct": 0.4,
+            "FT_pct": 0.1
+          }
+        }
+      },
+      "Creation / Playmaking": {
+        "Creation Output": {
+          "weight": 0.55,
+          "statistics": {
+            "AST_per75": 0.8,
+            "AST_pct": 0.2
+          }
+        },
+        "Ball Security / Creation Cost": {
+          "weight": 0.45,
+          "statistics": {
+            "AST_TOV": 0.6,
+            "TOV_pct": 0.4
+          }
+        }
+      },
+      "Rebounding": {
+        "Rebounding Production": {
+          "weight": 0.75,
+          "statistics": {
+            "ORB_per75": 0.45,
+            "DRB_per75": 0.35,
+            "TRB_per75": 0.2
+          }
+        },
+        "Rebounding Rate": {
+          "weight": 0.25,
+          "statistics": {
+            "OREB_pct": 0.45,
+            "DREB_pct": 0.35,
+            "TRB_pct": 0.2
+          }
+        }
+      },
+      "Defense": {
+        "Defensive Activity": {
+          "weight": 0.5833333333333334,
+          "statistics": {
+            "STL_per75": 0.4,
+            "BLK_per75": 0.6
+          }
+        },
+        "Defensive Activity Rate": {
+          "weight": 0.4166666666666667,
+          "statistics": {
+            "STL_pct": 0.4,
+            "BLK_pct": 0.6
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1487 @@
+season,season_type,team,efgpct,tovpct
+1968-69,Regular Season,Philadelphia 76ers*,45.4,13.6
+1969-70,Regular Season,Philadelphia 76ers*,46.9,15.2
+1970-71,Regular Season,Milwaukee Bucks*,50.9,16.0
+1970-71,Regular Season,Chicago Bulls*,45.2,13.3
+1970-71,Regular Season,New York Knicks*,45.0,11.8
+1970-71,Regular Season,Los Angeles Lakers*,47.599999999999994,15.0
+1970-71,Regular Season,Boston Celtics,44.2,14.4
+1970-71,Regular Season,Phoenix Suns,43.7,14.6
+1970-71,Regular Season,Philadelphia 76ers*,45.0,15.0
+1970-71,Regular Season,Baltimore Bullets*,44.2,14.2
+1970-71,Regular Season,San Diego Rockets,42.1,15.0
+1970-71,Regular Season,Detroit Pistons,44.9,15.5
+1970-71,Regular Season,San Francisco Warriors*,44.800000000000004,16.1
+1970-71,Regular Season,Atlanta Hawks*,46.5,16.5
+1970-71,Regular Season,Seattle SuperSonics,45.6,15.3
+1970-71,Regular Season,Cincinnati Royals,45.4,14.2
+1970-71,Regular Season,Portland Trail Blazers,43.5,12.7
+1970-71,Regular Season,Buffalo Braves,43.6,16.4
+1970-71,Regular Season,Cleveland Cavaliers,42.4,15.3
+1971-72,Regular Season,Los Angeles Lakers*,49.0,14.8
+1971-72,Regular Season,Milwaukee Bucks*,49.8,15.8
+1971-72,Regular Season,Chicago Bulls*,45.1,12.6
+1971-72,Regular Season,Phoenix Suns,45.7,14.9
+1971-72,Regular Season,Boston Celtics*,45.300000000000004,14.4
+1971-72,Regular Season,New York Knicks*,45.9,13.7
+1971-72,Regular Season,Golden State Warriors*,43.9,13.6
+1971-72,Regular Season,Seattle SuperSonics,46.400000000000006,16.3
+1971-72,Regular Season,Baltimore Bullets*,45.0,15.2
+1971-72,Regular Season,Houston Rockets,43.4,13.3
+1971-72,Regular Season,Atlanta Hawks*,46.0,17.2
+1971-72,Regular Season,Philadelphia 76ers,44.4,16.0
+1971-72,Regular Season,Cincinnati Royals,45.9,16.2
+1971-72,Regular Season,Detroit Pistons,45.4,17.3
+1971-72,Regular Season,Cleveland Cavaliers,42.8,14.1
+1971-72,Regular Season,Buffalo Braves,45.1,17.3
+1971-72,Regular Season,Portland Trail Blazers,44.2,16.2
+1972-73,Regular Season,Los Angeles Lakers*,47.8,17.2
+1972-73,Regular Season,Milwaukee Bucks*,48.1,16.0
+1972-73,Regular Season,Boston Celtics*,44.800000000000004,15.1
+1972-73,Regular Season,New York Knicks*,46.7,13.7
+1972-73,Regular Season,Chicago Bulls*,44.4,13.4
+1972-73,Regular Season,Baltimore Bullets*,46.400000000000006,15.3
+1972-73,Regular Season,Golden State Warriors*,45.5,14.5
+1972-73,Regular Season,Detroit Pistons,46.300000000000004,16.3
+1972-73,Regular Season,Atlanta Hawks*,46.1,16.0
+1972-73,Regular Season,Phoenix Suns,45.5,15.1
+1972-73,Regular Season,Houston Rockets,45.7,14.1
+1972-73,Regular Season,Cleveland Cavaliers,43.5,16.6
+1972-73,Regular Season,Kansas City-Omaha Kings,47.8,16.9
+1972-73,Regular Season,Seattle SuperSonics,44.9,16.8
+1972-73,Regular Season,Portland Trail Blazers,45.800000000000004,15.9
+1972-73,Regular Season,Buffalo Braves,44.9,18.6
+1972-73,Regular Season,Philadelphia 76ers,42.0,15.7
+1973-74,Regular Season,Milwaukee Bucks*,49.2,16.9
+1973-74,Regular Season,Detroit Pistons*,45.9,17.2
+1973-74,Regular Season,Boston Celtics*,45.6,16.8
+1973-74,Regular Season,Chicago Bulls*,44.6,16.8
+1973-74,Regular Season,New York Knicks*,46.5,15.1
+1973-74,Regular Season,Golden State Warriors,46.400000000000006,15.8
+1973-74,Regular Season,Capital Bullets*,44.1,15.3
+1973-74,Regular Season,Los Angeles Lakers*,45.300000000000004,17.7
+1973-74,Regular Season,Buffalo Braves*,48.0,17.3
+1973-74,Regular Season,Houston Rockets,48.0,16.8
+1973-74,Regular Season,Atlanta Hawks,46.5,17.3
+1973-74,Regular Season,Seattle SuperSonics,44.5,15.3
+1973-74,Regular Season,Phoenix Suns,46.0,16.1
+1973-74,Regular Season,Kansas City-Omaha Kings,45.9,17.8
+1973-74,Regular Season,Cleveland Cavaliers,43.9,15.3
+1973-74,Regular Season,Portland Trail Blazers,46.7,17.5
+1973-74,Regular Season,Philadelphia 76ers,43.2,16.2
+1974-75,Regular Season,Washington Bullets*,46.2,15.7
+1974-75,Regular Season,Boston Celtics*,45.800000000000004,15.8
+1974-75,Regular Season,Golden State Warriors*,46.5,16.3
+1974-75,Regular Season,Chicago Bulls*,44.7,15.5
+1974-75,Regular Season,Buffalo Braves*,47.599999999999994,16.8
+1974-75,Regular Season,Houston Rockets*,47.699999999999996,17.8
+1974-75,Regular Season,Portland Trail Blazers,48.0,18.4
+1974-75,Regular Season,Milwaukee Bucks,46.800000000000004,15.9
+1974-75,Regular Season,Kansas City-Omaha Kings*,44.9,15.8
+1974-75,Regular Season,Cleveland Cavaliers,46.2,15.2
+1974-75,Regular Season,Seattle SuperSonics*,45.6,15.9
+1974-75,Regular Season,New York Knicks*,45.0,14.2
+1974-75,Regular Season,Atlanta Hawks,43.8,14.8
+1974-75,Regular Season,Detroit Pistons*,46.6,16.4
+1974-75,Regular Season,Phoenix Suns,44.7,17.2
+1974-75,Regular Season,Philadelphia 76ers,44.5,16.0
+1974-75,Regular Season,Los Angeles Lakers,45.0,17.3
+1974-75,Regular Season,New Orleans Jazz,44.0,17.5
+1975-76,Regular Season,Golden State Warriors*,46.2,15.3
+1975-76,Regular Season,Cleveland Cavaliers*,45.4,13.5
+1975-76,Regular Season,Boston Celtics*,44.6,15.4
+1975-76,Regular Season,Washington Bullets*,47.199999999999996,16.9
+1975-76,Regular Season,Buffalo Braves*,47.599999999999994,17.3
+1975-76,Regular Season,Phoenix Suns*,47.199999999999996,18.3
+1975-76,Regular Season,Philadelphia 76ers*,44.7,16.4
+1975-76,Regular Season,Los Angeles Lakers,46.5,15.8
+1975-76,Regular Season,Seattle SuperSonics*,45.800000000000004,15.6
+1975-76,Regular Season,Houston Rockets,48.5,16.9
+1975-76,Regular Season,New Orleans Jazz,44.7,16.2
+1975-76,Regular Season,Detroit Pistons*,46.400000000000006,16.0
+1975-76,Regular Season,New York Knicks,45.6,14.3
+1975-76,Regular Season,Portland Trail Blazers,46.9,18.3
+1975-76,Regular Season,Milwaukee Bucks*,46.5,16.4
+1975-76,Regular Season,Kansas City Kings,45.300000000000004,16.0
+1975-76,Regular Season,Chicago Bulls,41.4,14.3
+1975-76,Regular Season,Atlanta Hawks,45.0,15.6
+1976-77,Regular Season,Portland Trail Blazers*,48.1,16.9
+1976-77,Regular Season,Denver Nuggets*,48.1,18.8
+1976-77,Regular Season,Philadelphia 76ers*,48.0,18.3
+1976-77,Regular Season,Golden State Warriors*,47.5,15.6
+1976-77,Regular Season,Los Angeles Lakers*,47.8,15.3
+1976-77,Regular Season,Houston Rockets*,48.3,16.2
+1976-77,Regular Season,Cleveland Cavaliers*,44.9,13.7
+1976-77,Regular Season,Washington Bullets*,47.0,16.5
+1976-77,Regular Season,Kansas City Kings,46.0,15.4
+1976-77,Regular Season,Chicago Bulls*,45.2,16.0
+1976-77,Regular Season,Phoenix Suns,47.0,18.1
+1976-77,Regular Season,San Antonio Spurs*,48.5,16.8
+1976-77,Regular Season,New York Knicks,48.6,16.6
+1976-77,Regular Season,Detroit Pistons*,48.3,16.6
+1976-77,Regular Season,Seattle SuperSonics,45.0,16.8
+1976-77,Regular Season,Indiana Pacers,44.9,15.4
+1976-77,Regular Season,Boston Celtics*,44.5,16.1
+1976-77,Regular Season,New Orleans Jazz,45.300000000000004,16.6
+1976-77,Regular Season,Milwaukee Bucks,46.800000000000004,15.8
+1976-77,Regular Season,Atlanta Hawks,45.7,17.7
+1976-77,Regular Season,Buffalo Braves,45.0,16.5
+1976-77,Regular Season,New York Nets,42.9,16.5
+1977-78,Regular Season,Portland Trail Blazers*,48.3,16.3
+1977-78,Regular Season,Philadelphia 76ers*,48.6,16.7
+1977-78,Regular Season,Phoenix Suns*,47.599999999999994,16.6
+1977-78,Regular Season,San Antonio Spurs*,50.0,16.3
+1977-78,Regular Season,Los Angeles Lakers*,48.699999999999996,15.3
+1977-78,Regular Season,Seattle SuperSonics*,44.7,15.8
+1977-78,Regular Season,Washington Bullets*,46.1,15.3
+1977-78,Regular Season,Denver Nuggets*,47.699999999999996,16.8
+1977-78,Regular Season,Cleveland Cavaliers*,45.4,13.8
+1977-78,Regular Season,Golden State Warriors,46.7,15.0
+1977-78,Regular Season,Atlanta Hawks*,46.0,16.1
+1977-78,Regular Season,New York Knicks*,48.8,16.7
+1977-78,Regular Season,Milwaukee Bucks*,48.199999999999996,15.9
+1977-78,Regular Season,Chicago Bulls,47.3,17.0
+1977-78,Regular Season,Detroit Pistons,47.8,17.9
+1977-78,Regular Season,Kansas City Kings,46.6,16.2
+1977-78,Regular Season,New Orleans Jazz,46.2,16.2
+1977-78,Regular Season,Boston Celtics,45.800000000000004,16.1
+1977-78,Regular Season,Indiana Pacers,45.0,15.6
+1977-78,Regular Season,Buffalo Braves,46.6,15.9
+1977-78,Regular Season,Houston Rockets,45.800000000000004,13.9
+1977-78,Regular Season,New Jersey Nets,44.3,16.4
+1978-79,Regular Season,Washington Bullets*,48.5,13.7
+1978-79,Regular Season,San Antonio Spurs*,50.6,15.8
+1978-79,Regular Season,Phoenix Suns*,51.2,17.1
+1978-79,Regular Season,Los Angeles Lakers*,51.7,15.9
+1978-79,Regular Season,Seattle SuperSonics*,46.800000000000004,15.7
+1978-79,Regular Season,Kansas City Kings*,49.2,15.8
+1978-79,Regular Season,Milwaukee Bucks,50.3,15.4
+1978-79,Regular Season,Atlanta Hawks*,47.3,15.2
+1978-79,Regular Season,Philadelphia 76ers*,48.8,17.4
+1978-79,Regular Season,Denver Nuggets*,48.1,16.3
+1978-79,Regular Season,Portland Trail Blazers*,48.3,16.5
+1978-79,Regular Season,Houston Rockets*,49.7,15.1
+1978-79,Regular Season,Golden State Warriors,48.699999999999996,15.3
+1978-79,Regular Season,Indiana Pacers,47.5,15.2
+1978-79,Regular Season,San Diego Clippers,48.3,15.6
+1978-79,Regular Season,Detroit Pistons,47.5,15.4
+1978-79,Regular Season,New York Knicks,48.699999999999996,15.9
+1978-79,Regular Season,Cleveland Cavaliers,46.800000000000004,13.9
+1978-79,Regular Season,New Jersey Nets*,46.0,17.7
+1978-79,Regular Season,Chicago Bulls,48.9,18.3
+1978-79,Regular Season,Boston Celtics,48.0,17.0
+1978-79,Regular Season,New Orleans Jazz,46.800000000000004,17.1
+1979-80,Regular Season,Boston Celtics*,50.1,15.4
+1979-80,Regular Season,Los Angeles Lakers*,53.0,16.5
+1979-80,Regular Season,Seattle SuperSonics*,47.4,14.9
+1979-80,Regular Season,Philadelphia 76ers*,49.4,17.2
+1979-80,Regular Season,Milwaukee Bucks*,49.1,15.0
+1979-80,Regular Season,Phoenix Suns*,49.8,16.4
+1979-80,Regular Season,Kansas City Kings*,48.0,14.5
+1979-80,Regular Season,Atlanta Hawks*,46.5,15.4
+1979-80,Regular Season,Cleveland Cavaliers,47.599999999999994,13.2
+1979-80,Regular Season,Houston Rockets*,48.699999999999996,15.5
+1979-80,Regular Season,San Antonio Spurs*,50.2,15.2
+1979-80,Regular Season,Indiana Pacers,47.9,14.8
+1979-80,Regular Season,Portland Trail Blazers*,47.699999999999996,16.1
+1979-80,Regular Season,New Jersey Nets,46.6,16.6
+1979-80,Regular Season,New York Knicks,49.8,15.7
+1979-80,Regular Season,Washington Bullets*,46.300000000000004,13.7
+1979-80,Regular Season,Chicago Bulls,48.9,17.2
+1979-80,Regular Season,San Diego Clippers,48.199999999999996,14.6
+1979-80,Regular Season,Denver Nuggets,46.9,15.1
+1979-80,Regular Season,Golden State Warriors,48.4,15.5
+1979-80,Regular Season,Utah Jazz,50.0,16.7
+1979-80,Regular Season,Detroit Pistons,48.3,16.9
+1980-81,Regular Season,Philadelphia 76ers*,51.5,17.3
+1980-81,Regular Season,Milwaukee Bucks*,50.0,15.7
+1980-81,Regular Season,Boston Celtics*,50.9,16.2
+1980-81,Regular Season,Phoenix Suns*,49.2,17.1
+1980-81,Regular Season,Los Angeles Lakers*,51.300000000000004,15.8
+1980-81,Regular Season,San Antonio Spurs*,49.2,15.4
+1980-81,Regular Season,Chicago Bulls*,50.4,17.2
+1980-81,Regular Season,New York Knicks*,48.699999999999996,15.0
+1980-81,Regular Season,Indiana Pacers*,48.4,15.1
+1980-81,Regular Season,Portland Trail Blazers*,49.8,15.2
+1980-81,Regular Season,Houston Rockets*,48.9,14.9
+1980-81,Regular Season,Washington Bullets,47.599999999999994,14.4
+1980-81,Regular Season,Kansas City Kings*,50.3,15.1
+1980-81,Regular Season,Denver Nuggets,47.699999999999996,13.4
+1980-81,Regular Season,Golden State Warriors,49.3,15.6
+1980-81,Regular Season,San Diego Clippers,48.6,14.5
+1980-81,Regular Season,Seattle SuperSonics,47.0,15.7
+1980-81,Regular Season,Atlanta Hawks,48.0,16.7
+1980-81,Regular Season,Cleveland Cavaliers,47.199999999999996,14.2
+1980-81,Regular Season,New Jersey Nets,47.8,16.6
+1980-81,Regular Season,Utah Jazz,49.1,15.5
+1980-81,Regular Season,Detroit Pistons,46.400000000000006,18.0
+1980-81,Regular Season,Dallas Mavericks,46.6,15.2
+1981-82,Regular Season,Boston Celtics*,50.2,14.7
+1981-82,Regular Season,Philadelphia 76ers*,52.1,15.5
+1981-82,Regular Season,Milwaukee Bucks*,50.9,16.5
+1981-82,Regular Season,Los Angeles Lakers*,51.800000000000004,14.7
+1981-82,Regular Season,Seattle SuperSonics*,49.1,14.1
+1981-82,Regular Season,Phoenix Suns*,49.5,15.9
+1981-82,Regular Season,San Antonio Spurs*,49.0,13.0
+1981-82,Regular Season,Golden State Warriors,50.2,14.5
+1981-82,Regular Season,Washington Bullets*,47.8,14.7
+1981-82,Regular Season,New Jersey Nets*,48.699999999999996,16.6
+1981-82,Regular Season,Portland Trail Blazers,50.7,14.4
+1981-82,Regular Season,Atlanta Hawks*,47.599999999999994,14.6
+1981-82,Regular Season,Denver Nuggets*,52.2,14.1
+1981-82,Regular Season,Houston Rockets*,47.9,13.7
+1981-82,Regular Season,Detroit Pistons,48.5,16.0
+1981-82,Regular Season,Indiana Pacers,47.199999999999996,14.6
+1981-82,Regular Season,Chicago Bulls,50.5,17.3
+1981-82,Regular Season,New York Knicks,49.5,15.4
+1981-82,Regular Season,Kansas City Kings,49.7,15.5
+1981-82,Regular Season,Dallas Mavericks,47.3,13.7
+1981-82,Regular Season,Utah Jazz,49.6,14.5
+1981-82,Regular Season,San Diego Clippers,50.7,16.2
+1981-82,Regular Season,Cleveland Cavaliers,46.6,13.7
+1982-83,Regular Season,Philadelphia 76ers*,50.1,16.3
+1982-83,Regular Season,Los Angeles Lakers*,52.800000000000004,15.9
+1982-83,Regular Season,Boston Celtics*,49.4,15.2
+1982-83,Regular Season,Phoenix Suns*,49.9,16.0
+1982-83,Regular Season,Milwaukee Bucks*,49.1,15.1
+1982-83,Regular Season,San Antonio Spurs*,51.0,15.1
+1982-83,Regular Season,Seattle SuperSonics*,49.6,15.5
+1982-83,Regular Season,New Jersey Nets*,49.4,18.7
+1982-83,Regular Season,New York Knicks*,48.4,16.2
+1982-83,Regular Season,Portland Trail Blazers*,48.8,15.4
+1982-83,Regular Season,Kansas City Kings,50.0,16.4
+1982-83,Regular Season,Denver Nuggets*,49.5,14.0
+1982-83,Regular Season,Washington Bullets,47.3,16.6
+1982-83,Regular Season,Detroit Pistons,48.1,15.1
+1982-83,Regular Season,Dallas Mavericks,48.9,13.5
+1982-83,Regular Season,Atlanta Hawks*,47.199999999999996,15.0
+1982-83,Regular Season,Golden State Warriors,48.5,15.9
+1982-83,Regular Season,Utah Jazz,48.3,16.7
+1982-83,Regular Season,Chicago Bulls,48.3,16.9
+1982-83,Regular Season,San Diego Clippers,47.9,15.7
+1982-83,Regular Season,Indiana Pacers,48.3,15.2
+1982-83,Regular Season,Cleveland Cavaliers,46.7,16.4
+1982-83,Regular Season,Houston Rockets,45.300000000000004,15.9
+1983-84,Regular Season,Boston Celtics*,50.4,14.6
+1983-84,Regular Season,Milwaukee Bucks*,49.7,15.0
+1983-84,Regular Season,New York Knicks*,49.9,16.7
+1983-84,Regular Season,Los Angeles Lakers*,53.6,16.1
+1983-84,Regular Season,Portland Trail Blazers*,50.7,15.1
+1983-84,Regular Season,Detroit Pistons*,48.199999999999996,12.7
+1983-84,Regular Season,Philadelphia 76ers*,49.7,16.9
+1983-84,Regular Season,New Jersey Nets*,50.1,16.1
+1983-84,Regular Season,Utah Jazz*,50.5,15.2
+1983-84,Regular Season,Phoenix Suns*,51.4,15.1
+1983-84,Regular Season,Dallas Mavericks*,50.3,13.6
+1983-84,Regular Season,Seattle SuperSonics*,49.0,14.3
+1983-84,Regular Season,San Antonio Spurs,51.1,14.0
+1983-84,Regular Season,Denver Nuggets*,49.8,12.8
+1983-84,Regular Season,Atlanta Hawks*,47.599999999999994,14.4
+1983-84,Regular Season,Kansas City Kings*,49.0,15.3
+1983-84,Regular Season,Houston Rockets,49.7,15.6
+1983-84,Regular Season,Washington Bullets*,48.9,15.5
+1983-84,Regular Season,San Diego Clippers,49.8,15.3
+1983-84,Regular Season,Golden State Warriors,47.099999999999994,14.9
+1983-84,Regular Season,Cleveland Cavaliers,46.800000000000004,14.0
+1983-84,Regular Season,Indiana Pacers,48.699999999999996,15.9
+1983-84,Regular Season,Chicago Bulls,47.5,16.3
+1984-85,Regular Season,Los Angeles Lakers*,55.1,15.7
+1984-85,Regular Season,Milwaukee Bucks*,49.7,14.2
+1984-85,Regular Season,Boston Celtics*,51.5,13.8
+1984-85,Regular Season,Philadelphia 76ers*,49.7,16.0
+1984-85,Regular Season,Portland Trail Blazers*,50.6,14.8
+1984-85,Regular Season,Detroit Pistons*,48.3,13.0
+1984-85,Regular Season,Denver Nuggets*,49.1,13.2
+1984-85,Regular Season,Dallas Mavericks*,49.9,12.5
+1984-85,Regular Season,Houston Rockets*,50.7,16.0
+1984-85,Regular Season,San Antonio Spurs*,51.7,15.6
+1984-85,Regular Season,New Jersey Nets*,49.3,13.8
+1984-85,Regular Season,Utah Jazz*,48.3,15.8
+1984-85,Regular Season,Washington Bullets*,48.6,13.4
+1984-85,Regular Season,Chicago Bulls*,50.2,15.4
+1984-85,Regular Season,Atlanta Hawks,48.9,15.3
+1984-85,Regular Season,Phoenix Suns*,49.7,16.3
+1984-85,Regular Season,Kansas City Kings,50.8,15.9
+1984-85,Regular Season,Cleveland Cavaliers*,47.8,14.1
+1984-85,Regular Season,Los Angeles Clippers,49.9,16.4
+1984-85,Regular Season,New York Knicks,48.699999999999996,15.2
+1984-85,Regular Season,Seattle SuperSonics,47.699999999999996,15.9
+1984-85,Regular Season,Indiana Pacers,47.8,16.1
+1984-85,Regular Season,Golden State Warriors,47.0,14.4
+1985-86,Regular Season,Boston Celtics*,51.800000000000004,14.1
+1985-86,Regular Season,Milwaukee Bucks*,50.1,13.9
+1985-86,Regular Season,Los Angeles Lakers*,53.2,14.9
+1985-86,Regular Season,Houston Rockets*,49.6,13.6
+1985-86,Regular Season,Atlanta Hawks*,49.3,15.3
+1985-86,Regular Season,Philadelphia 76ers*,49.0,16.1
+1985-86,Regular Season,Denver Nuggets*,47.5,13.0
+1985-86,Regular Season,Dallas Mavericks*,51.0,13.3
+1985-86,Regular Season,Detroit Pistons*,48.8,13.3
+1985-86,Regular Season,Portland Trail Blazers*,50.1,15.2
+1985-86,Regular Season,Seattle SuperSonics,47.8,15.1
+1985-86,Regular Season,Utah Jazz*,49.0,15.5
+1985-86,Regular Season,San Antonio Spurs*,50.9,16.5
+1985-86,Regular Season,Washington Bullets*,47.099999999999994,14.2
+1985-86,Regular Season,New Jersey Nets*,48.9,15.9
+1985-86,Regular Season,Cleveland Cavaliers,49.0,14.6
+1985-86,Regular Season,Phoenix Suns,50.6,17.7
+1985-86,Regular Season,Sacramento Kings*,49.2,15.7
+1985-86,Regular Season,Indiana Pacers,48.3,15.7
+1985-86,Regular Season,Golden State Warriors,48.8,13.9
+1985-86,Regular Season,Chicago Bulls*,48.699999999999996,14.7
+1985-86,Regular Season,New York Knicks,46.6,15.2
+1985-86,Regular Season,Los Angeles Clippers,47.699999999999996,15.3
+1986-87,Regular Season,Los Angeles Lakers*,52.800000000000004,14.0
+1986-87,Regular Season,Atlanta Hawks*,49.0,13.3
+1986-87,Regular Season,Boston Celtics*,53.2,14.0
+1986-87,Regular Season,Dallas Mavericks*,50.3,12.3
+1986-87,Regular Season,Milwaukee Bucks*,48.699999999999996,13.0
+1986-87,Regular Season,Detroit Pistons*,49.2,14.5
+1986-87,Regular Season,Portland Trail Blazers*,51.0,15.3
+1986-87,Regular Season,Houston Rockets*,48.3,14.3
+1986-87,Regular Season,Chicago Bulls*,47.8,13.4
+1986-87,Regular Season,Utah Jazz*,47.3,14.1
+1986-87,Regular Season,Seattle SuperSonics*,49.5,15.0
+1986-87,Regular Season,Philadelphia 76ers*,49.7,16.1
+1986-87,Regular Season,Indiana Pacers*,47.8,13.4
+1986-87,Regular Season,Denver Nuggets*,47.8,11.8
+1986-87,Regular Season,Washington Bullets*,45.7,13.3
+1986-87,Regular Season,Golden State Warriors*,48.699999999999996,13.7
+1986-87,Regular Season,Phoenix Suns,50.1,15.3
+1986-87,Regular Season,Sacramento Kings,48.0,14.2
+1986-87,Regular Season,Cleveland Cavaliers,47.599999999999994,16.4
+1986-87,Regular Season,New Jersey Nets,48.699999999999996,16.4
+1986-87,Regular Season,San Antonio Spurs,48.199999999999996,14.2
+1986-87,Regular Season,New York Knicks,48.3,15.0
+1986-87,Regular Season,Los Angeles Clippers,45.7,15.0
+1987-88,Regular Season,Boston Celtics*,54.1,14.1
+1987-88,Regular Season,Los Angeles Lakers*,51.5,13.9
+1987-88,Regular Season,Detroit Pistons*,49.7,14.2
+1987-88,Regular Season,Dallas Mavericks*,48.5,13.2
+1987-88,Regular Season,Portland Trail Blazers*,49.9,13.5
+1987-88,Regular Season,Denver Nuggets*,48.6,11.7
+1987-88,Regular Season,Utah Jazz*,50.0,15.4
+1987-88,Regular Season,Atlanta Hawks*,49.1,13.0
+1987-88,Regular Season,Chicago Bulls*,49.4,13.6
+1987-88,Regular Season,Seattle SuperSonics*,49.1,13.9
+1987-88,Regular Season,Houston Rockets*,47.599999999999994,13.9
+1987-88,Regular Season,Cleveland Cavaliers*,50.0,15.5
+1987-88,Regular Season,Milwaukee Bucks*,48.5,13.6
+1987-88,Regular Season,New York Knicks*,47.699999999999996,15.5
+1987-88,Regular Season,Washington Bullets*,47.0,14.4
+1987-88,Regular Season,Indiana Pacers,49.2,14.1
+1987-88,Regular Season,Philadelphia 76ers,48.5,15.2
+1987-88,Regular Season,Phoenix Suns,49.4,14.6
+1987-88,Regular Season,San Antonio Spurs*,49.9,14.1
+1987-88,Regular Season,Sacramento Kings,48.1,14.8
+1987-88,Regular Season,New Jersey Nets,47.8,16.0
+1987-88,Regular Season,Golden State Warriors,47.4,14.3
+1987-88,Regular Season,Los Angeles Clippers,44.9,15.7
+1988-89,Regular Season,Cleveland Cavaliers*,51.4,14.2
+1988-89,Regular Season,Phoenix Suns*,50.9,12.8
+1988-89,Regular Season,Los Angeles Lakers*,51.800000000000004,14.0
+1988-89,Regular Season,Detroit Pistons*,50.2,14.4
+1988-89,Regular Season,Utah Jazz*,49.1,16.4
+1988-89,Regular Season,Atlanta Hawks*,48.0,13.5
+1988-89,Regular Season,Milwaukee Bucks*,48.699999999999996,13.7
+1988-89,Regular Season,New York Knicks*,51.2,15.4
+1988-89,Regular Season,Seattle SuperSonics*,49.6,14.1
+1988-89,Regular Season,Denver Nuggets*,48.199999999999996,11.8
+1988-89,Regular Season,Philadelphia 76ers*,50.0,12.8
+1988-89,Regular Season,Chicago Bulls*,50.7,14.4
+1988-89,Regular Season,Portland Trail Blazers*,48.8,13.9
+1988-89,Regular Season,Boston Celtics*,49.8,14.0
+1988-89,Regular Season,Houston Rockets*,48.6,15.9
+1988-89,Regular Season,Golden State Warriors*,48.0,14.2
+1988-89,Regular Season,Dallas Mavericks,48.4,13.5
+1988-89,Regular Season,Washington Bullets,46.7,13.0
+1988-89,Regular Season,Indiana Pacers,50.2,16.3
+1988-89,Regular Season,Sacramento Kings,47.8,14.2
+1988-89,Regular Season,New Jersey Nets,47.4,15.0
+1988-89,Regular Season,San Antonio Spurs,47.199999999999996,16.8
+1988-89,Regular Season,Charlotte Hornets,47.0,13.7
+1988-89,Regular Season,Los Angeles Clippers,47.8,16.5
+1988-89,Regular Season,Miami Heat,45.9,17.7
+1989-90,Regular Season,Los Angeles Lakers*,51.2,13.2
+1989-90,Regular Season,Phoenix Suns*,50.9,13.3
+1989-90,Regular Season,Detroit Pistons*,49.0,13.4
+1989-90,Regular Season,Portland Trail Blazers*,48.6,13.4
+1989-90,Regular Season,Philadelphia 76ers*,50.2,12.9
+1989-90,Regular Season,Utah Jazz*,52.2,15.5
+1989-90,Regular Season,Boston Celtics*,50.6,13.4
+1989-90,Regular Season,San Antonio Spurs*,48.8,14.7
+1989-90,Regular Season,Chicago Bulls*,51.6,13.4
+1989-90,Regular Season,Houston Rockets*,49.1,15.5
+1989-90,Regular Season,New York Knicks*,50.1,14.8
+1989-90,Regular Season,Denver Nuggets*,47.8,11.2
+1989-90,Regular Season,Seattle SuperSonics,49.4,14.0
+1989-90,Regular Season,Atlanta Hawks,49.6,13.5
+1989-90,Regular Season,Indiana Pacers*,51.800000000000004,14.6
+1989-90,Regular Season,Dallas Mavericks*,48.699999999999996,13.6
+1989-90,Regular Season,Cleveland Cavaliers*,48.5,13.5
+1989-90,Regular Season,Milwaukee Bucks*,48.8,13.9
+1989-90,Regular Season,Washington Bullets,47.699999999999996,12.4
+1989-90,Regular Season,Golden State Warriors,50.1,14.3
+1989-90,Regular Season,Los Angeles Clippers,48.8,16.3
+1989-90,Regular Season,Minnesota Timberwolves,45.1,13.3
+1989-90,Regular Season,Sacramento Kings,48.4,13.5
+1989-90,Regular Season,New Jersey Nets,43.5,13.9
+1989-90,Regular Season,Charlotte Hornets,47.0,13.2
+1989-90,Regular Season,Orlando Magic,46.7,13.9
+1989-90,Regular Season,Miami Heat,46.7,15.9
+1990-91,Regular Season,Chicago Bulls*,52.1,12.8
+1990-91,Regular Season,Portland Trail Blazers*,50.9,13.4
+1990-91,Regular Season,Los Angeles Lakers*,50.0,13.2
+1990-91,Regular Season,Phoenix Suns*,50.6,13.5
+1990-91,Regular Season,Boston Celtics*,52.0,14.0
+1990-91,Regular Season,San Antonio Spurs*,49.4,15.2
+1990-91,Regular Season,Detroit Pistons*,47.4,13.1
+1990-91,Regular Season,Utah Jazz*,50.3,14.6
+1990-91,Regular Season,Houston Rockets*,48.9,14.5
+1990-91,Regular Season,Milwaukee Bucks*,49.9,14.3
+1990-91,Regular Season,Golden State Warriors*,50.4,13.7
+1990-91,Regular Season,Seattle SuperSonics*,50.1,14.8
+1990-91,Regular Season,Atlanta Hawks*,48.199999999999996,12.9
+1990-91,Regular Season,New York Knicks*,49.8,15.1
+1990-91,Regular Season,Philadelphia 76ers*,48.9,13.4
+1990-91,Regular Season,Indiana Pacers*,51.1,14.4
+1990-91,Regular Season,Cleveland Cavaliers,48.699999999999996,14.1
+1990-91,Regular Season,Los Angeles Clippers,47.099999999999994,14.7
+1990-91,Regular Season,Orlando Magic,47.3,14.3
+1990-91,Regular Season,Minnesota Timberwolves,45.6,11.5
+1990-91,Regular Season,New Jersey Nets,45.5,14.4
+1990-91,Regular Season,Dallas Mavericks,48.5,13.3
+1990-91,Regular Season,Washington Bullets,47.0,14.3
+1990-91,Regular Season,Charlotte Hornets,47.699999999999996,13.9
+1990-91,Regular Season,Miami Heat,46.9,16.0
+1990-91,Regular Season,Sacramento Kings,46.800000000000004,14.1
+1990-91,Regular Season,Denver Nuggets,45.7,11.9
+1991-92,Regular Season,Chicago Bulls*,51.800000000000004,11.8
+1991-92,Regular Season,Portland Trail Blazers*,49.5,13.6
+1991-92,Regular Season,Utah Jazz*,50.4,13.7
+1991-92,Regular Season,Phoenix Suns*,50.8,13.1
+1991-92,Regular Season,Cleveland Cavaliers*,50.6,11.8
+1991-92,Regular Season,New York Knicks*,49.1,13.7
+1991-92,Regular Season,Boston Celtics*,50.0,12.7
+1991-92,Regular Season,Golden State Warriors*,52.400000000000006,13.6
+1991-92,Regular Season,San Antonio Spurs*,48.5,13.9
+1991-92,Regular Season,Detroit Pistons*,47.699999999999996,13.5
+1991-92,Regular Season,Seattle SuperSonics*,48.9,14.0
+1991-92,Regular Season,Indiana Pacers*,51.800000000000004,14.7
+1991-92,Regular Season,Los Angeles Clippers*,48.3,13.6
+1991-92,Regular Season,Los Angeles Lakers*,46.5,12.0
+1991-92,Regular Season,Philadelphia 76ers,48.8,13.8
+1991-92,Regular Season,Atlanta Hawks,48.1,13.0
+1991-92,Regular Season,New Jersey Nets*,47.3,14.1
+1991-92,Regular Season,Houston Rockets,49.9,15.0
+1991-92,Regular Season,Milwaukee Bucks,48.6,14.2
+1991-92,Regular Season,Charlotte Hornets,48.5,13.0
+1991-92,Regular Season,Miami Heat*,47.9,14.6
+1991-92,Regular Season,Washington Bullets,47.099999999999994,13.3
+1991-92,Regular Season,Sacramento Kings,48.199999999999996,14.3
+1991-92,Regular Season,Orlando Magic,46.7,14.6
+1991-92,Regular Season,Minnesota Timberwolves,46.7,12.4
+1991-92,Regular Season,Denver Nuggets,45.1,14.9
+1991-92,Regular Season,Dallas Mavericks,45.800000000000004,13.1
+1992-93,Regular Season,Seattle SuperSonics*,50.2,13.5
+1992-93,Regular Season,Chicago Bulls*,49.9,12.0
+1992-93,Regular Season,Cleveland Cavaliers*,51.800000000000004,12.5
+1992-93,Regular Season,Phoenix Suns*,52.1,14.2
+1992-93,Regular Season,New York Knicks*,47.9,14.1
+1992-93,Regular Season,Houston Rockets*,51.5,14.5
+1992-93,Regular Season,Portland Trail Blazers*,47.599999999999994,12.6
+1992-93,Regular Season,San Antonio Spurs*,50.7,13.6
+1992-93,Regular Season,Utah Jazz*,49.8,13.8
+1992-93,Regular Season,Indiana Pacers*,49.8,13.5
+1992-93,Regular Season,Orlando Magic,50.9,15.5
+1992-93,Regular Season,New Jersey Nets*,47.3,14.4
+1992-93,Regular Season,Boston Celtics*,49.5,12.9
+1992-93,Regular Season,Los Angeles Clippers*,49.3,13.9
+1992-93,Regular Season,Charlotte Hornets*,49.9,13.8
+1992-93,Regular Season,Atlanta Hawks*,49.3,14.0
+1992-93,Regular Season,Golden State Warriors,50.2,14.9
+1992-93,Regular Season,Miami Heat,48.1,13.9
+1992-93,Regular Season,Los Angeles Lakers*,48.6,13.7
+1992-93,Regular Season,Detroit Pistons,47.3,12.5
+1992-93,Regular Season,Denver Nuggets,47.0,14.5
+1992-93,Regular Season,Sacramento Kings,48.1,14.1
+1992-93,Regular Season,Milwaukee Bucks,49.5,14.8
+1992-93,Regular Season,Philadelphia 76ers,47.9,14.4
+1992-93,Regular Season,Washington Bullets,48.0,14.2
+1992-93,Regular Season,Minnesota Timberwolves,47.9,15.9
+1992-93,Regular Season,Dallas Mavericks,45.5,15.1
+1993-94,Regular Season,Seattle SuperSonics*,50.1,13.7
+1993-94,Regular Season,New York Knicks*,48.3,15.1
+1993-94,Regular Season,San Antonio Spurs*,49.4,13.6
+1993-94,Regular Season,Atlanta Hawks*,48.0,13.6
+1993-94,Regular Season,Phoenix Suns*,50.9,13.9
+1993-94,Regular Season,Utah Jazz*,49.0,13.3
+1993-94,Regular Season,Houston Rockets*,50.7,15.0
+1993-94,Regular Season,Cleveland Cavaliers*,48.699999999999996,12.8
+1993-94,Regular Season,Orlando Magic*,51.4,14.4
+1993-94,Regular Season,Indiana Pacers*,50.0,16.0
+1993-94,Regular Season,Chicago Bulls*,49.3,14.6
+1993-94,Regular Season,Miami Heat*,48.8,14.3
+1993-94,Regular Season,Portland Trail Blazers*,47.199999999999996,12.5
+1993-94,Regular Season,New Jersey Nets*,46.1,12.7
+1993-94,Regular Season,Golden State Warriors*,51.2,14.9
+1993-94,Regular Season,Denver Nuggets*,47.8,15.3
+1993-94,Regular Season,Charlotte Hornets,50.0,13.6
+1993-94,Regular Season,Boston Celtics,48.199999999999996,13.5
+1993-94,Regular Season,Los Angeles Lakers,46.6,12.8
+1993-94,Regular Season,Los Angeles Clippers,48.4,15.4
+1993-94,Regular Season,Sacramento Kings,47.099999999999994,14.2
+1993-94,Regular Season,Milwaukee Bucks,47.099999999999994,14.7
+1993-94,Regular Season,Minnesota Timberwolves,47.099999999999994,16.4
+1993-94,Regular Season,Washington Bullets,48.4,15.3
+1993-94,Regular Season,Philadelphia 76ers,47.8,15.0
+1993-94,Regular Season,Detroit Pistons,47.699999999999996,13.7
+1993-94,Regular Season,Dallas Mavericks,44.9,15.0
+1994-95,Regular Season,Utah Jazz*,53.5,14.8
+1994-95,Regular Season,Seattle SuperSonics*,52.7,14.1
+1994-95,Regular Season,Orlando Magic*,53.900000000000006,14.0
+1994-95,Regular Season,San Antonio Spurs*,51.6,13.8
+1994-95,Regular Season,Chicago Bulls*,50.9,14.5
+1994-95,Regular Season,Phoenix Suns*,52.400000000000006,12.7
+1994-95,Regular Season,Portland Trail Blazers*,48.3,13.0
+1994-95,Regular Season,Indiana Pacers*,50.7,15.5
+1994-95,Regular Season,Charlotte Hornets*,51.7,14.3
+1994-95,Regular Season,New York Knicks*,50.8,15.1
+1994-95,Regular Season,Houston Rockets*,52.900000000000006,15.0
+1994-95,Regular Season,Atlanta Hawks*,48.699999999999996,13.9
+1994-95,Regular Season,Denver Nuggets*,51.1,15.6
+1994-95,Regular Season,Cleveland Cavaliers*,47.199999999999996,14.2
+1994-95,Regular Season,Los Angeles Lakers*,50.0,13.4
+1994-95,Regular Season,Sacramento Kings,49.6,16.2
+1994-95,Regular Season,Miami Heat,49.9,14.4
+1994-95,Regular Season,Boston Celtics*,49.1,14.3
+1994-95,Regular Season,Dallas Mavericks,46.6,13.9
+1994-95,Regular Season,New Jersey Nets,46.7,14.4
+1994-95,Regular Season,Milwaukee Bucks,49.6,15.5
+1994-95,Regular Season,Golden State Warriors,50.8,15.9
+1994-95,Regular Season,Philadelphia 76ers,47.5,15.3
+1994-95,Regular Season,Washington Bullets,49.2,14.3
+1994-95,Regular Season,Detroit Pistons,49.9,15.0
+1994-95,Regular Season,Los Angeles Clippers,46.800000000000004,14.6
+1994-95,Regular Season,Minnesota Timberwolves,47.5,16.2
+1995-96,Regular Season,Chicago Bulls*,51.7,13.1
+1995-96,Regular Season,Seattle SuperSonics*,52.6,16.2
+1995-96,Regular Season,Utah Jazz*,51.7,14.1
+1995-96,Regular Season,San Antonio Spurs*,51.6,13.6
+1995-96,Regular Season,Orlando Magic*,52.900000000000006,13.2
+1995-96,Regular Season,Los Angeles Lakers*,51.5,13.3
+1995-96,Regular Season,Indiana Pacers*,50.9,15.5
+1995-96,Regular Season,Cleveland Cavaliers*,51.0,13.7
+1995-96,Regular Season,Detroit Pistons*,50.4,14.6
+1995-96,Regular Season,Portland Trail Blazers*,49.4,15.2
+1995-96,Regular Season,New York Knicks*,50.9,14.9
+1995-96,Regular Season,Houston Rockets*,51.2,14.1
+1995-96,Regular Season,Miami Heat*,50.1,16.0
+1995-96,Regular Season,Atlanta Hawks*,49.0,14.0
+1995-96,Regular Season,Washington Bullets,52.1,15.0
+1995-96,Regular Season,Phoenix Suns*,49.8,13.5
+1995-96,Regular Season,Charlotte Hornets,51.4,14.1
+1995-96,Regular Season,Golden State Warriors,48.9,14.8
+1995-96,Regular Season,Denver Nuggets,48.1,14.2
+1995-96,Regular Season,Sacramento Kings*,49.3,16.0
+1995-96,Regular Season,Boston Celtics,49.4,14.1
+1995-96,Regular Season,Los Angeles Clippers,51.1,15.3
+1995-96,Regular Season,New Jersey Nets,44.5,15.1
+1995-96,Regular Season,Dallas Mavericks,47.0,13.3
+1995-96,Regular Season,Minnesota Timberwolves,48.0,16.0
+1995-96,Regular Season,Milwaukee Bucks,49.5,15.0
+1995-96,Regular Season,Toronto Raptors,49.9,17.2
+1995-96,Regular Season,Philadelphia 76ers,47.4,16.0
+1995-96,Regular Season,Vancouver Grizzlies,45.6,15.5
+1996-97,Regular Season,Chicago Bulls*,51.1,12.5
+1996-97,Regular Season,Utah Jazz*,53.0,14.7
+1996-97,Regular Season,Seattle SuperSonics*,51.0,14.2
+1996-97,Regular Season,Atlanta Hawks*,49.8,14.6
+1996-97,Regular Season,Miami Heat*,50.7,15.5
+1996-97,Regular Season,Detroit Pistons*,51.2,13.0
+1996-97,Regular Season,Houston Rockets*,52.0,15.6
+1996-97,Regular Season,Los Angeles Lakers*,49.6,13.7
+1996-97,Regular Season,Portland Trail Blazers*,50.3,15.4
+1996-97,Regular Season,New York Knicks*,50.1,17.0
+1996-97,Regular Season,Cleveland Cavaliers,49.3,15.0
+1996-97,Regular Season,Charlotte Hornets*,51.800000000000004,14.3
+1996-97,Regular Season,Washington Bullets*,50.5,14.6
+1996-97,Regular Season,Indiana Pacers,49.0,15.5
+1996-97,Regular Season,Phoenix Suns*,50.8,13.4
+1996-97,Regular Season,Orlando Magic*,48.1,14.5
+1996-97,Regular Season,Minnesota Timberwolves*,48.5,14.4
+1996-97,Regular Season,Milwaukee Bucks,49.6,15.1
+1996-97,Regular Season,Los Angeles Clippers*,48.199999999999996,14.7
+1996-97,Regular Season,Toronto Raptors,48.1,15.2
+1996-97,Regular Season,Sacramento Kings,48.5,15.0
+1996-97,Regular Season,New Jersey Nets,45.6,13.9
+1996-97,Regular Season,Golden State Warriors,49.3,15.8
+1996-97,Regular Season,Denver Nuggets,48.6,15.2
+1996-97,Regular Season,Philadelphia 76ers,47.0,15.3
+1996-97,Regular Season,Dallas Mavericks,46.9,15.4
+1996-97,Regular Season,Boston Celtics,47.4,14.5
+1996-97,Regular Season,San Antonio Spurs,47.199999999999996,14.7
+1996-97,Regular Season,Vancouver Grizzlies,47.099999999999994,15.3
+1997-98,Regular Season,Los Angeles Lakers*,51.9,14.0
+1997-98,Regular Season,Seattle SuperSonics*,52.1,13.4
+1997-98,Regular Season,Chicago Bulls*,47.3,13.3
+1997-98,Regular Season,Utah Jazz*,51.0,14.8
+1997-98,Regular Season,Indiana Pacers*,50.2,14.0
+1997-98,Regular Season,Phoenix Suns*,50.0,14.0
+1997-98,Regular Season,Miami Heat*,49.4,14.5
+1997-98,Regular Season,San Antonio Spurs*,49.3,15.6
+1997-98,Regular Season,Atlanta Hawks*,48.1,14.1
+1997-98,Regular Season,Cleveland Cavaliers*,47.8,16.5
+1997-98,Regular Season,New York Knicks*,47.599999999999994,14.7
+1997-98,Regular Season,Charlotte Hornets*,49.5,14.6
+1997-98,Regular Season,Detroit Pistons,47.199999999999996,14.0
+1997-98,Regular Season,New Jersey Nets*,46.300000000000004,12.9
+1997-98,Regular Season,Portland Trail Blazers*,47.599999999999994,15.8
+1997-98,Regular Season,Washington Wizards,47.599999999999994,13.0
+1997-98,Regular Season,Minnesota Timberwolves*,48.3,12.7
+1997-98,Regular Season,Houston Rockets*,49.6,14.8
+1997-98,Regular Season,Orlando Magic,45.2,14.5
+1997-98,Regular Season,Milwaukee Bucks,47.5,15.8
+1997-98,Regular Season,Philadelphia 76ers,46.2,15.4
+1997-98,Regular Season,Boston Celtics,46.400000000000006,14.6
+1997-98,Regular Season,Sacramento Kings,46.400000000000006,14.3
+1997-98,Regular Season,Dallas Mavericks,45.800000000000004,13.6
+1997-98,Regular Season,Los Angeles Clippers,47.699999999999996,14.8
+1997-98,Regular Season,Vancouver Grizzlies,48.199999999999996,15.8
+1997-98,Regular Season,Toronto Raptors,46.2,15.1
+1997-98,Regular Season,Golden State Warriors,42.699999999999996,15.1
+1997-98,Regular Season,Denver Nuggets,44.0,15.1
+1998-99,Regular Season,San Antonio Spurs*,47.9,14.6
+1998-99,Regular Season,Utah Jazz*,48.5,16.0
+1998-99,Regular Season,Portland Trail Blazers*,47.3,14.5
+1998-99,Regular Season,Miami Heat*,49.4,15.3
+1998-99,Regular Season,Indiana Pacers*,48.6,12.8
+1998-99,Regular Season,Detroit Pistons*,48.0,15.6
+1998-99,Regular Season,Atlanta Hawks*,43.6,14.5
+1998-99,Regular Season,Los Angeles Lakers*,49.8,14.1
+1998-99,Regular Season,Orlando Magic*,45.6,15.4
+1998-99,Regular Season,Houston Rockets*,50.6,15.8
+1998-99,Regular Season,Phoenix Suns*,48.1,13.0
+1998-99,Regular Season,Philadelphia 76ers*,43.9,15.3
+1998-99,Regular Season,Milwaukee Bucks*,48.9,14.3
+1998-99,Regular Season,New York Knicks*,46.300000000000004,15.9
+1998-99,Regular Season,Minnesota Timberwolves*,43.9,11.7
+1998-99,Regular Season,Charlotte Hornets,48.5,15.5
+1998-99,Regular Season,Sacramento Kings*,47.9,14.7
+1998-99,Regular Season,Seattle SuperSonics,48.1,14.3
+1998-99,Regular Season,Toronto Raptors,45.0,15.0
+1998-99,Regular Season,Boston Celtics,46.9,14.8
+1998-99,Regular Season,Cleveland Cavaliers,46.400000000000006,15.9
+1998-99,Regular Season,Washington Wizards,46.800000000000004,14.1
+1998-99,Regular Season,Dallas Mavericks,45.9,13.2
+1998-99,Regular Season,Golden State Warriors,43.4,14.1
+1998-99,Regular Season,New Jersey Nets,43.4,13.7
+1998-99,Regular Season,Denver Nuggets,45.9,13.9
+1998-99,Regular Season,Vancouver Grizzlies,44.7,16.0
+1998-99,Regular Season,Los Angeles Clippers,45.4,14.9
+1998-99,Regular Season,Chicago Bulls,42.4,15.1
+1999-00,Regular Season,Los Angeles Lakers*,48.4,12.7
+1999-00,Regular Season,Portland Trail Blazers*,50.1,14.5
+1999-00,Regular Season,San Antonio Spurs*,48.8,14.3
+1999-00,Regular Season,Phoenix Suns*,49.1,15.2
+1999-00,Regular Season,Utah Jazz*,49.0,14.3
+1999-00,Regular Season,Indiana Pacers*,50.3,13.3
+1999-00,Regular Season,Miami Heat*,49.5,14.5
+1999-00,Regular Season,Sacramento Kings*,48.6,13.9
+1999-00,Regular Season,Charlotte Hornets*,47.5,13.7
+1999-00,Regular Season,Minnesota Timberwolves*,48.5,12.9
+1999-00,Regular Season,New York Knicks*,48.199999999999996,14.4
+1999-00,Regular Season,Detroit Pistons*,49.2,14.3
+1999-00,Regular Season,Philadelphia 76ers*,45.7,14.2
+1999-00,Regular Season,Seattle SuperSonics*,48.699999999999996,12.9
+1999-00,Regular Season,Orlando Magic,47.3,15.4
+1999-00,Regular Season,Milwaukee Bucks*,49.4,13.8
+1999-00,Regular Season,Toronto Raptors*,46.400000000000006,12.7
+1999-00,Regular Season,Dallas Mavericks,49.0,12.6
+1999-00,Regular Season,Boston Celtics,47.4,13.8
+1999-00,Regular Season,Houston Rockets,49.4,15.8
+1999-00,Regular Season,New Jersey Nets,46.800000000000004,12.6
+1999-00,Regular Season,Denver Nuggets,47.599999999999994,14.0
+1999-00,Regular Season,Washington Wizards,47.599999999999994,14.8
+1999-00,Regular Season,Cleveland Cavaliers,46.800000000000004,15.6
+1999-00,Regular Season,Atlanta Hawks,46.0,14.1
+1999-00,Regular Season,Vancouver Grizzlies,47.4,15.8
+1999-00,Regular Season,Golden State Warriors,44.4,13.9
+1999-00,Regular Season,Chicago Bulls,44.3,18.0
+1999-00,Regular Season,Los Angeles Clippers,45.800000000000004,14.9
+2000-01,Regular Season,San Antonio Spurs*,49.6,13.6
+2000-01,Regular Season,Sacramento Kings*,48.4,13.4
+2000-01,Regular Season,Utah Jazz*,49.7,15.1
+2000-01,Regular Season,Philadelphia 76ers*,46.800000000000004,14.7
+2000-01,Regular Season,Portland Trail Blazers*,49.7,14.8
+2000-01,Regular Season,Dallas Mavericks*,49.8,13.1
+2000-01,Regular Season,Milwaukee Bucks*,49.9,12.8
+2000-01,Regular Season,Los Angeles Lakers*,49.8,13.3
+2000-01,Regular Season,New York Knicks*,47.599999999999994,14.6
+2000-01,Regular Season,Miami Heat*,46.9,13.7
+2000-01,Regular Season,Toronto Raptors*,46.800000000000004,12.1
+2000-01,Regular Season,Houston Rockets,49.2,14.0
+2000-01,Regular Season,Charlotte Hornets*,45.7,13.7
+2000-01,Regular Season,Phoenix Suns*,46.0,14.1
+2000-01,Regular Season,Minnesota Timberwolves*,48.199999999999996,13.0
+2000-01,Regular Season,Orlando Magic*,47.4,13.8
+2000-01,Regular Season,Seattle SuperSonics,49.1,14.3
+2000-01,Regular Season,Indiana Pacers*,47.099999999999994,14.5
+2000-01,Regular Season,Detroit Pistons,45.300000000000004,14.2
+2000-01,Regular Season,Boston Celtics,47.3,14.7
+2000-01,Regular Season,Denver Nuggets,47.0,12.8
+2000-01,Regular Season,Los Angeles Clippers,47.599999999999994,14.9
+2000-01,Regular Season,Cleveland Cavaliers,45.9,15.4
+2000-01,Regular Season,New Jersey Nets,45.2,13.9
+2000-01,Regular Season,Atlanta Hawks,45.6,15.5
+2000-01,Regular Season,Vancouver Grizzlies,46.400000000000006,14.9
+2000-01,Regular Season,Washington Wizards,46.0,15.7
+2000-01,Regular Season,Golden State Warriors,42.9,13.9
+2000-01,Regular Season,Chicago Bulls,45.0,15.1
+2001-02,Regular Season,Sacramento Kings*,49.7,12.4
+2001-02,Regular Season,Los Angeles Lakers*,49.8,11.8
+2001-02,Regular Season,San Antonio Spurs*,49.2,13.8
+2001-02,Regular Season,New Jersey Nets*,47.599999999999994,13.4
+2001-02,Regular Season,Dallas Mavericks*,50.7,11.3
+2001-02,Regular Season,Minnesota Timberwolves*,49.0,12.5
+2001-02,Regular Season,Portland Trail Blazers*,48.5,13.5
+2001-02,Regular Season,Seattle SuperSonics*,50.5,13.2
+2001-02,Regular Season,Boston Celtics*,47.599999999999994,12.8
+2001-02,Regular Season,Detroit Pistons*,49.7,14.3
+2001-02,Regular Season,Philadelphia 76ers*,45.2,14.6
+2001-02,Regular Season,Orlando Magic*,49.3,12.6
+2001-02,Regular Season,Utah Jazz*,47.199999999999996,15.4
+2001-02,Regular Season,Charlotte Hornets*,46.6,13.3
+2001-02,Regular Season,Indiana Pacers*,47.699999999999996,14.2
+2001-02,Regular Season,Milwaukee Bucks,50.7,13.6
+2001-02,Regular Season,Los Angeles Clippers,47.599999999999994,13.8
+2001-02,Regular Season,Toronto Raptors*,46.300000000000004,13.6
+2001-02,Regular Season,Phoenix Suns,47.199999999999996,13.6
+2001-02,Regular Season,Washington Wizards,46.400000000000006,12.5
+2001-02,Regular Season,Miami Heat,46.300000000000004,14.6
+2001-02,Regular Season,Cleveland Cavaliers,47.699999999999996,13.8
+2001-02,Regular Season,New York Knicks,46.800000000000004,14.0
+2001-02,Regular Season,Atlanta Hawks,47.099999999999994,14.6
+2001-02,Regular Season,Houston Rockets,46.5,13.4
+2001-02,Regular Season,Golden State Warriors,45.2,14.7
+2001-02,Regular Season,Denver Nuggets,45.5,13.6
+2001-02,Regular Season,Memphis Grizzlies,46.2,15.4
+2001-02,Regular Season,Chicago Bulls,45.6,14.6
+2002-03,Regular Season,Dallas Mavericks*,49.8,10.9
+2002-03,Regular Season,Sacramento Kings*,49.9,13.3
+2002-03,Regular Season,San Antonio Spurs*,49.7,15.1
+2002-03,Regular Season,New Jersey Nets*,46.800000000000004,13.8
+2002-03,Regular Season,Detroit Pistons*,47.3,13.3
+2002-03,Regular Season,Indiana Pacers*,46.9,13.7
+2002-03,Regular Season,Portland Trail Blazers*,48.9,14.5
+2002-03,Regular Season,Utah Jazz*,48.6,16.0
+2002-03,Regular Season,Los Angeles Lakers*,48.6,13.3
+2002-03,Regular Season,Philadelphia 76ers*,46.6,13.7
+2002-03,Regular Season,Minnesota Timberwolves*,48.8,12.9
+2002-03,Regular Season,New Orleans Hornets*,46.5,13.9
+2002-03,Regular Season,Houston Rockets,47.4,14.8
+2002-03,Regular Season,Phoenix Suns*,47.3,13.7
+2002-03,Regular Season,Orlando Magic*,47.8,13.3
+2002-03,Regular Season,Milwaukee Bucks*,50.0,12.2
+2002-03,Regular Season,Seattle SuperSonics,47.199999999999996,12.8
+2002-03,Regular Season,Boston Celtics*,47.0,13.4
+2002-03,Regular Season,Washington Wizards,46.0,13.0
+2002-03,Regular Season,Golden State Warriors,47.199999999999996,13.9
+2002-03,Regular Season,New York Knicks,48.6,13.4
+2002-03,Regular Season,Memphis Grizzlies,48.699999999999996,14.2
+2002-03,Regular Season,Atlanta Hawks,47.599999999999994,15.7
+2002-03,Regular Season,Los Angeles Clippers,46.7,14.8
+2002-03,Regular Season,Chicago Bulls,47.099999999999994,15.4
+2002-03,Regular Season,Miami Heat,43.9,13.8
+2002-03,Regular Season,Toronto Raptors,45.800000000000004,13.6
+2002-03,Regular Season,Denver Nuggets,42.8,17.1
+2002-03,Regular Season,Cleveland Cavaliers,44.4,16.4
+2003-04,Regular Season,San Antonio Spurs*,47.3,14.1
+2003-04,Regular Season,Detroit Pistons*,46.1,14.7
+2003-04,Regular Season,Indiana Pacers*,47.099999999999994,14.1
+2003-04,Regular Season,Minnesota Timberwolves*,48.6,12.4
+2003-04,Regular Season,Sacramento Kings*,50.7,13.0
+2003-04,Regular Season,Dallas Mavericks*,49.5,11.1
+2003-04,Regular Season,Los Angeles Lakers*,48.1,12.8
+2003-04,Regular Season,New Jersey Nets*,47.099999999999994,14.4
+2003-04,Regular Season,Memphis Grizzlies*,47.9,13.9
+2003-04,Regular Season,Houston Rockets*,48.4,16.4
+2003-04,Regular Season,Denver Nuggets*,46.7,14.2
+2003-04,Regular Season,Milwaukee Bucks*,47.699999999999996,12.7
+2003-04,Regular Season,Miami Heat*,46.300000000000004,13.5
+2003-04,Regular Season,New Orleans Hornets*,46.0,14.1
+2003-04,Regular Season,Seattle SuperSonics,50.1,13.9
+2003-04,Regular Season,Golden State Warriors,47.5,14.1
+2003-04,Regular Season,Portland Trail Blazers,47.8,14.4
+2003-04,Regular Season,Utah Jazz,45.6,16.1
+2003-04,Regular Season,Boston Celtics*,48.6,15.4
+2003-04,Regular Season,New York Knicks*,47.4,15.1
+2003-04,Regular Season,Philadelphia 76ers,45.6,15.5
+2003-04,Regular Season,Cleveland Cavaliers,45.1,13.7
+2003-04,Regular Season,Toronto Raptors,45.4,14.1
+2003-04,Regular Season,Phoenix Suns,47.5,14.3
+2003-04,Regular Season,Los Angeles Clippers,45.300000000000004,15.0
+2003-04,Regular Season,Atlanta Hawks,46.5,15.4
+2003-04,Regular Season,Washington Wizards,45.4,16.0
+2003-04,Regular Season,Chicago Bulls,44.6,14.9
+2003-04,Regular Season,Orlando Magic,46.1,12.8
+2004-05,Regular Season,San Antonio Spurs*,49.2,13.2
+2004-05,Regular Season,Phoenix Suns*,53.400000000000006,12.4
+2004-05,Regular Season,Miami Heat*,52.400000000000006,13.1
+2004-05,Regular Season,Dallas Mavericks*,49.2,12.5
+2004-05,Regular Season,Houston Rockets*,48.6,13.5
+2004-05,Regular Season,Detroit Pistons*,47.199999999999996,13.3
+2004-05,Regular Season,Seattle SuperSonics*,49.5,13.0
+2004-05,Regular Season,Memphis Grizzlies*,48.9,14.3
+2004-05,Regular Season,Sacramento Kings*,49.6,12.0
+2004-05,Regular Season,Denver Nuggets*,48.3,13.8
+2004-05,Regular Season,Minnesota Timberwolves,48.9,12.7
+2004-05,Regular Season,Chicago Bulls*,47.099999999999994,15.5
+2004-05,Regular Season,Boston Celtics*,50.1,14.7
+2004-05,Regular Season,Cleveland Cavaliers,47.0,13.0
+2004-05,Regular Season,Indiana Pacers*,47.599999999999994,14.1
+2004-05,Regular Season,Washington Wizards*,47.4,12.9
+2004-05,Regular Season,Philadelphia 76ers*,47.5,14.2
+2004-05,Regular Season,Los Angeles Clippers,47.699999999999996,14.9
+2004-05,Regular Season,New Jersey Nets*,46.300000000000004,13.7
+2004-05,Regular Season,Toronto Raptors,49.2,12.5
+2004-05,Regular Season,Golden State Warriors,47.5,12.3
+2004-05,Regular Season,Orlando Magic,47.8,14.6
+2004-05,Regular Season,New York Knicks,48.5,13.8
+2004-05,Regular Season,Milwaukee Bucks,47.5,13.0
+2004-05,Regular Season,Los Angeles Lakers,48.5,13.4
+2004-05,Regular Season,Portland Trail Blazers,48.4,15.2
+2004-05,Regular Season,Utah Jazz,46.9,15.0
+2004-05,Regular Season,Charlotte Bobcats,45.5,13.3
+2004-05,Regular Season,New Orleans Hornets,44.6,14.2
+2004-05,Regular Season,Atlanta Hawks,46.400000000000006,14.9
+2005-06,Regular Season,San Antonio Spurs*,51.300000000000004,13.6
+2005-06,Regular Season,Detroit Pistons*,49.7,11.2
+2005-06,Regular Season,Dallas Mavericks*,49.5,13.1
+2005-06,Regular Season,Phoenix Suns*,53.7,12.2
+2005-06,Regular Season,Memphis Grizzlies*,49.6,13.9
+2005-06,Regular Season,Miami Heat*,51.7,13.9
+2005-06,Regular Season,Los Angeles Lakers*,49.5,13.1
+2005-06,Regular Season,Cleveland Cavaliers*,49.2,13.3
+2005-06,Regular Season,Indiana Pacers*,48.699999999999996,14.8
+2005-06,Regular Season,Washington Wizards*,48.4,12.8
+2005-06,Regular Season,Sacramento Kings*,49.2,13.9
+2005-06,Regular Season,Los Angeles Clippers*,48.699999999999996,13.8
+2005-06,Regular Season,New Jersey Nets*,47.8,13.3
+2005-06,Regular Season,Chicago Bulls*,48.699999999999996,13.9
+2005-06,Regular Season,Denver Nuggets*,48.8,13.7
+2005-06,Regular Season,Milwaukee Bucks*,49.2,13.8
+2005-06,Regular Season,Orlando Magic,49.6,14.7
+2005-06,Regular Season,Golden State Warriors,47.9,13.0
+2005-06,Regular Season,Houston Rockets,47.099999999999994,14.3
+2005-06,Regular Season,Boston Celtics,50.4,15.7
+2005-06,Regular Season,Minnesota Timberwolves,48.0,14.2
+2005-06,Regular Season,Philadelphia 76ers,48.699999999999996,13.3
+2005-06,Regular Season,Utah Jazz,46.7,15.0
+2005-06,Regular Season,New Orleans/Oklahoma City Hornets,46.400000000000006,12.9
+2005-06,Regular Season,Toronto Raptors,50.0,12.4
+2005-06,Regular Season,Seattle SuperSonics,50.4,13.7
+2005-06,Regular Season,Charlotte Bobcats,46.400000000000006,13.0
+2005-06,Regular Season,Atlanta Hawks,48.6,14.7
+2005-06,Regular Season,New York Knicks,48.1,16.5
+2005-06,Regular Season,Portland Trail Blazers,47.4,14.5
+2006-07,Regular Season,San Antonio Spurs*,52.1,13.6
+2006-07,Regular Season,Dallas Mavericks*,50.9,13.4
+2006-07,Regular Season,Phoenix Suns*,55.1,13.4
+2006-07,Regular Season,Chicago Bulls*,49.3,14.7
+2006-07,Regular Season,Houston Rockets*,49.9,13.6
+2006-07,Regular Season,Detroit Pistons*,48.8,12.0
+2006-07,Regular Season,Cleveland Cavaliers*,48.4,13.4
+2006-07,Regular Season,Utah Jazz*,50.2,14.5
+2006-07,Regular Season,Denver Nuggets*,50.1,14.6
+2006-07,Regular Season,Toronto Raptors*,50.4,13.0
+2006-07,Regular Season,Orlando Magic*,50.0,16.3
+2006-07,Regular Season,Los Angeles Lakers*,51.1,14.3
+2006-07,Regular Season,Golden State Warriors*,51.2,14.1
+2006-07,Regular Season,Washington Wizards*,49.1,12.6
+2006-07,Regular Season,Los Angeles Clippers,48.1,14.5
+2006-07,Regular Season,New Jersey Nets*,50.4,14.2
+2006-07,Regular Season,Miami Heat*,50.6,14.3
+2006-07,Regular Season,New Orleans/Oklahoma City Hornets,47.9,13.6
+2006-07,Regular Season,Sacramento Kings,49.1,13.5
+2006-07,Regular Season,Indiana Pacers,47.4,15.1
+2006-07,Regular Season,Seattle SuperSonics,49.9,14.5
+2006-07,Regular Season,New York Knicks,49.4,15.9
+2006-07,Regular Season,Philadelphia 76ers,48.0,14.6
+2006-07,Regular Season,Boston Celtics,47.9,15.4
+2006-07,Regular Season,Minnesota Timberwolves,49.0,14.8
+2006-07,Regular Season,Charlotte Bobcats,48.0,13.9
+2006-07,Regular Season,Milwaukee Bucks,50.4,14.1
+2006-07,Regular Season,Portland Trail Blazers,48.3,14.5
+2006-07,Regular Season,Atlanta Hawks,47.099999999999994,15.1
+2006-07,Regular Season,Memphis Grizzlies,50.4,15.2
+2007-08,Regular Season,Boston Celtics*,52.2,14.7
+2007-08,Regular Season,Detroit Pistons*,49.5,11.4
+2007-08,Regular Season,Los Angeles Lakers*,52.5,12.9
+2007-08,Regular Season,Utah Jazz*,52.800000000000004,13.6
+2007-08,Regular Season,Orlando Magic*,53.7,13.6
+2007-08,Regular Season,New Orleans Hornets*,51.2,11.4
+2007-08,Regular Season,San Antonio Spurs*,50.4,12.6
+2007-08,Regular Season,Houston Rockets*,49.2,13.0
+2007-08,Regular Season,Phoenix Suns*,55.1,13.4
+2007-08,Regular Season,Dallas Mavericks*,50.2,12.3
+2007-08,Regular Season,Denver Nuggets*,51.0,12.9
+2007-08,Regular Season,Toronto Raptors*,51.1,11.4
+2007-08,Regular Season,Golden State Warriors,51.1,11.5
+2007-08,Regular Season,Philadelphia 76ers*,48.199999999999996,13.4
+2007-08,Regular Season,Washington Wizards*,48.9,12.5
+2007-08,Regular Season,Cleveland Cavaliers*,48.0,13.1
+2007-08,Regular Season,Portland Trail Blazers,48.9,12.6
+2007-08,Regular Season,Indiana Pacers,49.8,13.5
+2007-08,Regular Season,Atlanta Hawks*,48.3,14.0
+2007-08,Regular Season,Sacramento Kings,50.3,14.8
+2007-08,Regular Season,Chicago Bulls,47.0,13.4
+2007-08,Regular Season,Charlotte Bobcats,49.2,13.9
+2007-08,Regular Season,New Jersey Nets,48.1,14.2
+2007-08,Regular Season,Memphis Grizzlies,50.0,14.0
+2007-08,Regular Season,New York Knicks,47.5,13.4
+2007-08,Regular Season,Minnesota Timberwolves,48.4,13.6
+2007-08,Regular Season,Milwaukee Bucks,48.199999999999996,13.7
+2007-08,Regular Season,Los Angeles Clippers,46.5,13.7
+2007-08,Regular Season,Seattle SuperSonics,46.7,14.3
+2007-08,Regular Season,Miami Heat,48.199999999999996,14.4
+2008-09,Regular Season,Cleveland Cavaliers*,51.9,12.5
+2008-09,Regular Season,Boston Celtics*,52.800000000000004,15.0
+2008-09,Regular Season,Los Angeles Lakers*,51.300000000000004,12.3
+2008-09,Regular Season,Orlando Magic*,52.0,13.4
+2008-09,Regular Season,Portland Trail Blazers*,51.1,12.5
+2008-09,Regular Season,Houston Rockets*,50.1,13.6
+2008-09,Regular Season,San Antonio Spurs*,51.300000000000004,11.7
+2008-09,Regular Season,Denver Nuggets*,51.2,14.2
+2008-09,Regular Season,Utah Jazz*,50.4,13.6
+2008-09,Regular Season,Dallas Mavericks*,50.4,12.1
+2008-09,Regular Season,Phoenix Suns,54.50000000000001,14.4
+2008-09,Regular Season,Atlanta Hawks*,50.4,12.5
+2008-09,Regular Season,New Orleans Hornets*,50.1,12.5
+2008-09,Regular Season,Miami Heat*,50.0,12.1
+2008-09,Regular Season,Philadelphia 76ers*,48.5,13.4
+2008-09,Regular Season,Chicago Bulls*,49.3,13.3
+2008-09,Regular Season,Detroit Pistons*,48.3,11.7
+2008-09,Regular Season,Indiana Pacers,50.1,13.1
+2008-09,Regular Season,Milwaukee Bucks,48.3,13.1
+2008-09,Regular Season,Charlotte Bobcats,49.4,15.1
+2008-09,Regular Season,New York Knicks,50.3,12.9
+2008-09,Regular Season,New Jersey Nets,49.7,12.7
+2008-09,Regular Season,Toronto Raptors,49.4,12.8
+2008-09,Regular Season,Golden State Warriors,49.7,12.9
+2008-09,Regular Season,Minnesota Timberwolves,48.1,13.3
+2008-09,Regular Season,Memphis Grizzlies,48.6,14.8
+2008-09,Regular Season,Oklahoma City Thunder,47.099999999999994,14.8
+2008-09,Regular Season,Washington Wizards,48.0,13.2
+2008-09,Regular Season,Sacramento Kings,49.1,14.3
+2008-09,Regular Season,Los Angeles Clippers,48.1,14.0
+2009-10,Regular Season,Orlando Magic*,53.6,13.6
+2009-10,Regular Season,Cleveland Cavaliers*,53.2,13.4
+2009-10,Regular Season,Utah Jazz*,52.400000000000006,14.2
+2009-10,Regular Season,San Antonio Spurs*,51.5,12.9
+2009-10,Regular Season,Atlanta Hawks*,50.6,11.4
+2009-10,Regular Season,Phoenix Suns*,54.6,13.6
+2009-10,Regular Season,Los Angeles Lakers*,49.6,12.4
+2009-10,Regular Season,Denver Nuggets*,50.9,12.7
+2009-10,Regular Season,Boston Celtics*,52.2,14.5
+2009-10,Regular Season,Portland Trail Blazers*,49.9,12.1
+2009-10,Regular Season,Oklahoma City Thunder*,49.4,13.9
+2009-10,Regular Season,Dallas Mavericks*,50.6,12.3
+2009-10,Regular Season,Miami Heat*,49.6,12.8
+2009-10,Regular Season,Milwaukee Bucks*,48.199999999999996,12.3
+2009-10,Regular Season,Charlotte Bobcats*,49.0,15.1
+2009-10,Regular Season,Houston Rockets,49.4,13.2
+2009-10,Regular Season,Memphis Grizzlies,49.4,13.7
+2009-10,Regular Season,Chicago Bulls*,47.699999999999996,13.3
+2009-10,Regular Season,Toronto Raptors,52.1,12.7
+2009-10,Regular Season,New Orleans Hornets,50.6,12.7
+2009-10,Regular Season,Indiana Pacers,49.1,13.8
+2009-10,Regular Season,Golden State Warriors,51.4,13.1
+2009-10,Regular Season,New York Knicks,50.9,13.0
+2009-10,Regular Season,Philadelphia 76ers,49.6,13.7
+2009-10,Regular Season,Sacramento Kings,49.1,13.6
+2009-10,Regular Season,Washington Wizards,48.1,13.9
+2009-10,Regular Season,Detroit Pistons,47.4,12.8
+2009-10,Regular Season,Los Angeles Clippers,49.1,14.8
+2009-10,Regular Season,Minnesota Timberwolves,47.8,14.6
+2009-10,Regular Season,New Jersey Nets,45.800000000000004,13.7
+2010-11,Regular Season,Miami Heat*,52.400000000000006,13.5
+2010-11,Regular Season,Chicago Bulls*,50.1,13.5
+2010-11,Regular Season,Los Angeles Lakers*,50.2,12.3
+2010-11,Regular Season,San Antonio Spurs*,52.7,12.8
+2010-11,Regular Season,Boston Celtics*,51.9,14.5
+2010-11,Regular Season,Orlando Magic*,52.1,14.3
+2010-11,Regular Season,Denver Nuggets*,52.6,13.1
+2010-11,Regular Season,Dallas Mavericks*,52.5,13.6
+2010-11,Regular Season,Oklahoma City Thunder*,50.1,13.1
+2010-11,Regular Season,Memphis Grizzlies*,49.3,13.0
+2010-11,Regular Season,Houston Rockets,50.3,12.3
+2010-11,Regular Season,Portland Trail Blazers*,48.6,12.6
+2010-11,Regular Season,Philadelphia 76ers*,49.4,12.3
+2010-11,Regular Season,New Orleans Hornets*,49.3,12.8
+2010-11,Regular Season,New York Knicks*,51.300000000000004,12.6
+2010-11,Regular Season,Milwaukee Bucks,46.7,13.0
+2010-11,Regular Season,Phoenix Suns,52.2,13.2
+2010-11,Regular Season,Atlanta Hawks*,50.1,13.5
+2010-11,Regular Season,Indiana Pacers*,48.6,14.1
+2010-11,Regular Season,Utah Jazz,49.8,13.5
+2010-11,Regular Season,Golden State Warriors,51.0,13.3
+2010-11,Regular Season,Los Angeles Clippers,49.6,15.1
+2010-11,Regular Season,Detroit Pistons,49.5,12.5
+2010-11,Regular Season,Charlotte Bobcats,48.199999999999996,14.1
+2010-11,Regular Season,Sacramento Kings,48.0,14.4
+2010-11,Regular Season,New Jersey Nets,47.4,13.4
+2010-11,Regular Season,Toronto Raptors,49.1,13.7
+2010-11,Regular Season,Minnesota Timberwolves,48.3,15.1
+2010-11,Regular Season,Washington Wizards,47.099999999999994,13.9
+2010-11,Regular Season,Cleveland Cavaliers,47.199999999999996,13.4
+2011-12,Regular Season,Chicago Bulls*,49.0,13.2
+2011-12,Regular Season,San Antonio Spurs*,52.800000000000004,12.8
+2011-12,Regular Season,Oklahoma City Thunder*,51.6,15.3
+2011-12,Regular Season,Miami Heat*,50.5,14.5
+2011-12,Regular Season,Philadelphia 76ers*,48.0,10.9
+2011-12,Regular Season,Atlanta Hawks*,50.0,13.4
+2011-12,Regular Season,Indiana Pacers*,47.4,13.1
+2011-12,Regular Season,New York Knicks*,49.2,14.9
+2011-12,Regular Season,Denver Nuggets*,51.6,14.1
+2011-12,Regular Season,Boston Celtics*,49.6,14.7
+2011-12,Regular Season,Los Angeles Clippers*,50.2,12.7
+2011-12,Regular Season,Memphis Grizzlies*,47.3,13.6
+2011-12,Regular Season,Los Angeles Lakers*,49.1,14.2
+2011-12,Regular Season,Dallas Mavericks*,48.9,13.4
+2011-12,Regular Season,Orlando Magic*,50.6,14.5
+2011-12,Regular Season,Utah Jazz*,48.1,13.0
+2011-12,Regular Season,Milwaukee Bucks,48.1,12.9
+2011-12,Regular Season,Houston Rockets,49.2,13.5
+2011-12,Regular Season,Phoenix Suns,49.9,13.3
+2011-12,Regular Season,Portland Trail Blazers,48.8,13.4
+2011-12,Regular Season,Minnesota Timberwolves,47.699999999999996,14.0
+2011-12,Regular Season,Golden State Warriors,50.5,13.3
+2011-12,Regular Season,Toronto Raptors,47.5,14.8
+2011-12,Regular Season,New Orleans Hornets,47.599999999999994,15.2
+2011-12,Regular Season,Washington Wizards,47.199999999999996,14.2
+2011-12,Regular Season,Detroit Pistons,46.800000000000004,15.0
+2011-12,Regular Season,Sacramento Kings,47.199999999999996,13.0
+2011-12,Regular Season,New Jersey Nets,47.3,14.3
+2011-12,Regular Season,Cleveland Cavaliers,46.300000000000004,14.3
+2011-12,Regular Season,Charlotte Bobcats,43.9,13.9
+2012-13,Regular Season,Oklahoma City Thunder*,52.7,14.4
+2012-13,Regular Season,Miami Heat*,55.2,13.7
+2012-13,Regular Season,Los Angeles Clippers*,52.6,13.9
+2012-13,Regular Season,San Antonio Spurs*,53.1,14.0
+2012-13,Regular Season,Denver Nuggets*,51.5,13.6
+2012-13,Regular Season,New York Knicks*,51.5,11.7
+2012-13,Regular Season,Memphis Grizzlies*,47.199999999999996,13.3
+2012-13,Regular Season,Indiana Pacers*,47.9,14.3
+2012-13,Regular Season,Houston Rockets*,52.5,14.9
+2012-13,Regular Season,Brooklyn Nets*,49.8,14.0
+2012-13,Regular Season,Los Angeles Lakers*,51.2,13.9
+2012-13,Regular Season,Golden State Warriors*,50.6,14.0
+2012-13,Regular Season,Atlanta Hawks*,51.7,14.2
+2012-13,Regular Season,Chicago Bulls*,47.0,13.6
+2012-13,Regular Season,Utah Jazz,49.2,13.8
+2012-13,Regular Season,Boston Celtics*,50.3,14.1
+2012-13,Regular Season,Dallas Mavericks,50.6,13.0
+2012-13,Regular Season,Milwaukee Bucks*,47.599999999999994,12.7
+2012-13,Regular Season,Toronto Raptors,48.8,13.0
+2012-13,Regular Season,Minnesota Timberwolves,47.3,13.8
+2012-13,Regular Season,Washington Wizards,47.5,14.2
+2012-13,Regular Season,Portland Trail Blazers,49.8,13.9
+2012-13,Regular Season,Philadelphia 76ers,48.1,12.5
+2012-13,Regular Season,Detroit Pistons,48.699999999999996,14.3
+2012-13,Regular Season,New Orleans Hornets,48.9,14.0
+2012-13,Regular Season,Cleveland Cavaliers,47.3,13.0
+2012-13,Regular Season,Sacramento Kings,49.1,13.4
+2012-13,Regular Season,Phoenix Suns,47.699999999999996,14.3
+2012-13,Regular Season,Orlando Magic,48.5,13.7
+2012-13,Regular Season,Charlotte Bobcats,46.0,13.2
+2013-14,Regular Season,San Antonio Spurs*,53.7,13.5
+2013-14,Regular Season,Los Angeles Clippers*,52.6,12.7
+2013-14,Regular Season,Oklahoma City Thunder*,52.0,14.0
+2013-14,Regular Season,Miami Heat*,55.400000000000006,14.6
+2013-14,Regular Season,Golden State Warriors*,51.7,13.8
+2013-14,Regular Season,Indiana Pacers*,49.0,14.3
+2013-14,Regular Season,Houston Rockets*,53.1,14.6
+2013-14,Regular Season,Portland Trail Blazers*,50.4,12.4
+2013-14,Regular Season,Toronto Raptors*,49.8,13.2
+2013-14,Regular Season,Phoenix Suns,51.9,14.0
+2013-14,Regular Season,Minnesota Timberwolves,48.6,12.2
+2013-14,Regular Season,Dallas Mavericks*,52.6,12.7
+2013-14,Regular Season,Chicago Bulls*,47.099999999999994,14.2
+2013-14,Regular Season,Memphis Grizzlies*,49.4,13.1
+2013-14,Regular Season,Washington Wizards*,50.6,13.6
+2013-14,Regular Season,Charlotte Bobcats*,48.1,11.7
+2013-14,Regular Season,Atlanta Hawks*,51.5,14.3
+2013-14,Regular Season,New York Knicks,50.5,12.5
+2013-14,Regular Season,Brooklyn Nets*,51.4,14.1
+2013-14,Regular Season,Denver Nuggets,49.7,14.0
+2013-14,Regular Season,New Orleans Pelicans,49.5,12.9
+2013-14,Regular Season,Sacramento Kings,48.4,13.9
+2013-14,Regular Season,Cleveland Cavaliers,47.9,13.0
+2013-14,Regular Season,Detroit Pistons,48.199999999999996,12.9
+2013-14,Regular Season,Boston Celtics,47.699999999999996,14.2
+2013-14,Regular Season,Orlando Magic,48.699999999999996,13.9
+2013-14,Regular Season,Los Angeles Lakers,50.5,13.7
+2013-14,Regular Season,Utah Jazz,48.4,13.9
+2013-14,Regular Season,Milwaukee Bucks,47.9,14.1
+2013-14,Regular Season,Philadelphia 76ers,47.5,14.8
+2014-15,Regular Season,Golden State Warriors*,54.0,13.1
+2014-15,Regular Season,Los Angeles Clippers*,53.300000000000004,11.6
+2014-15,Regular Season,San Antonio Spurs*,51.7,13.1
+2014-15,Regular Season,Atlanta Hawks*,52.7,13.5
+2014-15,Regular Season,Cleveland Cavaliers*,52.0,13.4
+2014-15,Regular Season,Portland Trail Blazers*,50.8,12.6
+2014-15,Regular Season,Houston Rockets*,51.2,15.0
+2014-15,Regular Season,Memphis Grizzlies*,48.9,12.6
+2014-15,Regular Season,Toronto Raptors*,50.8,12.0
+2014-15,Regular Season,Chicago Bulls*,48.9,12.9
+2014-15,Regular Season,Dallas Mavericks*,51.5,11.9
+2014-15,Regular Season,Oklahoma City Thunder,49.2,13.1
+2014-15,Regular Season,New Orleans Pelicans*,50.1,12.5
+2014-15,Regular Season,Washington Wizards*,49.9,14.0
+2014-15,Regular Season,Milwaukee Bucks*,49.9,15.5
+2014-15,Regular Season,Indiana Pacers,48.4,13.1
+2014-15,Regular Season,Utah Jazz,49.4,14.6
+2014-15,Regular Season,Boston Celtics*,48.9,12.5
+2014-15,Regular Season,Phoenix Suns,50.1,13.7
+2014-15,Regular Season,Detroit Pistons,48.199999999999996,12.3
+2014-15,Regular Season,Miami Heat,50.0,14.5
+2014-15,Regular Season,Brooklyn Nets*,49.1,13.0
+2014-15,Regular Season,Charlotte Hornets,45.6,11.2
+2014-15,Regular Season,Denver Nuggets,47.9,12.7
+2014-15,Regular Season,Sacramento Kings,49.0,14.8
+2014-15,Regular Season,Orlando Magic,49.4,14.0
+2014-15,Regular Season,Los Angeles Lakers,47.3,12.1
+2014-15,Regular Season,Minnesota Timberwolves,46.800000000000004,13.7
+2014-15,Regular Season,Philadelphia 76ers,45.9,16.0
+2014-15,Regular Season,New York Knicks,47.0,14.0
+2015-16,Regular Season,San Antonio Spurs*,52.6,12.4
+2015-16,Regular Season,Golden State Warriors*,56.3,13.5
+2015-16,Regular Season,Oklahoma City Thunder*,52.400000000000006,14.0
+2015-16,Regular Season,Cleveland Cavaliers*,52.400000000000006,12.7
+2015-16,Regular Season,Toronto Raptors*,50.4,12.3
+2015-16,Regular Season,Los Angeles Clippers*,52.400000000000006,12.1
+2015-16,Regular Season,Atlanta Hawks*,51.6,13.8
+2015-16,Regular Season,Boston Celtics*,48.8,12.1
+2015-16,Regular Season,Charlotte Hornets*,50.2,11.7
+2015-16,Regular Season,Utah Jazz,50.1,14.2
+2015-16,Regular Season,Miami Heat*,50.8,13.3
+2015-16,Regular Season,Indiana Pacers*,49.7,13.5
+2015-16,Regular Season,Portland Trail Blazers*,51.1,13.2
+2015-16,Regular Season,Detroit Pistons*,49.1,12.2
+2015-16,Regular Season,Houston Rockets*,51.6,14.2
+2015-16,Regular Season,Dallas Mavericks*,50.2,12.0
+2015-16,Regular Season,Washington Wizards,51.1,13.1
+2015-16,Regular Season,Chicago Bulls,48.699999999999996,12.6
+2015-16,Regular Season,Orlando Magic,50.0,12.8
+2015-16,Regular Season,Sacramento Kings,51.0,14.2
+2015-16,Regular Season,Memphis Grizzlies*,47.699999999999996,12.3
+2015-16,Regular Season,New York Knicks,48.3,12.6
+2015-16,Regular Season,Denver Nuggets,48.9,13.2
+2015-16,Regular Season,Minnesota Timberwolves,49.8,13.9
+2015-16,Regular Season,New Orleans Pelicans,49.8,12.3
+2015-16,Regular Season,Milwaukee Bucks,49.9,14.2
+2015-16,Regular Season,Phoenix Suns,48.699999999999996,15.2
+2015-16,Regular Season,Brooklyn Nets,49.2,13.6
+2015-16,Regular Season,Los Angeles Lakers,46.0,12.5
+2015-16,Regular Season,Philadelphia 76ers,48.699999999999996,14.8
+2016-17,Regular Season,Golden State Warriors*,56.3,13.2
+2016-17,Regular Season,San Antonio Spurs*,52.400000000000006,12.6
+2016-17,Regular Season,Houston Rockets*,54.50000000000001,13.3
+2016-17,Regular Season,Toronto Raptors*,51.7,11.8
+2016-17,Regular Season,Los Angeles Clippers*,53.7,12.0
+2016-17,Regular Season,Utah Jazz*,52.6,13.2
+2016-17,Regular Season,Cleveland Cavaliers*,54.7,12.6
+2016-17,Regular Season,Boston Celtics*,52.5,12.2
+2016-17,Regular Season,Washington Wizards*,52.800000000000004,12.8
+2016-17,Regular Season,Miami Heat,51.2,12.4
+2016-17,Regular Season,Oklahoma City Thunder*,50.0,13.2
+2016-17,Regular Season,Memphis Grizzlies*,49.1,12.1
+2016-17,Regular Season,Denver Nuggets,53.0,13.2
+2016-17,Regular Season,Chicago Bulls*,48.699999999999996,12.3
+2016-17,Regular Season,Charlotte Hornets,50.1,10.7
+2016-17,Regular Season,Indiana Pacers*,51.6,12.8
+2016-17,Regular Season,Milwaukee Bucks*,52.7,13.2
+2016-17,Regular Season,Portland Trail Blazers*,52.0,12.5
+2016-17,Regular Season,Atlanta Hawks*,50.4,14.2
+2016-17,Regular Season,Detroit Pistons,49.2,10.9
+2016-17,Regular Season,Minnesota Timberwolves,51.1,12.9
+2016-17,Regular Season,New Orleans Pelicans,50.4,11.7
+2016-17,Regular Season,Dallas Mavericks,50.5,11.6
+2016-17,Regular Season,New York Knicks,49.6,12.4
+2016-17,Regular Season,Sacramento Kings,51.6,13.7
+2016-17,Regular Season,Phoenix Suns,49.3,13.4
+2016-17,Regular Season,Philadelphia 76ers,50.1,14.9
+2016-17,Regular Season,Brooklyn Nets,50.7,14.7
+2016-17,Regular Season,Orlando Magic,48.9,12.1
+2016-17,Regular Season,Los Angeles Lakers,50.1,13.5
+2017-18,Regular Season,Houston Rockets*,55.1,12.7
+2017-18,Regular Season,Toronto Raptors*,53.900000000000006,12.1
+2017-18,Regular Season,Golden State Warriors*,56.89999999999999,14.1
+2017-18,Regular Season,Utah Jazz*,52.7,13.7
+2017-18,Regular Season,Philadelphia 76ers*,53.5,14.6
+2017-18,Regular Season,Boston Celtics*,51.800000000000004,12.9
+2017-18,Regular Season,Oklahoma City Thunder*,51.4,12.4
+2017-18,Regular Season,San Antonio Spurs*,50.7,12.2
+2017-18,Regular Season,Portland Trail Blazers*,51.1,12.3
+2017-18,Regular Season,Minnesota Timberwolves*,52.300000000000004,11.4
+2017-18,Regular Season,Denver Nuggets,53.6,13.4
+2017-18,Regular Season,Indiana Pacers*,52.5,12.3
+2017-18,Regular Season,New Orleans Pelicans*,54.1,13.3
+2017-18,Regular Season,Cleveland Cavaliers*,54.7,12.6
+2017-18,Regular Season,Washington Wizards*,52.5,13.3
+2017-18,Regular Season,Miami Heat*,52.0,13.3
+2017-18,Regular Season,Charlotte Hornets,50.8,11.4
+2017-18,Regular Season,Los Angeles Clippers,52.7,13.2
+2017-18,Regular Season,Detroit Pistons,51.2,12.3
+2017-18,Regular Season,Milwaukee Bucks*,53.1,12.9
+2017-18,Regular Season,Los Angeles Lakers,51.7,13.8
+2017-18,Regular Season,Dallas Mavericks,51.300000000000004,11.5
+2017-18,Regular Season,New York Knicks,51.0,13.3
+2017-18,Regular Season,Brooklyn Nets,51.4,13.6
+2017-18,Regular Season,Orlando Magic,51.2,13.3
+2017-18,Regular Season,Atlanta Hawks,51.2,14.1
+2017-18,Regular Season,Memphis Grizzlies,50.0,14.0
+2017-18,Regular Season,Chicago Bulls,49.7,12.6
+2017-18,Regular Season,Sacramento Kings,50.2,12.8
+2017-18,Regular Season,Phoenix Suns,49.5,13.9
+2018-19,Regular Season,Milwaukee Bucks*,55.00000000000001,12.0
+2018-19,Regular Season,Golden State Warriors*,56.49999999999999,12.6
+2018-19,Regular Season,Toronto Raptors*,54.300000000000004,12.4
+2018-19,Regular Season,Utah Jazz*,53.800000000000004,13.4
+2018-19,Regular Season,Houston Rockets*,54.2,12.0
+2018-19,Regular Season,Boston Celtics*,53.400000000000006,11.5
+2018-19,Regular Season,Portland Trail Blazers*,52.800000000000004,12.1
+2018-19,Regular Season,Denver Nuggets*,52.7,11.9
+2018-19,Regular Season,Indiana Pacers*,53.0,12.4
+2018-19,Regular Season,Oklahoma City Thunder*,51.4,11.7
+2018-19,Regular Season,Philadelphia 76ers*,53.2,12.9
+2018-19,Regular Season,San Antonio Spurs*,53.400000000000006,11.0
+2018-19,Regular Season,Los Angeles Clippers*,52.900000000000006,12.7
+2018-19,Regular Season,Orlando Magic*,51.800000000000004,11.9
+2018-19,Regular Season,Brooklyn Nets*,52.0,13.0
+2018-19,Regular Season,Detroit Pistons*,50.9,12.3
+2018-19,Regular Season,Miami Heat,51.5,13.1
+2018-19,Regular Season,Sacramento Kings,52.400000000000006,11.5
+2018-19,Regular Season,Charlotte Hornets,51.4,10.9
+2018-19,Regular Season,New Orleans Pelicans,52.900000000000006,12.6
+2018-19,Regular Season,Dallas Mavericks,51.9,12.7
+2018-19,Regular Season,Minnesota Timberwolves,51.1,11.4
+2018-19,Regular Season,Los Angeles Lakers,52.7,13.4
+2018-19,Regular Season,Memphis Grizzlies,50.8,12.9
+2018-19,Regular Season,Washington Wizards,53.1,12.3
+2018-19,Regular Season,Atlanta Hawks,52.2,14.3
+2018-19,Regular Season,Chicago Bulls,50.5,12.7
+2018-19,Regular Season,New York Knicks,49.0,12.4
+2018-19,Regular Season,Phoenix Suns,51.4,13.8
+2018-19,Regular Season,Cleveland Cavaliers,50.3,12.2
+2019-20,Regular Season,Milwaukee Bucks*,55.2,12.9
+2019-20,Regular Season,Boston Celtics*,53.1,12.2
+2019-20,Regular Season,Los Angeles Clippers*,53.5,12.6
+2019-20,Regular Season,Toronto Raptors*,53.6,13.1
+2019-20,Regular Season,Los Angeles Lakers*,54.2,13.3
+2019-20,Regular Season,Dallas Mavericks*,54.50000000000001,11.2
+2019-20,Regular Season,Miami Heat*,54.7,13.5
+2019-20,Regular Season,Houston Rockets*,53.7,12.6
+2019-20,Regular Season,Utah Jazz*,54.900000000000006,13.7
+2019-20,Regular Season,Philadelphia 76ers*,53.400000000000006,12.7
+2019-20,Regular Season,Denver Nuggets*,53.5,12.3
+2019-20,Regular Season,Indiana Pacers*,53.400000000000006,12.0
+2019-20,Regular Season,Oklahoma City Thunder*,53.0,12.4
+2019-20,Regular Season,Phoenix Suns,53.2,13.0
+2019-20,Regular Season,Brooklyn Nets*,52.0,13.1
+2019-20,Regular Season,Orlando Magic*,50.6,11.5
+2019-20,Regular Season,San Antonio Spurs,53.1,11.2
+2019-20,Regular Season,Memphis Grizzlies,52.800000000000004,13.2
+2019-20,Regular Season,Portland Trail Blazers*,53.300000000000004,11.2
+2019-20,Regular Season,New Orleans Pelicans,53.900000000000006,13.9
+2019-20,Regular Season,Sacramento Kings,53.400000000000006,13.0
+2019-20,Regular Season,Chicago Bulls,51.5,13.7
+2019-20,Regular Season,Detroit Pistons,52.900000000000006,13.8
+2019-20,Regular Season,Minnesota Timberwolves,51.4,13.0
+2019-20,Regular Season,Washington Wizards,52.300000000000004,12.2
+2019-20,Regular Season,New York Knicks,50.1,12.6
+2019-20,Regular Season,Charlotte Hornets,50.4,13.3
+2019-20,Regular Season,Atlanta Hawks,51.5,13.8
+2019-20,Regular Season,Cleveland Cavaliers,52.2,14.6
+2019-20,Regular Season,Golden State Warriors,49.7,13.2
+2020-21,Regular Season,Utah Jazz*,56.3,12.7
+2020-21,Regular Season,Los Angeles Clippers*,56.39999999999999,12.2
+2020-21,Regular Season,Phoenix Suns*,56.39999999999999,11.5
+2020-21,Regular Season,Milwaukee Bucks*,56.599999999999994,12.0
+2020-21,Regular Season,Philadelphia 76ers*,54.1,12.8
+2020-21,Regular Season,Denver Nuggets*,55.7,12.1
+2020-21,Regular Season,Brooklyn Nets*,57.49999999999999,12.2
+2020-21,Regular Season,Los Angeles Lakers*,53.6,13.6
+2020-21,Regular Season,Dallas Mavericks*,55.00000000000001,11.1
+2020-21,Regular Season,New York Knicks*,52.400000000000006,11.9
+2020-21,Regular Season,Atlanta Hawks*,53.900000000000006,11.9
+2020-21,Regular Season,Portland Trail Blazers*,54.0,9.9
+2020-21,Regular Season,Boston Celtics*,54.300000000000004,12.5
+2020-21,Regular Season,Golden State Warriors,55.1,13.3
+2020-21,Regular Season,Memphis Grizzlies*,52.800000000000004,11.6
+2020-21,Regular Season,Miami Heat*,54.6,13.1
+2020-21,Regular Season,Indiana Pacers,54.2,11.9
+2020-21,Regular Season,New Orleans Pelicans,53.7,12.7
+2020-21,Regular Season,Toronto Raptors,52.900000000000006,11.9
+2020-21,Regular Season,Chicago Bulls,54.7,13.6
+2020-21,Regular Season,San Antonio Spurs,51.7,10.2
+2020-21,Regular Season,Washington Wizards*,53.1,12.3
+2020-21,Regular Season,Charlotte Hornets,53.2,13.3
+2020-21,Regular Season,Sacramento Kings,54.900000000000006,12.0
+2020-21,Regular Season,Detroit Pistons,51.9,13.5
+2020-21,Regular Season,Minnesota Timberwolves,52.0,12.4
+2020-21,Regular Season,Houston Rockets,52.1,13.0
+2020-21,Regular Season,Cleveland Cavaliers,50.8,13.9
+2020-21,Regular Season,Orlando Magic,49.0,11.5
+2020-21,Regular Season,Oklahoma City Thunder,50.9,14.2
+2021-22,Regular Season,Boston Celtics*,54.2,12.4
+2021-22,Regular Season,Phoenix Suns*,54.900000000000006,11.6
+2021-22,Regular Season,Utah Jazz*,55.50000000000001,12.7
+2021-22,Regular Season,Memphis Grizzlies*,52.2,11.2
+2021-22,Regular Season,Golden State Warriors*,55.2,13.5
+2021-22,Regular Season,Miami Heat*,54.7,13.4
+2021-22,Regular Season,Dallas Mavericks*,53.800000000000004,11.7
+2021-22,Regular Season,Milwaukee Bucks*,54.6,11.9
+2021-22,Regular Season,Philadelphia 76ers*,53.400000000000006,11.6
+2021-22,Regular Season,Minnesota Timberwolves*,53.900000000000006,12.4
+2021-22,Regular Season,Denver Nuggets*,55.60000000000001,13.2
+2021-22,Regular Season,Toronto Raptors*,51.0,11.0
+2021-22,Regular Season,Cleveland Cavaliers,53.800000000000004,13.2
+2021-22,Regular Season,Atlanta Hawks*,54.300000000000004,10.8
+2021-22,Regular Season,Brooklyn Nets*,54.0,12.5
+2021-22,Regular Season,Charlotte Hornets,54.400000000000006,11.6
+2021-22,Regular Season,San Antonio Spurs,52.7,11.1
+2021-22,Regular Season,Los Angeles Clippers,53.1,12.5
+2021-22,Regular Season,New York Knicks,51.300000000000004,12.0
+2021-22,Regular Season,Chicago Bulls*,54.1,11.8
+2021-22,Regular Season,New Orleans Pelicans*,51.7,12.5
+2021-22,Regular Season,Los Angeles Lakers,53.7,12.8
+2021-22,Regular Season,Washington Wizards,53.2,12.1
+2021-22,Regular Season,Indiana Pacers,53.1,12.7
+2021-22,Regular Season,Sacramento Kings,52.5,12.5
+2021-22,Regular Season,Detroit Pistons,49.4,12.6
+2021-22,Regular Season,Orlando Magic,50.3,13.0
+2021-22,Regular Season,Oklahoma City Thunder,49.7,12.5
+2021-22,Regular Season,Houston Rockets,53.400000000000006,14.5
+2021-22,Regular Season,Portland Trail Blazers,51.5,13.0
+2022-23,Regular Season,Boston Celtics*,56.599999999999994,12.0
+2022-23,Regular Season,Cleveland Cavaliers*,55.60000000000001,12.3
+2022-23,Regular Season,Philadelphia 76ers*,56.3,12.6
+2022-23,Regular Season,Memphis Grizzlies*,54.0,11.7
+2022-23,Regular Season,Milwaukee Bucks*,55.50000000000001,12.7
+2022-23,Regular Season,Denver Nuggets*,57.3,13.1
+2022-23,Regular Season,New York Knicks*,54.1,11.4
+2022-23,Regular Season,Sacramento Kings*,57.199999999999996,12.0
+2022-23,Regular Season,Phoenix Suns*,53.5,12.0
+2022-23,Regular Season,New Orleans Pelicans,54.300000000000004,12.9
+2022-23,Regular Season,Golden State Warriors*,57.099999999999994,14.1
+2022-23,Regular Season,Toronto Raptors,51.7,10.3
+2022-23,Regular Season,Chicago Bulls,55.00000000000001,12.2
+2022-23,Regular Season,Oklahoma City Thunder,53.1,11.2
+2022-23,Regular Season,Brooklyn Nets*,56.2,12.7
+2022-23,Regular Season,Los Angeles Lakers*,54.2,12.3
+2022-23,Regular Season,Los Angeles Clippers*,55.1,12.8
+2022-23,Regular Season,Atlanta Hawks*,54.1,11.2
+2022-23,Regular Season,Dallas Mavericks,56.49999999999999,11.4
+2022-23,Regular Season,Minnesota Timberwolves*,56.00000000000001,13.6
+2022-23,Regular Season,Miami Heat*,53.0,12.4
+2022-23,Regular Season,Utah Jazz,54.7,13.3
+2022-23,Regular Season,Washington Wizards,55.00000000000001,12.7
+2022-23,Regular Season,Orlando Magic,53.2,13.4
+2022-23,Regular Season,Indiana Pacers,54.50000000000001,13.0
+2022-23,Regular Season,Portland Trail Blazers,54.900000000000006,13.1
+2022-23,Regular Season,Charlotte Hornets,51.6,12.3
+2022-23,Regular Season,Houston Rockets,51.6,14.0
+2022-23,Regular Season,Detroit Pistons,52.0,13.3
+2022-23,Regular Season,San Antonio Spurs,52.5,13.0
+2023-24,Regular Season,Boston Celtics*,57.8,10.8
+2023-24,Regular Season,Oklahoma City Thunder*,57.3,11.4
+2023-24,Regular Season,Minnesota Timberwolves*,55.900000000000006,13.0
+2023-24,Regular Season,Denver Nuggets*,56.2,11.5
+2023-24,Regular Season,New York Knicks*,54.0,11.9
+2023-24,Regular Season,New Orleans Pelicans*,55.800000000000004,11.8
+2023-24,Regular Season,Los Angeles Clippers*,56.10000000000001,12.0
+2023-24,Regular Season,Philadelphia 76ers*,53.2,10.7
+2023-24,Regular Season,Phoenix Suns*,56.49999999999999,13.4
+2023-24,Regular Season,Indiana Pacers*,57.8,11.3
+2023-24,Regular Season,Golden State Warriors,55.7,12.5
+2023-24,Regular Season,Milwaukee Bucks*,56.8,11.5
+2023-24,Regular Season,Cleveland Cavaliers*,55.7,12.4
+2023-24,Regular Season,Dallas Mavericks*,56.2,11.2
+2023-24,Regular Season,Orlando Magic*,54.1,13.3
+2023-24,Regular Season,Miami Heat*,53.800000000000004,11.7
+2023-24,Regular Season,Sacramento Kings,55.60000000000001,11.6
+2023-24,Regular Season,Houston Rockets,52.900000000000006,11.2
+2023-24,Regular Season,Los Angeles Lakers*,56.599999999999994,12.5
+2023-24,Regular Season,Chicago Bulls,53.400000000000006,11.0
+2023-24,Regular Season,Atlanta Hawks,53.900000000000006,11.6
+2023-24,Regular Season,Brooklyn Nets,53.1,11.8
+2023-24,Regular Season,Utah Jazz,53.900000000000006,13.6
+2023-24,Regular Season,San Antonio Spurs,53.2,13.2
+2023-24,Regular Season,Toronto Raptors,53.5,12.4
+2023-24,Regular Season,Memphis Grizzlies,50.9,13.4
+2023-24,Regular Season,Detroit Pistons,52.6,13.5
+2023-24,Regular Season,Washington Wizards,53.800000000000004,12.2
+2023-24,Regular Season,Portland Trail Blazers,50.3,13.4
+2023-24,Regular Season,Charlotte Hornets,52.900000000000006,12.6
+2024-25,Regular Season,Oklahoma City Thunder*,56.00000000000001,10.3
+2024-25,Regular Season,Boston Celtics*,56.10000000000001,10.8
+2024-25,Regular Season,Cleveland Cavaliers*,57.8,11.6
+2024-25,Regular Season,Minnesota Timberwolves*,55.400000000000006,13.0
+2024-25,Regular Season,Los Angeles Clippers*,55.400000000000006,13.4
+2024-25,Regular Season,Memphis Grizzlies*,55.400000000000006,13.1
+2024-25,Regular Season,Houston Rockets*,52.300000000000004,11.8
+2024-25,Regular Season,New York Knicks*,55.60000000000001,11.9
+2024-25,Regular Season,Denver Nuggets*,57.3,12.5
+2024-25,Regular Season,Golden State Warriors*,53.6,12.3
+2024-25,Regular Season,Milwaukee Bucks*,56.8,12.2
+2024-25,Regular Season,Indiana Pacers*,56.2,11.8
+2024-25,Regular Season,Detroit Pistons*,54.7,13.0
+2024-25,Regular Season,Los Angeles Lakers*,55.7,12.7
+2024-25,Regular Season,Miami Heat*,54.400000000000006,12.4
+2024-25,Regular Season,Sacramento Kings,54.800000000000004,11.8
+2024-25,Regular Season,Orlando Magic*,51.0,12.9
+2024-25,Regular Season,Atlanta Hawks,54.6,13.2
+2024-25,Regular Season,Dallas Mavericks,54.900000000000006,12.5
+2024-25,Regular Season,Chicago Bulls,55.300000000000004,12.7
+2024-25,Regular Season,San Antonio Spurs,54.400000000000006,12.3
+2024-25,Regular Season,Portland Trail Blazers,52.1,13.8
+2024-25,Regular Season,Phoenix Suns,56.10000000000001,12.8
+2024-25,Regular Season,Toronto Raptors,52.2,13.3
+2024-25,Regular Season,Philadelphia 76ers,52.7,12.3
+2024-25,Regular Season,Brooklyn Nets,51.6,13.7
+2024-25,Regular Season,Utah Jazz,53.300000000000004,14.9
+2024-25,Regular Season,Charlotte Hornets,50.3,13.7
+2024-25,Regular Season,New Orleans Pelicans,51.9,12.8
+2024-25,Regular Season,Washington Wizards,51.2,13.6
+2025-26,Regular Season,Oklahoma City Thunder*,56.10000000000001,11.2
+2025-26,Regular Season,San Antonio Spurs*,55.900000000000006,11.8
+2025-26,Regular Season,Detroit Pistons*,54.6,13.0
+2025-26,Regular Season,Boston Celtics*,55.300000000000004,11.2
+2025-26,Regular Season,New York Knicks*,55.7,12.1
+2025-26,Regular Season,Houston Rockets*,54.2,13.3
+2025-26,Regular Season,Denver Nuggets*,57.699999999999996,11.5
+2025-26,Regular Season,Charlotte Hornets,55.2,13.5
+2025-26,Regular Season,Cleveland Cavaliers*,56.10000000000001,12.2
+2025-26,Regular Season,Minnesota Timberwolves*,55.900000000000006,12.9
+2025-26,Regular Season,Toronto Raptors*,54.6,12.2
+2025-26,Regular Season,Atlanta Hawks*,55.400000000000006,12.3
+2025-26,Regular Season,Miami Heat,54.2,11.6
+2025-26,Regular Season,Los Angeles Lakers*,57.3,13.2
+2025-26,Regular Season,Phoenix Suns*,53.7,12.8
+2025-26,Regular Season,Los Angeles Clippers,55.900000000000006,13.2
+2025-26,Regular Season,Orlando Magic*,53.1,12.4
+2025-26,Regular Season,Philadelphia 76ers*,53.0,11.9
+2025-26,Regular Season,Portland Trail Blazers*,53.400000000000006,14.6
+2025-26,Regular Season,Golden State Warriors,54.900000000000006,13.8
+2025-26,Regular Season,New Orleans Pelicans,52.7,12.2
+2025-26,Regular Season,Chicago Bulls,54.7,13.3
+2025-26,Regular Season,Dallas Mavericks,52.7,12.6
+2025-26,Regular Season,Memphis Grizzlies,53.300000000000004,13.0
+2025-26,Regular Season,Milwaukee Bucks,56.49999999999999,13.9
+2025-26,Regular Season,Indiana Pacers,53.300000000000004,12.8
+2025-26,Regular Season,Utah Jazz,53.6,13.2
+2025-26,Regular Season,Sacramento Kings,52.5,12.6
+2025-26,Regular Season,Brooklyn Nets,52.0,14.3
+2025-26,Regular Season,Washington Wizards,53.5,13.6

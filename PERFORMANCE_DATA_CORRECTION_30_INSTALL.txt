@@ -1,0 +1,34 @@
+WEBSITE240 PERFORMANCE DATA CORRECTION 30
+
+Purpose
+- Restore the canonical Big Board eligibility gates that were lost when the public performance layer was introduced.
+- Keep the performance layer fast while ensuring sub-threshold player-seasons cannot enter single-season Big Board rankings.
+- Make the Career summary row arrive on the same fast public season-bundles request as the individual season table.
+
+Why the Big Board changed
+The performance layer incorrectly treated the canonical percentile table as the complete ranking population. That table contains descriptive rows for sub-threshold seasons (for example, tiny-sample seasons), while the old Big Board applied Basketball-Reference-style qualification gates before ranking. This patch restores that gate as a precomputed indexed eligibility sidecar. The underlying statistic values/percentiles are NOT replaced.
+
+Install
+1. Back up the current Website240 project.
+2. Copy src/App.jsx over the existing src/App.jsx.
+3. Copy local_api/public_data_layer.py over the existing file.
+4. Copy data/public/board_eligibility.sqlite3 into the existing data/public/ directory.
+5. Copy data/public/career_support.csv.gz into the existing data/public/ directory.
+6. Restart the local API and reload the site.
+
+Big Board behavior
+- Basic rate/stat boards use the canonical basic qualification gate.
+- Advanced boards (including rTS) use the canonical advanced MP gate.
+- FG%, FT%, 3P%, and TS% use their statistic-specific evidence gates.
+- The displayed/ranked statistic itself remains the canonical percentile-table value.
+- Historical 2PA remains FGA before 1979-80.
+- Career and 5-Year Peak Big Boards remain on their existing canonical paths.
+
+Career row behavior
+The season-bundles endpoint now includes a precomputed Career aggregate. Player Profiles consume that aggregate immediately, so the Career row no longer waits on the slower legacy Career profile request. The legacy request remains available as a fallback/secondary source.
+
+Validation performed
+- PTS/75 1993-94: David Robinson is #1; Chuck Nevitt is excluded.
+- Historical PTS/75: James Harden is #1 in the current canonical population; Chuck Nevitt is excluded.
+- Wilt P004823 Career bundle returns Career PTS/75 and Career 2PA/75 immediately from the public layer.
+- Python syntax compilation passed for public_data_layer.py and the existing API.

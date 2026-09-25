@@ -1,0 +1,180 @@
+/* Phase 7 V6 — Player Profile Visual / Interaction Polish */
+
+/* The back of the card is the vertical scroll container. The upper profile
+   area stays pinned while the historical tables move underneath it. */
+.player-profile .backface {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  scroll-behavior: auto;
+  padding-bottom: 18px;
+  box-sizing: border-box;
+}
+.player-profile .profile-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin: -18px -18px 0;
+  padding: 18px 18px 12px;
+  background: #0e1116;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  isolation: isolate;
+  box-shadow: 0 10px 24px rgba(0,0,0,.24);
+  backdrop-filter: blur(10px);
+}
+
+/* SDI boxes: category name remains above; the score itself stays LEFT and the
+   companion percentile, when supplied by the API, sits on the RIGHT. */
+.player-profile .sdi-score-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+  min-width: 0;
+}
+.player-profile .sdi-score-line b {
+  min-width: 2ch;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+.player-profile .sdi-companion-percentile {
+  margin-left: auto;
+  font-size: .68rem;
+  font-weight: 750;
+  letter-spacing: .02em;
+  opacity: .9;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.player-profile .sdi-companion-percentile::before {
+  content: "PCTL ";
+  opacity: .58;
+  font-weight: 650;
+  letter-spacing: .04em;
+}
+.player-profile .sdi-snapshot > div {
+  align-items: stretch;
+}
+.player-profile .sdi-description {
+  margin: 8px 0 14px;
+  color: rgba(235,238,242,.62);
+  font-size: .72rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* One scrollbar for the entire profile card, pinned to the card's lower edge.
+   It does not sit on top of a table row. */
+.player-profile .profile-table-shell {
+  position: relative;
+  min-width: 0;
+  padding-bottom: 0;
+}
+.player-profile .profile-table-shell .tablewrap {
+  min-width: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.player-profile .profile-table-shell .tablewrap::-webkit-scrollbar {
+  height: 0;
+}
+.player-profile .profile-global-scrollbar {
+  position: absolute;
+  left: 0;
+  right: 14px;
+  bottom: 0;
+  z-index: 60;
+  width: auto;
+  height: 18px;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: rgba(18,22,28,.99);
+  scrollbar-color: #707985 #292f37;
+  scrollbar-width: auto;
+}
+.player-profile .profile-global-scrollbar::-webkit-scrollbar { height: 12px; }
+.player-profile .profile-global-scrollbar::-webkit-scrollbar-track { background: #292f37; }
+.player-profile .profile-global-scrollbar::-webkit-scrollbar-thumb {
+  background: #707985;
+  border-radius: 8px;
+  border: 2px solid #292f37;
+}
+.player-profile .profile-global-scrollbar-spacer {
+  height: 1px;
+  min-width: 100%;
+}
+
+/* Selected season: one continuous, subtle site-red row treatment. */
+.player-profile tr.season-selected,
+.player-profile tr.season-selected > td,
+.player-profile tr.season-selected:hover,
+.player-profile tr.season-selected:hover > td {
+  background: rgba(185,75,93,.18) !important;
+}
+.player-profile tr.season-selected {
+  box-shadow: inset 4px 0 0 #b94b5d,
+              inset 0 1px 0 rgba(185,75,93,.20),
+              inset 0 -1px 0 rgba(185,75,93,.20);
+}
+.player-profile tr.season-selected > td {
+  border-bottom-color: rgba(185,75,93,.26) !important;
+}
+.player-profile tr.season-selected > td:first-child {
+  color: #f3cbd2 !important;
+}
+
+/* IMPORTANT: only the configurable spider (opened by clicking the radar) gets
+   the enlarged label radius. The compact six-dimension radar in the hero is
+   intentionally untouched. */
+.player-profile .spider-wrap {
+  overflow: visible;
+}
+.player-profile .spider-svg {
+  overflow: visible;
+}
+.player-profile .spider-label {
+  paint-order: stroke;
+  stroke: rgba(14,17,22,.98);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 900px) {
+  .player-profile .profile-sticky-header {
+    margin-left: -17px;
+    margin-right: -17px;
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+}
+@media (max-width: 620px) {
+  .player-profile .profile-sticky-header {
+    margin-left: -14px;
+    margin-right: -14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .player-profile .sdi-description { font-size: .68rem; }
+}
+
+/* Selected season values are emphasized without changing their numeric formatting. */
+.player-profile tr.season-selected > td,
+.player-profile tr.season-selected > td span {
+  font-weight: 800 !important;
+}
+.player-profile tr.season-selected > td:first-child {
+  font-weight: 850 !important;
+}
+
+/* Keep the configurable radar labels outside the chart's visual footprint. */
+.player-profile .spider-wrap {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+.player-profile .spider-svg {
+  overflow: visible;
+}

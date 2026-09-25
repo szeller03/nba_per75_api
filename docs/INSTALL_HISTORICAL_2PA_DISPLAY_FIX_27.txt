@@ -1,0 +1,29 @@
+WEBSITE240 — HISTORICAL 2PA/75 DISPLAY FIX 27
+
+Purpose
+-------
+Fix the Player Profile seasonal PER 75 table so that, for NBA seasons before
+1979-80, 2PA/75 is displayed exactly as FGA/75. Because there were no recorded
+3-point attempts in those seasons, 2PA = FGA. The 2PA percentile also uses the
+FGA/75 percentile.
+
+Files
+-----
+src/App.jsx
+local_api/nba_per75_local_api.py
+
+Install
+-------
+1. Replace NBA_Per75_Website240/src/App.jsx with the supplied App.jsx.
+2. Replace NBA_Per75_Website240/local_api/nba_per75_local_api.py with the
+   supplied API file.
+3. Restart the local API and hard-refresh the website.
+
+Important
+---------
+This patch does not alter Career SDI, 5-Year Peak, WOWY, or any other statistic.
+It only guarantees the historical seasonal 2PA/75 display and its percentile.
+
+Expected Wilt behavior
+----------------------
+1959-60 through 1978-79: 2PA/75 = FGA/75, with the same percentile.

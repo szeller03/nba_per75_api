@@ -1,0 +1,22 @@
+﻿# Local environment
+.env.local
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Frontend build output
+dist/
+node_modules/
+
+# Archives
+*.zip
+*.7z
+*.rar
+
+# Local/editor files
+.vscode/
+.idea/

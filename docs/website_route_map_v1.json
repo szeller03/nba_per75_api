@@ -1,0 +1,33 @@
+{
+  "global": [
+    "/",
+    "/players",
+    "/big-board",
+    "/compare",
+    "/explorer",
+    "/teams",
+    "/methodology"
+  ],
+  "player": [
+    "/players/{player_slug}",
+    "/players/{player_slug}?season={season}&context={context}"
+  ],
+  "api_backed_features": [
+    "player_identity",
+    "player_seasons",
+    "player_percentiles",
+    "player_spider_statistics",
+    "player_spider_categories",
+    "big_board_long",
+    "dominance_index",
+    "dominance_components",
+    "team_index",
+    "team_seasons",
+    "team_lookup"
+  ],
+  "design_baseline_references": {
+    "navigation": "DataBallr-inspired section navigation",
+    "visualization_controls": "Hoopology-inspired direct chart customization",
+    "visual_identity": "Original NBA PER-75 design; references are principles, not templates"
+  }
+}

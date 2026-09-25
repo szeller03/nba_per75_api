@@ -1,0 +1,3 @@
+Exactly five qualifying regular-season seasons. A candidate is either five consecutive qualifying calendar seasons, or a six-calendar-year span containing exactly five qualifying seasons and exactly one non-qualifying season. A qualifying season is never skipped. Highest mean season SDI using current WOWY-aware SDI v4 wins. Displayed statistics aggregate underlying totals/attempts/possessions.
+
+This version explicitly forbids skipping a qualifying season.

@@ -1,0 +1,7 @@
+npm build exit=127
+
+> nba-per75@0.1.73 build
+> vite build
+
+
+sh: 1: vite: Permission denied

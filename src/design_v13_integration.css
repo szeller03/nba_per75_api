@@ -1,0 +1,45 @@
+/* NBA PER-75 Prototype v13 integration layer. Scoped to the finalized visual direction. */
+:root{--bg:#090a0d;--surface:#111419;--surface-2:#15181e;--line:#2b3039;--muted:#a6a3a0;--text:#f1eee9;--accent:#b94b5d;--wine:#5b1724;--wine2:#7b2433;--gold:#d8ad54;--green:#68b987}
+body{background:var(--bg);color:var(--text)}
+.site-header{background:linear-gradient(90deg,#070709,#190b0f 52%,#351117);backdrop-filter:none}
+.brand-mark{background:var(--wine2);border-color:#8f3a4a}
+.nav-link.active{box-shadow:inset 0 -2px 0 var(--accent)}
+.page{max-width:1320px}
+/* Player Profiles */
+.player-profile{position:relative}
+.player-profile .profile-header{background:linear-gradient(145deg,#11151b,#0c0f14);border:1px solid #303640;border-radius:16px;padding:22px 24px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.player-profile .profile-headshot{width:125px;height:125px;border-radius:10px;border-color:#3a414c;background:#171b21}
+.player-profile .profile-identity h1{color:#f1eee9}
+.player-profile .profile-section{margin-top:24px}
+.player-profile .experience-section,.player-profile .career-note,.player-profile .profile-stats-section{max-width:calc(100% - 405px)}
+.player-profile .profile-spider-section{position:absolute;right:0;top:178px;width:380px;margin-top:0;z-index:3}
+.player-profile .profile-spider-section .section-label{color:#8f969f}
+.player-profile .profile-spider-section .spider-card{background:#11151b;border:1px solid #303640;border-radius:14px;padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.player-profile .profile-spider-section .spider-mode{display:none}
+.player-profile .profile-spider-section .spider-svg{max-width:330px}
+.player-profile .profile-spider-section .spider-wrap{min-height:350px}
+.player-profile .profile-sdi-section{max-width:calc(100% - 405px)}
+.player-profile .profile-sdi-section .category-grid{grid-template-columns:repeat(3,1fr)}
+.player-profile .profile-sdi-section .category-card{background:#14181e;border-color:#303640;min-height:105px}
+.player-profile .profile-sdi-section .category-card strong{font-size:28px;color:#f3f0ec}
+.player-profile .profile-stats-section .stat-table{background:#11151b;border-color:#303640}
+.player-profile .profile-stats-section .stat-row{background:#11151b;border-bottom-color:#292f38;min-height:48px}
+.player-profile .profile-stats-section .stat-row b{font-size:14px;color:#f1eee9}
+.player-profile .profile-stats-section .stat-row em{font-size:10px;color:#68b987}
+.player-profile .profile-stats-section .section-label{color:#f1eee9}
+.player-profile .custom-spider-layout{grid-template-columns:1fr}
+/* Clickable spider affordance: the existing Website230 custom spider remains available. */
+.player-profile .profile-spider-section .spider-toolbar{cursor:pointer}
+@media(max-width:1050px){.player-profile .profile-spider-section{position:static;width:auto;margin-top:24px}.player-profile .experience-section,.player-profile .career-note,.player-profile .profile-stats-section,.player-profile .profile-sdi-section{max-width:none}}
+@media(max-width:700px){.player-profile .profile-header{grid-template-columns:90px 1fr}.player-profile .profile-controls{grid-column:1/-1;flex-wrap:wrap}.player-profile .profile-sdi-section .category-grid{grid-template-columns:repeat(2,1fr)}}
+/* Big Board */
+.big-board-table{background:#11151b;border-color:#303640}
+.big-board-row{grid-template-columns:48px minmax(170px,1fr) 105px 105px 105px 105px;background:#11151b;border-bottom-color:#292f38;font-size:10px}
+.big-board-header{background:#0e1116;color:#777f88}
+.big-board-row:hover:not(.big-board-header){background:#171c21}
+.big-board-primary{font-weight:800;color:#f1eee9;font-size:13px}
+.big-board-primary .pct{display:block;font-size:8px;margin-top:3px}
+.big-board-secondary{font-weight:700;font-size:11px}
+.bb-elite{color:#68b987}.bb-verygood{color:#9bb86f}.bb-average{color:#d8ad54}.bb-below{color:#b97958}.bb-poor{color:#a95761}.bb-neutral{color:#8f969f}
+.big-board-secondary-header{color:#777f88}
+@media(max-width:850px){.big-board-row{grid-template-columns:38px minmax(130px,1fr) 90px 90px 90px 90px}}

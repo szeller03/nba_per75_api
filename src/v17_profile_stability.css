@@ -1,0 +1,153 @@
+/* v17 — Player Profile route/scroll stability + sticky occlusion safety.
+   Design/interaction stabilization only. No data, calculations, SDI, or API changes. */
+
+/* Never inherit the previous route's scroll position when a player profile opens. */
+.player-profile{
+  scroll-margin-top:0!important;
+}
+
+/* Keep the card physically anchored at the top of the profile stage. */
+.player-profile .profile-stage{
+  position:relative!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  min-height:980px!important;
+  padding-top:30px!important;
+  overflow:visible!important;
+}
+.player-profile .profile-card-wrap{
+  position:relative!important;
+  align-self:flex-start!important;
+  flex:0 0 auto!important;
+  margin:0 auto!important;
+}
+
+/* Preserve the original two-sided card contract exactly. */
+.player-profile .profile-card{
+  position:relative!important;
+  transform-style:preserve-3d!important;
+  -webkit-transform-style:preserve-3d!important;
+}
+.player-profile .cardface{
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+}
+.player-profile .frontface{
+  position:relative!important;
+  transform:rotateY(0deg)!important;
+  -webkit-transform:rotateY(0deg)!important;
+}
+.player-profile .backface{
+  position:absolute!important;
+  inset:0!important;
+  transform:rotateY(180deg)!important;
+  -webkit-transform:rotateY(180deg)!important;
+  overflow:auto!important;
+}
+
+/* The profile sticky is the highest visual layer inside the backface. */
+.player-profile .profile-back-top{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+  background:#080608!important;
+  background-color:#080608!important;
+  background-image:none!important;
+  opacity:1!important;
+  isolation:isolate!important;
+  mix-blend-mode:normal!important;
+  box-shadow:none!important;
+}
+.player-profile .profile-back-top::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  background:#080608!important;
+  opacity:1!important;
+  pointer-events:none!important;
+}
+
+/* Table sticky bands sit below the profile header and cannot paint through it. */
+.player-profile .profile-table-section > .profile-table-title{
+  position:sticky!important;
+  top:var(--profile-header-height,0px)!important;
+  z-index:200!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  opacity:1!important;
+}
+.player-profile .profile-table-section > .tablewrap thead,
+.player-profile .profile-table-section > .tablewrap thead tr,
+.player-profile .profile-table-section > .tablewrap thead th{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  isolation:isolate!important;
+}
+.player-profile .profile-table-section > .tablewrap thead th{
+  position:sticky!important;
+  top:calc(var(--profile-header-height,0px) + 34px)!important;
+  z-index:190!important;
+  box-shadow:0 4px 0 #000,0 8px 12px rgba(0,0,0,1)!important;
+}
+
+/* YEAR is explicitly part of the same opaque header layer. */
+.player-profile .profile-table-section > .tablewrap thead th:first-child{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Keep the profile field dark enough for percentile-colored SDI shadows. */
+.player-profile .backface,
+.player-profile .profile-card,
+.player-profile .profile-back-top,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .profile-content,
+.player-profile .back-title,
+.player-profile .profile-teams{
+  background-color:#080608!important;
+  background-image:none!important;
+}
+
+/* Do not suppress the inline percentile-dependent blue/red box shadows. */
+.player-profile .profile-header-sdi-value{
+  filter:none!important;
+}
+
+/* Rose-gold profile context + radar language. */
+.player-profile .profile-control-label,
+.player-profile .back-tabs button.active,
+.player-profile .sdi-radar-grid,
+.player-profile .sdi-radar-axis,
+.player-profile .sdi-radar-line,
+.player-profile .sdi-radar-dot,
+.player-profile .sdi-radar-label{
+  color:#F4CBC6!important;
+  stroke:#F4CBC6!important;
+}
+.player-profile .back-tabs button.active{
+  background:#F4CBC6!important;
+  border-color:#F4CBC6!important;
+}
+
+/* Selected-season highlight remains muted enough for white values. */
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover>td{
+  background:rgba(105,76,20,.30)!important;
+  background-color:rgba(105,76,20,.30)!important;
+  color:#F7F4F2!important;
+}

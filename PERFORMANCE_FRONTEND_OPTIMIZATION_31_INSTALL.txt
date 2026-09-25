@@ -1,0 +1,20 @@
+Website240 Performance Frontend Optimization 31
+
+Base: Performance Data Correction 30.
+
+Changes:
+1. Adds a short-lived browser GET cache for successful JSON API responses from the local API. This prevents repeated identical requests during a browsing session without changing data or methodology.
+2. Defers reusable player/card headshots and team logos with native lazy loading + async decoding + low fetch priority. Main profile headshots remain on the existing eager path.
+3. Adds low-risk CSS containment to large data tables and the global search control. No visual design or data calculations are changed.
+4. Does NOT change Big Board qualification, SDI, WOWY, Career SDI, 5-Year Peak, Explorer population logic, or headshot source mappings.
+
+Validation:
+- App.jsx was syntax-checked for balanced braces/import presence.
+- Existing Python public data layer remains unchanged from Fix 30.
+- This environment does not contain the production node_modules/Vite toolchain, so a production bundle-size/Lighthouse run must be performed in the user's normal frontend environment.
+
+Next performance pass after this build:
+- production bundle analysis / route-level code splitting,
+- static asset compression and CDN/cache headers,
+- image size audit,
+- real browser Lighthouse measurements on the production host.

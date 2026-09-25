@@ -1,0 +1,17 @@
+Website 240 — Career Evidence + WOWY Fix 18
+
+Focused API/data patch. No frontend files or unrelated website assets are changed.
+
+Fixes
+1. Career WOWY Offense/Defense/Net are MP-weighted across recorded regular-season WOWY seasons. The WOWY source is joined to the canonical player-season MP layer before aggregation.
+2. WOWY Offense/Defense/Net are exposed through the existing career statistic registry/profile rows and receive career percentiles from the qualified career population.
+3. Career six-dimension SDI axes are read from the authoritative WOWY-aware career SDI cache instead of being reconstructed from career percentile rows. This prevents tiny historical tracking samples, such as Wilt’s single recorded BLK season, from turning the Defense axis into 100. Career BLK/75 remains a descriptive recorded-stat value (~4.05) but does not become full-strength evidence in the six-dimension career SDI.
+4. The complete six-category WOWY-aware career SDI cache is carried forward as v3.
+
+Expected Wilt targets
+- Career BLK/75: ~4.05
+- Career Defense axis: 73.36
+- Career SDI: 77.25
+
+Install
+Replace local_api/nba_per75_local_api.py and add data/precomputed_sdi_v4/regular_career_sdi_v4_wowy_v3.csv at the matching paths.

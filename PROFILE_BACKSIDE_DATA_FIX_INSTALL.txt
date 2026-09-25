@@ -1,0 +1,15 @@
+PLAYER PROFILE BACKSIDE DATA FIX
+
+Replace ONLY these two files in the current Website240 installation:
+  src/App.jsx
+  local_api/nba_per75_local_api.py
+
+What this fixes:
+- The Player Profile backside no longer waits for the separate /spider request.
+- The /profile response now carries the availability-aware six-dimension axes.
+- WOWY/SDI values therefore populate directly from the successful profile response.
+- The /spider endpoint remains available for configurable/custom spider use and season clicks.
+- No headshot files, sitewide performance code, or 5-Year Peak data are changed.
+- Player ORtg/DRtg remain removed from the profile advanced-stat display.
+
+Restart the local API after replacing nba_per75_local_api.py, then refresh the site.

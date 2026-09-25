@@ -1,0 +1,129 @@
+{
+  "version": "SDI_v4_WOWY_locked",
+  "top_level_category_method": "weighted",
+  "scoring_volume": {
+    "Primary Scoring Output": {
+      "weight": 0.35,
+      "statistics": {
+        "PTS_per75": 1.0
+      }
+    },
+    "Scoring Composition": {
+      "weight": 0.65,
+      "statistics": {
+        "FGA_per75": 0.55,
+        "FTA_per75": 0.45
+      }
+    }
+  },
+  "scoring_efficiency": {
+    "Overall Efficiency": {
+      "weight": 0.6,
+      "statistics": {
+        "rTS": 1.0
+      }
+    },
+    "Component Efficiency": {
+      "weight": 0.4,
+      "statistics": {
+        "2P_pct": 0.5,
+        "3P_pct": 0.4,
+        "FT_pct": 0.1
+      }
+    }
+  },
+  "creation_playmaking": {
+    "Creation Output": {
+      "weight": 0.385,
+      "statistics": {
+        "AST_per75": 0.8,
+        "AST_pct": 0.2
+      }
+    },
+    "Ball Security / Creation Cost": {
+      "weight": 0.315,
+      "statistics": {
+        "AST_TOV": 1.0
+      }
+    },
+    "WOWY Offensive Impact": {
+      "weight": 0.3,
+      "statistics": {
+        "WOWY_Offense": 1.0
+      }
+    }
+  },
+  "rebounding": {
+    "Rebounding Production": {
+      "weight": 0.75,
+      "statistics": {
+        "ORB_per75": 0.45,
+        "DRB_per75": 0.35,
+        "TRB_per75": 0.2
+      }
+    },
+    "Rebounding Rate": {
+      "weight": 0.25,
+      "statistics": {
+        "OREB_pct": 0.45,
+        "DREB_pct": 0.35,
+        "TRB_pct": 0.2
+      }
+    }
+  },
+  "defense": {
+    "Defensive Activity": {
+      "weight": 0.35,
+      "statistics": {
+        "STL_per75": 0.5,
+        "BLK_per75": 0.5
+      }
+    },
+    "Defensive Activity Rate": {
+      "weight": 0.25,
+      "statistics": {
+        "STL_pct": 0.5,
+        "BLK_pct": 0.5
+      }
+    },
+    "WOWY Defensive Impact": {
+      "weight": 0.4,
+      "statistics": {
+        "WOWY_Defense": 1.0
+      }
+    }
+  },
+  "impact_value": {
+    "WOWY Overall Impact": {
+      "weight": 1.0,
+      "statistics": {
+        "WOWY_Net": 1.0
+      }
+    }
+  },
+  "peak_rules": {
+    "regular_season": {
+      "min_games_share": 0.6,
+      "min_minutes": 1400,
+      "required_qualifying_seasons": 5,
+      "max_calendar_span": 6,
+      "max_skipped_seasons": 1,
+      "selection_metric": "average_season_SDI"
+    },
+    "playoffs": {
+      "single_season_min_games": 3,
+      "five_year_total_min_games": 35,
+      "required_appearances": 5,
+      "selection_metric": "average_appearance_SDI"
+    }
+  },
+  "top_level_category_weights": {
+    "scoring_volume": 0.2,
+    "scoring_efficiency": 0.18,
+    "creation_playmaking": 0.18,
+    "rebounding": 0.105,
+    "defense": 0.2,
+    "impact_value": 0.135
+  },
+  "top_level_category_total_weight": 1.0
+}

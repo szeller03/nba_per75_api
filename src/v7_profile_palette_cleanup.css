@@ -1,0 +1,531 @@
+/* v7 — final palette cleanup. Design-only. Loaded after all legacy profile CSS.
+   Deliberately does not touch transform, overflow, positioning, or flip rules. */
+
+.player-profile .backface,
+.player-profile .profile-card,
+.player-profile .profile-back-top,
+.player-profile .profile-header,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-sdi-section,
+.player-profile .profile-stats-section,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .category-card,
+.player-profile .profile-content,
+.player-profile .profile-page,
+.player-profile .profile-stage,
+.player-profile .profile-card-wrap,
+.player-profile .profile-headshot,
+.player-profile .back-tabs button,
+.player-profile .profile-header-sdi-value,
+.player-profile .axis-row-v12,
+.player-profile .config-count,
+.player-profile .spider-config,
+.player-profile .spider-config-panel,
+.player-profile .spider-config-head,
+.player-profile .config-options {
+  background:#2F2A2E!important;
+  background-image:none!important;
+}
+
+/* Remove only the decorative paint pseudo-elements that caused the detached
+   rectangle/line artifacts. The card's actual 3D structure remains untouched. */
+.player-profile .profile-back-top::before,
+.player-profile .profile-back-top::after {
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+
+/* Both profile data tables are true black surfaces. */
+.player-profile .tablewrap,
+.player-profile .tablewrap table,
+.player-profile .tablewrap thead,
+.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,
+.player-profile .tablewrap th,
+.player-profile .tablewrap td {
+  background:#110B11!important;
+  background-image:none!important;
+}
+.player-profile .profile-section h3.profile-table-title {
+  background:#2F2A2E!important;
+  box-shadow:none!important;
+}
+.player-profile .profile-section h3.profile-table-title::before,
+.player-profile .profile-section h3.profile-table-title::after {
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+
+/* Spider chart belongs to the same plum interior; keep the geometry simple. */
+.player-profile .sixbox,
+.player-profile .spider-card,
+.player-profile .config-radar,
+.player-profile .sixbox .fake-radar {
+  background:#2F2A2E!important;
+  background-image:none!important;
+}
+.player-profile .sdi-radar-grid,
+.player-profile .spider-grid {
+  fill:transparent!important;
+  fill-opacity:0!important;
+  stroke:rgba(245,245,220,.18)!important;
+}
+.player-profile .sdi-radar-axis,
+.player-profile .spider-axis {
+  stroke:rgba(245,245,220,.14)!important;
+}
+.player-profile .sdi-radar-fill,
+.player-profile .spider-fill {
+  fill:rgba(173,52,62,.12)!important;
+  stroke:#AD343E!important;
+  stroke-width:2!important;
+}
+.player-profile .sdi-radar-line,
+.player-profile .spider-line {
+  stroke:#AD343E!important;
+  stroke-width:2!important;
+  fill:none!important;
+}
+.player-profile .sdi-radar-dot,
+.player-profile .spider-dot {
+  fill:#F5F5DC!important;
+  stroke:#AD343E!important;
+  stroke-width:1.5!important;
+}
+.player-profile .sdi-radar-label,
+.player-profile .spider-label {
+  fill:#F5F5DC!important;
+}
+
+/* Create Your T75 matchup statistics. */
+.create-t75-card-grid .matchstats-card b { color:#F5F5DC!important; }
+.create-t75-card-grid .matchstats-card span { color:rgba(245,245,220,.72)!important; }
+
+/* v7 geometry cleanup: the surrounding stage/wrapper must not paint a second
+   rectangle behind the rounded profile card. Keep the card itself plum. */
+.player-profile .profile-stage,
+.player-profile .profile-card-wrap{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+.player-profile .profile-card{
+  background:#2F2A2E!important;
+  background-image:none!important;
+}
+
+/* The complete backside is one continuous plum field. Only the two statistical
+   table surfaces are black. */
+.player-profile .backface{
+  background:#2F2A2E!important;
+  background-image:none!important;
+}
+.player-profile .profile-back-top{
+  background:#2F2A2E!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* v8 palette refinement — deeper brown profile field + true-black data tables.
+   Design-only. Do not alter card transforms, flip mechanics, layout, or data. */
+:root{
+  --profile-deep-brown:#211A1D;
+  --profile-brown-raised:#2A2225;
+  --profile-true-black:#000000;
+}
+
+/* Player Profile non-table surfaces: substantially darker brown. */
+.player-profile .backface,
+.player-profile .profile-card,
+.player-profile .profile-back-top,
+.player-profile .profile-header,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-sdi-section,
+.player-profile .profile-stats-section,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .category-card,
+.player-profile .profile-content,
+.player-profile .profile-page,
+.player-profile .back-title,
+.player-profile .profile-teams,
+.player-profile .profile-control-label,
+.player-profile .back-tabs,
+.player-profile .sdi-snapshot,
+.player-profile .sdi-snapshot > div,
+.player-profile .category-grid,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar,
+.player-profile .sixbox-hint,
+.player-profile .profile-table-shell,
+.player-profile .profile-table-shell > * {
+  background-color:var(--profile-deep-brown)!important;
+  background-image:none!important;
+}
+
+/* Raised controls remain part of the same brown family. */
+.player-profile .profile-header-sdi-value,
+.player-profile .back-tabs button,
+.player-profile .axis-selector,
+.player-profile .axis-chip,
+.player-profile .config-count,
+.player-profile .axis-row-v12,
+.player-profile .spider-config,
+.player-profile .spider-config-panel,
+.player-profile .spider-config-head,
+.player-profile .config-options {
+  background-color:var(--profile-brown-raised)!important;
+  background-image:none!important;
+}
+
+/* Tables are literally black — including every table layer, row state,
+   header, first column, hover state, and selected-season state. */
+.player-profile .tablewrap,
+.player-profile .tablewrap table,
+.player-profile .tablewrap thead,
+.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,
+.player-profile .tablewrap th,
+.player-profile .tablewrap td,
+.player-profile .stat-table,
+.player-profile .stat-table thead,
+.player-profile .stat-table tbody,
+.player-profile .stat-table tr,
+.player-profile .stat-table th,
+.player-profile .stat-table td,
+.player-profile .profile-table-shell .tablewrap,
+.player-profile .profile-table-shell .tablewrap table,
+.player-profile .profile-table-shell .tablewrap thead,
+.player-profile .profile-table-shell .tablewrap tbody,
+.player-profile .profile-table-shell .tablewrap tr,
+.player-profile .profile-table-shell .tablewrap th,
+.player-profile .profile-table-shell .tablewrap td {
+  background-color:var(--profile-true-black)!important;
+  background-image:none!important;
+}
+
+.player-profile .tablewrap tbody tr:hover,
+.player-profile .tablewrap tbody tr.season-selected,
+.player-profile .tablewrap tbody tr.season-selected:hover,
+.player-profile .tablewrap tbody tr.season-selected > td,
+.player-profile .tablewrap tbody tr.season-selected > td:first-child,
+.player-profile .tablewrap td:first-child {
+  background-color:var(--profile-true-black)!important;
+  background-image:none!important;
+}
+
+/* Table headings/titles sit outside the black data surface. */
+.player-profile .profile-section h3.profile-table-title,
+.player-profile .profile-section h3.profile-table-title::before,
+.player-profile .profile-section h3.profile-table-title::after {
+  background-color:var(--profile-deep-brown)!important;
+  background-image:none!important;
+}
+
+/* Radar/chart remains a black chart surface, distinct from the brown profile. */
+.player-profile .sixbox,
+.player-profile .spider-card,
+.player-profile .config-radar,
+.player-profile .sixbox .fake-radar {
+  background-color:var(--profile-true-black)!important;
+  background-image:none!important;
+}
+
+/* v9 — deeper profile brown + absolute-black tables + clean sticky headers.
+   Design-only. Do not modify card transforms, flip mechanics, overflow, or data. */
+:root{
+  --profile-deeper-brown:#171113;
+  --profile-deeper-raised:#21191C;
+  --profile-absolute-black:#000000;
+}
+
+/* One very dark brown field for the entire profile outside the data tables. */
+.player-profile .backface,
+.player-profile .profile-card,
+.player-profile .profile-back-top,
+.player-profile .profile-header,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-sdi-section,
+.player-profile .profile-stats-section,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .category-card,
+.player-profile .profile-content,
+.player-profile .profile-page,
+.player-profile .back-title,
+.player-profile .profile-teams,
+.player-profile .profile-control-label,
+.player-profile .back-tabs,
+.player-profile .sdi-snapshot,
+.player-profile .sdi-snapshot > div,
+.player-profile .category-grid,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar,
+.player-profile .sixbox-hint,
+.player-profile .profile-table-shell,
+.player-profile .profile-table-shell > *{
+  background-color:var(--profile-deeper-brown)!important;
+  background-image:none!important;
+}
+
+/* Raised UI stays dark brown, not blue/gray. */
+.player-profile .profile-header-sdi-value,
+.player-profile .back-tabs button,
+.player-profile .axis-selector,
+.player-profile .axis-chip,
+.player-profile .config-count,
+.player-profile .axis-row-v12,
+.player-profile .spider-config,
+.player-profile .spider-config-panel,
+.player-profile .spider-config-head,
+.player-profile .config-options{
+  background-color:var(--profile-deeper-raised)!important;
+  background-image:none!important;
+}
+
+/* Remove the secondary rounded outline around the sticky profile header.
+   Keep the outer profile-card outline intact. */
+.player-profile .profile-back-top{
+  border:0!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+
+/* The table itself is pure black at every rendered layer. */
+.player-profile .tablewrap,
+.player-profile .tablewrap table,
+.player-profile .tablewrap thead,
+.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,
+.player-profile .tablewrap th,
+.player-profile .tablewrap td,
+.player-profile .stat-table,
+.player-profile .stat-table thead,
+.player-profile .stat-table tbody,
+.player-profile .stat-table tr,
+.player-profile .stat-table th,
+.player-profile .stat-table td,
+.player-profile .profile-table-shell,
+.player-profile .profile-table-shell .tablewrap,
+.player-profile .profile-table-shell .tablewrap table,
+.player-profile .profile-table-shell .tablewrap thead,
+.player-profile .profile-table-shell .tablewrap tbody,
+.player-profile .profile-table-shell .tablewrap tr,
+.player-profile .profile-table-shell .tablewrap th,
+.player-profile .profile-table-shell .tablewrap td{
+  background-color:var(--profile-absolute-black)!important;
+  background-image:none!important;
+}
+
+/* Never let hover/selected/first-column paint reintroduce brown into tables. */
+.player-profile .tablewrap tbody tr:hover,
+.player-profile .tablewrap tbody tr.season-selectable:hover,
+.player-profile .tablewrap tbody tr.season-selected,
+.player-profile .tablewrap tbody tr.season-selected:hover,
+.player-profile .tablewrap tbody tr.season-selected > td,
+.player-profile .tablewrap tbody tr.season-selected > td:first-child,
+.player-profile .tablewrap td:first-child,
+.player-profile .tablewrap tbody tr.season-selected td:first-child{
+  background-color:var(--profile-absolute-black)!important;
+  background-image:none!important;
+}
+
+/* Opaque sticky bands: the column headings and section title fully cover
+   whatever scrolls underneath, so values cannot bleed through. */
+.player-profile .profile-section h3.profile-table-title{
+  background-color:var(--profile-absolute-black)!important;
+  background-image:none!important;
+  opacity:1!important;
+  isolation:isolate!important;
+  z-index:100!important;
+}
+.player-profile .tablewrap thead,
+.player-profile .tablewrap thead tr,
+.player-profile .tablewrap thead th{
+  background-color:var(--profile-absolute-black)!important;
+  background-image:none!important;
+  opacity:1!important;
+  isolation:isolate!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.player-profile .tablewrap thead th{
+  z-index:99!important;
+  box-shadow:inset 0 -1px 0 rgba(245,245,220,.20)!important;
+}
+
+/* Table borders stay visible but do not create a colored interior. */
+.player-profile .tablewrap{
+  border-color:rgba(245,245,220,.32)!important;
+}
+
+/* The chart remains an actual black chart surface. */
+.player-profile .sixbox,
+.player-profile .spider-card,
+.player-profile .config-radar,
+.player-profile .sixbox .fake-radar{
+  background-color:var(--profile-absolute-black)!important;
+  background-image:none!important;
+}
+
+
+/* ================================================================
+   v10 — FINAL PROFILE SURFACE / TABLE BLACKNESS PASS
+   Design-only. Preserve card flip mechanics, data, calculations and behavior.
+   ================================================================ */
+:root{
+  --profile-v10-brown:#120D10;
+  --profile-v10-raised:#1B1417;
+  --profile-v10-black:#000000;
+}
+
+/* Make the profile field materially darker so the SDI percentile shadows
+   remain visually strong against the background. */
+.player-profile .backface,
+.player-profile .profile-back-top,
+.player-profile .profile-header,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .profile-content,
+.player-profile .profile-page,
+.player-profile .profile-stage,
+.player-profile .profile-card-wrap,
+.player-profile .back-title,
+.player-profile .profile-teams,
+.player-profile .profile-control-label,
+.player-profile .back-tabs,
+.player-profile .sdi-snapshot,
+.player-profile .sdi-snapshot > div,
+.player-profile .category-grid,
+.player-profile .category-card,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar,
+.player-profile .sixbox-hint{
+  background-color:var(--profile-v10-brown)!important;
+  background-image:none!important;
+}
+
+/* Keep the small UI/readout surfaces in the same dark-brown family. */
+.player-profile .profile-header-sdi-value,
+.player-profile .back-tabs button,
+.player-profile .axis-selector,
+.player-profile .axis-chip,
+.player-profile .config-count,
+.player-profile .axis-row-v12,
+.player-profile .spider-config,
+.player-profile .spider-config-panel,
+.player-profile .spider-config-head,
+.player-profile .config-options{
+  background-color:var(--profile-v10-raised)!important;
+  background-image:none!important;
+}
+
+/* ================================================================
+   TABLES — ABSOLUTE BLACK
+   Every painted layer is black, including sticky header bands.
+   ================================================================ */
+.player-profile .tablewrap,
+.player-profile .tablewrap table,
+.player-profile .tablewrap thead,
+.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,
+.player-profile .tablewrap th,
+.player-profile .tablewrap td,
+.player-profile .stat-table,
+.player-profile .stat-table thead,
+.player-profile .stat-table tbody,
+.player-profile .stat-table tr,
+.player-profile .stat-table th,
+.player-profile .stat-table td,
+.player-profile .profile-table-shell,
+.player-profile .profile-table-shell > *,
+.player-profile .profile-table-shell .tablewrap,
+.player-profile .profile-table-shell .tablewrap table,
+.player-profile .profile-table-shell .tablewrap thead,
+.player-profile .profile-table-shell .tablewrap tbody,
+.player-profile .profile-table-shell .tablewrap tr,
+.player-profile .profile-table-shell .tablewrap th,
+.player-profile .profile-table-shell .tablewrap td{
+  background:#000000!important;
+  background-color:#000000!important;
+  background-image:none!important;
+}
+
+/* Explicitly defeat legacy selected/hover paint. Keep the data state visible
+   through text/borders without tinting the black table surface. */
+.player-profile .tablewrap tbody tr:hover,
+.player-profile .tablewrap tbody tr.season-selectable:hover,
+.player-profile .tablewrap tbody tr.season-selected,
+.player-profile .tablewrap tbody tr.season-selected:hover,
+.player-profile .tablewrap tbody tr.season-selected > td,
+.player-profile .tablewrap tbody tr.season-selected > td:first-child,
+.player-profile .tablewrap td:first-child{
+  background:#000000!important;
+  background-color:#000000!important;
+  background-image:none!important;
+}
+
+/* Sticky column headers: fully opaque black and above the scrolling table.
+   No transparency/backdrop effects, so values cannot bleed through. */
+.player-profile .tablewrap thead,
+.player-profile .tablewrap thead tr,
+.player-profile .tablewrap thead th{
+  background:#000000!important;
+  background-color:#000000!important;
+  background-image:none!important;
+  opacity:1!important;
+  isolation:isolate!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.player-profile .tablewrap thead th{
+  position:sticky!important;
+  top:calc(var(--profile-header-height,0px) + 28px)!important;
+  z-index:999!important;
+  background:#000000!important;
+  background-color:#000000!important;
+  background-clip:padding-box!important;
+  box-shadow:inset 0 -1px 0 rgba(245,245,220,.20)!important;
+}
+
+/* Opaque title bridge immediately above each table. */
+.player-profile .profile-section h3.profile-table-title,
+.player-profile .profile-section h3.profile-table-title::before,
+.player-profile .profile-section h3.profile-table-title::after{
+  background:#000000!important;
+  background-color:#000000!important;
+  background-image:none!important;
+  opacity:1!important;
+}
+.player-profile .profile-section h3.profile-table-title{
+  isolation:isolate!important;
+  z-index:1000!important;
+}
+
+/* Preserve the existing dynamic, percentile-colored inline SDI shadow and
+   make its dark-background contrast stronger without replacing it. */
+.player-profile .profile-header-sdi-value{
+  filter:drop-shadow(0 4px 7px rgba(0,0,0,.72))!important;
+}

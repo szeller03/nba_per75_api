@@ -1,0 +1,1263 @@
+/* ================================================================
+   DESIGN SYSTEM v11 — WHITE / RED / BLACK / ROSE-GOLD
+   Final visual pass. Design-only; preserve all behavior and data.
+   ================================================================ */
+:root{
+  --site-black:#0B090A;
+  --site-black-soft:#120E10;
+  --site-panel:#171214;
+  --site-panel-raised:#24181B;
+  --site-red:#AD343E;
+  --site-red-bright:#C94A57;
+  --site-rose:#F4CBC6;
+  --site-rose-soft:#DFA8AA;
+  --site-white:#F7F4F2;
+  --site-muted:#C9BFC0;
+  --site-line:rgba(244,203,198,.62);
+}
+
+/* Sitewide foundation: red/black/VHS, with no brown surfaces. */
+html,body,#root{
+  background-color:var(--site-red)!important;
+  background-image:url('./assets/sitewide-vhs-bg.png')!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-attachment:fixed!important;
+  color:var(--site-white)!important;
+}
+body{
+  --bg:var(--site-black)!important;
+  --surface:var(--site-panel)!important;
+  --surface-2:var(--site-panel-raised)!important;
+  --line:var(--site-line)!important;
+  --text:var(--site-white)!important;
+  --muted:var(--site-muted)!important;
+  --accent:var(--site-red)!important;
+}
+.page,.app-shell,.site-main,main{background:transparent!important;color:var(--site-white)!important;}
+
+/* Common site surfaces: black/plum-black with rose-gold structure. */
+.panel,.controls,.section,.feature-card,.select-card,.method-card,
+.hero-search,.search-panel,.placeholder-card,.distribution,.scatter,
+.axisbox,.control,.create-method,.direct-builder-main,.direct-selected-panel,
+.create-adaptive-meter,.comparison-spider-card,.comparison-spider-section,
+.search-results,.player-search-panel,.team-profile-card,.team-analytics-card{
+  background:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:var(--site-line)!important;
+}
+
+/* Rose-gold replaces the former beige/brown outline language sitewide. */
+.panel,.controls,.section,.feature-card,.select-card,.method-card,
+.hero-search,.search-panel,.placeholder-card,.distribution,.scatter,
+.axisbox,.control,select,input,textarea,.create-method,.direct-builder-main,
+.direct-selected-panel,.comparison-spider-card,.team-profile-card,.team-analytics-card{
+  border-color:var(--site-line)!important;
+}
+
+/* Tables: every table is an uninterrupted black surface. */
+.board-table,.board-table table,.board-table thead,.board-table tbody,.board-table tr,.board-table th,.board-table td,
+.big-board-table,.big-board-table table,.big-board-table thead,.big-board-table tbody,.big-board-table tr,.big-board-table th,.big-board-table td,
+.comparison-table-wrap,.comparison-table-wrap table,.comparison-table-wrap thead,.comparison-table-wrap tbody,.comparison-table-wrap tr,.comparison-table-wrap th,.comparison-table-wrap td,
+.comparison-table,.comparison-table thead,.comparison-table tbody,.comparison-table tr,.comparison-table th,.comparison-table td,
+.explorer-table-wrap,.explorer-table-wrap table,.explorer-table-wrap thead,.explorer-table-wrap tbody,.explorer-table-wrap tr,.explorer-table-wrap th,.explorer-table-wrap td,
+.explorer-table,.explorer-table thead,.explorer-table tbody,.explorer-table tr,.explorer-table th,.explorer-table td,
+.team-t50-table,.team-t50-table table,.team-t50-table thead,.team-t50-table tbody,.team-t50-table tr,.team-t50-table th,.team-t50-table td,
+.team-roster-table,.team-roster-table table,.team-roster-table thead,.team-roster-table tbody,.team-roster-table tr,.team-roster-table th,.team-roster-table td{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Charts stay black while their graphics use white/rose/red. */
+.scatter,.distribution,.comparison-spider-card,.comparison-spider-section,
+.player-profile .sixbox,.player-profile .spider-card,.player-profile .config-radar{
+  background:#000!important;
+  background-color:#000!important;
+}
+
+/* Player Profile: remove the painted rectangular stage/wrapper entirely. */
+.player-profile .profile-stage,
+.player-profile .profile-stage::before,
+.player-profile .profile-stage::after,
+.player-profile .profile-card-wrap,
+.player-profile .profile-card-wrap::before,
+.player-profile .profile-card-wrap::after{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+}
+
+/* Player Profile surfaces use black/plum-black only — no brown/navy. */
+.player-profile .backface,
+.player-profile .profile-card,
+.player-profile .profile-back-top,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .profile-content,
+.player-profile .back-title,
+.player-profile .profile-teams,
+.player-profile .category-grid,
+.player-profile .category-card,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar,
+.player-profile .sdi-snapshot,
+.player-profile .sdi-snapshot>div{
+  background:var(--site-panel)!important;
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+}
+.player-profile .profile-back-top{border-color:transparent!important;}
+.player-profile .profile-header-sdi-value,
+.player-profile .back-tabs button,
+.player-profile .axis-selector,
+.player-profile .axis-chip,
+.player-profile .config-count,
+.player-profile .axis-row-v12,
+.player-profile .profile-headshot{
+  background:var(--site-panel-raised)!important;
+  background-color:var(--site-panel-raised)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:var(--site-line)!important;
+}
+
+/* Player Profile tables are truly black, including selected/hover rows. */
+.player-profile .profile-table-section,
+.player-profile .profile-table-section .profile-table-title,
+.player-profile .profile-table-section .tablewrap,
+.player-profile .profile-table-section .tablewrap table,
+.player-profile .profile-table-section .tablewrap thead,
+.player-profile .profile-table-section .tablewrap tbody,
+.player-profile .profile-table-section .tablewrap tr,
+.player-profile .profile-table-section .tablewrap th,
+.player-profile .profile-table-section .tablewrap td,
+.player-profile .tablewrap,
+.player-profile .tablewrap table,
+.player-profile .tablewrap thead,
+.player-profile .tablewrap tbody,
+.player-profile .tablewrap tr,
+.player-profile .tablewrap th,
+.player-profile .tablewrap td{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+.player-profile .tablewrap tbody tr:hover,
+.player-profile .tablewrap tbody tr.season-selected,
+.player-profile .tablewrap tbody tr.season-selected:hover,
+.player-profile .tablewrap tbody tr.season-selected>td,
+.player-profile .tablewrap tbody tr.season-selected>td:first-child,
+.player-profile .tablewrap td:first-child{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Sticky table headers: opaque black sheets above all scrolling values. */
+.player-profile .tablewrap thead,
+.player-profile .tablewrap thead tr,
+.player-profile .tablewrap thead th{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  isolation:isolate!important;
+}
+.player-profile .tablewrap thead th{
+  position:sticky!important;
+  top:0!important;
+  z-index:10000!important;
+  box-shadow:0 3px 0 #000,0 6px 10px rgba(0,0,0,.95)!important;
+  background-clip:padding-box!important;
+}
+
+/* Rose-gold chart geometry. */
+.player-profile .sdi-radar-grid,.player-profile .spider-grid{
+  fill:none!important;fill-opacity:0!important;stroke:rgba(244,203,198,.22)!important;
+}
+.player-profile .sdi-radar-axis,.player-profile .spider-axis{stroke:rgba(244,203,198,.16)!important;}
+.player-profile .sdi-radar-fill,.player-profile .spider-fill{fill:rgba(173,52,62,.16)!important;stroke:none!important;}
+.player-profile .sdi-radar-line,.player-profile .spider-line{stroke:var(--site-red)!important;stroke-width:2.3!important;fill:none!important;}
+.player-profile .sdi-radar-dot,.player-profile .spider-dot{fill:var(--site-rose)!important;stroke:var(--site-red)!important;}
+.player-profile .sdi-radar-label,.player-profile .spider-label{fill:var(--site-white)!important;color:var(--site-white)!important;}
+
+/* SDI percentile shadows are supplied inline by App.jsx. Do not override them here. */
+.player-profile .profile-header-sdi-value{
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.90))!important;
+}
+
+/* Create Your T75 values and primary copy use the new warm white/rose system. */
+.create-t75-card-grid .matchstats-card b{color:var(--site-rose)!important;}
+.create-t75-card-grid .matchstats-card span{color:var(--site-white)!important;}
+
+/* Sitewide typography/accent cleanup: eliminate the old cream/brown accent. */
+.eyebrow,.feature-kicker,.select-card span,.method-card>span{color:var(--site-rose)!important;}
+button:focus-visible,input:focus,select:focus,textarea:focus{
+  outline:2px solid var(--site-rose)!important;
+  border-color:var(--site-rose)!important;
+}
+
+
+/* ================================================================
+   v12 — DATA SURFACES / STICKY HEADER / SELECTED SEASON CLEANUP
+   Design-only. Keep profile flip mechanics and all data behavior untouched.
+   ================================================================ */
+
+/* Player Profile: the table section title + column header are a single,
+   opaque black mounted band. Nothing from the scrolling rows may show through. */
+.player-profile .profile-section.profile-table-section > .profile-table-title{
+  position:sticky!important;
+  top:calc(var(--profile-header-height,0px) - 20px)!important;
+  z-index:100000!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border:0!important;
+  border-bottom:1px solid rgba(244,203,198,.22)!important;
+  box-shadow:0 5px 0 #000,0 10px 18px rgba(0,0,0,.98)!important;
+  isolation:isolate!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap{
+  position:relative!important;
+  z-index:1!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap table,
+.player-profile .profile-section.profile-table-section > .tablewrap thead,
+.player-profile .profile-section.profile-table-section > .tablewrap thead tr,
+.player-profile .profile-section.profile-table-section > .tablewrap thead th{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  isolation:isolate!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap thead{
+  position:static!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap thead th{
+  position:sticky!important;
+  top:calc(var(--profile-header-height,0px) + 8px)!important;
+  z-index:99999!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  background-clip:padding-box!important;
+  box-shadow:0 5px 0 #000,0 10px 16px rgba(0,0,0,.98)!important;
+  isolation:isolate!important;
+}
+/* A solid black underlay on each header cell prevents subpixel/transformed
+   content from showing through at the sticky boundary. */
+.player-profile .profile-section.profile-table-section > .tablewrap thead th::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-2px!important;
+  z-index:-1!important;
+  background:#000!important;
+  pointer-events:none!important;
+}
+
+/* Selected season: unmistakable gold state, persistent after click and equally
+   visible when the pointer leaves the row. */
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected,
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected:hover,
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected > td,
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected:hover > td{
+  background:rgba(216,173,84,.34)!important;
+  background-color:rgba(216,173,84,.34)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected{
+  box-shadow:inset 7px 0 0 #d8ad54,inset 0 2px 0 rgba(216,173,84,.72),inset 0 -2px 0 rgba(216,173,84,.72),0 0 16px rgba(216,173,84,.18)!important;
+  font-weight:900!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected > td:first-child{
+  color:#f4e4b7!important;
+  background:rgba(216,173,84,.42)!important;
+  background-color:rgba(216,173,84,.42)!important;
+  font-weight:950!important;
+}
+.player-profile .profile-section.profile-table-section > .tablewrap tbody tr.season-selected .season-selected-mark{
+  color:#d8ad54!important;
+  text-shadow:0 0 8px rgba(216,173,84,.75)!important;
+}
+
+/* Sitewide: eliminate legacy brown/cream data-surface paint from tables. */
+.team-table,.team-table table,.team-table thead,.team-table tbody,
+.tc-compare-table,.tc-compare-table table,.tc-detail-table,.tc-detail-table table,
+.team-panels .teamrow,.season-table,
+.board-table,.board-table table,.board-table thead,.board-table tbody,
+.board-table tr,.board-table th,.board-table td,
+.big-board-table,.big-board-table table,.big-board-table thead,.big-board-table tbody,
+.comparison-table-wrap,.comparison-table-wrap table,.comparison-table-wrap thead,.comparison-table-wrap tbody,
+.explorer-table-wrap,.explorer-table-wrap table,.explorer-table-wrap thead,.explorer-table-wrap tbody,
+.team-t50-table,.team-t50-table table,.team-t50-table thead,.team-t50-table tbody,
+.team-roster-table,.team-roster-table table,.team-roster-table thead,.team-roster-table tbody{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+.team-table .team-row,.team-table .team-row-head,
+.season-table .team-row,.season-table .team-row-head{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-bottom-color:rgba(244,203,198,.14)!important;
+}
+
+/* Sitewide charts: black plotting fields, with rose-gold/red graphics only. */
+.scatter,.scatter > svg,.distribution,.distribution-chart,
+.comparison-spider-card,.comparison-spider-section,
+.comparison-spider-svg,.six-radar-wrap,.spider-wrap,.spider-svg,
+.config-radar,.config-radar .spider-wrap,
+.dimension-bars,.bar,.team-profile-card .chart,.team-analytics-card .chart,
+.team-profile-card svg,.team-analytics-card svg{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Team-page legacy beige surfaces around tables/charts are replaced without
+   changing their structure or behavior. */
+.team-page,.team-panel,.metric-card,.context-card,.hero-logo,.season-toolbar,
+.team-page .team-section-head,.team-page .panel-head{
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:var(--site-line)!important;
+}
+.team-page .team-table,.team-page .season-table{background:#000!important;background-color:#000!important;}
+.team-page .team-row,.team-page .team-row-head{background:#000!important;background-color:#000!important;}
+
+/* Comparison/team chart cards inherit the new black data-surface language. */
+.compare-visuals .panel,.comparison-spider-section,.comparison-spider-card,
+.team-analytics-card .panel,.team-profile-card .panel{
+  background:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+}
+.compare-visuals .comparison-spider-section .six-radar-wrap,
+.compare-visuals .comparison-spider-card .comparison-spider-svg{
+  background:#000!important;
+}
+
+
+/* ================================================================
+   v13 — FINAL ROSE / BLACK SURFACE + STICKY CONTAINMENT PASS
+   Design-only. No API/data/calculation changes.
+   ================================================================ */
+
+/* ---- Sitewide palette authority ---------------------------------
+   This is the last stylesheet in App.jsx, so legacy brown/beige surfaces
+   elsewhere in the older CSS stack cannot reassert themselves. */
+:root{
+  --site-black:#0B090A;
+  --site-black-soft:#120E10;
+  --site-panel:#171214;
+  --site-panel-raised:#24181B;
+  --site-red:#AD343E;
+  --site-rose:#F4CBC6;
+  --site-white:#F7F4F2;
+  --site-muted:#C9BFC0;
+  --site-line:rgba(244,203,198,.62);
+}
+
+/* Big Board / Compare / Explorer / Teams — no legacy brown surfaces. */
+.big-board-controls,.bb-control-group,.bb-control-group-fields,
+.board-size-select,.big-board-meta,
+.compare-players,.compare-results,.comparison-global-controls,
+.comparison-range-controls,.compare-range,
+.explorer-grid,.explorer-range-grid,.explorer-population-buttons,
+.explorer-population-note,.explorer-population-status,.explorer-range-heading,
+.tc-panel,.tc-panel-head,.team-panel,.team-profile-panel,.team-profile-grid,
+.team-profile-header,.team-profile-stat,.team-profile-percentiles,
+.team-section-head,.team-hero,.season-toolbar,.metric-card,.context-card,
+.hero-logo,.team-search,.team-profile-card,.team-analytics-card,
+.team-profile-summary,.team-info,.team-selected-stat{
+  background:var(--site-panel)!important;
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:var(--site-line)!important;
+}
+
+.big-board-controls select,.bb-control,.bb-control-group select,
+.compare-range select,.comparison-global-controls select,
+.tc-team-select,.team-search,.season-toolbar select,
+.control,input,select,textarea{
+  background:var(--site-panel-raised)!important;
+  background-color:var(--site-panel-raised)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:var(--site-line)!important;
+}
+
+/* Team legacy page was originally a warm paper/beige design. Replace every
+   visible paper surface while preserving its layout and typography. */
+.team-page,.team-page .team-section-head,.team-page .team-hero,
+.team-page .team-panel,.team-page .panel-head,.team-page .season-toolbar,
+.team-page .metric-card,.team-page .context-card,.team-page .hero-logo,
+.team-page .season-toolbar select,.team-page .team-search,
+.team-page .segmented{
+  background:var(--site-panel)!important;
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:var(--site-line)!important;
+}
+.team-page .segmented button{color:var(--site-muted)!important;background:transparent!important;}
+.team-page .segmented button.active{background:var(--site-red)!important;color:#fff!important;}
+.team-page .team-row-head,.team-page .team-row,
+.team-page .season-table .team-row,.team-page .season-table .team-row-head{
+  background:#000!important;
+  background-color:#000!important;
+  color:var(--site-white)!important;
+  border-bottom-color:rgba(244,203,198,.14)!important;
+}
+
+/* All data tables remain true black; surrounding cards stay the new palette. */
+.board-table,.board-table table,.board-table thead,.board-table tbody,
+.board-table tr,.board-table th,.board-table td,
+.big-board-table,.big-board-table table,.big-board-table thead,
+.big-board-table tbody,.big-board-table tr,.big-board-table th,.big-board-table td,
+.comparison-table-wrap,.comparison-table-wrap table,.comparison-table-wrap thead,
+.comparison-table-wrap tbody,.comparison-table-wrap tr,.comparison-table-wrap th,
+.comparison-table-wrap td,.comparison-table,
+.explorer-table-wrap,.explorer-table-wrap table,.explorer-table-wrap thead,
+.explorer-table-wrap tbody,.explorer-table-wrap tr,.explorer-table-wrap th,
+.explorer-table-wrap td,.explorer-table,
+.team-table,.team-table table,.team-table thead,.team-table tbody,
+.team-table tr,.team-table th,.team-table td,
+.team-t50-table,.team-t50-table table,.team-t50-table thead,
+.team-t50-table tbody,.team-t50-table tr,.team-t50-table th,.team-t50-table td,
+.team-roster-table,.team-roster-table table,.team-roster-table thead,
+.team-roster-table tbody,.team-roster-table tr,.team-roster-table th,
+.team-roster-table td,.tc-compare-table,.tc-compare-table table,
+.tc-detail-table,.tc-detail-table table,.season-table{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* All plot/chart fields are black. */
+.scatter,.scatter > svg,.distribution,.distribution-chart,
+.comparison-spider-card,.comparison-spider-section,.comparison-spider-svg,
+.six-radar-wrap,.spider-wrap,.spider-svg,.config-radar,
+.config-radar .spider-wrap,.dimension-bars,.bar,
+.team-profile-card .chart,.team-analytics-card .chart,
+.team-profile-card svg,.team-analytics-card svg,
+.explorer-grid .scatter,.explorer-grid .distribution{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* ---- Player Profile ---------------------------------------------
+   The profile sticky is one full-width surface. The old pseudo-element
+   extensions are removed so there is no detached rectangle behind it. */
+.player-profile .profile-stage,
+.player-profile .profile-stage::before,
+.player-profile .profile-stage::after,
+.player-profile .profile-card-wrap,
+.player-profile .profile-card-wrap::before,
+.player-profile .profile-card-wrap::after{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+
+.player-profile .backface{
+  background:var(--site-panel)!important;
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+}
+
+/* Dark rose-black profile field; tables/charts remain black islands. */
+.player-profile .profile-back-top,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .profile-content,
+.player-profile .back-title,
+.player-profile .profile-teams,
+.player-profile .category-grid,
+.player-profile .category-card,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar{
+  background:var(--site-panel)!important;
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+}
+
+.player-profile .profile-back-top{
+  position:sticky!important;
+  top:-20px!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  z-index:1000!important;
+  isolation:isolate!important;
+  border:0!important;
+  border-radius:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  overflow:visible!important;
+}
+.player-profile .profile-back-top::before,
+.player-profile .profile-back-top::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* SDI cards retain the percentile-specific border + shadow inline style from
+   App.jsx. Only the base surface is controlled here. */
+.player-profile .profile-header-sdi-value{
+  background:var(--site-panel-raised)!important;
+  background-color:var(--site-panel-raised)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+}
+
+/* The profile tables are black from title through every row. */
+.player-profile .profile-table-section,
+.player-profile .profile-table-section .profile-table-title,
+.player-profile .profile-table-section .tablewrap,
+.player-profile .profile-table-section .tablewrap table,
+.player-profile .profile-table-section .tablewrap thead,
+.player-profile .profile-table-section .tablewrap tbody,
+.player-profile .profile-table-section .tablewrap tr,
+.player-profile .profile-table-section .tablewrap th,
+.player-profile .profile-table-section .tablewrap td{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Each table title + YEAR/column header form one opaque sticky band. The
+   sticky elements belong to their own table section, so the PER 75 band ends
+   when that section ends instead of remaining over Advanced / Impact. */
+.player-profile .profile-table-section > .profile-table-title{
+  position:sticky!important;
+  top:var(--profile-header-height,0px)!important;
+  z-index:950!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  min-height:28px!important;
+  margin:0!important;
+  padding:7px 10px 5px!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border:0!important;
+  border-bottom:1px solid rgba(244,203,198,.20)!important;
+  box-shadow:0 5px 0 #000,0 9px 14px rgba(0,0,0,.98)!important;
+  isolation:isolate!important;
+}
+.player-profile .profile-table-section > .tablewrap{
+  position:relative!important;
+  overflow:visible!important;
+  z-index:1!important;
+  background:#000!important;
+}
+.player-profile .profile-table-section > .tablewrap thead,
+.player-profile .profile-table-section > .tablewrap thead tr{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+.player-profile .profile-table-section > .tablewrap thead th{
+  position:sticky!important;
+  top:calc(var(--profile-header-height,0px) + 28px)!important;
+  z-index:940!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  isolation:isolate!important;
+  background-clip:padding-box!important;
+  box-shadow:0 4px 0 #000,0 9px 14px rgba(0,0,0,.98)!important;
+}
+.player-profile .profile-table-section > .tablewrap thead th::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-3px!important;
+  z-index:-1!important;
+  background:#000!important;
+  pointer-events:none!important;
+}
+
+/* The profile header always sits over the table stack and reaches the full
+   content width, including the space beside the radar. */
+.player-profile .profile-back-top{
+  box-shadow:0 8px 18px rgba(0,0,0,.92)!important;
+}
+
+/* Restore the persistent percentile-colored SDI shadows by ensuring no later
+   stylesheet replaces the inline box-shadow with a black-only shadow. */
+.player-profile .profile-header-sdi-value[style*="box-shadow"]{
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.90))!important;
+}
+
+/* Strong persistent selected-season gold state. */
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected > td,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover > td{
+  background:rgba(216,173,84,.36)!important;
+  background-color:rgba(216,173,84,.36)!important;
+  color:var(--site-white)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected{
+  box-shadow:inset 7px 0 0 #d8ad54,inset 0 2px 0 rgba(216,173,84,.80),inset 0 -2px 0 rgba(216,173,84,.80),0 0 18px rgba(216,173,84,.22)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected > td:first-child{
+  background:rgba(216,173,84,.48)!important;
+  background-color:rgba(216,173,84,.48)!important;
+  color:#fff0c2!important;
+}
+
+/* Create Your T75 statistical values stay rose-gold/white rather than old
+   beige/brown styling. */
+.create-t75-card-grid .matchstats-card b{color:var(--site-rose)!important;}
+.create-t75-card-grid .matchstats-card span{color:var(--site-white)!important;}
+
+
+/* ================================================================
+   v14 — DEEP PROFILE / TRUE STICKY CONTAINMENT / NO LEGACY BROWN
+   Design-only. Preserve all flip mechanics and application data.
+   ================================================================ */
+:root{
+  --site-black:#000000;
+  --site-deep:#0A0709;
+  --site-surface:#100A0D;
+  --site-raised:#160D11;
+  --site-rose:#F4CBC6;
+  --site-red:#AD343E;
+  --site-white:#F7F4F2;
+  --site-gold:#B88E35;
+}
+
+/* Player Profile: darker field so percentile-colored SDI shadows read clearly. */
+.player-profile .backface,
+.player-profile .profile-card,
+.player-profile .profile-back-top,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .profile-content,
+.player-profile .back-title,
+.player-profile .profile-teams,
+.player-profile .category-grid,
+.player-profile .category-card,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar,
+.player-profile .sdi-snapshot,
+.player-profile .sdi-snapshot>div{
+  background:#0E080B!important;
+  background-color:#0E080B!important;
+  background-image:none!important;
+}
+.player-profile .profile-card-wrap,
+.player-profile .profile-stage,
+.player-profile .profile-stage::before,
+.player-profile .profile-stage::after,
+.player-profile .profile-card-wrap::before,
+.player-profile .profile-card-wrap::after{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+}
+
+/* Remove the levitating black shadow from the entire profile header. */
+.player-profile .profile-back-top{
+  box-shadow:none!important;
+}
+
+/* Restore the real percentile-dependent inline colored shadows. */
+.player-profile .profile-header-sdi-value,
+.player-profile .profile-header-sdi-value[style*="box-shadow"]{
+  filter:none!important;
+}
+
+/* PER 75 / Advanced tables: section itself contains the sticky stack, so the
+   sticky title/header cannot survive beyond the bottom of its own table. */
+.player-profile .profile-table-section{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:clip!important;
+  background:transparent!important;
+}
+.player-profile .profile-table-section > .profile-table-title{
+  position:sticky!important;
+  top:var(--profile-header-height,0px)!important;
+  z-index:500!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+.player-profile .profile-table-section > .tablewrap{
+  position:relative!important;
+  z-index:1!important;
+}
+.player-profile .profile-table-section > .tablewrap thead th{
+  top:calc(var(--profile-header-height,0px) + 34px)!important;
+  z-index:490!important;
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  box-shadow:0 4px 0 #000,0 8px 12px rgba(0,0,0,1)!important;
+}
+.player-profile .profile-table-section > .tablewrap thead th::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-4px!important;
+  z-index:-1!important;
+  background:#000!important;
+  opacity:1!important;
+}
+
+/* The profile header remains above the table stack, without levitation. */
+.player-profile .profile-header,
+.player-profile .profile-back-top{
+  position:relative!important;
+  z-index:600!important;
+}
+
+/* Slightly darker, readable persistent season selection. */
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover>td{
+  background:rgba(184,142,53,.30)!important;
+  background-color:rgba(184,142,53,.30)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected{
+  box-shadow:inset 6px 0 0 #B88E35,inset 0 2px 0 rgba(184,142,53,.70),inset 0 -2px 0 rgba(184,142,53,.70)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td:first-child{
+  background:rgba(184,142,53,.38)!important;
+  background-color:rgba(184,142,53,.38)!important;
+  color:#F3E3B6!important;
+}
+
+/* ================================================================
+   Sitewide palette enforcement: eliminate the old brown/cream surfaces.
+   Data surfaces stay black; surrounding surfaces are near-black/rose.
+   ================================================================ */
+.team-page,.team-panel,.metric-card,.context-card,.hero-logo,.season-toolbar,
+.team-profile-card,.team-analytics-card,
+.tc-panel,.tc-header,.tc-controls,.tc-picker,.tc-hero,
+.board-page,.big-board-page,.comparison-page,.explorer-page,
+.explorer-shell,.compare-shell,.big-board-shell,
+.feature-card,.method-card,.select-card,.search-panel,.hero-search,
+.controls,.control,.section,.panel,.distribution,.scatter,.axisbox,
+.placeholder-card,.comparison-table-wrap,.explorer-table-wrap,
+.board-table,.big-board-table,
+.team-table,.season-table,.team-t50-table,.team-roster-table,
+.tc-compare-table,.tc-detail-table{
+  background-color:#100A0D!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+}
+
+/* Common table/chart containers are black. */
+.board-table,.board-table table,.board-table thead,.board-table tbody,
+.big-board-table,.big-board-table table,.big-board-table thead,.big-board-table tbody,
+.comparison-table-wrap,.comparison-table-wrap table,.comparison-table-wrap thead,.comparison-table-wrap tbody,
+.explorer-table-wrap,.explorer-table-wrap table,.explorer-table-wrap thead,.explorer-table-wrap tbody,
+.team-table,.team-table table,.team-table thead,.team-table tbody,
+.season-table,.season-table table,.season-table thead,.season-table tbody,
+.team-t50-table,.team-t50-table table,.team-t50-table thead,.team-t50-table tbody,
+.team-roster-table,.team-roster-table table,.team-roster-table thead,.team-roster-table tbody,
+.tc-compare-table,.tc-compare-table table,.tc-compare-table thead,.tc-compare-table tbody,
+.tc-detail-table,.tc-detail-table table,.tc-detail-table thead,.tc-detail-table tbody,
+.scatter,.distribution,.comparison-spider-card,.comparison-spider-section,
+.spider-wrap,.spider-svg,.config-radar,.config-radar .spider-wrap{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Team page legacy cream surfaces: explicitly replace them. */
+.team-page{
+  background:#0A0709!important;
+  color:var(--site-white)!important;
+}
+.team-panel,.metric-card,.context-card,.hero-logo,.season-toolbar,.team-search,.segmented{
+  background:#100A0D!important;
+  border-color:rgba(244,203,198,.28)!important;
+  color:var(--site-white)!important;
+}
+.team-row,.team-row-head,.team-row-button,.season-table .team-row{
+  background:#000!important;
+  color:var(--site-white)!important;
+}
+
+/* Neutralize the legacy brown palette wherever those exact old colors remain. */
+*[style*="#26221e"],*[style*="#1f1c19"],*[style*="#3b342e"],*[style*="#37312b"],
+*[style*="#c9c0b5"],*[style*="#756d65"],*[style*="#8f8077"],*[style*="#d8ccc0"]{
+  background-color:#100A0D!important;
+  border-color:rgba(244,203,198,.28)!important;
+  color:var(--site-white)!important;
+}
+
+/* Rose-gold is the only warm structural accent now. */
+.team-page .eyebrow,.team-page .back-button,.team-page .metric-card span,
+.team-page .context-card span,.tc-header-note,.tc-picker-label,.tc-panel-head p{
+  color:var(--site-rose)!important;
+}
+
+/* ================================================================
+   v15 — FINAL ROSE/BLACK SITEWIDE SURFACE AUTHORITY + PROFILE STICKY
+   Design-only. No API/data/calculation changes.
+   ================================================================ */
+:root{
+  --site-black:#000000;
+  --site-deep:#070507;
+  --site-panel:#100A0D;
+  --site-panel-raised:#170D11;
+  --site-rose:#F4CBC6;
+  --site-red:#AD343E;
+  --site-white:#F7F4F2;
+  --site-muted:#C9BFC0;
+}
+
+/* The old dark-cream rules are more specific than the earlier palette pass.
+   Match that specificity here so the old brown cannot win anywhere outside
+   the locked Player Profile. */
+.page:not(:has(.player-profile)) .feature-card,
+.page:not(:has(.player-profile)) .select-card,
+.page:not(:has(.player-profile)) .method-card,
+.page:not(:has(.player-profile)) .hero-search,
+.page:not(:has(.player-profile)) .search-panel,
+.page:not(:has(.player-profile)) .placeholder-card,
+.page:not(:has(.player-profile)) .panel,
+.page:not(:has(.player-profile)) .controls,
+.page:not(:has(.player-profile)) .section,
+.page:not(:has(.player-profile)) .distribution,
+.page:not(:has(.player-profile)) .scatter,
+.page:not(:has(.player-profile)) .axisbox,
+.page:not(:has(.player-profile)) .big-board-controls,
+.page:not(:has(.player-profile)) .big-board-meta,
+.page:not(:has(.player-profile)) .compare-players,
+.page:not(:has(.player-profile)) .compare-results,
+.page:not(:has(.player-profile)) .comparison-global-controls,
+.page:not(:has(.player-profile)) .comparison-range-controls,
+.page:not(:has(.player-profile)) .explorer-grid,
+.page:not(:has(.player-profile)) .explorer-range-grid,
+.page:not(:has(.player-profile)) .explorer-population-buttons,
+.page:not(:has(.player-profile)) .explorer-population-note,
+.page:not(:has(.player-profile)) .explorer-population-status,
+.page:not(:has(.player-profile)) .team-panels > *,
+.page:not(:has(.player-profile)) .team-panel,
+.page:not(:has(.player-profile)) .team-profile-card,
+.page:not(:has(.player-profile)) .team-analytics-card,
+.page:not(:has(.player-profile)) .team-profile-panel,
+.page:not(:has(.player-profile)) .metric-card,
+.page:not(:has(.player-profile)) .context-card,
+.page:not(:has(.player-profile)) .hero-logo,
+.page:not(:has(.player-profile)) .season-toolbar,
+.page:not(:has(.player-profile)) .team-search,
+.page:not(:has(.player-profile)) .tc-panel,
+.page:not(:has(.player-profile)) .tc-header,
+.page:not(:has(.player-profile)) .tc-controls,
+.page:not(:has(.player-profile)) .tc-picker,
+.page:not(:has(.player-profile)) .tc-hero,
+.page:not(:has(.player-profile)) .comparison-visuals > .panel,
+.page:not(:has(.player-profile)) .playerhead,
+.page:not(:has(.player-profile)) .stat-compare,
+.page:not(:has(.player-profile)) .distribution-chart{
+  background:var(--site-panel)!important;
+  background-color:var(--site-panel)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:rgba(244,203,198,.34)!important;
+}
+
+/* Controls are raised black/plum, not brown. */
+.page:not(:has(.player-profile)) .control,
+.page:not(:has(.player-profile)) select,
+.page:not(:has(.player-profile)) input,
+.page:not(:has(.player-profile)) textarea,
+.page:not(:has(.player-profile)) .bb-control,
+.page:not(:has(.player-profile)) .bb-control-group,
+.page:not(:has(.player-profile)) .bb-control-group-fields,
+.page:not(:has(.player-profile)) .board-size-select,
+.page:not(:has(.player-profile)) .tc-team-select{
+  background:var(--site-panel-raised)!important;
+  background-color:var(--site-panel-raised)!important;
+  background-image:none!important;
+  color:var(--site-white)!important;
+  border-color:rgba(244,203,198,.38)!important;
+}
+
+/* Every non-profile data table is a pure black island. */
+.page:not(:has(.player-profile)) .board-table,
+.page:not(:has(.player-profile)) .board-table table,
+.page:not(:has(.player-profile)) .board-table thead,
+.page:not(:has(.player-profile)) .board-table tbody,
+.page:not(:has(.player-profile)) .board-table tr,
+.page:not(:has(.player-profile)) .board-table th,
+.page:not(:has(.player-profile)) .board-table td,
+.page:not(:has(.player-profile)) .big-board-table,
+.page:not(:has(.player-profile)) .big-board-table table,
+.page:not(:has(.player-profile)) .big-board-table thead,
+.page:not(:has(.player-profile)) .big-board-table tbody,
+.page:not(:has(.player-profile)) .big-board-table tr,
+.page:not(:has(.player-profile)) .big-board-table th,
+.page:not(:has(.player-profile)) .big-board-table td,
+.page:not(:has(.player-profile)) .comparison-table-wrap,
+.page:not(:has(.player-profile)) .comparison-table-wrap table,
+.page:not(:has(.player-profile)) .comparison-table-wrap thead,
+.page:not(:has(.player-profile)) .comparison-table-wrap tbody,
+.page:not(:has(.player-profile)) .comparison-table-wrap tr,
+.page:not(:has(.player-profile)) .comparison-table-wrap th,
+.page:not(:has(.player-profile)) .comparison-table-wrap td,
+.page:not(:has(.player-profile)) .explorer-table-wrap,
+.page:not(:has(.player-profile)) .explorer-table-wrap table,
+.page:not(:has(.player-profile)) .explorer-table-wrap thead,
+.page:not(:has(.player-profile)) .explorer-table-wrap tbody,
+.page:not(:has(.player-profile)) .explorer-table-wrap tr,
+.page:not(:has(.player-profile)) .explorer-table-wrap th,
+.page:not(:has(.player-profile)) .explorer-table-wrap td,
+.page:not(:has(.player-profile)) .team-t50-table,
+.page:not(:has(.player-profile)) .team-t50-table table,
+.page:not(:has(.player-profile)) .team-t50-table thead,
+.page:not(:has(.player-profile)) .team-t50-table tbody,
+.page:not(:has(.player-profile)) .team-t50-table tr,
+.page:not(:has(.player-profile)) .team-t50-table th,
+.page:not(:has(.player-profile)) .team-t50-table td,
+.page:not(:has(.player-profile)) .team-table,
+.page:not(:has(.player-profile)) .team-table table,
+.page:not(:has(.player-profile)) .team-table thead,
+.page:not(:has(.player-profile)) .team-table tbody,
+.page:not(:has(.player-profile)) .team-table tr,
+.page:not(:has(.player-profile)) .team-table th,
+.page:not(:has(.player-profile)) .team-table td,
+.page:not(:has(.player-profile)) .season-table,
+.page:not(:has(.player-profile)) .season-table table,
+.page:not(:has(.player-profile)) .season-table thead,
+.page:not(:has(.player-profile)) .season-table tbody,
+.page:not(:has(.player-profile)) .season-table tr,
+.page:not(:has(.player-profile)) .season-table th,
+.page:not(:has(.player-profile)) .season-table td,
+.page:not(:has(.player-profile)) .team-roster-table,
+.page:not(:has(.player-profile)) .team-roster-table table,
+.page:not(:has(.player-profile)) .team-roster-table thead,
+.page:not(:has(.player-profile)) .team-roster-table tbody,
+.page:not(:has(.player-profile)) .team-roster-table tr,
+.page:not(:has(.player-profile)) .team-roster-table th,
+.page:not(:has(.player-profile)) .team-roster-table td,
+.page:not(:has(.player-profile)) .tc-compare-table,
+.page:not(:has(.player-profile)) .tc-compare-table table,
+.page:not(:has(.player-profile)) .tc-compare-table thead,
+.page:not(:has(.player-profile)) .tc-compare-table tbody,
+.page:not(:has(.player-profile)) .tc-compare-table tr,
+.page:not(:has(.player-profile)) .tc-compare-table th,
+.page:not(:has(.player-profile)) .tc-compare-table td,
+.page:not(:has(.player-profile)) .tc-detail-table,
+.page:not(:has(.player-profile)) .tc-detail-table table,
+.page:not(:has(.player-profile)) .tc-detail-table thead,
+.page:not(:has(.player-profile)) .tc-detail-table tbody,
+.page:not(:has(.player-profile)) .tc-detail-table tr,
+.page:not(:has(.player-profile)) .tc-detail-table th,
+.page:not(:has(.player-profile)) .tc-detail-table td{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* Plot/chart fields are also black, while their surrounding cards remain
+   rose-black. */
+.page:not(:has(.player-profile)) .scatter,
+.page:not(:has(.player-profile)) .scatter > svg,
+.page:not(:has(.player-profile)) .distribution-chart,
+.page:not(:has(.player-profile)) .comparison-spider-section,
+.page:not(:has(.player-profile)) .comparison-spider-card,
+.page:not(:has(.player-profile)) .comparison-spider-svg,
+.page:not(:has(.player-profile)) .six-radar-wrap,
+.page:not(:has(.player-profile)) .spider-wrap,
+.page:not(:has(.player-profile)) .spider-svg,
+.page:not(:has(.player-profile)) .config-radar{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+}
+
+/* ================================================================
+   Player Profile — darker field, restored sticky, rose-gold controls/radar
+   ================================================================ */
+.player-profile .backface,
+.player-profile .profile-back-top,
+.player-profile .profile-identity,
+.player-profile .profile-controls-area,
+.player-profile .profile-header-sdi,
+.player-profile .profile-header-sdi-values,
+.player-profile .profile-context-note,
+.player-profile .profile-content,
+.player-profile .profile-section,
+.player-profile .career-note,
+.player-profile .category-grid,
+.player-profile .category-card,
+.player-profile .spider-wrap,
+.player-profile .spider-toolbar{
+  background:#080608!important;
+  background-color:#080608!important;
+  background-image:none!important;
+}
+
+/* Restore the sticky player header; keep it visually flat rather than
+   levitating with a black shadow. */
+.player-profile .profile-back-top{
+  position:sticky!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  z-index:1000!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+}
+.player-profile .profile-back-top::before,
+.player-profile .profile-back-top::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Rose-gold pressed profile context buttons. */
+.player-profile .back-tabs button.active,
+.player-profile .back-tabs button[aria-pressed="true"]{
+  background:#F4CBC6!important;
+  background-color:#F4CBC6!important;
+  color:#110B11!important;
+  border-color:#F4CBC6!important;
+  box-shadow:0 0 0 1px rgba(244,203,198,.28),0 5px 14px rgba(244,203,198,.18)!important;
+}
+.player-profile .back-tabs button:hover{
+  border-color:#F4CBC6!important;
+}
+
+/* Spider chart: rose-gold lines/points instead of red. */
+.player-profile .sdi-radar-grid,
+.player-profile .spider-grid{
+  stroke:rgba(244,203,198,.26)!important;
+}
+.player-profile .sdi-radar-axis,
+.player-profile .spider-axis{
+  stroke:rgba(244,203,198,.22)!important;
+}
+.player-profile .sdi-radar-fill,
+.player-profile .spider-fill{
+  fill:rgba(244,203,198,.13)!important;
+}
+.player-profile .sdi-radar-line,
+.player-profile .spider-line{
+  stroke:#F4CBC6!important;
+  stroke-width:2.6!important;
+}
+.player-profile .sdi-radar-dot,
+.player-profile .spider-dot{
+  fill:#F4CBC6!important;
+  stroke:#F4CBC6!important;
+  stroke-width:1.7!important;
+}
+.player-profile .sdi-radar-label,
+.player-profile .spider-label{
+  fill:#F4CBC6!important;
+  color:#F4CBC6!important;
+}
+
+/* Darker, less luminous persistent season selection. */
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover>td{
+  background:rgba(122,88,25,.42)!important;
+  background-color:rgba(122,88,25,.42)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected{
+  box-shadow:inset 5px 0 0 #8A6724,inset 0 1px 0 rgba(138,103,36,.72),inset 0 -1px 0 rgba(138,103,36,.72)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td:first-child{
+  background:rgba(122,88,25,.50)!important;
+  background-color:rgba(122,88,25,.50)!important;
+  color:#E5D4A7!important;
+}
+
+/* Make the existing inline percentile-colored SDI shadows punch harder
+   without replacing their colors. The actual RGB values still come from
+   App.jsx; only their visual strength is increased there. */
+
+/* ================================================================
+   v16 — PROFILE CONTEXT / STICKY OCCLUSION / ROSE OUTLINE
+   Design-only. Preserve profile flip mechanics and all data behavior.
+   ================================================================ */
+
+/* Remove the legacy panel-like boxes surrounding Profile Context and tabs. */
+.player-profile .profile-controls-area,
+.player-profile .profile-control-label,
+.player-profile .back-tabs{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  outline:0!important;
+}
+.player-profile .profile-control-label{
+  color:#F4CBC6!important;
+}
+
+/* Make the complete profile card use the rose-gold structural outline. */
+.player-profile .profile-card{
+  border:2px solid #F4CBC6!important;
+  border-color:#F4CBC6!important;
+}
+
+/* Rose-gold profile-context controls and radar geometry. */
+.player-profile .back-tabs button.active,
+.player-profile .back-tabs button[aria-pressed="true"]{
+  background:#F4CBC6!important;
+  color:#110B11!important;
+  border-color:#F4CBC6!important;
+}
+.player-profile .back-tabs button{
+  border-color:rgba(244,203,198,.42)!important;
+}
+.player-profile .sdi-radar-grid,
+.player-profile .spider-grid,
+.player-profile .sdi-radar-axis,
+.player-profile .spider-axis{
+  stroke:rgba(244,203,198,.30)!important;
+}
+.player-profile .sdi-radar-line,
+.player-profile .spider-line{
+  stroke:#F4CBC6!important;
+}
+.player-profile .sdi-radar-dot,
+.player-profile .spider-dot{
+  fill:#F4CBC6!important;
+  stroke:#F4CBC6!important;
+}
+
+/* The profile sticky is a fully opaque sheet. Nothing from the tables may
+   paint through its top or sides while the backface scrolls. */
+.player-profile .backface{
+  position:relative!important;
+  isolation:isolate!important;
+}
+.player-profile .profile-back-top{
+  position:sticky!important;
+  top:0!important;
+  z-index:30000!important;
+  background:#080608!important;
+  background-color:#080608!important;
+  background-image:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+}
+.player-profile .profile-back-top > *{
+  position:relative!important;
+  z-index:1!important;
+}
+
+/* Give the sticky header a solid occlusion layer without adding a visible
+   shadow or a second rectangular outline. */
+.player-profile .profile-back-top::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:#080608!important;
+  opacity:1!important;
+  pointer-events:none!important;
+}
+.player-profile .profile-back-top::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* The table title + YEAR/column header remain one mounted black band. */
+.player-profile .profile-table-section{
+  position:relative!important;
+}
+.player-profile .profile-table-section > .profile-table-title{
+  background:#000!important;
+  background-color:#000!important;
+  opacity:1!important;
+  z-index:20000!important;
+}
+.player-profile .profile-table-section > .tablewrap thead,
+.player-profile .profile-table-section > .tablewrap thead tr,
+.player-profile .profile-table-section > .tablewrap thead th{
+  background:#000!important;
+  background-color:#000!important;
+  background-image:none!important;
+  opacity:1!important;
+  z-index:19999!important;
+}
+.player-profile .profile-table-section > .tablewrap thead th{
+  position:sticky!important;
+  top:calc(var(--profile-header-height,0px) + 34px)!important;
+  box-shadow:0 4px 0 #000,0 8px 12px rgba(0,0,0,1)!important;
+}
+
+/* Darker, quieter selected-season gold so white values remain readable. */
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td,
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected:hover>td{
+  background:rgba(105,76,20,.34)!important;
+  background-color:rgba(105,76,20,.34)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected{
+  box-shadow:inset 4px 0 0 #745516,inset 0 1px 0 rgba(116,85,22,.58),inset 0 -1px 0 rgba(116,85,22,.58)!important;
+}
+.player-profile .profile-table-section .tablewrap tbody tr.season-selected>td:first-child{
+  background:rgba(105,76,20,.40)!important;
+  background-color:rgba(105,76,20,.40)!important;
+  color:#E8D8A7!important;
+}

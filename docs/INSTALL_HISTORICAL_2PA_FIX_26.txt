@@ -1,0 +1,26 @@
+WEBSITE240 — HISTORICAL SEASONAL 2PA/75 FIX 26
+
+Purpose
+Fix the blank historical seasonal 2PA/75 display, especially pre-1979 seasons.
+
+Changes
+1. Adds data/historical_2pa_per75_overrides.csv covering every canonical
+   regular-season player-season before 1979-80 with valid evidence.
+2. Before the three-point era, 2PA = FGA. The displayed rate is
+   2PA / Estimated Possessions * 75.
+3. The API applies this value by Player_ID (name fallback) for historical
+   seasonal profile responses.
+4. No SDI, career, peak, WOWY, headshot, or other statistic is changed.
+
+Install
+Copy this patch's files into the matching Website240 directories and restart
+local_api/nba_per75_local_api.py.
+
+Validated Wilt examples from the canonical profile source:
+1959-60 18.73
+1960-61 17.78
+1961-62 22.35
+1962-63 21.29
+1963-64 19.49
+
+These are 2PA/75, not 2P%.

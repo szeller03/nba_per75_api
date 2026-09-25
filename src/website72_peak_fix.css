@@ -1,0 +1,7 @@
+
+.website72-peak-section { margin-top: 24px; }
+.website72-peak-card { padding: 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,.10); }
+.website72-peak-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:12px; }
+.website72-peak-value { font-size:1.25rem; font-weight:700; }
+.website72-peak-label { font-size:.78rem; opacity:.7; text-transform:uppercase; letter-spacing:.05em; }
+.website72-peak-empty { opacity:.72; margin-top:8px; }

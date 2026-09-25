@@ -1,0 +1,15 @@
+WEBSITE240 — REGULAR 5-YEAR PEAK SDI v3 / FIX 25
+
+This patch is built on Career SDI v3 Fix 24 and replaces the regular-season 5-Year Peak cache.
+
+STRICT PEAK RULE
+1. Every included season must meet the normal regular-season threshold: >=60% of that season's team games AND >=1400 minutes.
+2. Valid peak windows are ONLY: (A) five consecutive qualifying seasons; OR (B) a six-calendar-year span with exactly five qualifying seasons and exactly one non-qualifying/missing season.
+3. A season that qualifies CANNOT be skipped to improve the SDI score.
+4. No Era Average threshold.
+5. Peak statistics are aggregated from underlying totals/attempts/possessions.
+6. Peak selection metric is the mean authoritative season SDI v4 WOWY across the five included seasons.
+
+The package contains the generated peak cache, the API patch, the reproducible builder, and this install note. It does not modify the playoff peak cache or the separate seasonal 2PA display issue.
+
+Validation targets from the build are included in the console output when the builder is rerun.

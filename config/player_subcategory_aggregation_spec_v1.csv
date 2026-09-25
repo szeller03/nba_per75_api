@@ -1,0 +1,26 @@
+Category,Group_ID,Group_Weight,Statistic,Statistic_Weight
+Scoring Volume,Primary Scoring Output,0.45,PTS_per75,1.0
+Scoring Volume,Scoring Composition,0.55,FGA_per75,0.6363636363636364
+Scoring Volume,Scoring Composition,0.55,FTA_per75,0.36363636363636365
+Scoring Efficiency,Overall Efficiency,0.6,TS_pct,0.0
+Scoring Efficiency,Overall Efficiency,0.6,rTS,1.0
+Scoring Efficiency,Component Efficiency,0.4,2P_pct,0.5
+Scoring Efficiency,Component Efficiency,0.4,3P_pct,0.4
+Scoring Efficiency,Component Efficiency,0.4,FT_pct,0.1
+Creation / Playmaking,Creation Output,0.385,AST_per75,0.8
+Creation / Playmaking,Creation Output,0.385,AST_pct,0.2
+Creation / Playmaking,Ball Security / Creation Cost,0.315,AST_TOV,1.0
+Creation / Playmaking,Ball Security / Creation Cost,0.315,TOV_pct,0.0
+Creation / Playmaking,WOWY Offensive Impact,0.3,WOWY_Offense,1.0
+Rebounding,Rebounding Production,0.75,ORB_per75,0.45
+Rebounding,Rebounding Production,0.75,DRB_per75,0.35
+Rebounding,Rebounding Production,0.75,TRB_per75,0.2
+Rebounding,Rebounding Rate,0.25,OREB_pct,0.45
+Rebounding,Rebounding Rate,0.25,DREB_pct,0.35
+Rebounding,Rebounding Rate,0.25,TRB_pct,0.2
+Defense,Defensive Activity,0.35,STL_per75,0.35
+Defense,Defensive Activity,0.35,BLK_per75,0.65
+Defense,Defensive Activity Rate,0.25,STL_pct,0.35
+Defense,Defensive Activity Rate,0.25,BLK_pct,0.65
+Defense,WOWY Defensive Impact,0.4,WOWY_Defense,1.0
+Impact / Value,WOWY Overall Impact,1.0,WOWY_Net,1.0

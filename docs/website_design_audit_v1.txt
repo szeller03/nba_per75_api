@@ -1,0 +1,35 @@
+NBA PER-75 — WEBSITE DESIGN & UX SPECIFICATION V1
+
+Status: PASSED
+Baseline:
+- DataBallr-inspired section navigation
+- Hoopology-inspired configurable visualization controls
+- Original NBA PER-75 visual identity remains intentionally flexible
+
+Core pages:
+- Home
+- Players
+- Big Board
+- Compare
+- Explorer
+- Teams
+- Methodology
+
+Key principles:
+- Complete 4,896-player identity/search universe
+- Headshots optional and independent of data eligibility
+- Season/Era/Historical percentile context is user-selectable
+- Spider charts configurable
+- Big Board supports season-wide population exploration
+- Important analytical state is URL-shareable
+- Frontend consumes API contracts rather than analytical CSVs directly
+
+Build order:
+1. Application shell
+2. Player experience
+3. Big Board / Explorer
+4. Comparison
+5. Teams
+6. Methodology / polish
+
+Source/master data: NOT MODIFIED

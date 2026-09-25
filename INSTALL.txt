@@ -1,0 +1,20 @@
+WEBSITE240 CAREER CORRECTIONS V2
+
+Replace only:
+  src/App.jsx
+  local_api/nba_per75_local_api.py
+
+Add/replace:
+  data/career_availability_corrections.csv
+  2p_pct_pre1979_season_percentiles.csv (place at site root, alongside src/data)
+
+Then restart the local API and hard-refresh the browser.
+
+Fixes:
+- Career row remains present and uses the career profile response.
+- Career six SDI category values are supplied from the authoritative WOWY-aware career SDI cache and used by the profile UI.
+- Career availability corrections are applied after Player_ID mapping, so they actually take effect.
+- Per-75 career rates use possession-weighted recorded seasons; percentages use natural attempt denominators.
+- WOWY career values use MP-weighted available seasons.
+- Early-era 2P% season percentiles are injected from the reconstructed historical 2P% percentile population, including Wilt's seasons.
+- No headshots, 5-Year Peak, or sitewide performance changes.

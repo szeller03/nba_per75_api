@@ -1,0 +1,16 @@
+WEBSITE240 — PLAYER PROFILE BACKSIDE LOAD FIX
+
+This is a small runtime patch only. It does NOT change sitewide loading/optimization,
+headshots, or the WOWY/SDI calculations.
+
+Replace:
+  src/App.jsx
+
+What this fixes:
+  The Player Profile previously used Promise.all() for the core profile request and
+  the WOWY/SDI spider request. If the spider endpoint failed, Promise.all rejected and
+  the entire profile stayed unloaded. The patch makes the profile request authoritative
+  and loads the spider independently as an optional enhancement. The backside therefore
+  renders even when the spider/WOWY/SDI request is temporarily unavailable.
+
+Keep all other existing Website240 files unchanged.

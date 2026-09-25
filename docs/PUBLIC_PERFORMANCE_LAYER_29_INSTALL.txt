@@ -1,0 +1,35 @@
+WEBSITE240 — PUBLIC PERFORMANCE DATA LAYER 29
+
+Purpose
+Moves the hottest regular-season read paths away from large research CSVs and into one indexed SQLite public query layer.
+
+Included
+- data/public/per75_public.sqlite3 — indexed public query database
+- local_api/public_data_layer.py — fast query functions
+- local_api/build_public_data_layer.py — reproducible build script
+- local_api/nba_per75_local_api.py — adds /api/v1/public/* routes
+- src/api.js — uses fast player search, season-bundle and regular Big Board routes
+- src/App.jsx — loads all player season rows in one request instead of one request per season
+
+New endpoints
+GET /api/v1/public/players?q=...
+GET /api/v1/public/players/{player_id}/season-bundles?season_type=Regular%20Season
+GET /api/v1/public/players/{player_id}/profile?season=YYYY-YY&season_type=Regular%20Season
+GET /api/v1/public/big-board?... (regular-season single/historical/era query layer)
+GET /api/v1/public/teams?season=...&season_type=...
+
+Data guarantees
+- Pre-1979 regular-season 2PA/75 is forced to FGA/75 at the public query boundary.
+- Pre-1979 2PA/75 percentile is inherited from FGA/75 percentile.
+- No SDI weights/formula, WOWY methodology, Career SDI, or 5-Year Peak eligibility is changed.
+- Existing legacy endpoints remain available as fallback paths.
+
+Install
+1. Back up the current Website240 folder.
+2. Copy the included files over matching paths.
+3. Keep data/public/per75_public.sqlite3 in place.
+4. Start the local API normally.
+5. Rebuild the frontend normally.
+
+Important
+This is the public query/data layer, not final CDN/hosting configuration. Explorer population logic is intentionally unchanged until its algorithm review is complete.
