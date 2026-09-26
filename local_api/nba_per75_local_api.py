@@ -9996,9 +9996,11 @@ class Handler(BaseHTTPRequestHandler):
                             raise ValueError("Empty image response")
                     else:
                         fp=Path(str(url))
-                        if not fp.is_absolute():
+                        if fp.is_absolute():
                             rel=str(fp).lstrip("/\\")
                             fp=(ROOT/"public"/rel).resolve()
+                        else:
+                            fp=(ROOT/fp).resolve()
                         body=fp.read_bytes()
                         ctype={"jpg":"image/jpeg","jpeg":"image/jpeg","png":"image/png","webp":"image/webp"}.get(fp.suffix.lower().lstrip("."),"application/octet-stream")
                     if not body:
