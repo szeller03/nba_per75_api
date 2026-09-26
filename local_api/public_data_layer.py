@@ -5,9 +5,9 @@ opening the large research CSVs on each request. Source CSVs remain build-time
 inputs and are not needed by these hot-path queries.
 """
 from pathlib import Path
-import sqlite3, json, re, threading, gzip, csv
+import os, sqlite3, json, re, threading, gzip, csv
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(os.environ.get("NBA_PER75_ROOT", str(Path(__file__).resolve().parents[1])))
 DB=ROOT/'data'/'public'/'per75_public.sqlite3'
 ELIGIBILITY=ROOT/'data'/'public'/'board_eligibility.sqlite3'
 CAREER_SUPPORT=ROOT/'data'/'public'/'career_support.csv.gz'
