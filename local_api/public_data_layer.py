@@ -258,7 +258,13 @@ def search_players(q='',limit=50):
 
 def _player_row(c,pid):
     r=c.execute('SELECT player_id,player_name,display_name,slug,nba_player_id,headshot_url,headshot_source,headshot_status,qualified_profile,qualified_seasons FROM players WHERE player_id=?',(str(pid),)).fetchone()
-    return dict(r) if r else None
+    if not r: return None
+    out=dict(r)
+    name=str(out.get('player_name') or out.get('display_name') or '').replace('*','').strip().casefold()
+    if name in {'kareem abdul-jabbar','kareem abdul jabbar'} or str(out.get('nba_player_id') or '').strip()=='76003':
+        out['headshot_url']='https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png'
+        out['headshot_source']='NBA CDN canonical'
+    return out
 
 def _percentiles(c,pid,season):
     rows=[dict(r) for r in c.execute('SELECT statistic,value,season_percentile,era_percentile,historical_percentile,player_name,season,season_end_year,era FROM percentile WHERE player_id=? AND season=?',(str(pid),str(season))).fetchall()]
@@ -354,6 +360,60 @@ def warm_public_profile_data():
     return True
 
 
+_CAREER_SDI_SUMMARY_CACHE=None
+_CAREER_SDI_SUMMARY_LOCK=threading.Lock()
+
+def _career_sdi_summary():
+    global _CAREER_SDI_SUMMARY_CACHE
+    if _CAREER_SDI_SUMMARY_CACHE is not None: return _CAREER_SDI_SUMMARY_CACHE
+    with _CAREER_SDI_SUMMARY_LOCK:
+        if _CAREER_SDI_SUMMARY_CACHE is not None: return _CAREER_SDI_SUMMARY_CACHE
+        out={'id':{},'name':{}}
+        try:
+            candidates=[]
+            for p in ROOT.rglob('*.csv'):
+                try:
+                    with p.open('r',encoding='utf-8-sig') as fh: cols=next(csv.reader([fh.readline()]))
+                except Exception: continue
+                if 'SDI_v4_WOWY' in cols and 'Career_scoring_volume' in cols: candidates.append(p)
+            candidates.sort(key=lambda p:(0 if 'regular_career_sdi_v4_wowy_rts' in p.name.lower() else 1,len(str(p))))
+            if candidates:
+                with candidates[0].open('r',encoding='utf-8-sig',newline='') as fh:
+                    for row in csv.DictReader(fh):
+                        pid=str(row.get('Player_ID') or row.get('PlayerId') or row.get('player_id') or '').strip()
+                        name=str(row.get('Player') or row.get('Player_Name') or row.get('Display_Name') or '').replace('*','').strip()
+                        def num(k):
+                            try: return float(row[k]) if row.get(k) not in ('',None) else None
+                            except Exception: return None
+                        item={'sdi':num('SDI_v4_WOWY') or num('Career_SDI_v4_WOWY'),
+                              'categories':{k:num(v) for k,v in {
+                                  'Scoring Volume':'Career_scoring_volume','Scoring Efficiency':'Career_scoring_efficiency',
+                                  'Creation & Playmaking':'Career_creation_playmaking','Rebounding':'Career_rebounding',
+                                  'Defense':'Career_defense','Impact & Value':'Career_impact_value'}.items()}}
+                        if pid: out['id'][pid]=item
+                        if name: out['name'][norm(name)]=item
+        except Exception: pass
+        _CAREER_SDI_SUMMARY_CACHE=out
+        return out
+
+def _regular_peak_public(pid,player_name=''):
+    try:
+        candidates=[p for p in ROOT.rglob('*.json') if 'regular_profile_peaks' in p.name.lower()]
+        candidates.sort(key=lambda p:(0 if 'canonical' in p.name.lower() else 1,len(str(p))))
+        if not candidates: return None
+        payload=json.loads(candidates[0].read_text(encoding='utf-8'))
+        wanted=str(pid or '').strip(); nkey=norm(player_name)
+        hit=next((x for x in payload.get('players',[]) if wanted and str(x.get('player_id','')).strip()==wanted),None)
+        if hit is None and nkey: hit=next((x for x in payload.get('players',[]) if norm(x.get('player_name',''))==nkey),None)
+        if hit is None: return None
+        stats=hit.get('statistics',{}) or {}
+        vals={k:v for k,v in stats.items() if not str(k).endswith('__percentile') and v not in ('',None)}
+        pct=[{'Statistic':k,'Value':v,'Peak_Value':v,'Peak_Percentile':stats.get(k+'__percentile')} for k,v in vals.items()]
+        row={'Player_ID':hit.get('player_id'),'Player':hit.get('player_name'),'Season':'5-Year Peak','Peak_Start_Year':hit.get('peak_start_year'),'Peak_End_Year':hit.get('peak_end_year'),'Peak_Seasons':hit.get('peak_seasons',[]),'Peak_Era':hit.get('peak_era'),'Peak_SDI':hit.get('peak_sdi')}
+        row.update(vals)
+        return {'found':True,'available':True,'view':'5-Year Peak','is_five_year_peak':True,'player':{'player_id':str(hit.get('player_id') or pid),'player_name':hit.get('player_name'),'headshot_url':None},'seasons':['5-Year Peak'],'individual_seasons':['5-Year Peak'],'profile':row,'statistic_values':vals,'statistic_values_normalized':vals,'percentiles':pct,'season':'5-Year Peak','season_type':'Regular Season','peak':{'start':hit.get('peak_start_year'),'end':hit.get('peak_end_year'),'seasons':hit.get('peak_seasons',[]),'era':hit.get('peak_era'),'sdi':hit.get('peak_sdi')}}
+    except Exception: return None
+
 def player_season_bundles(pid,season_type='Regular Season'):
     cache_key=(str(pid).strip(),str(season_type))
     cached=_PROFILE_BUNDLE_CACHE.get(cache_key)
@@ -437,7 +497,10 @@ def player_season_bundles(pid,season_type='Regular Season'):
     if career_payload:
         vals=career_payload['values']; plist=[{'Statistic':k,'Career_Value':v,'Career_Percentile':career_payload['percentiles'].get(k),'Career_Percentile_Qualified':career_payload['percentiles'].get(k) is not None} for k,v in vals.items()]
         profile=dict(vals); profile.update({'Player':career_payload['player_name'],'G':career_payload['G'],'MP':career_payload['MP'],'League':'NBA','Player_ID':str(pid),'Season':'Career','Qualified_Career':career_payload['Qualified_Career']})
-        cb={'found':True,'view':'Career','is_career':True,'player':{'player_id':str(pid),'player_name':career_payload['player_name'],'headshot_url':player.get('headshot_url','')},'seasons':[],'individual_seasons':[],'profile':profile,'statistic_values':vals,'statistic_values_normalized':vals,'percentiles':plist,'playoff_available':False,'playoff_statistics':{},'season_type':'Regular Season','career_note':'Career aggregate served from indexed public performance layer.'}
+        _sdi=_career_sdi_summary().get('id',{}).get(str(pid).strip()) or _career_sdi_summary().get('name',{}).get(norm(career_payload['player_name']))
+        if _sdi:
+            profile['Career_SDI_v4_WOWY']=_sdi.get('sdi'); profile['SDI_v4_WOWY']=_sdi.get('sdi')
+        cb={'found':True,'view':'Career','is_career':True,'player':{'player_id':str(pid),'player_name':career_payload['player_name'],'headshot_url':player.get('headshot_url','')},'seasons':[],'individual_seasons':[],'profile':profile,'statistic_values':vals,'statistic_values_normalized':vals,'percentiles':plist,'playoff_available':False,'playoff_statistics':{},'season_type':'Regular Season','career_sdi':_sdi,'sdi':(_sdi or {}).get('sdi') if _sdi else None,'category_axes':([] if not _sdi else [{'axis':k,'score':v,'value':v,'percentile':None} for k,v in _sdi.get('categories',{}).items() if v is not None]),'career_note':'Career aggregate served from indexed public performance layer.'}
     else:
         cb=None
     result={'found':True,'player':player,'seasons':seasons,'rows':bundles,'career':cb,'season_type':season_type}
@@ -450,6 +513,11 @@ def player_season_bundle(pid,season,season_type='Regular Season'):
     if c is None:return {'found':False}
     player=_player_row(c,pid)
     if not player:return {'found':False}
+    if str(season).strip().casefold() in {'5-year peak','5 year peak','five-year peak','five_year_peak'} and str(season_type).casefold() not in {'playoffs','playoff','postseason'}:
+        peak=_regular_peak_public(pid,player.get('player_name',''))
+        if peak is not None:
+            peak['player']['headshot_url']=player.get('headshot_url','')
+            return peak
     b=_bundle(c,pid,season,season_type)
     return b or {'found':False}
 
