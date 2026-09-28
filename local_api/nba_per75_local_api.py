@@ -212,7 +212,7 @@ def _headshot_url_for(player_id=None, player_name=None):
 
 TEAM_INDEX_CACHE = Path(__file__).resolve().parent / "cache" / "team_index_v1.json"
 TEAM_ANALYTICS_CACHE = Path(__file__).resolve().parent / "cache" / "team_analytics_v1.json"
-TEAM_COMPETITIVE_CONTEXT_CACHE = Path(__file__).resolve().parent / "cache" / "team_competitive_context_v4.json"
+TEAM_COMPETITIVE_CONTEXT_CACHE = Path(__file__).resolve().parent / "cache" / "team_competitive_context_v9.json"
 TEAM_PLAYOFF_SUCCESS_CACHE = Path(__file__).resolve().parent / "cache" / "team_playoff_success_v1.json"
 TEAM_BUILD_STATE = {"status":"idle","started_at":None,"finished_at":None,"error":None}
 TEAM_BUILD_LOCK = threading.Lock()
@@ -9458,13 +9458,20 @@ def _build_team_analytics_cache():
 
 
 def _team_competitive_context_payload():
-    if not TEAM_COMPETITIVE_CONTEXT_CACHE.exists():
-        return {}
-    try:
-        p=json.loads(TEAM_COMPETITIVE_CONTEXT_CACHE.read_text(encoding="utf-8"))
-        return p if isinstance(p,dict) else {}
-    except Exception:
-        return {}
+    candidates=[
+        TEAM_COMPETITIVE_CONTEXT_CACHE,
+        Path(__file__).resolve().parent/"cache"/"team_competitive_context_v8.json",
+        Path(__file__).resolve().parent/"cache"/"team_competitive_context_v4.json",
+    ]
+    for path in candidates:
+        if not path.exists(): continue
+        try:
+            p=json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(p,dict) and p.get("seasons"):
+                return p
+        except Exception:
+            continue
+    return {}
 
 
 def _context_team_key(name):
