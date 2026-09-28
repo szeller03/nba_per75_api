@@ -8949,7 +8949,7 @@ TEAM_ANALYTICS_STATS = [
     ("ORB%","ORB_pct","higher"),
     ("FTr","FTr","higher"),
     ("Opp TOV%","Opp_TOV_pct","higher"),
-    ("Opp eFG%","Opp_eFG_pct","higher"),
+    ("Opp eFG%","Opp_eFG_pct","lower"),
 ]
 
 def _norm_col(s):
