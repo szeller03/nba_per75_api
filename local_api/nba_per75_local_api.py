@@ -160,7 +160,15 @@ PATHS["stat_registry"]=PATHS["statistic_registry"]
 CACHE = {}
 
 def _headshot_url_for(player_id=None, player_name=None):
-    """Canonical runtime resolver: shipped PNGs first, NBA CDN second; never B-Ref."""
+    """Canonical runtime resolver: shipped PNGs first, NBA CDN second; never B-Ref.
+    
+    Kareem Abdul-Jabbar is pinned explicitly because the production public
+    player registry has historically carried an incorrect/stale image mapping.
+    """
+    _pid = str(player_id).strip() if player_id is not None else ""
+    _pname = str(player_name or "").replace("*","").strip().casefold()
+    if _pid in {"76003", "P0001"} or _pname in {"kareem abdul-jabbar","kareem abdul jabbar","abdul-jabbar, kareem"}:
+        return "https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png"
     key="__canonical_headshot_registry_png_cdn_v2__"
     if key not in CACHE:
         lookup={}
@@ -9476,7 +9484,6 @@ def _merge_team_competitive_context(rows):
         success_map={}
     payload=_team_competitive_context_payload()
     seasons=payload.get("seasons",{}) if isinstance(payload,dict) else {}
-    if not seasons:return rows
     for r in rows:
         se=str(r.get("season") or "")
         tm=_context_team_key(r.get("team"))
@@ -9489,10 +9496,19 @@ def _merge_team_competitive_context(rows):
             for k in ("seed","conference","wins","losses","playoff_finish","playoff_status","playoff_round","series_wins","series_losses"):
                 if k in hit:r[k]=hit[k]
             r["competitive_context_source"]="Land of Basketball + Basketball-Reference (V2)"
-        sk=f"{se}|||{str(r.get('team') or '').replace('*','').strip()}"
-        if sk in success_map:
-            r["playoff_status"]=success_map[sk]
-            r["playoff_finish"]=success_map[sk]
+        raw_team=str(r.get("team") or "").replace("*","").strip()
+        success_candidates=[
+            f"{se}|||{raw_team}",
+            f"{se}|||{_clean_team_name(raw_team)}",
+        ]
+        success_value=None
+        for _sk in success_candidates:
+            if _sk in success_map:
+                success_value=success_map[_sk]
+                break
+        if success_value is not None:
+            r["playoff_status"]=success_value
+            r["playoff_finish"]=success_value
             r["competitive_context_source"]="Basketball-Reference series cache + canonical team qualification"
     return rows
 
