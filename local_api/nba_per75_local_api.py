@@ -5181,7 +5181,12 @@ def api_spider(requested, season=None, context="Historical", stats=None, season_
     # Canonical 5-Year Peak spider: all axes use the same SDI-selected
     # five-season window and the peak-specific percentile population.
     if str(season).casefold() in {"5-year peak","5 year peak","five-year peak","five_year_peak"}:
-        peak=_canonical_five_year_peak_profile(pid,pname)
+        # Player Profile Peak is locked to the canonical precomputed artifact.
+        # The spider must consume that same artifact rather than silently
+        # rebuilding a second peak through the live calculator.
+        peak=_load_precomputed_regular_peak_profile(requested_pid=pid,requested_name=pname)
+        if peak is None:
+            peak=_canonical_five_year_peak_profile(pid,pname)
         if not peak.get("found") or not peak.get("available"):
             return {"found":True,"player":{"player_id":pid,"player_name":pname},
                     "season":"5-Year Peak","context":"Peak","available_contexts":{"Peak":False},
