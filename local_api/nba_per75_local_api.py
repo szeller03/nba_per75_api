@@ -9427,6 +9427,13 @@ def _build_team_analytics_cache():
             # the independent source for the offensive copy.
             if _def_efg is None: _def_efg=_legacy_opp_efg
             if _def_tov is None: _def_tov=_legacy_opp_tov
+            # Legacy enriched Team-master opponent TOV% is stored as a
+            # percentage number (e.g. 14.5), while the API contract uses a
+            # fraction (0.145). Normalize only the recovered opponent copy.
+            if _def_tov is not None and abs(_def_tov)>1.5:
+                _def_tov=_def_tov/100.0
+            if _def_efg is not None and abs(_def_efg)>1.5:
+                _def_efg=_def_efg/100.0
             if _off_efg is None: _off_efg=_ff_nested_value(ff,"offense","efg")
             if _off_tov is None: _off_tov=_ff_nested_value(ff,"offense","tov")
 
@@ -9500,7 +9507,7 @@ def _build_team_analytics_cache():
 
     all_rows=[r for v in season_types.values() for r in v["rows"]]
     payload={
-        "version":29,
+        "version":30,
         "season_types":season_types,
         "rows":all_rows,
         "seasons":sorted({r["season"] for r in all_rows},reverse=True),
@@ -9636,7 +9643,7 @@ def _team_analytics_payload():
     if TEAM_ANALYTICS_CACHE.exists():
         try:
             p=json.loads(TEAM_ANALYTICS_CACHE.read_text(encoding="utf-8"))
-            if p.get("version")==29 and p.get("season_types"):
+            if p.get("version")==30 and p.get("season_types"):
                 return p
         except Exception:
             pass
