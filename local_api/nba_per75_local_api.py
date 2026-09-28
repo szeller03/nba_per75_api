@@ -9632,11 +9632,15 @@ def _merge_team_competitive_context(rows):
             r["lost_conference_finals"]=_success_norm=="LOST CONFERENCE FINALS"
             r["competitive_context_source"]="Basketball-Reference series cache + canonical team qualification"
         elif r.get("playoff_status") is not None:
-            _st=str(r.get("playoff_status")).upper()
-            r["team_success"]=r.get("playoff_status")
+            _st=str(r.get("playoff_status")).upper().strip()
+            if _st=="CONFERENCE FINALS":
+                _st="LOST CONFERENCE FINALS"
+            r["playoff_status"]=_st
+            r["playoff_finish"]=_st
+            r["team_success"]=_st
             r["champion"]=_st=="CHAMPION"
             r["made_finals"]=_st in {"CHAMPION","MADE FINALS"}
-            r["lost_conference_finals"]=_st=="CONFERENCE FINALS"
+            r["lost_conference_finals"]=_st=="LOST CONFERENCE FINALS"
     return rows
 
 def _team_analytics_payload():
