@@ -1260,7 +1260,7 @@ REGULAR_STATS = [
     "BLK_per75","TOV_per75","PF_per75","FG_pct","2P_pct","3P_pct","FT_pct","TS_pct",
     "FTr","3PAr","rTS","WOWY_Offense","WOWY_Defense","WOWY_Net",
     "PER","BPM","OBPM","DBPM","VORP","WS/48","OWS","DWS",
-    "OREB_pct","AST_pct","STL_pct","BLK_pct","TOV_pct","AST_TOV","DREB_pct"
+    "OREB_pct","AST_pct","STL_pct","BLK_pct","TOV_pct","AST_TOV","DREB_pct","NRtg"
 ]
 
 def normalize_requested_season(value):
@@ -6534,6 +6534,10 @@ def _build_regular_career_table():
                         out["Player_ID"]=out["Player"]
             except Exception:
                 out["Player_ID"]=out["Player"]
+            # Derive career NRtg when the canonical export carries ORtg/DRtg
+            # but omits the derived net rating.
+            if "NRtg" not in out.columns and "ORtg" in out.columns and "DRtg" in out.columns:
+                out["NRtg"]=pd.to_numeric(out["ORtg"],errors="coerce")-pd.to_numeric(out["DRtg"],errors="coerce")
             # The legacy canonical career file exposes a column named WS/48
             # that is actually total Win Shares. Replace that one field with
             # the true weighted WS/48 rate from the existing canonical
@@ -7788,17 +7792,25 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         # changing top-level weights cannot leave a stale career composite.
         src=sdi_index.copy() if sdi_index is not None else pd.DataFrame()
         if not src.empty:
+            pid_col=col(src,["Player_ID","PlayerId","PlayerID","player_id"])
+            name_col=col(src,["Player","Player_Name","Display_Name","player_name","Name"])
+            if not pid_col or not name_col:
+                return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                        "statistic":"Statistical Dominance Index",
+                        "note":"Authoritative SDI v4 source is missing player identity columns."}
             score_col="SDI_v4_WOWY" if (not is_playoff and "SDI_v4_WOWY" in src.columns) else "SDI_v4"
+            src["__pid"]=src[pid_col]
+            src["__player"]=src[name_col]
             src["__score"]=pd.to_numeric(src.get(score_col),errors="coerce")
             src["MP"]=pd.to_numeric(src.get("MP"),errors="coerce")
             src["G"]=pd.to_numeric(src.get("G"),errors="coerce")
             rows=[]
-            for pid,g in src.groupby("Player_ID",dropna=False,sort=False):
+            for pid,g in src.groupby("__pid",dropna=False,sort=False):
                 q=g.dropna(subset=["__score"]).copy()
                 if q.empty: continue
                 w=q["MP"].clip(lower=0).fillna(0)
                 score=float((q["__score"]*w).sum()/w.sum()) if w.sum()>0 else float(q["__score"].mean())
-                rows.append({"Player_ID":pid,"Player":str(q["Player"].iloc[0]),"Career_SDI_v4":score,"Qualifying_Seasons":int(len(q)),"Career_MP":float(w.sum())})
+                rows.append({"Player_ID":pid,"Player":str(q["__player"].iloc[0]),"Career_SDI_v4":score,"Qualifying_Seasons":int(len(q)),"Career_MP":float(w.sum())})
             d=pd.DataFrame(rows)
         else:
             d=pd.DataFrame()
@@ -7829,7 +7841,14 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         if "MP" not in seasons.columns and "minutes" in seasons.columns: seasons["MP"]=seasons["minutes"]
         seasons["G"]=pd.to_numeric(seasons["G"],errors="coerce").fillna(0)
         seasons["MP"]=pd.to_numeric(seasons["MP"],errors="coerce").fillna(0)
-        elig=seasons.groupby("Player_ID").agg(G=("G","sum"),MP=("MP","sum")).reset_index()
+        elig_pid_col=col(seasons,["Player_ID","PlayerId","PlayerID","player_id"])
+        if not elig_pid_col:
+            return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                    "statistic":"Statistical Dominance Index",
+                    "note":"Authoritative SDI v4 source is missing player identity columns."}
+        elig=seasons.groupby(elig_pid_col).agg(G=("G","sum"),MP=("MP","sum")).reset_index()
+        if elig_pid_col != "Player_ID":
+            elig=elig.rename(columns={elig_pid_col:"Player_ID"})
         if is_playoff:
             elig=elig.loc[(elig["G"]>=50)&(elig["MP"]>=1500)]
         else:
