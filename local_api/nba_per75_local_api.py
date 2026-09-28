@@ -847,7 +847,17 @@ def _career_sdi_axes(pid=None, pname=None):
     if pid is not None:
         axes=cache.get("id",{}).get(str(pid).strip(),[]) or []
     if not axes and pname:
-        axes=cache.get("name",{}).get(str(pname).replace("*","").strip().casefold(),[]) or []
+        _nk=str(pname).replace("*","").strip().casefold()
+        axes=cache.get("name",{}).get(_nk,[]) or []
+        if not axes:
+            try:
+                _resolved_pid,_resolved_name=resolve_player_identity(pname)
+                if _resolved_pid:
+                    axes=cache.get("id",{}).get(str(_resolved_pid).strip(),[]) or []
+                if not axes and _resolved_name:
+                    axes=cache.get("name",{}).get(str(_resolved_name).replace("*","").strip().casefold(),[]) or []
+            except Exception:
+                pass
     if isinstance(axes,dict):
         overall_sdi=axes.get("overall_sdi")
         axes=axes.get("axes",[]) or []
@@ -5139,6 +5149,16 @@ def api_spider(requested, season=None, context="Historical", stats=None, season_
             payload = cache.get("name", {}).get(req.replace("*", "").strip().casefold())
         if payload is not None:
             out = dict(payload)
+            try:
+                _overall_item=(_CAREER_SDI_AXES or {}).get("id",{}).get(req)
+                if _overall_item is None:
+                    _overall_item=(_CAREER_SDI_AXES or {}).get("name",{}).get(req.replace("*","").strip().casefold())
+                if isinstance(_overall_item,dict):
+                    _ov=_overall_item.get("overall_sdi")
+                    if _ov is not None:
+                        out["sdi"]=float(_ov); out["raw_sdi"]=float(_ov)
+            except Exception:
+                pass
             rows = _REGULAR_CAREER_SPIDER_ROWS.get("id", {}).get(req)
             if rows is None:
                 rows = _REGULAR_CAREER_SPIDER_ROWS.get("name", {}).get(req.replace("*", "").strip().casefold(), [])
@@ -9558,10 +9578,15 @@ def _merge_team_competitive_context(rows):
         if success_value is not None:
             r["playoff_status"]=success_value
             r["playoff_finish"]=success_value
-            r["team_success"]=success_value
-            r["champion"]=str(success_value).upper()=="CHAMPION"
-            r["made_finals"]=str(success_value).upper() in {"CHAMPION","MADE FINALS"}
-            r["lost_conference_finals"]=str(success_value).upper()=="CONFERENCE FINALS"
+            _success_norm=str(success_value).upper().strip()
+            if _success_norm=="CONFERENCE FINALS":
+                _success_norm="LOST CONFERENCE FINALS"
+            r["playoff_status"]=_success_norm
+            r["playoff_finish"]=_success_norm
+            r["team_success"]=_success_norm
+            r["champion"]=_success_norm=="CHAMPION"
+            r["made_finals"]=_success_norm in {"CHAMPION","MADE FINALS"}
+            r["lost_conference_finals"]=_success_norm=="LOST CONFERENCE FINALS"
             r["competitive_context_source"]="Basketball-Reference series cache + canonical team qualification"
         elif r.get("playoff_status") is not None:
             _st=str(r.get("playoff_status")).upper()
