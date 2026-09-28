@@ -9487,7 +9487,7 @@ def _build_team_analytics_cache():
 
     all_rows=[r for v in season_types.values() for r in v["rows"]]
     payload={
-        "version":27,
+        "version":28,
         "season_types":season_types,
         "rows":all_rows,
         "seasons":sorted({r["season"] for r in all_rows},reverse=True),
@@ -9623,7 +9623,7 @@ def _team_analytics_payload():
     if TEAM_ANALYTICS_CACHE.exists():
         try:
             p=json.loads(TEAM_ANALYTICS_CACHE.read_text(encoding="utf-8"))
-            if p.get("version")==27 and p.get("season_types"):
+            if p.get("version")==28 and p.get("season_types"):
                 return p
         except Exception:
             pass
