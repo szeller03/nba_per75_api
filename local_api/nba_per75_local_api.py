@@ -8977,6 +8977,9 @@ def _load_offensive_four_factor_overrides():
     if _TEAM_OFFENSIVE_FOUR_FACTORS_CACHE is not None:
         return _TEAM_OFFENSIVE_FOUR_FACTORS_CACHE
     candidates=[
+        # Canonical Basketball-Reference offensive Four Factors shipped with
+        # the API repo. This is the authoritative offensive eFG%/TOV% layer.
+        Path(__file__).resolve().parent/"bref_offensive_four_factors_v1.csv",
         Path(__file__).resolve().parent/"data"/"nba_per75_team_master.csv",
         Path(__file__).resolve().parents[1]/"data"/"nba_per75_team_master.csv",
     ]
@@ -9010,11 +9013,12 @@ def _load_offensive_four_factor_overrides():
                 if not (np.isfinite(tov) if tov is not None else False): tov=None
                 if efg is None and tov is None:
                     continue
-                # The supplied file stores eFG% as a fraction (e.g. .424)
-                # and TOV% as percentage points (e.g. 14.5). Normalize only
-                # the representation, not the underlying statistic.
-                if efg is not None and abs(efg) <= 1.5: efg=efg
-                if tov is not None and abs(tov) <= 1.5: tov=tov*100.0
+                # The canonical BRef CSV stores both eFG% and TOV% as
+                # percentage points (e.g. 50.9 and 16.0), while the API
+                # payload represents percentages as fractions (0.509/0.160).
+                # Accept either representation without changing the statistic.
+                if efg is not None and abs(efg) > 1.5: efg=efg/100.0
+                if tov is not None and abs(tov) > 1.5: tov=tov/100.0
                 out[(st,season,team)]={"efgpct":efg,"tovpct":tov}
             if out:
                 break
@@ -9286,7 +9290,9 @@ def _build_team_analytics_cache():
         def _bref_team_key(v):
             return re.sub(r"\s+"," ",re.sub(r"[^a-z0-9]+"," ",str(v).replace("*","")).strip().lower())
 
-        offensive_ff_overrides={}
+        # Load the canonical offensive Four Factors once. These values must
+        # survive even when the optional runtime BRef cache is absent.
+        offensive_ff_overrides=_load_offensive_four_factor_overrides()
         rows=[]
         for (tm,se),g in d.groupby([c["team"],c["season"]],sort=False):
             # A genuine team source should have one team-season record. If it
@@ -9411,16 +9417,28 @@ def _build_team_analytics_cache():
             if _off_efg is None: _off_efg=_ff_nested_value(ff,"offense","efg")
             if _off_tov is None: _off_tov=_ff_nested_value(ff,"offense","tov")
 
-            if _off_efg is not None:
+            # The canonical offensive CSV is authoritative. Prefer it over
+            # any optional runtime cache, and preserve it when that cache is
+            # missing. Never expose the legacy opponent/defensive copy as
+            # offensive eFG% or TOV%.
+            _canonical_off=offensive_ff_overrides.get(
+                (requested,str(se),_team_name_key(tm))
+            )
+            if _canonical_off and _canonical_off.get("efgpct") is not None:
+                r["efgpct"]=_canonical_off["efgpct"]
+            elif _off_efg is not None:
                 r["efgpct"]=_off_efg
             else:
-                # Do not expose the mislabeled opponent value as offensive.
                 r["efgpct"]=None
-            if _off_tov is not None:
+            if _canonical_off and _canonical_off.get("tovpct") is not None:
+                r["tovpct"]=_canonical_off["tovpct"]
+            elif _off_tov is not None:
                 r["tovpct"]=_off_tov
             else:
                 r["tovpct"]=None
-            if _off_ftr is not None:
+            if _canonical_off and _canonical_off.get("ftr") is not None:
+                r["ftr"]=_canonical_off["ftr"]
+            elif _off_ftr is not None:
                 r["ftr"]=_off_ftr
             if _def_efg is not None:
                 r["opp_efgpct"]=_def_efg
