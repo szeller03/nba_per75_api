@@ -9582,6 +9582,18 @@ def _merge_team_competitive_context(rows):
         success_map={}
     payload=_team_competitive_context_payload()
     seasons=payload.get("seasons",{}) if isinstance(payload,dict) else {}
+
+    # Shipped canonical fallback for seasons whose generated competitive-context
+    # cache is not present on an ephemeral Railway deploy.  Keep this small and
+    # source-backed; generated cache data still takes precedence when available.
+    shipped_success={
+        "2024-25":{
+            "oklahomacitythunder":"CHAMPION",
+            "indianapacers":"MADE FINALS",
+            "newyorkknicks":"LOST CONFERENCE FINALS",
+            "minnesotatimberwolves":"LOST CONFERENCE FINALS",
+        },
+    }
     for r in rows:
         se=str(r.get("season") or "")
         tm=_context_team_key(r.get("team"))
@@ -9618,6 +9630,8 @@ def _merge_team_competitive_context(rows):
                         break
                 except Exception:
                     continue
+        if success_value is None:
+            success_value=shipped_success.get(se,{}).get(_context_team_key(raw_team))
         if success_value is not None:
             r["playoff_status"]=success_value
             r["playoff_finish"]=success_value
