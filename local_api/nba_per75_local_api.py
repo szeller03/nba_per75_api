@@ -1054,9 +1054,9 @@ def _warm_regular_career_spider_cache():
             # rebuild them from individual statistic percentiles: that was the
             # source of the historical Wilt/Russell Defense discrepancy and can
             # silently drop Impact / Value.
-            axes0=[dict(a) for a in ((_CAREER_SDI_AXES or {}).get("id",{}).get(pid0,[]) or [])]
-            if not axes0 and pname0:
-                axes0=[dict(a) for a in ((_CAREER_SDI_AXES or {}).get("name",{}).get(pname0.casefold(),[]) or [])]
+            _career_entry0=(_CAREER_SDI_AXES or {}).get("id",{}).get(pid0) or (_CAREER_SDI_AXES or {}).get("name",{}).get(pname0.casefold())
+            _career_axes0=_career_entry0.get("axes",[]) if isinstance(_career_entry0,dict) else (_career_entry0 or [])
+            axes0=[dict(a) for a in _career_axes0]
             for ax0 in axes0:
                 raw=ax0.get("score",ax0.get("raw_score"))
                 try: raw=float(raw)
