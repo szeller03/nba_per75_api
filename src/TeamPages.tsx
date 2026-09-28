@@ -81,7 +81,7 @@ export function TeamsPage({ onOpenTeam }: { onOpenTeam: (team: string) => void }
           const value = r.Value ?? r.value ?? r[stat];
           const item = teams.find(t => t.Team === team);
           return <button className="team-row team-row-button" key={`${team}-${season}-${i}`} onClick={() => onOpenTeam(team)}>
-            <span className="rank">{i + 1}</span><span className="team-name"><TeamMark item={item} />{team}</span><span>{season}</span><strong>{signed(value)}</strong><span>{String(r.Team_Success ?? r.team_success ?? r.Success ?? r.success ?? r.Playoff_Finish ?? r.playoff_finish ?? (r.Made_Playoffs ? "PLAYOFFS" : "MISSED PLAYOFFS"))}</span>
+            <span className="rank">{i + 1}</span><span className="team-name"><TeamMark item={item} />{team}</span><span>{season}</span><strong>{signed(value)}</strong><span className={`team-success ${teamSuccessClass(r.Team_Success ?? r.team_success ?? r.Success ?? r.success ?? r.Playoff_Finish ?? r.playoff_finish ?? (r.Made_Playoffs ? "PLAYOFFS" : "MISSED PLAYOFFS"))}`}>{teamSuccessLabel(r.Team_Success ?? r.team_success ?? r.Success ?? r.success ?? r.Playoff_Finish ?? (r.Made_Playoffs ? "PLAYOFFS" : "MISSED PLAYOFFS"))}</span>
           </button>;
         })}
       </div>
@@ -162,7 +162,7 @@ export function TeamProfilePage({ team, onBack }: { team: string; onBack?: () =>
     </section>
 
     <section className="team-panel">
-      <div className="panel-head"><div><span className="eyebrow">COMPETITIVE CONTEXT</span><h2>{season.Playoff_Finish ?? (season.Made_Playoffs ? 'Playoffs' : 'Missed Playoffs')}</h2></div>{season.Champion ? <span className="champion-pill">CHAMPION</span> : null}</div>
+      <div className="panel-head"><div><span className="eyebrow">COMPETITIVE CONTEXT</span><h2>{teamSuccessLabel(season.Playoff_Finish ?? (season.Made_Playoffs ? 'PLAYOFFS' : 'MISSED PLAYOFFS'))}</h2></div><span className={`team-success-pill ${teamSuccessClass(season.Playoff_Finish ?? (season.Made_Playoffs ? 'PLAYOFFS' : 'MISSED PLAYOFFS'))}`}>{teamSuccessLabel(season.Playoff_Finish ?? (season.Made_Playoffs ? 'PLAYOFFS' : 'MISSED PLAYOFFS'))}</span></div>
       <div className="context-grid">
         <Context label="Seed" value={season.Seed ?? '—'} />
         <Context label="Playoff round" value={season.Playoff_Round ?? '—'} />
@@ -176,11 +176,33 @@ export function TeamProfilePage({ team, onBack }: { team: string; onBack?: () =>
       <div className="team-table season-table">
         <div className="team-row team-row-head"><span>SEASON</span><span>W–L</span><span>ORtg</span><span>DRtg</span><span>NRtg</span><span>TEAM SUCCESS</span></div>
         {seasons.map(s => <button className={`team-row team-row-button ${s.Season === selected ? 'selected' : ''}`} key={s.Season} onClick={() => setSelected(s.Season)}>
-          <span>{s.Season}</span><span>{s.W ?? '—'}–{s.L ?? '—'}</span><span>{fmt(s.ORtg)}</span><span>{fmt(s.DRtg)}</span><strong>{signed(s.NRtg)}</strong><span>{s.Champion ? 'Champion' : s.Playoff_Finish ?? (s.Made_Playoffs ? 'Playoffs' : '—')}</span>
+          <span>{s.Season}</span><span>{s.W ?? '—'}–{s.L ?? '—'}</span><span>{fmt(s.ORtg)}</span><span>{fmt(s.DRtg)}</span><strong>{signed(s.NRtg)}</strong><span className={`team-success ${teamSuccessClass(s.Champion ? 'CHAMPION' : s.Playoff_Finish ?? (s.Made_Playoffs ? 'PLAYOFFS' : '—'))}`}>{teamSuccessLabel(s.Champion ? 'CHAMPION' : s.Playoff_Finish ?? (s.Made_Playoffs ? 'PLAYOFFS' : '—'))}</span>
         </button>)}
       </div>
     </section>
   </div>;
+}
+
+function teamSuccessKey(value: unknown): string {
+  const s = String(value ?? '').trim().toUpperCase();
+  return s === 'CONFERENCE FINALS' ? 'LOST CONFERENCE FINALS' : s;
+}
+function teamSuccessLabel(value: unknown): string {
+  const s = teamSuccessKey(value);
+  if (s === 'CHAMPION') return 'Champion';
+  if (s === 'MADE FINALS') return 'Made Finals';
+  if (s === 'LOST CONFERENCE FINALS') return 'Lost Conference Finals';
+  if (s === 'PLAYOFFS') return 'Playoffs';
+  if (s === 'MISSED PLAYOFFS') return 'Missed Playoffs';
+  return s || '—';
+}
+function teamSuccessClass(value: unknown): string {
+  const s = teamSuccessKey(value);
+  if (s === 'CHAMPION') return 'champion';
+  if (s === 'MADE FINALS') return 'made-finals';
+  if (s === 'LOST CONFERENCE FINALS') return 'lost-conference-finals';
+  if (s === 'PLAYOFFS') return 'playoffs';
+  return 'missed-playoffs';
 }
 
 function Metric({ label, value, sub }: { label: string; value: string; sub: string }) { return <div className="metric-card"><span>{label}</span><strong>{value}</strong><small>{sub}</small></div>; }
