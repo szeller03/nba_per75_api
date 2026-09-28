@@ -10035,6 +10035,15 @@ def api_teams(search="", season=None, season_type="Regular Season", era="", stat
     except Exception:
         pass
 
+    # Attach the canonical competitive-context / Team Success fields to the
+    # exhaustive team-season index consumed by the frontend season selector
+    # and Team Leaderboard. Keep this on the cached analytics path so it does
+    # not require a full source-data load per request.
+    try:
+        _merge_team_competitive_context(rows)
+    except Exception:
+        pass
+
     # A franchise search is still exhaustive, but it should respect the
     # selected statistic and sort direction. Seasons with no value remain in
     # the database and are placed after seasons with valid values.
