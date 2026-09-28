@@ -260,10 +260,9 @@ def _player_row(c,pid):
     r=c.execute('SELECT player_id,player_name,display_name,slug,nba_player_id,headshot_url,headshot_source,headshot_status,qualified_profile,qualified_seasons FROM players WHERE player_id=?',(str(pid),)).fetchone()
     if not r: return None
     out=dict(r)
-    name=str(out.get('player_name') or out.get('display_name') or '').replace('*','').strip().casefold()
-    if name in {'kareem abdul-jabbar','kareem abdul jabbar'} or str(out.get('nba_player_id') or '').strip()=='76003':
-        out['headshot_url']='https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png'
-        out['headshot_source']='NBA CDN canonical'
+    # Do not hard-code a CDN portrait for any player. The active canonical
+    # headshot registry/API resolver owns precedence: approved uploaded PNG first,
+    # NBA CDN only as fallback. A public-layer row must never overwrite that choice.
     return out
 
 def _percentiles(c,pid,season):
