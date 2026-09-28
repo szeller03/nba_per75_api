@@ -9545,7 +9545,7 @@ def _team_analytics_payload():
     if TEAM_ANALYTICS_CACHE.exists():
         try:
             p=json.loads(TEAM_ANALYTICS_CACHE.read_text(encoding="utf-8"))
-            if p.get("version")==26 and p.get("season_types"):
+            if p.get("version")==27 and p.get("season_types"):
                 return p
         except Exception:
             pass
