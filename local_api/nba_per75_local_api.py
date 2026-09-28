@@ -9789,6 +9789,14 @@ def api_team_profile(team, season="", season_type="Regular Season", scope="seaso
     # against the team's season-wide team population mean, then percentile
     # ranked historically across the corresponding relative values. NRtg is
     # retained as a raw impact statistic with a historical percentile.
+    #
+    # IMPORTANT: percentile populations must use the same historical
+    # availability windows as the profile display. Backfilled/derived values
+    # from seasons before a statistic was actually recorded must not change
+    # the historical percentile distribution for that statistic.
+    relative_start={"rTS%":1974,"reFG%":1974,"rTOV%":1974,"rORB%":1974,
+                    "rFTr":1974,"rOpponent TOV%":1974,"rOpponent eFG%":1974,
+                    "r3PAr":1980}
     rel_defs=[
         ("rORtg","Relative ORtg","ortg","higher"),
         ("rDRtg","Relative DRtg","drtg","lower"),
@@ -9817,8 +9825,12 @@ def api_team_profile(team, season="", season_type="Regular Season", scope="seaso
             season_means[hs][raw]=(sum(vals)/len(vals)) if vals else None
     for rr in historical_population:
         hs=str(rr.get("season") or "")
+        hs_year=_season_end_year(hs)
         means=season_means.get(hs,{})
         for key,label,raw,direction in rel_defs:
+            start_year=relative_start.get(key)
+            if start_year is not None and (hs_year is None or hs_year < start_year):
+                continue
             x=_num(rr.get(raw)); m=means.get(raw)
             if x is not None and m is not None:
                 delta=x-m
@@ -9857,7 +9869,6 @@ def api_team_profile(team, season="", season_type="Regular Season", scope="seaso
     nr_pct=_team_percentile(nr_value,nr_pop,higher=True) if nr_value is not None else None
     profile_relative.append({"key":"NRtg","label":"NRtg","value":nr_value,"direction":"higher","percentiles":{"historical":nr_pct}})
 
-    relative_start={"rTS%":1974,"reFG%":1974,"rTOV%":1974,"rORB%":1974,"rFTr":1974,"rOpponent TOV%":1974,"rOpponent eFG%":1974,"r3PAr":1980}
     stats=[]
     for item in profile_relative:
         start_year=relative_start.get(item["key"])
