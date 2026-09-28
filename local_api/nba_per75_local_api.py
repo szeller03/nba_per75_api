@@ -10071,9 +10071,26 @@ class Handler(BaseHTTPRequestHandler):
                         if not row.get("headshot_url"): row["headshot_url"]=_headshot_url_for(row.get("player_id"),row.get("player_name"))
                 return self.send_json(200,result)
             if u.path == "/api/v1/public/big-board" and public_big_board:
-                return self.send_json(200,public_big_board(q.get("statistic",["PTS_per75"])[0],q.get("season",["Historical Percentile"])[0],q.get("context",["Historical"])[0],q.get("sort",["desc"])[0],q.get("search",[""])[0],int(q.get("limit",["100"])[0] or 100),q.get("era",[""])[0]))
+                _pb_stat=q.get("statistic",["PTS_per75"])[0]
+                _pb_season=q.get("season",["Historical Percentile"])[0]
+                _pb_context=q.get("context",["Historical"])[0]
+                _pb_era=q.get("era",[""])[0]
+                if str(_pb_season).casefold() in {"era average","era_average"} or (str(_pb_context).casefold()=="era" and _pb_era):
+                    return self.send_json(200,api_era_average_big_board(
+                        q.get("season_type",["Regular Season"])[0],_pb_era,_pb_stat,
+                        q.get("sort",["desc"])[0],q.get("search",[""])[0],
+                        int(q.get("limit",["100"])[0] or 100)))
+                return self.send_json(200,public_big_board(_pb_stat,_pb_season,_pb_context,q.get("sort",["desc"])[0],q.get("search",[""])[0],int(q.get("limit",["100"])[0] or 100),_pb_era))
             if u.path == "/api/v1/public/teams" and public_teams:
-                return self.send_json(200,public_teams(q.get("season",[""])[0],q.get("season_type",["Regular Season"])[0],q.get("era",[""])[0]))
+                _team_result=api_teams(
+                    search=q.get("search",[""])[0],
+                    season=q.get("season",[""])[0],
+                    season_type=q.get("season_type",["Regular Season"])[0],
+                    era=q.get("era",[""])[0],
+                    statistic=q.get("statistic",["rDRtg"])[0],
+                    direction=q.get("direction",["asc"])[0],
+                )
+                return self.send_json(200,_team_result)
             if u.path == "/api/v1/health":
                 return self.send_json(200, {"ok": True})
             if u.path == "/api/v1/diagnostics":
