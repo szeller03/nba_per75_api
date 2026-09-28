@@ -563,6 +563,32 @@ def big_board(statistic='PTS_per75',season='Historical Percentile',context='Hist
     if c is None:return {'rows':[],'count':0,'ready':False}
     stat=str(statistic or 'PTS_per75')
     if stat not in STAT_COLUMNS:return {'rows':[],'count':0,'error':'Unsupported statistic'}
+    # Career table transport: the public layer previously treated "Career" as
+    # an ordinary season filter, yielding no rows and no secondary values.
+    if str(season or '').casefold() in {'career','career average','career_average'} or str(context or '').casefold()=='career':
+        career=_career_support()
+        companion_map={
+            'FGA_per75':'FG_pct','3PA_per75':'3P_pct','2PA_per75':'2P_pct',
+            'ORB_per75':'OREB_pct','DRB_per75':'DREB_pct','AST_per75':'AST_TOV',
+            'TOV_per75':'AST_TOV'
+        }
+        comp=companion_map.get(stat)
+        rows=[]
+        for pid,item in career.items():
+            if not item.get('Qualified_Career'): continue
+            val=item.get('values',{}).get(stat)
+            if val is None: continue
+            if search and str(item.get('player_name','')).casefold().find(str(search).casefold())<0: continue
+            rows.append({'player_id':pid,'player_name':item.get('player_name'),'season':'Career',
+                         'season_label':'Career','value':val,'percentile':item.get('percentiles',{}).get(stat),
+                         'headshot_url':None,
+                         'companion_values':({comp:item.get('values',{}).get(comp),
+                                              'companion_percentile':item.get('percentiles',{}).get(comp),
+                                              'statistic':comp} if comp else {})})
+        rows.sort(key=lambda r:(r.get('percentile') is None, -(float(r.get('percentile') or 0)) if str(sort).casefold()!='asc' else float(r.get('percentile') or 0)))
+        return {'rows':rows[:int(limit or 100)],'count':min(len(rows),int(limit or 100)),'total':len(rows),
+                'season':'Career','season_type':'Regular Season','context':'Career','career_scope':True,
+                'historical_scope':False,'statistic':stat,'public_layer':True}
     source_stat=stat
     if stat=='2PA_per75' and season and season!='Historical Percentile' and str(season)[:4].isdigit() and int(str(season)[:4])<1979:
         source_stat='FGA_per75'
