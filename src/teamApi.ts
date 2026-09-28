@@ -72,7 +72,40 @@ export async function getTeam(team: string): Promise<TeamProfile> {
 }
 
 export async function getTeamSeasons(team: string): Promise<TeamSeason[]> {
-  return unwrapRecords<TeamSeason>(await getJson(`/api/v1/teams/${encodeURIComponent(team)}/seasons`));
+  const rows = unwrapRecords<Record<string, unknown>>(await getJson(
+    '/api/v1/teams?search=' + encodeURIComponent(team) + '&season_type=Regular%20Season&statistic=NRtg&direction=desc'
+  ));
+  return rows.map((r) => ({
+    ...r,
+    Season: String(r.season ?? r.Season ?? ''),
+    Team: String(r.team ?? r.Team ?? team),
+    W: r.wins ?? r.W,
+    L: r.losses ?? r.L,
+    Win_Pct: r.Win_Pct ?? r.win_pct,
+    ORtg: r.ortg ?? r.ORtg,
+    DRtg: r.drtg ?? r.DRtg,
+    NRtg: r.nrtg ?? r.NRtg,
+    rORTG: r.rortg ?? r.rORTG,
+    rDRTG: r.rdrtg ?? r.rDRTG,
+    Relative_ORtg: r.rortg ?? r.Relative_ORtg,
+    Relative_DRtg: r.rdrtg ?? r.Relative_DRtg,
+    Relative_NRtg: r.nrtg ?? r.Relative_NRtg,
+    Pace_Final: r.pace ?? r.Pace_Final,
+    Champion: r.champion ?? r.Champion,
+    Made_Playoffs: r.made_playoffs ?? r.Made_Playoffs,
+    Playoff_Finish: r.playoff_finish ?? r.Playoff_Finish,
+    Playoff_Round: r.playoff_round ?? r.Playoff_Round,
+    Logo_ID: r.logo_id ?? r.Logo_ID,
+    Logo_File: r.logo_file ?? r.Logo_File,
+  })) as TeamSeason[];
+}
+
+export async function getTeamProfile(team: string, season: string): Promise<any> {
+  return getJson(
+    '/api/v1/teams/profile?team=' + encodeURIComponent(team) +
+    '&season=' + encodeURIComponent(season) +
+    '&season_type=Regular%20Season&scope=season'
+  );
 }
 
 export async function getTeamSeason(team: string, season: string): Promise<TeamSeason> {
