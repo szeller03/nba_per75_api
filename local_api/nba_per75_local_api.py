@@ -9857,7 +9857,7 @@ def api_team_profile(team, season="", season_type="Regular Season", scope="seaso
     nr_pct=_team_percentile(nr_value,nr_pop,higher=True) if nr_value is not None else None
     profile_relative.append({"key":"NRtg","label":"NRtg","value":nr_value,"direction":"higher","percentiles":{"historical":nr_pct}})
 
-    relative_start={"rTS%":1974,"reFG%":1974,"rTOV%":1978,"rORB%":1974,"rFTr":1974,"rOpponent TOV%":1978,"rOpponent eFG%":1974,"r3PAr":1980}
+    relative_start={"rTS%":1974,"reFG%":1974,"rTOV%":1974,"rORB%":1974,"rFTr":1974,"rOpponent TOV%":1974,"rOpponent eFG%":1974,"r3PAr":1980}
     stats=[]
     for item in profile_relative:
         start_year=relative_start.get(item["key"])
