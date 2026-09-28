@@ -92,6 +92,7 @@ export function TeamProfilePage({ team, onBack }: { team: string; onBack?: () =>
   const [profile, setProfile] = useState<any>(null);
   const [seasons, setSeasons] = useState<TeamSeason[]>([]);
   const [selected, setSelected] = useState<string>('');
+  const [profileStats, setProfileStats] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -100,6 +101,13 @@ export function TeamProfilePage({ team, onBack }: { team: string; onBack?: () =>
       .then(([p, s]) => { setProfile(p); setSeasons(s); setSelected(s[0]?.Season ?? ''); })
       .finally(() => setLoading(false));
   }, [team]);
+
+  useEffect(() => {
+    if (!selected) { setProfileStats([]); return; }
+    getTeamProfile(team, selected)
+      .then((p) => setProfileStats(Array.isArray(p?.stats) ? p.stats : []))
+      .catch(() => setProfileStats([]));
+  }, [team, selected]);
 
   const season = seasons.find(s => s.Season === selected) ?? seasons[0];
   const identity = profile?.identity ?? profile?.team ?? profile;
@@ -124,6 +132,32 @@ export function TeamProfilePage({ team, onBack }: { team: string; onBack?: () =>
       <Metric label="ORtg" value={fmt(season.ORtg)} sub={`rORtg ${signed(season.rORTG ?? season.Relative_ORtg)}`} />
       <Metric label="DRtg" value={fmt(season.DRtg)} sub={`rDRtg ${signed(season.rDRTG ?? season.Relative_DRtg)}`} />
       <Metric label="NRtg" value={signed(season.NRtg)} sub={`rNRtg ${signed(season.Relative_NRtg)}`} />
+    </section>
+
+    <section className="team-panel percentile-panel">
+      <div className="panel-head">
+        <div><span className="eyebrow">HISTORICAL PERCENTILES</span><h2>Team Profile Rankings</h2></div>
+        <span className="season-count">0–100</span>
+      </div>
+      <div className="percentile-grid">
+        {profileStats.map((item) => {
+          const percentile = Number(item?.percentiles?.historical);
+          if (!Number.isFinite(percentile)) return null;
+          const clamped = Math.max(0, Math.min(100, percentile));
+          const tone = clamped >= 90 ? 'elite' : clamped >= 75 ? 'strong' : clamped >= 50 ? 'average' : clamped >= 25 ? 'below' : 'low';
+          const rawValue = Number(item?.value);
+          const displayValue = Number.isFinite(rawValue)
+            ? (String(item?.key ?? '').includes('%') ? `${rawValue.toFixed(1)}%` : (rawValue > 0 ? '+' : '') + rawValue.toFixed(1))
+            : '—';
+          return (
+            <div className="percentile-card" key={item.key}>
+              <div className="percentile-card-head"><span>{item.label}</span><strong className={`percentile-value ${tone}`}>{clamped.toFixed(0)}</strong></div>
+              <div className="percentile-meta"><span>{displayValue}</span><span>{item.direction === 'lower' ? 'LOWER IS BETTER' : 'HIGHER IS BETTER'}</span></div>
+              <div className="percentile-track"><span className={tone} style={{ width: `${clamped}%` }} /></div>
+            </div>
+          );
+        })}
+      </div>
     </section>
 
     <section className="team-panel">
