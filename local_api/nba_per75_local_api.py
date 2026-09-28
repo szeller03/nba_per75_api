@@ -9301,6 +9301,13 @@ def _build_team_analytics_cache():
             g=g.dropna(subset=[c["ortg"],c["drtg"],c["pace"]])
             if g.empty: continue
             rec=g.iloc[0]
+            # The bundled enriched Team master carries its legacy eFG%/TOV%
+            # fields as the opponent/defensive Four-Factor copy. Preserve those
+            # raw values before the canonical offensive layer overwrites the
+            # public eFG%/TOV% fields. Only use this fallback for the enriched
+            # Team master; never infer opponent values from a generic source.
+            _legacy_opp_efg = _num(rec[c["efgpct"]]) if c.get("efgpct") and "enriched" in path.name.lower() else None
+            _legacy_opp_tov = _num(rec[c["tovpct"]]) if c.get("tovpct") and "enriched" in path.name.lower() else None
             r={"team":str(tm),"season":str(se),"season_type":requested,
                "source":str(path)}
             # Historical logo identity travels with the same team-season row.
@@ -9414,6 +9421,12 @@ def _build_team_analytics_cache():
             _def_tov=_num(bref.get("opp_tovpct")) if isinstance(bref,dict) else None
             if _def_efg is None: _def_efg=_ff_nested_value(ff,"defense","efg")
             if _def_tov is None: _def_tov=_ff_nested_value(ff,"defense","tov")
+            # On the canonical enriched Team master, the legacy eFG%/TOV%
+            # columns are the defensive/opponent copy. They are safe to expose
+            # as opponent values because the canonical offensive CSV above is
+            # the independent source for the offensive copy.
+            if _def_efg is None: _def_efg=_legacy_opp_efg
+            if _def_tov is None: _def_tov=_legacy_opp_tov
             if _off_efg is None: _off_efg=_ff_nested_value(ff,"offense","efg")
             if _off_tov is None: _off_tov=_ff_nested_value(ff,"offense","tov")
 
