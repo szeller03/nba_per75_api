@@ -146,7 +146,7 @@ function Home() {
 const HISTORICAL_HEADSHOT_MAP = {};
 const HISTORICAL_HEADSHOT_IDS = new Set(Object.keys(HISTORICAL_HEADSHOT_MAP));
 const CREATE_T75_HEADSHOT_OVERRIDES = {
-  "kareem abdul-jabbar": "/player_headshots_final_v1/P002997.png",
+  "kareem abdul-jabbar": "https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png",
   "alex english": "/player_headshots_final_v1/P000102.png",
   "alex english*": "/player_headshots_final_v1/P000103.png",
   "shaquille o'neal": "https://cdn.nba.com/headshots/nba/latest/1040x760/406.png",
