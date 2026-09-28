@@ -6,7 +6,7 @@ _ESTABLISHED_ROOT=Path(os.environ.get("NBA_PER75_ROOT", r"C:\Users\szell\OneDriv
 _ROOT_CANDIDATES=[
     _ESTABLISHED_ROOT,
     HERE.parents[2] / "NBA_Per75",
-    HERE.parents[3] / "NBA_Per75",
+    HERE.parents[3] / "NBA_Per75" if len(HERE.parents) > 3 else Path("/nonexistent/NBA_Per75"),
 ]
 ROOT=next((p for p in _ROOT_CANDIDATES if (p/"data").exists()),_ESTABLISHED_ROOT)
 MASTER=ROOT/"data"/"nba_per75_master_v46.csv"
