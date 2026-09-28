@@ -5776,8 +5776,14 @@ def api_era_average_big_board(season_type="Regular Season",era=None,statistic=No
     all_key=f"__era_average_rows_v3__:{season_type}:{era_key}:__all__"
     if statistic and all_key in CACHE:
         _all_rows,_all_meta=CACHE[all_key]
-        rows=_all_rows.copy()
-        meta=dict(_all_meta)
+        # The all-stat warm bundle can legitimately omit a legacy alias or a
+        # newly requested statistic. In that case rebuild only the requested
+        # statistic instead of returning an empty board.
+        if statistic in _all_rows.columns:
+            rows=_all_rows.copy()
+            meta=dict(_all_meta)
+        else:
+            rows,meta=_era_average_qualified_rows(source,season_type,era_key,statistic)
     else:
         rows,meta=_era_average_qualified_rows(source,season_type,era_key,statistic)
     if rows.empty or not statistic or statistic not in rows.columns:
