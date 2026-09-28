@@ -713,6 +713,22 @@ def _warm_career_sdi_axes():
         # project tree for that exact legacy source so a data-folder relocation
         # cannot silently trigger a recomputation from the active SDI formula.
         path = _recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
+        # Also discover the canonical career SDI export by schema.  Several
+        # finalized builds used a descriptive filename rather than the legacy
+        # filename above; the data itself is authoritative and must not be
+        # discarded merely because the filename changed.
+        if path is None or not path.exists():
+            try:
+                for candidate in ROOT.rglob("*.csv"):
+                    try:
+                        cols=pd.read_csv(candidate,nrows=0).columns.tolist()
+                    except Exception:
+                        continue
+                    if "SDI_v4_WOWY" in cols and "Career_scoring_volume" in cols and "Career_impact_value" in cols:
+                        path=candidate
+                        break
+            except Exception:
+                path=None
         out = {"id": {}, "name": {}}
         if path is None or not path.exists():
             _CAREER_SDI_AXES = out
@@ -754,6 +770,17 @@ def _warm_career_sdi_axes():
                 item[label+"_percentile"]=float(pct.iloc[i]) if pd.notna(pct.iloc[i]) else np.nan
 
         for item in raw_rows:
+            # Overall Career SDI is an authoritative career-layer value. Keep
+            # it separate from the six category percentiles so the Profile can
+            # display the actual composite rather than NQ.
+            overall=None
+            for field_name in ("Career_SDI_v4_WOWY","SDI_v4_WOWY","Career_SDI_v4","SDI_v4"):
+                if field_name in sd.columns:
+                    ov=pd.to_numeric(sd.loc[sd.index[raw_rows.index(item)], field_name], errors="coerce")
+                    if pd.notna(ov):
+                        overall=float(ov)
+                        break
+            item["_overall_sdi"]=overall
             axes=[]
             for label, field in mapping:
                 raw=item.get(label,np.nan)
@@ -768,9 +795,9 @@ def _warm_career_sdi_axes():
             if not axes:
                 continue
             if item.get("id"):
-                out["id"][item["id"]]=axes
+                out["id"][item["id"]]={"axes":axes,"overall_sdi":item.get("_overall_sdi")}
             if item.get("name"):
-                out["name"][item["name"]]=axes
+                out["name"][item["name"]]={"axes":axes,"overall_sdi":item.get("_overall_sdi")}
         _CAREER_SDI_AXES=out
 
 def _rebuild_career_category_axes_from_current_formula(pid=None, pname=None):
@@ -816,7 +843,17 @@ def _career_sdi_axes(pid=None, pname=None):
         axes=cache.get("id",{}).get(str(pid).strip(),[]) or []
     if not axes and pname:
         axes=cache.get("name",{}).get(str(pname).replace("*","").strip().casefold(),[]) or []
+    if isinstance(axes,dict):
+        overall_sdi=axes.get("overall_sdi")
+        axes=axes.get("axes",[]) or []
+    else:
+        overall_sdi=None
     axes=[dict(a) for a in axes]
+    if isinstance(axes, dict):
+        overall_sdi=axes.get("overall_sdi")
+        axes=axes.get("axes",[]) or []
+    else:
+        overall_sdi=None
     if not axes:
         return []
 
@@ -1075,6 +1112,8 @@ def _warm_regular_career_spider_cache():
             career_axes = category_axes_by_id.get(pid, [])
             if not career_axes:
                 career_axes = category_axes_by_name.get(pname, [])
+            _career_entry=(_CAREER_SDI_AXES or {}).get("id",{}).get(pid0) or (_CAREER_SDI_AXES or {}).get("name",{}).get(pname0.casefold())
+            _career_overall=_career_entry.get("overall_sdi") if isinstance(_career_entry,dict) else None
             payload = {
                 "found": True,
                 "player": {"player_id": pid, "player_name": pname_raw},
@@ -1083,6 +1122,8 @@ def _warm_regular_career_spider_cache():
                 "available_contexts": {"Season": False, "Era": False, "Historical": False, "Career": True},
                 "category_axes": career_axes,
                 "stat_axes": [],
+                "sdi": clean(_career_overall),
+                "raw_sdi": clean(_career_overall),
             }
 
             if pid:
@@ -2895,6 +2936,14 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
     # has its own v2 peak bundle and is intentionally not changed here.
     path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_wowy_canonical_v1.json"
     if not path.exists():
+        try:
+            candidates=list(ROOT.rglob("*.json"))
+            candidates=[p for p in candidates if "regular_profile_peaks" in p.name.lower() and p.is_file()]
+            candidates.sort(key=lambda p:(0 if "canonical" in p.name.lower() else 1, len(str(p))))
+            path=candidates[0] if candidates else None
+        except Exception:
+            path=None
+    if path is None or not path.exists():
         return None
     try:
         cache_key="__precomputed_regular_peak_profiles_v7_sdi_v4_authoritative__"
@@ -5177,6 +5226,9 @@ def api_spider(requested, season=None, context="Historical", stats=None, season_
     out={"found":True,"player":{"player_id":pid,"player_name":pname},
          "season":season,"context":context,"available_contexts":available,
          "category_axes":axes,"stat_axes":stat_axes}
+    if context=="Career" and overall_sdi is not None:
+        out["sdi"]=float(overall_sdi)
+        out["raw_sdi"]=float(overall_sdi)
     if context!="Career" and str(season).casefold() not in {"5-year peak","5 year peak","five-year peak","five_year_peak"}:
         if 'overall_sdi' in locals() and overall_sdi is not None:
             out["sdi"]=float(overall_sdi)
@@ -6585,8 +6637,66 @@ BREF_3P = {}
 BREF_TSA = {}
 BREF_BASIC_GAMES = {}
 
+_CAREER_SUPPORT_CACHE = None
+
+def _load_career_support_values():
+    global _CAREER_SUPPORT_CACHE
+    if _CAREER_SUPPORT_CACHE is not None:
+        return _CAREER_SUPPORT_CACHE
+    _CAREER_SUPPORT_CACHE=pd.DataFrame()
+    try:
+        candidates=list(ROOT.rglob("*.gz")) + list(ROOT.rglob("*.csv"))
+        for f in candidates:
+            name=f.name.lower()
+            if "career" not in name and "support" not in name:
+                continue
+            try:
+                hdr=pd.read_csv(f,nrows=0,compression="infer").columns.tolist()
+            except Exception:
+                continue
+            if "player_id" in hdr and any(str(c).startswith("v__") for c in hdr):
+                _CAREER_SUPPORT_CACHE=pd.read_csv(f,low_memory=False,compression="infer")
+                break
+    except Exception:
+        pass
+    return _CAREER_SUPPORT_CACHE
+
 def _regular_career_big_board(statistic, sort_direction="desc", search=None, limit=100):
     career=_build_regular_career_table()
+    # Fill missing career statistics from the canonical compact career-support
+    # layer when one is present. Existing canonical values always win.
+    support=_load_career_support_values()
+    if not career.empty and not support.empty:
+        sid=col(support,["player_id","Player_ID","PlayerId","PlayerID"])
+        cid=col(career,["Player_ID","PlayerId","PlayerID","player_id"])
+        if sid and cid:
+            sv=support.copy()
+            sv["__pid"]=sv[sid].astype(str).str.strip()
+            keep={"__pid"}
+            for c in sv.columns:
+                if str(c).startswith("v__"):
+                    stat_name=str(c)[3:]
+                    if stat_name in PLAYOFF_STATS:
+                        career_col=stat_name
+                        tmp=pd.to_numeric(sv[c],errors="coerce")
+                        if career_col not in career.columns:
+                            sv[f"__fill__{career_col}"]=tmp
+                            keep.add(f"__fill__{career_col}")
+            fill_cols=[c for c in sv.columns if c.startswith("__fill__")]
+            if fill_cols:
+                fills=sv[["__pid"]+fill_cols].drop_duplicates("__pid",keep="first")
+                career["__pid"]=career[cid].astype(str).str.strip()
+                career=career.merge(fills,on="__pid",how="left")
+                for fc in fill_cols:
+                    stat_name=fc.replace("__fill__","")
+                    if stat_name in career.columns:
+                        career[stat_name]=pd.to_numeric(career[stat_name],errors="coerce").where(
+                            pd.to_numeric(career[stat_name],errors="coerce").notna(),
+                            pd.to_numeric(career[fc],errors="coerce")
+                        )
+                    else:
+                        career[stat_name]=pd.to_numeric(career[fc],errors="coerce")
+                career=career.drop(columns=["__pid"]+fill_cols,errors="ignore")
     if career.empty or not statistic: return []
     # WOWY Career is a first-class board. The canonical WOWY layer does not
     # carry minutes in its compact export, so join it to the authoritative
