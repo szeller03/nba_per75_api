@@ -213,7 +213,7 @@ function Headshot({ player, name="", className="", alt="", preferDirect=false, p
   const [attempt,setAttempt]=useState(0);
   useEffect(()=>setAttempt(0),[identity,direct,name]);
   const namedOverride=CREATE_T75_HEADSHOT_OVERRIDES[_nameKey(name)];
-  const candidates=[...(preferCanonicalApi?[localOverride,namedOverride,endpoint,direct]:preferDirect?[direct]:[localOverride,namedOverride,direct,endpoint])].filter(Boolean).map(x=>String(x).split("?")[0]).filter((x,i,a)=>a.indexOf(x)===i);
+  const candidates=[...(preferCanonicalApi?[localOverride,direct,endpoint,namedOverride]:preferDirect?[direct,localOverride,endpoint,namedOverride]:[localOverride,direct,endpoint,namedOverride])].filter(Boolean).map(x=>String(x).split("?")[0]).filter((x,i,a)=>a.indexOf(x)===i);
   const src=candidates[attempt] || "";
   const isHistoricalLocal=String(src||"").startsWith("/player_headshots_final_v1/");
   if(!src)return <span className="sil">{initials}</span>;
@@ -994,12 +994,12 @@ function Teams() {
 
   const statOptions=[
     ["rDRtg","Relative DRtg"],["rORtg","Relative ORtg"],["NRtg","NRtg"],["Pace","Pace"],["rPace","Relative Pace"],
-    ["ORtg","ORtg"],["DRtg","DRtg"],["TS%","TS%"],["eFG%","eFG%"],
-    ["3PAr","3PAr"],["TOV%","TOV%"],["ORB%","ORB%"],["FTr","FTr"],
+    ["ORtg","ORtg"],["DRtg","DRtg"],["TS%","TS%"],["Offensive eFG%","Offensive eFG%"],
+    ["3PAr","3PAr"],["Offensive TOV%","Offensive TOV%"],["ORB%","ORB%"],["FTr","FTr"],
     ["Opp TOV%","Opponent TOV%"],["Opp eFG%","Opponent eFG%"]
   ];
   const keyMap={"rDRtg":"rdrtg","rORtg":"rortg","NRtg":"nrtg","Pace":"pace","rPace":"rpace","ORtg":"ortg","DRtg":"drtg",
-    "TS%":"tspct","eFG%":"efgpct","3PAr":"threepar","TOV%":"tovpct","ORB%":"orbpct","FTr":"ftr","Opp TOV%":"opp_tovpct","Opp eFG%":"opp_efgpct"};
+    "TS%":"tspct","Offensive eFG%":"efgpct","3PAr":"threepar","Offensive TOV%":"tovpct","ORB%":"orbpct","FTr":"ftr","Opp TOV%":"opp_tovpct","Opp eFG%":"opp_efgpct"};
   const labelFor=(key)=>{const x=statOptions.find((v)=>v[0]===key);return x?x[1]:key;};
   const fmt=(v,key)=>{
     if(v==null||!Number.isFinite(Number(v)))return "—";
