@@ -9197,19 +9197,58 @@ def _build_team_analytics_cache():
             # where the existing opponent source is genuinely missing.
             ff=bref_ff.get("seasons",{}).get(f"{requested}|{se}",{}).get(_bref_team_key(tm),{})
             bref=bref_cache.get("seasons",{}).get(f"{requested}|{se}",{}).get(_bref_team_key(tm),{})
-            # Once a verified BRef Four Factors row exists, its OFFENSIVE
-            # eFG% and TOV% are authoritative. This deliberately overrides
-            # any ambiguous/mislabeled team-master percentage columns.
-            if ff.get("efgpct") is not None:
-                r["efgpct"]=float(ff["efgpct"])
-            if ff.get("tovpct") is not None:
-                r["tovpct"]=float(ff["tovpct"])
-            if ff.get("ftr") is not None:
-                r["ftr"]=float(ff["ftr"])
-            if r.get("opp_efgpct") is None and bref.get("opp_efgpct") is not None:
-                r["opp_efgpct"]=float(bref["opp_efgpct"])
-            if r.get("opp_tovpct") is None and bref.get("opp_tovpct") is not None:
-                r["opp_tovpct"]=float(bref["opp_tovpct"])
+
+            # IMPORTANT: nba_per75_team_master_enriched.csv contains legacy
+            # eFG%/TOV% fields that are actually the DEFENSIVE/opponent
+            # Four-Factor values. Never trust those fields as offensive values.
+            # The canonical BRef Four Factors cache is the source of truth for
+            # the offensive copy. Opponent values come from the dedicated
+            # defensive cache when present, or from an explicit defensive copy
+            # embedded in the canonical Four Factors row.
+            def _ff_nested_value(obj, side, key):
+                if not isinstance(obj, dict):
+                    return None
+                side_obj=None
+                for k,v in obj.items():
+                    nk=re.sub(r"[^a-z0-9]","",str(k).lower())
+                    if side=="offense" and nk in {"offense","offensive","offensivefourfactors"}:
+                        side_obj=v
+                    if side=="defense" and nk in {"defense","defensive","opponent","opponentfourfactors","defensivefourfactors"}:
+                        side_obj=v
+                if isinstance(side_obj,dict):
+                    for k,v in side_obj.items():
+                        nk=re.sub(r"[^a-z0-9]","",str(k).lower())
+                        if key=="efg" and ("efg" in nk and ("pct" in nk or "percent" in nk or nk.endswith("efg"))):
+                            return _num(v)
+                        if key=="tov" and ("tov" in nk and ("pct" in nk or "percent" in nk or nk.endswith("tov"))):
+                            return _num(v)
+                return None
+
+            _off_efg=_num(ff.get("efgpct")) if isinstance(ff,dict) else None
+            _off_tov=_num(ff.get("tovpct")) if isinstance(ff,dict) else None
+            _off_ftr=_num(ff.get("ftr")) if isinstance(ff,dict) else None
+            _def_efg=_num(bref.get("opp_efgpct")) if isinstance(bref,dict) else None
+            _def_tov=_num(bref.get("opp_tovpct")) if isinstance(bref,dict) else None
+            if _def_efg is None: _def_efg=_ff_nested_value(ff,"defense","efg")
+            if _def_tov is None: _def_tov=_ff_nested_value(ff,"defense","tov")
+            if _off_efg is None: _off_efg=_ff_nested_value(ff,"offense","efg")
+            if _off_tov is None: _off_tov=_ff_nested_value(ff,"offense","tov")
+
+            if _off_efg is not None:
+                r["efgpct"]=_off_efg
+            else:
+                # Do not expose the mislabeled opponent value as offensive.
+                r["efgpct"]=None
+            if _off_tov is not None:
+                r["tovpct"]=_off_tov
+            else:
+                r["tovpct"]=None
+            if _off_ftr is not None:
+                r["ftr"]=_off_ftr
+            if _def_efg is not None:
+                r["opp_efgpct"]=_def_efg
+            if _def_tov is not None:
+                r["opp_tovpct"]=_def_tov
 
             # Guard against accidentally ingesting a player-level source.
             if r.get("nrtg") is not None:
