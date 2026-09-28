@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import {
   getTeam,
   getTeamLeaderboardFeed,
+  getTeamProfile,
   getTeamSeasons,
   getTeams,
   teamLogoCandidates,
