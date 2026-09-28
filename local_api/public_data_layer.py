@@ -581,7 +581,7 @@ def big_board(statistic='PTS_per75',season='Historical Percentile',context='Hist
             if search and str(item.get('player_name','')).casefold().find(str(search).casefold())<0: continue
             rows.append({'player_id':pid,'player_name':item.get('player_name'),'season':'Career',
                          'season_label':'Career','value':val,'percentile':item.get('percentiles',{}).get(stat),
-                         'headshot_url':None,
+                         'headshot_url':_player_row(c,pid).get('headshot_url') if _player_row(c,pid) else None,
                          'companion_values':({comp:item.get('values',{}).get(comp),
                                               'companion_percentile':item.get('percentiles',{}).get(comp),
                                               'statistic':comp} if comp else {})})
