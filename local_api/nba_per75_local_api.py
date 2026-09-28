@@ -5160,6 +5160,10 @@ def api_spider(requested, season=None, context="Historical", stats=None, season_
         peak_authoritative_axes=_REGULAR_PEAK_SDI_AXES_CACHE.get(pk_key)
         if peak_authoritative_axes is None:
             peak_authoritative_axes=_regular_peak_category_percentile_axes(peak)
+        try:
+            overall_sdi=float((peak.get('peak') or {}).get('sdi'))
+        except Exception:
+            overall_sdi=None
     # Career spider uses the canonical career percentile population directly.
     # Season percentile tables do not contain a Career row, so filtering them
     # by season="Career" necessarily produced an empty spider.
@@ -5234,7 +5238,7 @@ def api_spider(requested, season=None, context="Historical", stats=None, season_
     out={"found":True,"player":{"player_id":pid,"player_name":pname},
          "season":season,"context":context,"available_contexts":available,
          "category_axes":axes,"stat_axes":stat_axes}
-    if context=="Career" and overall_sdi is not None:
+    if (context=="Career" or str(season).casefold() in {"5-year peak","5 year peak","five-year peak","five_year_peak"}) and 'overall_sdi' in locals() and overall_sdi is not None:
         out["sdi"]=float(overall_sdi)
         out["raw_sdi"]=float(overall_sdi)
     if context!="Career" and str(season).casefold() not in {"5-year peak","5 year peak","five-year peak","five_year_peak"}:
