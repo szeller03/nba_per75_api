@@ -2085,10 +2085,46 @@ def _load_regular_sdi_v4_player_seasons():
     if cache_path.exists():
         try:
             d=pd.read_csv(cache_path,low_memory=False)
-            if "__pid" not in d.columns:
-                d["__pid"]=d["Player_ID"].astype(str).str.strip()
-            if "__season" not in d.columns:
-                d["__season"]=pd.to_numeric(d["SeasonEndYear"],errors="coerce")
+
+            # Normalize the cache's internal identity/season aliases at the
+            # loader boundary. Some production cache builds intentionally use
+            # __pid/__season as their compact canonical keys; the SDI Big Board
+            # contract, however, expects the public Player_ID/Player/Season
+            # fields. Never let an internal cache schema leak into an endpoint.
+            pid_src=col(d,["Player_ID","PlayerId","PlayerID","player_id","__pid"])
+            if pid_src:
+                d["__pid"]=d[pid_src].astype(str).str.strip()
+                if "Player_ID" not in d.columns:
+                    d["Player_ID"]=d["__pid"]
+
+            season_src=col(d,["Season","season","SeasonEndYear","Season_End_Year","__season"])
+            if season_src:
+                d["__season"]=pd.to_numeric(d[season_src].map(_season_end_year),errors="coerce")
+                if "Season" not in d.columns:
+                    d["Season"]=d["__season"].map(_season_label_any)
+
+            name_src=col(d,["Player","Player_Name","Display_Name","player_name","Name"])
+            if name_src:
+                d["Player"]=d[name_src].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+
+            # If the compact cache contains IDs but no display names, resolve
+            # names from the same canonical master identity layer used elsewhere
+            # in the API. This is an identity-only hydration; it does not alter
+            # any SDI values or methodology.
+            if "Player" not in d.columns or d["Player"].isna().all():
+                try:
+                    master=load_master_seasons()
+                    mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                    mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                    if mpid and mname:
+                        names=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                        names["__pid"]=names[mpid].astype(str).str.strip()
+                        names["Player"]=names[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                        names=names.drop_duplicates("__pid",keep="first")[["__pid","Player"]]
+                        d=d.drop(columns=["Player"],errors="ignore").merge(names,on="__pid",how="left")
+                except Exception:
+                    pass
+
             CACHE[key]=d
             return d
         except Exception:
