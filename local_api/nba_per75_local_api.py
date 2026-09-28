@@ -9224,12 +9224,20 @@ def _build_team_analytics_cache():
         # contains the distinct OFFENSE and DEFENSE columns from the source
         # table, so the team master cannot accidentally swap/duplicate eFG% or
         # TOV% when pandas has suffixed duplicate headers.
-        bref_ff_path=Path(__file__).resolve().parent/"cache"/"bref_team_four_factors_v2.json"
+        def _find_runtime_cache(filename):
+            primary=Path(__file__).resolve().parent/"cache"/filename
+            if primary.exists(): return primary
+            try:
+                hits=list(ROOT.rglob(filename))
+                return hits[0] if hits else primary
+            except Exception:
+                return primary
+        bref_ff_path=_find_runtime_cache("bref_team_four_factors_v2.json")
         try:
             bref_ff=json.loads(bref_ff_path.read_text(encoding="utf-8")) if bref_ff_path.exists() else {"seasons":{}}
         except Exception:
             bref_ff={"seasons":{}}
-        bref_cache_path=Path(__file__).resolve().parent/"cache"/"bref_team_defense_four_factors_v1.json"
+        bref_cache_path=_find_runtime_cache("bref_team_defense_four_factors_v1.json")
         try:
             bref_cache=json.loads(bref_cache_path.read_text(encoding="utf-8")) if bref_cache_path.exists() else {"seasons":{}}
         except Exception:
