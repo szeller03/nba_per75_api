@@ -3020,6 +3020,10 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
                 "era":hit.get("peak_era"),
                 "sdi":hit.get("peak_sdi"),
             },
+            # Expose the overall peak SDI at the same top level used by the
+            # Career/Season profile header and spider payloads.
+            "sdi":clean(hit.get("peak_sdi")),
+            "raw_sdi":clean(hit.get("peak_sdi")),
             "source":"precomputed_5_year_peak_authoritative_v6",
             "peak_cache_version":"regular_profile_peaks_wowy_canonical_v1",
         }
@@ -3292,6 +3296,11 @@ def api_profile(requested, season, season_type="Regular Season"):
     except Exception:
         pass
 
+    # Canonical headshot override for Kareem. Some legacy headshot registry
+    # rows can still resolve before the canonical NBA-CDN resolver is applied.
+    if str(pid or "").strip() == "76003" or str(pname or "").replace("*","").strip().casefold() in {"kareem abdul-jabbar","kareem abdul jabbar"}:
+        headshot = "https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png"
+
     profile = None
     if not current.empty:
         if is_career:
@@ -3315,6 +3324,26 @@ def api_profile(requested, season, season_type="Regular Season"):
             career["Career_Qualification"]=("G >= 400 AND MP >= 10,000")
             career["Qualified_Career"] = bool(pd.to_numeric(career.get("G", np.nan), errors="coerce") >= 400 and pd.to_numeric(career.get("MP", np.nan), errors="coerce") >= 10000)
             career["Career_SDI_Qualified"] = career["Qualified_Career"]
+
+            # Career overall SDI is an authoritative career-layer value. The
+            # existing Career spider already warms the same WOWY-aware source,
+            # but the Profile header also needs the scalar on the profile
+            # payload itself. Do not recompute Career SDI from season rows here.
+            try:
+                _warm_career_sdi_axes()
+                _career_sdi_item = (_CAREER_SDI_AXES or {}).get("id",{}).get(str(pid).strip())
+                if not _career_sdi_item and pname:
+                    _career_sdi_item = (_CAREER_SDI_AXES or {}).get("name",{}).get(
+                        str(pname).replace("*","").strip().casefold()
+                    )
+                if isinstance(_career_sdi_item,dict):
+                    _career_overall = _career_sdi_item.get("overall_sdi")
+                    if _career_overall is not None:
+                        career["Career_SDI_v4_WOWY"] = clean(_career_overall)
+                        career["SDI_v4_WOWY"] = clean(_career_overall)
+            except Exception:
+                pass
+
             profile=career
         else:
             if is_playoffs:
@@ -9519,12 +9548,26 @@ def _merge_team_competitive_context(rows):
         success_candidates=[
             f"{se}|||{raw_team}",
             f"{se}|||{_clean_team_name(raw_team)}",
+            f"{se}|||{_context_team_key(raw_team)}",
         ]
         success_value=None
         for _sk in success_candidates:
             if _sk in success_map:
                 success_value=success_map[_sk]
                 break
+        # Some playoff-success cache builds normalize the team portion of the
+        # key differently. If direct keys miss, normalize the cache keys once
+        # and match on season + canonical franchise identity.
+        if success_value is None and success_map:
+            target_key=_context_team_key(raw_team)
+            for _sk,_sv in success_map.items():
+                try:
+                    _sy,_tmkey=str(_sk).split("|||",1)
+                    if str(_sy)==se and _context_team_key(_tmkey)==target_key:
+                        success_value=_sv
+                        break
+                except Exception:
+                    continue
         if success_value is not None:
             r["playoff_status"]=success_value
             r["playoff_finish"]=success_value
@@ -9556,7 +9599,10 @@ def _team_analytics_payload():
 _TEAM_STAT_KEY_MAP = {
     "rDRtg":"rdrtg","rORtg":"rortg","NRtg":"nrtg","Pace":"pace","rPace":"rpace",
     "ORtg":"ortg","DRtg":"drtg","TS%":"tspct",
-    "eFG%":"efgpct","3PAr":"threepar","TOV%":"tovpct","ORB%":"orbpct","FTr":"ftr","Opp TOV%":"opp_tovpct","Opp eFG%":"opp_efgpct",
+    "eFG%":"efgpct","Offensive eFG%":"efgpct",
+    "3PAr":"threepar","TOV%":"tovpct","Offensive TOV%":"tovpct",
+    "ORB%":"orbpct","FTr":"ftr","Opp TOV%":"opp_tovpct","Opponent TOV%":"opp_tovpct",
+    "Opp eFG%":"opp_efgpct","Opponent eFG%":"opp_efgpct",
     "rdrtg":"rdrtg","rortg":"rortg","nrtg":"nrtg","pace":"pace","rpace":"rpace","ortg":"ortg","drtg":"drtg",
     "tspct":"tspct","efgpct":"efgpct","threepar":"threepar",
     "tovpct":"tovpct","orbpct":"orbpct","ftr":"ftr","opp_tovpct":"opp_tovpct","opp_efgpct":"opp_efgpct"
@@ -9565,7 +9611,8 @@ _TEAM_DISPLAY_STATS = [
     ("rDRtg","Relative DRtg","lower"),("rORtg","Relative ORtg","higher"),
     ("NRtg","NRtg","higher"),("Pace","Pace","higher"),("rPace","Relative Pace","higher"),("ORtg","ORtg","higher"),
     ("DRtg","DRtg","lower"),("TS%","TS%","higher"),
-    ("eFG%","eFG%","higher"),("3PAr","3PAr","higher"),("TOV%","TOV%","lower"),
+    ("Offensive eFG%","Offensive eFG%","higher"),("3PAr","3PAr","higher"),
+    ("Offensive TOV%","Offensive TOV%","lower"),
     ("ORB%","ORB%","higher"),("FTr","FTr","higher"),
     ("Opp TOV%","Opponent TOV%","higher"),("Opp eFG%","Opponent eFG%","lower")
 ]
