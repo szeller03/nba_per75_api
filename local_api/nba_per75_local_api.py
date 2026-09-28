@@ -857,11 +857,6 @@ def _career_sdi_axes(pid=None, pname=None):
     else:
         overall_sdi=None
     axes=[dict(a) for a in axes]
-    if isinstance(axes, dict):
-        overall_sdi=axes.get("overall_sdi")
-        axes=axes.get("axes",[]) or []
-    else:
-        overall_sdi=None
     if not axes:
         return []
 
