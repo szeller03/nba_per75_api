@@ -9428,7 +9428,7 @@ def _build_team_analytics_cache():
 
     all_rows=[r for v in season_types.values() for r in v["rows"]]
     payload={
-        "version":26,
+        "version":27,
         "season_types":season_types,
         "rows":all_rows,
         "seasons":sorted({r["season"] for r in all_rows},reverse=True),
