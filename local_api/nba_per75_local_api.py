@@ -7717,6 +7717,44 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
     else:
         _sdi_path = ROOT/"local_api"/"cache"/"regular_sdi_v4_wowy_rts_player_seasons.csv"
         sdi_index = pd.read_csv(_sdi_path,low_memory=False) if _sdi_path.exists() else _load_regular_sdi_v4_player_seasons()
+
+    # The deployed Career SDI artifact may be an older compact cache whose
+    # internal identity fields are __pid/__season rather than the public
+    # Player_ID/Player/Season contract. Normalize that artifact immediately
+    # after loading it, because the Career branch intentionally reads the
+    # precomputed CSV directly.
+    if not is_playoff and sdi_index is not None and not sdi_index.empty:
+        pid_src=col(sdi_index,["Player_ID","PlayerId","PlayerID","player_id","__pid"])
+        if pid_src:
+            sdi_index["__pid"]=sdi_index[pid_src].astype(str).str.strip()
+            if "Player_ID" not in sdi_index.columns:
+                sdi_index["Player_ID"]=sdi_index["__pid"]
+
+        season_src=col(sdi_index,["Season","season","SeasonEndYear","Season_End_Year","__season"])
+        if season_src:
+            sdi_index["__season"]=pd.to_numeric(sdi_index[season_src].map(_season_end_year),errors="coerce")
+            if "Season" not in sdi_index.columns:
+                sdi_index["Season"]=sdi_index["__season"].map(_season_label_any)
+
+        name_src=col(sdi_index,["Player","Player_Name","Display_Name","player_name","Name"])
+        if name_src:
+            sdi_index["Player"]=sdi_index[name_src].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+        else:
+            # Hydrate display names from the canonical master identity layer.
+            # This is identity-only and does not change SDI calculations.
+            try:
+                master=load_master_seasons()
+                mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                if mpid and mname and "Player_ID" in sdi_index.columns:
+                    names=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                    names["__pid"]=names[mpid].astype(str).str.strip()
+                    names["Player"]=names[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                    names=names.drop_duplicates("__pid",keep="first")[["__pid","Player"]]
+                    sdi_index=sdi_index.drop(columns=["Player"],errors="ignore").merge(names,on="__pid",how="left")
+            except Exception:
+                pass
+
     sdi_year_col = _existing_season_column(sdi_index)
 
     def _finish_sdi(df, scope_name, season_value, context_value):
