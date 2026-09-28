@@ -160,16 +160,13 @@ PATHS["stat_registry"]=PATHS["statistic_registry"]
 CACHE = {}
 
 def _headshot_url_for(player_id=None, player_name=None):
-    """Canonical runtime resolver: shipped PNGs first, NBA CDN second; never B-Ref.
+    """Canonical runtime resolver: approved uploaded PNGs first, NBA CDN second; never B-Ref.
     
-    Kareem Abdul-Jabbar is pinned explicitly because the production public
-    player registry has historically carried an incorrect/stale image mapping.
+    The active headshot registry is authoritative. A shipped/uploaded PNG always
+    wins over an NBA CDN portrait; the CDN is only a fallback when no approved
+    PNG is registered for that player.
     """
-    _pid = str(player_id).strip() if player_id is not None else ""
-    _pname = str(player_name or "").replace("*","").strip().casefold()
-    if _pid in {"76003", "P0001"} or _pname in {"kareem abdul-jabbar","kareem abdul jabbar","abdul-jabbar, kareem"}:
-        return "https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png"
-    key="__canonical_headshot_registry_png_cdn_v2__"
+    key="__canonical_headshot_registry_png_cdn_v3__"
     if key not in CACHE:
         lookup={}
         candidates=[ROOT/"public"/"player_headshots_final_v1"/"player_headshot_registry_active_v1.csv",
@@ -3290,11 +3287,6 @@ def api_profile(requested, season, season_type="Regular Season"):
                 headshot = clean(hm.iloc[0][hc])
     except Exception:
         pass
-
-    # Canonical headshot override for Kareem. Some legacy headshot registry
-    # rows can still resolve before the canonical NBA-CDN resolver is applied.
-    if str(pid or "").strip() == "76003" or str(pname or "").replace("*","").strip().casefold() in {"kareem abdul-jabbar","kareem abdul jabbar"}:
-        headshot = "https://cdn.nba.com/headshots/nba/latest/1040x760/76003.png"
 
     profile = None
     if not current.empty:
