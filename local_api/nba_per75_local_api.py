@@ -7981,27 +7981,24 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
             if elig_pid_col != "Player_ID":
                 elig=elig.rename(columns={elig_pid_col:"Player_ID"})
         elif not is_playoff:
-            master=load_master_seasons()
-            mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
-            mg=col(master,["G","Games","games","GP","Games_Played","GamesPlayed","Total_Games","TotalGames"])
-            mmp=col(master,["MP","Minutes","minutes","Minutes_Played","MinutesPlayed","Total_Minutes","TotalMinutes"])
-            # Accept descriptive participation columns used by generated master
-            # variants when they are not covered by the explicit aliases.
-            if not mg:
-                _norm={re.sub(r"[^a-z0-9]","",str(x).lower()):x for x in master.columns}
-                mg=next((x for k,x in _norm.items() if "game" in k and not any(t in k for t in ("percent","pct","rate"))),None)
-            if not mmp:
-                _norm={re.sub(r"[^a-z0-9]","",str(x).lower()):x for x in master.columns}
-                mmp=next((x for k,x in _norm.items() if "minute" in k and not any(t in k for t in ("percent","pct","rate"))),None)
-            if not (mpid and mg and mmp and not master.empty):
+            # Use the same finalized canonical career layer that powers the
+            # working Career Big Board. It already contains authoritative
+            # Career_G and Career_MP totals, so Career SDI eligibility must not
+            # depend on the compact season-SDI artifact or an unrelated master
+            # schema.
+            career=_build_regular_career_table()
+            cpid=col(career,["Player_ID","PlayerId","PlayerID","player_id"]) if not career.empty else None
+            cg=col(career,["Career_G","G","Games","games"]) if not career.empty else None
+            cmp=col(career,["Career_MP","MP","Minutes","minutes"]) if not career.empty else None
+            if not (cpid and cg and cmp and not career.empty):
                 return {"rows":[],"count":0,"scope":"career","season_type":season_type,
                         "statistic":"Statistical Dominance Index",
-                        "note":"Canonical player-season source is missing career participation fields."}
-            elig_src=master[[mpid,mg,mmp]].copy()
-            elig_src["G"]=pd.to_numeric(elig_src[mg],errors="coerce").fillna(0)
-            elig_src["MP"]=pd.to_numeric(elig_src[mmp],errors="coerce").fillna(0)
-            elig=elig_src.groupby(mpid).agg(G=("G","sum"),MP=("MP","sum")).reset_index()
-            elig=elig.rename(columns={mpid:"Player_ID"})
+                        "note":"Canonical career source is missing Career_G/Career_MP fields."}
+            elig_src=career[[cpid,cg,cmp]].copy()
+            elig_src["G"]=pd.to_numeric(elig_src[cg],errors="coerce").fillna(0)
+            elig_src["MP"]=pd.to_numeric(elig_src[cmp],errors="coerce").fillna(0)
+            elig=elig_src[[cpid,"G","MP"]].copy()
+            elig=elig.rename(columns={cpid:"Player_ID"})
         else:
             return {"rows":[],"count":0,"scope":"career","season_type":season_type,
                     "statistic":"Statistical Dominance Index",
