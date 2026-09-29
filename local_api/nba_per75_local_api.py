@@ -8150,6 +8150,45 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 d=d.loc[d["Player_ID"].astype(str).str.strip().isin(elig_ids)].copy()
             else:
                 d=d.iloc[0:0].copy()
+        # Final public-identity hydration for the Career SDI emitter.
+        # The SDI artifact can carry source slugs/truncated names (for example
+        # "bob-pettit" and "nikola-joki"). Resolve those names against the
+        # canonical master identity immediately before emitting rows so the
+        # public Big Board and headshot resolver receive the real Player_ID.
+        if not is_playoff:
+            try:
+                master=load_master_seasons()
+                mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                if mpid and mname and not master.empty:
+                    mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                    mm["__canonical_id"]=mm[mpid].astype(str).str.strip()
+                    mm["__canonical_name"]=mm[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                    def _public_name_key(v):
+                        return re.sub(r"[^a-z0-9]+","",str(v or "").replace("*","").casefold())
+                    mm["__name_key"]=mm["__canonical_name"].map(_public_name_key)
+                    mm=mm.drop_duplicates("__name_key",keep="first")
+                    id_by_name=dict(zip(mm["__name_key"],mm["__canonical_id"]))
+                    name_by_key=dict(zip(mm["__name_key"],mm["__canonical_name"]))
+                    keys=list(id_by_name)
+                    resolved_ids=[]
+                    resolved_names=[]
+                    for _,rr in d.iterrows():
+                        raw=str(rr.get("Player","")).strip()
+                        nk=_public_name_key(raw)
+                        rid=id_by_name.get(nk)
+                        matched_key=nk
+                        if rid is None and nk and keys:
+                            matches=get_close_matches(nk,keys,n=2,cutoff=0.92)
+                            if len(matches)==1:
+                                matched_key=matches[0]
+                                rid=id_by_name[matched_key]
+                        resolved_ids.append(rid or str(rr.get("Player_ID","")).strip())
+                        resolved_names.append(name_by_key.get(matched_key,raw))
+                    d["Player_ID"]=resolved_ids
+                    d["Player"]=resolved_names
+            except Exception:
+                pass
         if search:
             d=d.loc[d["Player"].astype(str).str.contains(str(search),case=False,na=False)].copy()
         d=d.sort_values("_value_num",ascending=(sort_direction=="asc"),kind="stable")
