@@ -3694,12 +3694,12 @@ def api_profile(requested, season, season_type="Regular Season"):
     # season-relative percentiles of the locked SDI category composites.
     category_axes = []
     try:
-        if is_career and not is_playoff:
+        if is_career and not is_playoffs:
             # Career Profile axes are sourced from the authoritative WOWY-aware
             # Career SDI layer. Do not rebuild them from generic career
             # percentiles, which can fail when identity namespaces differ.
             category_axes=_career_sdi_axes(pid,pname)
-        elif (not is_playoff and not is_career and str(chosen).casefold() not in {"5-year peak","5 year peak","five-year peak","five_year_peak"}):
+        elif (not is_playoffs and not is_career and str(chosen).casefold() not in {"5-year peak","5 year peak","five-year peak","five_year_peak"}):
             _canonical_axes, _canonical_overall = _canonical_regular_season_sdi_axes(
                 pid=pid, pname=pname, season=chosen
             )
