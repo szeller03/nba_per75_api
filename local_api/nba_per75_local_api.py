@@ -3401,16 +3401,64 @@ def api_profile(requested, season, season_type="Regular Season"):
         try:
             _warm_career_sdi_axes()
             _career_cache = _CAREER_SDI_AXES or {}
-            _career_sdi_item = _career_cache.get("id",{}).get(str(pid).strip())
-            if not _career_sdi_item and pname:
-                _career_name_cache = _career_cache.get("name",{})
-                _career_sdi_item = _career_name_cache.get(
-                    str(pname).replace("*","").strip().casefold()
-                )
-                if not _career_sdi_item:
-                    _career_sdi_item = _career_name_cache.get(
-                        _normalize_peak_lookup_name(pname)
-                    )
+            _career_sdi_item = None
+
+            # Resolve the authoritative Career SDI row through every identity
+            # representation used by the finalized data layers. This is
+            # lookup-only and cannot alter SDI values or eligibility.
+            for _candidate in (pid, data_pid):
+                if _candidate is None:
+                    continue
+                _candidate = str(_candidate).strip()
+                if _candidate:
+                    _career_sdi_item = (_career_cache.get("id",{}) or {}).get(_candidate)
+                    if isinstance(_career_sdi_item,dict):
+                        break
+
+            if not isinstance(_career_sdi_item,dict) and pname:
+                _career_name_cache = _career_cache.get("name",{}) or {}
+                for _key in (
+                    str(pname).replace("*","").strip().casefold(),
+                    _normalize_peak_lookup_name(pname),
+                ):
+                    if _key:
+                        _career_sdi_item = _career_name_cache.get(_key)
+                        if isinstance(_career_sdi_item,dict):
+                            break
+
+            # Bridge canonical website identity to a source career ID/slug.
+            if not isinstance(_career_sdi_item,dict) and pname:
+                try:
+                    _identity_path = _recursive_file(["website_player_identity_v1.csv"])
+                    if _identity_path is not None and _identity_path.exists():
+                        _ir = pd.read_csv(_identity_path, low_memory=False)
+                        _irc_name = col(_ir,["Player","Display_Name","Player_Name","Name"])
+                        _irc_pid = col(_ir,["Player_ID","PlayerId","PlayerID","player_id"])
+                        _irc_slug = col(_ir,["Player_Slug","Slug","player_slug"])
+                        _irc_nba = col(_ir,["NBA_Player_ID","NBAPlayerID","nba_player_id"])
+                        _target_name = _normalize_peak_lookup_name(pname)
+                        _aliases = set()
+                        if _irc_name:
+                            _rows = _ir.loc[_ir[_irc_name].map(_normalize_peak_lookup_name).eq(_target_name)]
+                            for _,_rr in _rows.iterrows():
+                                for _cc in (_irc_pid,_irc_slug,_irc_nba):
+                                    if _cc:
+                                        _raw = clean(_rr.get(_cc))
+                                        if _raw is not None:
+                                            _aliases.add(str(_raw).strip())
+                        for _alias in _aliases:
+                            _career_sdi_item = (_career_cache.get("id",{}) or {}).get(_alias)
+                            if isinstance(_career_sdi_item,dict):
+                                break
+                            _alias_key = _normalize_peak_lookup_name(_alias)
+                            if _alias_key:
+                                _career_sdi_item = (_career_cache.get("name",{}) or {}).get(_alias_key)
+                                if isinstance(_career_sdi_item,dict):
+                                    break
+                            _career_sdi_item = None
+                except Exception:
+                    pass
+
             if isinstance(_career_sdi_item,dict):
                 _career_overall = _career_sdi_item.get("overall_sdi")
                 if _career_overall is not None:
@@ -3647,7 +3695,10 @@ def api_profile(requested, season, season_type="Regular Season"):
     category_axes = []
     try:
         if is_career and not is_playoff:
-            category_axes=_rebuild_career_category_axes_from_current_formula(pid,pname)
+            # Career Profile axes are sourced from the authoritative WOWY-aware
+            # Career SDI layer. Do not rebuild them from generic career
+            # percentiles, which can fail when identity namespaces differ.
+            category_axes=_career_sdi_axes(pid,pname)
         elif (not is_playoff and not is_career and str(chosen).casefold() not in {"5-year peak","5 year peak","five-year peak","five_year_peak"}):
             _canonical_axes, _canonical_overall = _canonical_regular_season_sdi_axes(
                 pid=pid, pname=pname, season=chosen
