@@ -7983,7 +7983,7 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                     s="".join(ch for ch in s if not unicodedata.combining(ch))
                     return re.sub(r"[^a-z0-9]+","",s)
 
-                im["__public_name"]=im[name_col].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                im["__public_name"]=im[name_col].astype(str).str.replace("*","",regex=False).str.strip()
                 im["__name_key"]=im["__public_name"].map(_career_identity_key)
                 if nba_col:
                     im["__canonical_id"]=pd.to_numeric(im[nba_col],errors="coerce").map(
@@ -8045,7 +8045,7 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
             if mpid and mname and not master.empty:
                 mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
                 mm["__master_id"]=mm[mpid].astype(str).str.strip()
-                mm["__master_name"]=mm[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                mm["__master_name"]=mm[mname].astype(str).str.replace("*","",regex=False).str.strip()
                 mm=mm.drop_duplicates("__master_id",keep="first")
                 name_by_id=dict(zip(mm["__master_id"],mm["__master_name"]))
                 for idx,rr in d.iterrows():
