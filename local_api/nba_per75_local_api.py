@@ -7983,8 +7983,16 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         elif not is_playoff:
             master=load_master_seasons()
             mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
-            mg=col(master,["G","Games","games"])
-            mmp=col(master,["MP","Minutes","minutes"])
+            mg=col(master,["G","Games","games","GP","Games_Played","GamesPlayed","Total_Games","TotalGames"])
+            mmp=col(master,["MP","Minutes","minutes","Minutes_Played","MinutesPlayed","Total_Minutes","TotalMinutes"])
+            # Accept descriptive participation columns used by generated master
+            # variants when they are not covered by the explicit aliases.
+            if not mg:
+                _norm={re.sub(r"[^a-z0-9]","",str(x).lower()):x for x in master.columns}
+                mg=next((x for k,x in _norm.items() if "game" in k and not any(t in k for t in ("percent","pct","rate"))),None)
+            if not mmp:
+                _norm={re.sub(r"[^a-z0-9]","",str(x).lower()):x for x in master.columns}
+                mmp=next((x for k,x in _norm.items() if "minute" in k and not any(t in k for t in ("percent","pct","rate"))),None)
             if not (mpid and mg and mmp and not master.empty):
                 return {"rows":[],"count":0,"scope":"career","season_type":season_type,
                         "statistic":"Statistical Dominance Index",
