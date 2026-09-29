@@ -8012,7 +8012,28 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
             elig=elig.loc[(elig["G"]>=50)&(elig["MP"]>=1500)]
         else:
             elig=elig.loc[(elig["G"]>=400)&(elig["MP"]>=10000)]
-        d=d.loc[d["Player_ID"].astype(str).isin(set(elig["Player_ID"].astype(str)))].copy()
+        # Canonical career tables and the SDI season artifact can carry
+        # different historical ID namespaces. Prefer the stable ID join, but
+        # fall back to canonical player-name identity when the namespaces do
+        # not intersect. This is identity reconciliation only; SDI scores and
+        # the 400-game / 10,000-minute gate remain unchanged.
+        elig_ids=set(elig["Player_ID"].astype(str).str.strip())
+        d_ids=set(d["Player_ID"].astype(str).str.strip())
+        if elig_ids.intersection(d_ids):
+            d=d.loc[d["Player_ID"].astype(str).str.strip().isin(elig_ids)].copy()
+        else:
+            elig_names=set()
+            try:
+                if not career.empty and "Player" in career.columns:
+                    elig_names=set(
+                        career.loc[career["Player_ID"].astype(str).str.strip().isin(elig_ids),"Player"]
+                        .astype(str).str.replace(r"\\*+","",regex=True).str.strip().str.casefold()
+                    )
+                if elig_names:
+                    d["__career_name_key"]=d["Player"].astype(str).str.replace(r"\\*+","",regex=True).str.strip().str.casefold()
+                    d=d.loc[d["__career_name_key"].isin(elig_names)].drop(columns=["__career_name_key"],errors="ignore").copy()
+            except Exception:
+                d=d.iloc[0:0].copy()
         if search:
             d=d.loc[d["Player"].astype(str).str.contains(str(search),case=False,na=False)].copy()
         d=d.sort_values("_value_num",ascending=(sort_direction=="asc"),kind="stable")
