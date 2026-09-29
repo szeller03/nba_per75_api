@@ -8013,10 +8013,14 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         else:
             elig=elig.loc[(elig["G"]>=400)&(elig["MP"]>=10000)]
         # Canonical career tables and the SDI season artifact can carry
-        # different historical ID namespaces. Prefer the stable ID join, but
-        # fall back to canonical player-name identity when the namespaces do
-        # not intersect. This is identity reconciliation only; SDI scores and
-        # the 400-game / 10,000-minute gate remain unchanged.
+        # different historical ID namespaces. Prefer a real ID intersection,
+        # but fall back to canonical player-name identity when the namespaces
+        # do not intersect. IMPORTANT: the participation-bearing SDI artifact
+        # may take the first eligibility branch above, so `career` is not
+        # guaranteed to have been initialized. Never let that fallback fail
+        # closed merely because the local variable is undefined.
+        # This is identity reconciliation only; SDI scores and the
+        # 400-game / 10,000-minute gate remain unchanged.
         elig_ids=set(elig["Player_ID"].astype(str).str.strip())
         d_ids=set(d["Player_ID"].astype(str).str.strip())
         if elig_ids.intersection(d_ids):
@@ -8024,14 +8028,51 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         else:
             elig_names=set()
             try:
-                if not career.empty and "Player" in career.columns:
-                    elig_names=set(
-                        career.loc[career["Player_ID"].astype(str).str.strip().isin(elig_ids),"Player"]
-                        .astype(str).str.replace(r"\\*+","",regex=True).str.strip().str.casefold()
+                career_for_names=pd.DataFrame()
+                if not is_playoff:
+                    # Use the same canonical career table that powers the
+                    # working Career Big Board, regardless of whether the
+                    # SDI season artifact also contains G/MP.
+                    career_for_names=_build_regular_career_table()
+                if not career_for_names.empty:
+                    cpid=col(career_for_names,["Player_ID","PlayerId","PlayerID","player_id"])
+                    cname=col(career_for_names,["Player","Player_Name","Display_Name","player_name","Name"])
+                    if cpid and cname:
+                        eligible_career=career_for_names.loc[
+                            career_for_names[cpid].astype(str).str.strip().isin(elig_ids)
+                        ]
+                        elig_names=set(
+                            eligible_career[cname].astype(str)
+                            .str.replace(r"\\*+","",regex=True)
+                            .str.strip().str.casefold()
+                        )
+                # If the canonical career table's ID namespace also differs,
+                # resolve the eligible IDs through the authoritative master
+                # identity layer before giving up.
+                if not elig_names:
+                    master=load_master_seasons()
+                    mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                    mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                    if mpid and mname and not master.empty:
+                        eligible_master=master.loc[
+                            master[mpid].astype(str).str.strip().isin(elig_ids)
+                        ]
+                        elig_names=set(
+                            eligible_master[mname].astype(str)
+                            .str.replace(r"\\*+","",regex=True)
+                            .str.strip().str.casefold()
+                        )
+                if elig_names and "Player" in d.columns:
+                    d["__career_name_key"]=(
+                        d["Player"].astype(str)
+                        .str.replace(r"\\*+","",regex=True)
+                        .str.strip().str.casefold()
                     )
-                if elig_names:
-                    d["__career_name_key"]=d["Player"].astype(str).str.replace(r"\\*+","",regex=True).str.strip().str.casefold()
-                    d=d.loc[d["__career_name_key"].isin(elig_names)].drop(columns=["__career_name_key"],errors="ignore").copy()
+                    d=d.loc[d["__career_name_key"].isin(elig_names)].drop(
+                        columns=["__career_name_key"],errors="ignore"
+                    ).copy()
+                elif not elig_names:
+                    d=d.iloc[0:0].copy()
             except Exception:
                 d=d.iloc[0:0].copy()
         if search:
