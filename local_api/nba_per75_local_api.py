@@ -868,6 +868,36 @@ def _career_sdi_axes(pid=None, pname=None):
                     axes=cache.get("name",{}).get(str(_resolved_name).replace("*","").strip().casefold(),[]) or []
             except Exception:
                 pass
+    # If direct ID/name resolution misses because the frozen Career artifact
+    # uses a legacy source slug or a truncated historical name, resolve the
+    # requested public identity against the authoritative cache keys. Only a
+    # unique normalized-name match is accepted; this is lookup-only and does
+    # not alter the underlying SDI values.
+    if not axes and pname:
+        try:
+            _wanted=_normalize_peak_lookup_name(pname)
+            _name_cache=cache.get("name",{}) or {}
+            _matches=[]
+            for _key,_payload in _name_cache.items():
+                if not isinstance(_payload,dict):
+                    continue
+                if _normalize_peak_lookup_name(_key)==_wanted:
+                    _matches.append(_payload)
+            # Also tolerate legacy truncated source names/slugs only when the
+            # normalized requested name has exactly one high-confidence prefix
+            # relationship to a cache key.
+            if not _matches and _wanted:
+                _prefix=[_payload for _key,_payload in _name_cache.items()
+                         if isinstance(_payload,dict)
+                         and (_normalize_peak_lookup_name(_key).startswith(_wanted)
+                              or _wanted.startswith(_normalize_peak_lookup_name(_key)))]
+                if len(_prefix)==1:
+                    _matches=_prefix
+            if len(_matches)==1:
+                axes=_matches[0]
+        except Exception:
+            pass
+
     if isinstance(axes,dict):
         overall_sdi=axes.get("overall_sdi")
         axes=axes.get("axes",[]) or []
@@ -3425,6 +3455,32 @@ def api_profile(requested, season, season_type="Regular Season"):
                         _career_sdi_item = _career_name_cache.get(_key)
                         if isinstance(_career_sdi_item,dict):
                             break
+
+            # If the frozen Career artifact uses a legacy source name/slug,
+            # accept one unique normalized cache-name match before consulting
+            # the identity registry. This mirrors the Career spider resolver
+            # and keeps the Profile scalar tied to the same authoritative row.
+            if not isinstance(_career_sdi_item,dict) and pname:
+                try:
+                    _wanted=_normalize_peak_lookup_name(pname)
+                    _name_cache=_career_cache.get("name",{}) or {}
+                    _matches=[]
+                    for _key,_payload in _name_cache.items():
+                        if not isinstance(_payload,dict):
+                            continue
+                        if _normalize_peak_lookup_name(_key)==_wanted:
+                            _matches.append(_payload)
+                    if not _matches and _wanted:
+                        _prefix=[_payload for _key,_payload in _name_cache.items()
+                                 if isinstance(_payload,dict)
+                                 and (_normalize_peak_lookup_name(_key).startswith(_wanted)
+                                      or _wanted.startswith(_normalize_peak_lookup_name(_key)))]
+                        if len(_prefix)==1:
+                            _matches=_prefix
+                    if len(_matches)==1:
+                        _career_sdi_item=_matches[0]
+                except Exception:
+                    pass
 
             # Bridge canonical website identity to a source career ID/slug.
             if not isinstance(_career_sdi_item,dict) and pname:
