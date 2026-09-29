@@ -2994,14 +2994,6 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
     # has its own v2 peak bundle and is intentionally not changed here.
     path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_authoritative_v6.json"
     if not path.exists():
-        try:
-            candidates=list(ROOT.rglob("*.json"))
-            candidates=[p for p in candidates if "regular_profile_peaks" in p.name.lower() and p.is_file()]
-            candidates.sort(key=lambda p:(0 if "canonical" in p.name.lower() else 1, len(str(p))))
-            path=candidates[0] if candidates else None
-        except Exception:
-            path=None
-    if path is None or not path.exists():
         return None
     try:
         cache_key="__precomputed_regular_peak_profiles_v6_authoritative__"
