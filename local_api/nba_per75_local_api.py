@@ -804,6 +804,15 @@ def _warm_career_sdi_axes():
                 out["id"][item["id"]]={"axes":axes,"overall_sdi":item.get("_overall_sdi")}
             if item.get("name"):
                 out["name"][item["name"]]={"axes":axes,"overall_sdi":item.get("_overall_sdi")}
+                # Also index an accent/punctuation-insensitive name key so
+                # canonical website names (e.g. Jokić) resolve against career
+                # artifacts that store the ASCII form (e.g. Jokic).
+                try:
+                    _nk=_normalize_peak_lookup_name(item["name"])
+                    if _nk:
+                        out["name"][_nk]={"axes":axes,"overall_sdi":item.get("_overall_sdi")}
+                except Exception:
+                    pass
         _CAREER_SDI_AXES=out
 
 def _rebuild_career_category_axes_from_current_formula(pid=None, pname=None):
@@ -3014,6 +3023,30 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
             for p in players:
                 if _normalize_peak_lookup_name(p.get("player_name",""))==wanted_name:
                     hit=p; break
+        if hit is None and wanted_name:
+            # Final identity-only fallback: match the requested canonical
+            # website identity against the cache's player name/ID aliases.
+            try:
+                registry_path = ROOT / "player_website_identity_v1" / "website_player_identity_v1.csv"
+                if registry_path.exists():
+                    ident = pd.read_csv(registry_path, low_memory=False)
+                    iname = col(ident, ["Display_Name","Player","Player_Name","Name"])
+                    iid = col(ident, ["Player_ID","player_id","PlayerId","PlayerID"])
+                    nbaid = col(ident, ["NBA_Player_ID","nba_player_id","NBAID"])
+                    target = ident.iloc[0:0]
+                    if iname:
+                        target = ident.loc[ident[iname].map(_normalize_peak_lookup_name).eq(wanted_name)]
+                    alias_ids=set()
+                    if not target.empty:
+                        for cc in [iid,nbaid]:
+                            if cc:
+                                alias_ids.update(str(v).strip() for v in target[cc].dropna().tolist())
+                    for p in players:
+                        pidv=str(p.get("player_id","")).strip()
+                        if pidv in alias_ids:
+                            hit=p; break
+            except Exception:
+                pass
         if hit is None:
             return None
 
@@ -3367,11 +3400,17 @@ def api_profile(requested, season, season_type="Regular Season"):
         # payload itself. Do not recompute Career SDI from season rows here.
         try:
             _warm_career_sdi_axes()
-            _career_sdi_item = (_CAREER_SDI_AXES or {}).get("id",{}).get(str(pid).strip())
+            _career_cache = _CAREER_SDI_AXES or {}
+            _career_sdi_item = _career_cache.get("id",{}).get(str(pid).strip())
             if not _career_sdi_item and pname:
-                _career_sdi_item = (_CAREER_SDI_AXES or {}).get("name",{}).get(
+                _career_name_cache = _career_cache.get("name",{})
+                _career_sdi_item = _career_name_cache.get(
                     str(pname).replace("*","").strip().casefold()
                 )
+                if not _career_sdi_item:
+                    _career_sdi_item = _career_name_cache.get(
+                        _normalize_peak_lookup_name(pname)
+                    )
             if isinstance(_career_sdi_item,dict):
                 _career_overall = _career_sdi_item.get("overall_sdi")
                 if _career_overall is not None:
