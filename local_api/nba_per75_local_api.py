@@ -1,6 +1,7 @@
 
 from __future__ import annotations
 import unicodedata
+from difflib import get_close_matches
 
 import json
 import math
@@ -7999,11 +8000,42 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
                 mm["__master_id"]=mm[mpid].astype(str).str.strip()
                 mm["__master_name"]=mm[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
-                mm=mm.drop_duplicates("__master_id",keep="first")[["__master_id","__master_name"]]
-                d["__master_id"]=d["Player_ID"].astype(str).str.strip()
-                d=d.merge(mm,on="__master_id",how="left")
-                d["Player"]=d["__master_name"].fillna(d["Player"])
-                d=d.drop(columns=["__master_id","__master_name"],errors="ignore")
+
+                # Career SDI artifacts can contain source slugs rather than
+                # canonical website identities (for example "bob-pettit" or
+                # the truncated "nikola-joki"). Resolve by normalized public
+                # name first, then use a conservative fuzzy match for minor
+                # source-name truncation/typos. This is identity-only; the
+                # Career SDI score and eligibility gate are untouched.
+                def _identity_name_key(value):
+                    return re.sub(r"[^a-z0-9]+","",str(value or "").replace("*","").casefold())
+
+                mm["__name_key"]=mm["__master_name"].map(_identity_name_key)
+                mm=mm.drop_duplicates("__name_key",keep="first")
+                name_to_id=dict(zip(mm["__name_key"],mm["__master_id"]))
+                name_to_display=dict(zip(mm["__name_key"],mm["__master_name"]))
+                known_keys=list(name_to_id.keys())
+
+                resolved_ids=[]
+                resolved_names=[]
+                for _,rr in d.iterrows():
+                    raw_name=str(rr.get("Player","")).strip()
+                    nk=_identity_name_key(raw_name)
+                    rid=name_to_id.get(nk)
+                    if rid is None and nk and known_keys:
+                        # Only accept a very close, unique match. This handles
+                        # truncated historical source names without risking
+                        # arbitrary namesake assignment.
+                        matches=get_close_matches(nk,known_keys,n=2,cutoff=0.92)
+                        if len(matches)==1:
+                            rid=name_to_id[matches[0]]
+                            nk=matches[0]
+                    if rid is None:
+                        rid=str(rr.get("Player_ID","")).strip()
+                    resolved_ids.append(rid)
+                    resolved_names.append(name_to_display.get(nk,raw_name))
+                d["Player_ID"]=resolved_ids
+                d["Player"]=resolved_names
         except Exception:
             pass
 
