@@ -7963,35 +7963,81 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 score=float((q["__score"]*w).sum()/w.sum()) if w.sum()>0 else float(q["__score"].mean())
                 rows.append({"Player_ID":pid,"Player":str(q["Player"].iloc[0]),"Career_SDI_v4":score,"Qualifying_Seasons":int(len(q)),"Career_MP":float(w.sum()),"Average_SDI_Coverage":float(pd.to_numeric(q["SDI_Category_Coverage"],errors="coerce").mean())})
             pd.DataFrame(rows).to_csv(p,index=False)
-        # Reconcile the public Career identity before emitting Big Board rows.
-        # Career SDI artifacts can carry historical/source IDs and names that
-        # differ from the website identity layer. First resolve the source ID
-        # through the canonical identity registry's __identity_key, then use
-        # the master player-season identity as a fallback for display names.
+        # Final public identity hydration for Career SDI rows.
+        # The numeric Career SDI layer can carry historical/source slugs or
+        # truncated names. Resolve those values against the website's exact
+        # identity registry immediately before emission. This block changes
+        # identity/headshot lookup only; it does not alter SDI scores or
+        # Career eligibility.
         try:
-            ident=_canonical_identity_registry()
-            if ident is not None and not ident.empty:
-                ic=identity_cols(ident)
-                source_id_col=ic.get("id")
-                name_col=ic.get("name")
-                if source_id_col:
-                    keep=[source_id_col,"__identity_key"]
-                    if name_col: keep.append(name_col)
-                    keep=[x for x in keep if x in ident.columns]
-                    im=ident[keep].copy()
-                    im["__lookup_id"]=im[source_id_col].astype(str).str.strip()
-                    im=im.drop_duplicates("__lookup_id",keep="first")
-                    d["__lookup_id"]=d["Player_ID"].astype(str).str.strip()
-                    d=d.merge(im.drop(columns=[source_id_col],errors="ignore"),
-                              on="__lookup_id",how="left",suffixes=("","__canonical"))
-                    if "__identity_key" in d.columns:
-                        d["Player_ID"]=d["__identity_key"].fillna(d["Player_ID"]).astype(str).str.strip()
-                        d=d.drop(columns=["__identity_key"],errors="ignore")
-                    if name_col and f"{name_col}__canonical" in d.columns:
-                        d["Player"]=d[f"{name_col}__canonical"].fillna(d["Player"])
-                    d=d.drop(columns=["__lookup_id"],errors="ignore")
-        except Exception:
-            pass
+            ident=load_exact_csv("identity","website_player_identity_v1.csv")
+            ic=identity_cols(ident) if ident is not None and not ident.empty else {}
+            id_col=ic.get("id")
+            name_col=ic.get("name")
+            if id_col and name_col and not ident.empty:
+                im=ident[[id_col,name_col]+[x for x in ["NBA_Player_ID"] if x in ident.columns]].copy()
+                nba_col=next((x for x in ["NBA_Player_ID","NBA_PlayerId","nba_player_id","NBA_ID"] if x in im.columns),None)
+
+                def _career_identity_key(value):
+                    s=unicodedata.normalize("NFKD",str(value or "")).casefold().replace("*","")
+                    s="".join(ch for ch in s if not unicodedata.combining(ch))
+                    return re.sub(r"[^a-z0-9]+","",s)
+
+                im["__public_name"]=im[name_col].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                im["__name_key"]=im["__public_name"].map(_career_identity_key)
+                if nba_col:
+                    im["__canonical_id"]=pd.to_numeric(im[nba_col],errors="coerce").map(
+                        lambda x:str(int(x)) if pd.notna(x) else ""
+                    )
+                    im["__canonical_id"]=im["__canonical_id"].where(
+                        im["__canonical_id"].ne(""),
+                        im[id_col].astype(str).str.strip()
+                    )
+                else:
+                    im["__canonical_id"]=im[id_col].astype(str).str.strip()
+                im=im.loc[im["__name_key"].ne("")].copy()
+                im=im.drop_duplicates("__name_key",keep="first")
+                id_by_name=dict(zip(im["__name_key"],im["__canonical_id"]))
+                name_by_key=dict(zip(im["__name_key"],im["__public_name"]))
+                known_keys=list(id_by_name)
+
+                resolved_ids=[]
+                resolved_names=[]
+                for _,rr in d.iterrows():
+                    raw=str(rr.get("Player","")).strip()
+                    nk=_career_identity_key(raw)
+                    rid=id_by_name.get(nk)
+                    matched=nk
+
+                    # Exact public-name match is preferred. For source slugs
+                    # that are truncated (e.g. "nikola-joki"), accept only a
+                    # unique high-confidence prefix/close match.
+                    if rid is None and nk:
+                        prefix=[k for k in known_keys if k.startswith(nk) or nk.startswith(k)]
+                        if len(prefix)==1:
+                            matched=prefix[0]
+                            rid=id_by_name[matched]
+                    if rid is None and nk:
+                        close=get_close_matches(nk,known_keys,n=2,cutoff=0.90)
+                        if len(close)==1:
+                            matched=close[0]
+                            rid=id_by_name[matched]
+
+                    if rid:
+                        resolved_ids.append(str(rid).strip())
+                        resolved_names.append(name_by_key.get(matched,raw))
+                    else:
+                        resolved_ids.append(str(rr.get("Player_ID","")).strip())
+                        resolved_names.append(raw)
+
+                d["Player_ID"]=resolved_ids
+                d["Player"]=resolved_names
+        except Exception as exc:
+            print("Career SDI public identity hydration failed:",repr(exc))
+
+        # Final fallback: use the canonical master identity for any row that
+        # could not be resolved above. Never replace an already-resolved public
+        # identity with a source slug.
         try:
             master=load_master_seasons()
             mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
@@ -8000,44 +8046,15 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
                 mm["__master_id"]=mm[mpid].astype(str).str.strip()
                 mm["__master_name"]=mm[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
-
-                # Career SDI artifacts can contain source slugs rather than
-                # canonical website identities (for example "bob-pettit" or
-                # the truncated "nikola-joki"). Resolve by normalized public
-                # name first, then use a conservative fuzzy match for minor
-                # source-name truncation/typos. This is identity-only; the
-                # Career SDI score and eligibility gate are untouched.
-                def _identity_name_key(value):
-                    return re.sub(r"[^a-z0-9]+","",str(value or "").replace("*","").casefold())
-
-                mm["__name_key"]=mm["__master_name"].map(_identity_name_key)
-                mm=mm.drop_duplicates("__name_key",keep="first")
-                name_to_id=dict(zip(mm["__name_key"],mm["__master_id"]))
-                name_to_display=dict(zip(mm["__name_key"],mm["__master_name"]))
-                known_keys=list(name_to_id.keys())
-
-                resolved_ids=[]
-                resolved_names=[]
-                for _,rr in d.iterrows():
-                    raw_name=str(rr.get("Player","")).strip()
-                    nk=_identity_name_key(raw_name)
-                    rid=name_to_id.get(nk)
-                    if rid is None and nk and known_keys:
-                        # Only accept a very close, unique match. This handles
-                        # truncated historical source names without risking
-                        # arbitrary namesake assignment.
-                        matches=get_close_matches(nk,known_keys,n=2,cutoff=0.92)
-                        if len(matches)==1:
-                            rid=name_to_id[matches[0]]
-                            nk=matches[0]
-                    if rid is None:
-                        rid=str(rr.get("Player_ID","")).strip()
-                    resolved_ids.append(rid)
-                    resolved_names.append(name_to_display.get(nk,raw_name))
-                d["Player_ID"]=resolved_ids
-                d["Player"]=resolved_names
-        except Exception:
-            pass
+                mm=mm.drop_duplicates("__master_id",keep="first")
+                name_by_id=dict(zip(mm["__master_id"],mm["__master_name"]))
+                for idx,rr in d.iterrows():
+                    pid=str(rr.get("Player_ID","")).strip()
+                    pname=str(rr.get("Player","")).strip()
+                    if pid in name_by_id:
+                        d.at[idx,"Player"]=name_by_id[pid]
+        except Exception as exc:
+            print("Career SDI master identity fallback failed:",repr(exc))
 
         d["_value_num"]=pd.to_numeric(d["Career_SDI_v4"],errors="coerce")
         d=d.dropna(subset=["_value_num"]).copy()
