@@ -7963,37 +7963,47 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 rows.append({"Player_ID":pid,"Player":str(q["Player"].iloc[0]),"Career_SDI_v4":score,"Qualifying_Seasons":int(len(q)),"Career_MP":float(w.sum()),"Average_SDI_Coverage":float(pd.to_numeric(q["SDI_Category_Coverage"],errors="coerce").mean())})
             pd.DataFrame(rows).to_csv(p,index=False)
         # Reconcile the public Career identity before emitting Big Board rows.
-        # Career SDI artifacts may retain historical/source slugs (for example
-        # an accented-name slug such as "nikola-joki") that are not the
-        # website's canonical player identity. The identity registry is the
-        # same canonical layer used by the rest of the site, so use it here
-        # for both the displayed player ID/name and downstream headshot lookup.
+        # Career SDI artifacts can carry historical/source IDs and names that
+        # differ from the website identity layer. First resolve the source ID
+        # through the canonical identity registry's __identity_key, then use
+        # the master player-season identity as a fallback for display names.
         try:
             ident=_canonical_identity_registry()
             if ident is not None and not ident.empty:
                 ic=identity_cols(ident)
-                iid=ic.get("id")
-                iname=ic.get("name")
-                if iid:
-                    ident_map=ident[[iid] + ([iname] if iname else [])].copy()
-                    ident_map["__lookup_id"]=ident_map[iid].astype(str).str.strip()
-                    ident_map=ident_map.drop_duplicates("__lookup_id",keep="first")
+                source_id_col=ic.get("id")
+                name_col=ic.get("name")
+                if source_id_col:
+                    keep=[source_id_col,"__identity_key"]
+                    if name_col: keep.append(name_col)
+                    keep=[x for x in keep if x in ident.columns]
+                    im=ident[keep].copy()
+                    im["__lookup_id"]=im[source_id_col].astype(str).str.strip()
+                    im=im.drop_duplicates("__lookup_id",keep="first")
                     d["__lookup_id"]=d["Player_ID"].astype(str).str.strip()
-                    d=d.merge(
-                        ident_map.drop(columns=[iid],errors="ignore"),
-                        on="__lookup_id",how="left",suffixes=("","__canonical")
-                    )
-                    if iname and f"{iname}__canonical" in d.columns:
-                        d["Player"]=d[f"{iname}__canonical"].fillna(d["Player"])
-                    elif iname and iname in d.columns and "Player" not in d.columns:
-                        d["Player"]=d[iname]
+                    d=d.merge(im.drop(columns=[source_id_col],errors="ignore"),
+                              on="__lookup_id",how="left",suffixes=("","__canonical"))
+                    if "__identity_key" in d.columns:
+                        d["Player_ID"]=d["__identity_key"].fillna(d["Player_ID"]).astype(str).str.strip()
+                        d=d.drop(columns=["__identity_key"],errors="ignore")
+                    if name_col and f"{name_col}__canonical" in d.columns:
+                        d["Player"]=d[f"{name_col}__canonical"].fillna(d["Player"])
                     d=d.drop(columns=["__lookup_id"],errors="ignore")
-                # If the registry carries a canonical Player_ID distinct from
-                # the source ID, prefer it for the public response.
-                if iid and iid in d.columns:
-                    d["Player_ID"]=d[iid].fillna(d["Player_ID"]).astype(str).str.strip()
-                    if iid != "Player_ID":
-                        d=d.drop(columns=[iid],errors="ignore")
+        except Exception:
+            pass
+        try:
+            master=load_master_seasons()
+            mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+            mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+            if mpid and mname and not master.empty:
+                mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                mm["__master_id"]=mm[mpid].astype(str).str.strip()
+                mm["__master_name"]=mm[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                mm=mm.drop_duplicates("__master_id",keep="first")[["__master_id","__master_name"]]
+                d["__master_id"]=d["Player_ID"].astype(str).str.strip()
+                d=d.merge(mm,on="__master_id",how="left")
+                d["Player"]=d["__master_name"].fillna(d["Player"])
+                d=d.drop(columns=["__master_id","__master_name"],errors="ignore")
         except Exception:
             pass
 
