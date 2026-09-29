@@ -8032,54 +8032,46 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         # closed merely because the local variable is undefined.
         # This is identity reconciliation only; SDI scores and the
         # 400-game / 10,000-minute gate remain unchanged.
-        elig_ids=set(elig["Player_ID"].astype(str).str.strip())
-        d_ids=set(d["Player_ID"].astype(str).str.strip())
-        if elig_ids.intersection(d_ids):
-            d=d.loc[d["Player_ID"].astype(str).str.strip().isin(elig_ids)].copy()
+        # Regular-season Career eligibility must be reconciled through the
+        # canonical Career Big Board identity layer. The SDI season artifact
+        # and the career table can legitimately use different Player_ID
+        # namespaces, and a partial numeric-ID intersection can therefore
+        # silently retain the wrong population (or, in practice, none).
+        # Normalize names beyond case/asterisks so punctuation differences such
+        # as "Abdul-Jabbar" vs "Abdul Jabbar" cannot erase a valid career.
+        def _career_name_key(value):
+            return re.sub(r"[^a-z0-9]+","",str(value or "").replace("*","").casefold())
+
+        if not is_playoff:
+            career_for_names=_build_regular_career_table()
+            if career_for_names.empty:
+                return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                        "statistic":"Statistical Dominance Index",
+                        "note":"Canonical career source is empty."}
+            cname=col(career_for_names,["Player","Player_Name","Display_Name","player_name","Name"])
+            if not cname:
+                return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                        "statistic":"Statistical Dominance Index",
+                        "note":"Canonical career source is missing player names."}
+            eligible_career=career_for_names.loc[
+                pd.to_numeric(career_for_names["G"],errors="coerce").ge(400)
+                & pd.to_numeric(career_for_names["MP"],errors="coerce").ge(10000)
+            ].copy()
+            elig_names=set(eligible_career[cname].map(_career_name_key))
+            if not elig_names:
+                return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                        "statistic":"Statistical Dominance Index",
+                        "note":"No players satisfy the canonical Career eligibility gate."}
+            d["__career_name_key"]=d["Player"].map(_career_name_key)
+            d=d.loc[d["__career_name_key"].isin(elig_names)].drop(
+                columns=["__career_name_key"],errors="ignore"
+            ).copy()
         else:
-            elig_names=set()
-            try:
-                if not is_playoff:
-                    # The canonical Career Big Board already contains the
-                    # authoritative 400-game / 10,000-minute population.
-                    # Do NOT join its IDs to the SDI artifact IDs here:
-                    # historical ID namespaces can differ. Use the canonical
-                    # career population's names directly as the identity
-                    # bridge to the SDI rows.
-                    career_for_names=_build_regular_career_table()
-                    if not career_for_names.empty:
-                        cname=col(career_for_names,["Player","Player_Name","Display_Name","player_name","Name"])
-                        if cname:
-                            elig_names=set(
-                                career_for_names[cname].astype(str)
-                                .str.replace(r"\\*+","",regex=True)
-                                .str.strip().str.casefold()
-                            )
-                if not elig_names:
-                    # Last-resort identity layer: use all canonical master
-                    # player names represented by the authoritative career
-                    # universe rather than attempting another cross-namespace
-                    # ID join.
-                    master=load_master_seasons()
-                    mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
-                    if mname and not master.empty:
-                        elig_names=set(
-                            master[mname].astype(str)
-                            .str.replace(r"\\*+","",regex=True)
-                            .str.strip().str.casefold()
-                        )
-                if elig_names and "Player" in d.columns:
-                    d["__career_name_key"]=(
-                        d["Player"].astype(str)
-                        .str.replace(r"\\*+","",regex=True)
-                        .str.strip().str.casefold()
-                    )
-                    d=d.loc[d["__career_name_key"].isin(elig_names)].drop(
-                        columns=["__career_name_key"],errors="ignore"
-                    ).copy()
-                elif not elig_names:
-                    d=d.iloc[0:0].copy()
-            except Exception:
+            elig_ids=set(elig["Player_ID"].astype(str).str.strip())
+            d_ids=set(d["Player_ID"].astype(str).str.strip())
+            if elig_ids.intersection(d_ids):
+                d=d.loc[d["Player_ID"].astype(str).str.strip().isin(elig_ids)].copy()
+            else:
                 d=d.iloc[0:0].copy()
         if search:
             d=d.loc[d["Player"].astype(str).str.contains(str(search),case=False,na=False)].copy()
