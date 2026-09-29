@@ -742,7 +742,20 @@ def _warm_career_sdi_axes():
         sd = pd.read_csv(path, low_memory=False)
         sid = col(sd,["Player_ID","PlayerId","PlayerID","player_id"])
         sn = col(sd,["Player","Player_Name","Display_Name","player_name","Name"])
-        mapping=[("Scoring Volume","Career_scoring_volume"),("Scoring Efficiency","Career_scoring_efficiency"),("Creation & Playmaking","Career_creation_playmaking"),("Rebounding","Career_rebounding"),("Defense","Career_defense"),("Impact & Value","Career_impact_value")]
+        # Resolve the authoritative Career category columns through the
+        # project's normalized column resolver. The frozen artifact has appeared
+        # in builds with capitalization/underscore variants (for example
+        # Career_Scoring_Volume vs career_scoring_volume); exact string access
+        # silently turns those rows into NaN and makes the Profile fall back to
+        # incomplete generic axes.
+        mapping=[
+            ("Scoring Volume", col(sd,["Career_scoring_volume","Career_Scoring_Volume","career_scoring_volume"])),
+            ("Scoring Efficiency", col(sd,["Career_scoring_efficiency","Career_Scoring_Efficiency","career_scoring_efficiency"])),
+            ("Creation & Playmaking", col(sd,["Career_creation_playmaking","Career_Creation_Playmaking","career_creation_playmaking"])),
+            ("Rebounding", col(sd,["Career_rebounding","Career_Rebounding","career_rebounding"])),
+            ("Defense", col(sd,["Career_defense","Career_Defense","career_defense"])),
+            ("Impact & Value", col(sd,["Career_impact_value","Career_Impact_Value","career_impact_value"])),
+        ]
         # Preserve the underlying Career category composites exactly as the
         # authoritative source computes them.  The player-facing spider,
         # however, is a percentile-based display: each category score is
@@ -754,9 +767,10 @@ def _warm_career_sdi_axes():
             item={"id": str(r.get(sid,"" )).strip() if sid else "",
                   "name": str(r.get(sn,"" )).replace("*","").strip().casefold() if sn else ""}
             for label, field in mapping:
-                val=pd.to_numeric(r.get(field,np.nan),errors="coerce")
+                val=pd.to_numeric(r.get(field,np.nan),errors="coerce") if field else np.nan
                 item[label]=float(val) if pd.notna(val) else np.nan
-                cov=pd.to_numeric(r.get(field+"_Coverage",np.nan),errors="coerce")
+                cov_field=col(sd,[str(field)+"_Coverage"]) if field else None
+                cov=pd.to_numeric(r.get(cov_field,np.nan),errors="coerce") if cov_field else np.nan
                 item[label+"_coverage"]=None if pd.isna(cov) else float(cov)
             raw_rows.append(item)
 
@@ -781,8 +795,9 @@ def _warm_career_sdi_axes():
             # display the actual composite rather than NQ.
             overall=None
             for field_name in ("Career_SDI_v4_WOWY","SDI_v4_WOWY","Career_SDI_v4","SDI_v4"):
-                if field_name in sd.columns:
-                    ov=pd.to_numeric(sd.loc[sd.index[raw_rows.index(item)], field_name], errors="coerce")
+                _overall_col=col(sd,[field_name])
+                if _overall_col:
+                    ov=pd.to_numeric(sd.loc[sd.index[raw_rows.index(item)], _overall_col], errors="coerce")
                     if pd.notna(ov):
                         overall=float(ov)
                         break
