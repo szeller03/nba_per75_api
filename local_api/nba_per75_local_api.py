@@ -7866,15 +7866,35 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         # changing top-level weights cannot leave a stale career composite.
         src=sdi_index.copy() if sdi_index is not None else pd.DataFrame()
         if not src.empty:
-            pid_col=col(src,["Player_ID","PlayerId","PlayerID","player_id"])
+            pid_col=col(src,["Player_ID","PlayerId","PlayerID","player_id","__pid"])
             name_col=col(src,["Player","Player_Name","Display_Name","player_name","Name"])
-            if not pid_col or not name_col:
+            # Career SDI requires a stable player identity, but display names
+            # are an identity-hydration concern rather than a requirement of
+            # the numeric SDI artifact. Older production artifacts can contain
+            # __pid/Player_ID without a public Player column.
+            if not pid_col:
                 return {"rows":[],"count":0,"scope":"career","season_type":season_type,
                         "statistic":"Statistical Dominance Index",
                         "note":"Authoritative SDI v4 source is missing player identity columns."}
             score_col="SDI_v4_WOWY" if (not is_playoff and "SDI_v4_WOWY" in src.columns) else "SDI_v4"
-            src["__pid"]=src[pid_col]
-            src["__player"]=src[name_col]
+            src["__pid"]=src[pid_col].astype(str).str.strip()
+            if name_col:
+                src["__player"]=src[name_col].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+            else:
+                src["__player"]=src["__pid"]
+                try:
+                    master=load_master_seasons()
+                    mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                    mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                    if mpid and mname and not master.empty:
+                        names=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                        names["__pid"]=names[mpid].astype(str).str.strip()
+                        names["__player"]=names[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+                        names=names.drop_duplicates("__pid",keep="first")[["__pid","__player"]]
+                        src=src.drop(columns=["__player"],errors="ignore").merge(names,on="__pid",how="left")
+                        src["__player"]=src["__player"].fillna(src["__pid"])
+                except Exception:
+                    pass
             src["__score"]=pd.to_numeric(src.get(score_col),errors="coerce")
             src["MP"]=pd.to_numeric(src.get("MP"),errors="coerce")
             src["G"]=pd.to_numeric(src.get("G"),errors="coerce")
