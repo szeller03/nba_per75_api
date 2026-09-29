@@ -7962,6 +7962,41 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 score=float((q["__score"]*w).sum()/w.sum()) if w.sum()>0 else float(q["__score"].mean())
                 rows.append({"Player_ID":pid,"Player":str(q["Player"].iloc[0]),"Career_SDI_v4":score,"Qualifying_Seasons":int(len(q)),"Career_MP":float(w.sum()),"Average_SDI_Coverage":float(pd.to_numeric(q["SDI_Category_Coverage"],errors="coerce").mean())})
             pd.DataFrame(rows).to_csv(p,index=False)
+        # Reconcile the public Career identity before emitting Big Board rows.
+        # Career SDI artifacts may retain historical/source slugs (for example
+        # an accented-name slug such as "nikola-joki") that are not the
+        # website's canonical player identity. The identity registry is the
+        # same canonical layer used by the rest of the site, so use it here
+        # for both the displayed player ID/name and downstream headshot lookup.
+        try:
+            ident=_canonical_identity_registry()
+            if ident is not None and not ident.empty:
+                ic=identity_cols(ident)
+                iid=ic.get("id")
+                iname=ic.get("name")
+                if iid:
+                    ident_map=ident[[iid] + ([iname] if iname else [])].copy()
+                    ident_map["__lookup_id"]=ident_map[iid].astype(str).str.strip()
+                    ident_map=ident_map.drop_duplicates("__lookup_id",keep="first")
+                    d["__lookup_id"]=d["Player_ID"].astype(str).str.strip()
+                    d=d.merge(
+                        ident_map.drop(columns=[iid],errors="ignore"),
+                        on="__lookup_id",how="left",suffixes=("","__canonical")
+                    )
+                    if iname and f"{iname}__canonical" in d.columns:
+                        d["Player"]=d[f"{iname}__canonical"].fillna(d["Player"])
+                    elif iname and iname in d.columns and "Player" not in d.columns:
+                        d["Player"]=d[iname]
+                    d=d.drop(columns=["__lookup_id"],errors="ignore")
+                # If the registry carries a canonical Player_ID distinct from
+                # the source ID, prefer it for the public response.
+                if iid and iid in d.columns:
+                    d["Player_ID"]=d[iid].fillna(d["Player_ID"]).astype(str).str.strip()
+                    if iid != "Player_ID":
+                        d=d.drop(columns=[iid],errors="ignore")
+        except Exception:
+            pass
+
         d["_value_num"]=pd.to_numeric(d["Career_SDI_v4"],errors="coerce")
         d=d.dropna(subset=["_value_num"]).copy()
         # Derive the career eligibility gate from the same authoritative
