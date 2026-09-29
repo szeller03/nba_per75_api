@@ -7715,8 +7715,11 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
     if is_playoff:
         sdi_index = _load_authoritative_playoff_sdi_v4()
     else:
-        _sdi_path = ROOT/"local_api"/"cache"/"regular_sdi_v4_wowy_rts_player_seasons.csv"
-        sdi_index = pd.read_csv(_sdi_path,low_memory=False) if _sdi_path.exists() else _load_regular_sdi_v4_player_seasons()
+        # Always use the active regular-season SDI v4 formula-layer loader.
+        # Do not bypass it with the legacy regular_sdi_v4_wowy_rts_player_seasons
+        # cache: that older artifact can have a compact/stale schema and is not
+        # the authoritative Career SDI source.
+        sdi_index = _load_regular_sdi_v4_player_seasons()
 
     # The deployed Career SDI artifact may be an older compact cache whose
     # internal identity fields are __pid/__season rather than the public
