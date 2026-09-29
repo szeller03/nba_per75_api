@@ -7963,97 +7963,35 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 score=float((q["__score"]*w).sum()/w.sum()) if w.sum()>0 else float(q["__score"].mean())
                 rows.append({"Player_ID":pid,"Player":str(q["Player"].iloc[0]),"Career_SDI_v4":score,"Qualifying_Seasons":int(len(q)),"Career_MP":float(w.sum()),"Average_SDI_Coverage":float(pd.to_numeric(q["SDI_Category_Coverage"],errors="coerce").mean())})
             pd.DataFrame(rows).to_csv(p,index=False)
-        # Final public identity hydration for Career SDI rows.
-        # The Career SDI source can contain historical/source slugs or
-        # truncated names. Resolve those against the website identity registry
-        # by Player_Slug first, then by the registry's canonical public name.
-        # This changes identity/headshot lookup only; SDI values and eligibility
-        # are intentionally untouched.
+        # Reconcile the public Career identity before emitting Big Board rows.
+        # Career SDI artifacts can carry historical/source IDs and names that
+        # differ from the website identity layer. First resolve the source ID
+        # through the canonical identity registry's __identity_key, then use
+        # the master player-season identity as a fallback for display names.
         try:
-            ident=load_exact_csv("identity","website_player_identity_v1.csv")
+            ident=_canonical_identity_registry()
             if ident is not None and not ident.empty:
                 ic=identity_cols(ident)
-                id_col=ic.get("id")
+                source_id_col=ic.get("id")
                 name_col=ic.get("name")
-                slug_col=col(ident,["Player_Slug","PlayerSlug","Slug"])
-                nba_col=col(ident,["NBA_Player_ID","NBA_PlayerId","nba_player_id","NBA_ID"])
-
-                def _career_key(value):
-                    s0=unicodedata.normalize("NFKD",str(value or "")).casefold().replace("*","")
-                    s0="".join(ch for ch in s0 if not unicodedata.combining(ch))
-                    return re.sub(r"[^a-z0-9]+","",s0)
-
-                if id_col and name_col:
-                    im=ident[[id_col,name_col]+([slug_col] if slug_col else [])+([nba_col] if nba_col else [])].copy()
-                    im["__public_name"]=im[name_col].astype(str).str.replace("*","",regex=False).str.strip()
-                    im["__name_key"]=im["__public_name"].map(_career_key)
-                    if slug_col:
-                        im["__slug_key"]=im[slug_col].astype(str).map(_career_key)
-                    else:
-                        im["__slug_key"]=im["__name_key"]
-                    if nba_col:
-                        im["__canonical_id"]=pd.to_numeric(im[nba_col],errors="coerce").map(
-                            lambda x:str(int(x)) if pd.notna(x) else ""
-                        )
-                        im["__canonical_id"]=im["__canonical_id"].where(
-                            im["__canonical_id"].ne(""),
-                            im[id_col].astype(str).str.strip()
-                        )
-                    else:
-                        im["__canonical_id"]=im[id_col].astype(str).str.strip()
-
-                    im=im.loc[im["__name_key"].ne("")].drop_duplicates("__name_key",keep="first")
-                    name_map=dict(zip(im["__name_key"],im["__public_name"]))
-                    id_map=dict(zip(im["__name_key"],im["__canonical_id"]))
-                    slug_map=dict(zip(im["__slug_key"],im["__canonical_id"]))
-                    slug_name_map=dict(zip(im["__slug_key"],im["__public_name"]))
-                    name_keys=list(name_map)
-                    slug_keys=list(slug_map)
-
-                    resolved_ids=[]
-                    resolved_names=[]
-                    for _,rr in d.iterrows():
-                        raw_name=str(rr.get("Player","")).strip()
-                        raw_id=str(rr.get("Player_ID","")).strip()
-                        nk=_career_key(raw_name)
-                        rid=slug_map.get(nk)
-                        resolved_name=slug_name_map.get(nk)
-
-                        # Exact public-name match using the SAME normalization
-                        # as _canonical_identity_registry.
-                        if rid is None:
-                            rid=id_map.get(nk)
-                            resolved_name=name_map.get(nk)
-
-                        # Source slugs such as "nikola-joki" can be truncated.
-                        # Accept only a unique high-confidence match.
-                        if rid is None and nk and slug_keys:
-                            close=get_close_matches(nk,slug_keys,n=2,cutoff=0.90)
-                            if len(close)==1:
-                                rid=slug_map[close[0]]
-                                resolved_name=slug_name_map[close[0]]
-
-                        if rid is None and nk and name_keys:
-                            close=get_close_matches(nk,name_keys,n=2,cutoff=0.90)
-                            if len(close)==1:
-                                rid=id_map[close[0]]
-                                resolved_name=name_map[close[0]]
-
-                        if rid:
-                            resolved_ids.append(str(rid).strip())
-                            resolved_names.append(resolved_name or raw_name)
-                        else:
-                            resolved_ids.append(raw_id)
-                            resolved_names.append(raw_name)
-
-                    d["Player_ID"]=resolved_ids
-                    d["Player"]=resolved_names
-        except Exception as exc:
-            print("Career SDI public identity hydration failed:",repr(exc))
-
-        # Final fallback: use the canonical master identity for any row that
-        # could not be resolved above. Never replace an already-resolved public
-        # identity with a source slug.
+                if source_id_col:
+                    keep=[source_id_col,"__identity_key"]
+                    if name_col: keep.append(name_col)
+                    keep=[x for x in keep if x in ident.columns]
+                    im=ident[keep].copy()
+                    im["__lookup_id"]=im[source_id_col].astype(str).str.strip()
+                    im=im.drop_duplicates("__lookup_id",keep="first")
+                    d["__lookup_id"]=d["Player_ID"].astype(str).str.strip()
+                    d=d.merge(im.drop(columns=[source_id_col],errors="ignore"),
+                              on="__lookup_id",how="left",suffixes=("","__canonical"))
+                    if "__identity_key" in d.columns:
+                        d["Player_ID"]=d["__identity_key"].fillna(d["Player_ID"]).astype(str).str.strip()
+                        d=d.drop(columns=["__identity_key"],errors="ignore")
+                    if name_col and f"{name_col}__canonical" in d.columns:
+                        d["Player"]=d[f"{name_col}__canonical"].fillna(d["Player"])
+                    d=d.drop(columns=["__lookup_id"],errors="ignore")
+        except Exception:
+            pass
         try:
             master=load_master_seasons()
             mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
@@ -8061,16 +7999,45 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
             if mpid and mname and not master.empty:
                 mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
                 mm["__master_id"]=mm[mpid].astype(str).str.strip()
-                mm["__master_name"]=mm[mname].astype(str).str.replace("*","",regex=False).str.strip()
-                mm=mm.drop_duplicates("__master_id",keep="first")
-                name_by_id=dict(zip(mm["__master_id"],mm["__master_name"]))
-                for idx,rr in d.iterrows():
-                    pid=str(rr.get("Player_ID","")).strip()
-                    pname=str(rr.get("Player","")).strip()
-                    if pid in name_by_id:
-                        d.at[idx,"Player"]=name_by_id[pid]
-        except Exception as exc:
-            print("Career SDI master identity fallback failed:",repr(exc))
+                mm["__master_name"]=mm[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip()
+
+                # Career SDI artifacts can contain source slugs rather than
+                # canonical website identities (for example "bob-pettit" or
+                # the truncated "nikola-joki"). Resolve by normalized public
+                # name first, then use a conservative fuzzy match for minor
+                # source-name truncation/typos. This is identity-only; the
+                # Career SDI score and eligibility gate are untouched.
+                def _identity_name_key(value):
+                    return re.sub(r"[^a-z0-9]+","",str(value or "").replace("*","").casefold())
+
+                mm["__name_key"]=mm["__master_name"].map(_identity_name_key)
+                mm=mm.drop_duplicates("__name_key",keep="first")
+                name_to_id=dict(zip(mm["__name_key"],mm["__master_id"]))
+                name_to_display=dict(zip(mm["__name_key"],mm["__master_name"]))
+                known_keys=list(name_to_id.keys())
+
+                resolved_ids=[]
+                resolved_names=[]
+                for _,rr in d.iterrows():
+                    raw_name=str(rr.get("Player","")).strip()
+                    nk=_identity_name_key(raw_name)
+                    rid=name_to_id.get(nk)
+                    if rid is None and nk and known_keys:
+                        # Only accept a very close, unique match. This handles
+                        # truncated historical source names without risking
+                        # arbitrary namesake assignment.
+                        matches=get_close_matches(nk,known_keys,n=2,cutoff=0.92)
+                        if len(matches)==1:
+                            rid=name_to_id[matches[0]]
+                            nk=matches[0]
+                    if rid is None:
+                        rid=str(rr.get("Player_ID","")).strip()
+                    resolved_ids.append(rid)
+                    resolved_names.append(name_to_display.get(nk,raw_name))
+                d["Player_ID"]=resolved_ids
+                d["Player"]=resolved_names
+        except Exception:
+            pass
 
         d["_value_num"]=pd.to_numeric(d["Career_SDI_v4"],errors="coerce")
         d=d.dropna(subset=["_value_num"]).copy()
@@ -8183,44 +8150,114 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
                 d=d.loc[d["Player_ID"].astype(str).str.strip().isin(elig_ids)].copy()
             else:
                 d=d.iloc[0:0].copy()
-        # Final public-identity hydration for the Career SDI emitter.
-        # Career SDI artifacts may contain source slugs/truncated names such
-        # as "nikola-joki". Resolve them against the canonical website
-        # identity registry, whose __identity_key is the public/NBA identity.
-        if not is_playoff:
-            try:
-                ident=_canonical_identity_registry()
-                if ident is not None and not ident.empty:
-                    ic=identity_cols(ident)
-                    id_col=ic.get("id")
-                    name_col=ic.get("name")
-                    if id_col and name_col:
-                        im=ident[[id_col,name_col,"__identity_key","__public_name","__public_key"]].copy()
-                        im["__match_key"]=im["__public_name"].astype(str).map(
-                            lambda v: re.sub(r"[^a-z0-9]+","",v.casefold())
+        # Final public identity hydration for Career SDI rows.
+        # The Career SDI source can contain historical/source slugs or
+        # truncated names. Resolve those against the website identity registry
+        # by Player_Slug first, then by the registry's canonical public name.
+        # This changes identity/headshot lookup only; SDI values and eligibility
+        # are intentionally untouched.
+        try:
+            ident=load_exact_csv("identity","website_player_identity_v1.csv")
+            if ident is not None and not ident.empty:
+                ic=identity_cols(ident)
+                id_col=ic.get("id")
+                name_col=ic.get("name")
+                slug_col=col(ident,["Player_Slug","PlayerSlug","Slug"])
+                nba_col=col(ident,["NBA_Player_ID","NBA_PlayerId","nba_player_id","NBA_ID"])
+
+                def _career_key(value):
+                    s0=unicodedata.normalize("NFKD",str(value or "")).casefold().replace("*","")
+                    s0="".join(ch for ch in s0 if not unicodedata.combining(ch))
+                    return re.sub(r"[^a-z0-9]+","",s0)
+
+                if id_col and name_col:
+                    im=ident[[id_col,name_col]+([slug_col] if slug_col else [])+([nba_col] if nba_col else [])].copy()
+                    im["__public_name"]=im[name_col].astype(str).str.replace("*","",regex=False).str.strip()
+                    im["__name_key"]=im["__public_name"].map(_career_key)
+                    if slug_col:
+                        im["__slug_key"]=im[slug_col].astype(str).map(_career_key)
+                    else:
+                        im["__slug_key"]=im["__name_key"]
+                    if nba_col:
+                        im["__canonical_id"]=pd.to_numeric(im[nba_col],errors="coerce").map(
+                            lambda x:str(int(x)) if pd.notna(x) else ""
                         )
-                        im=im.drop_duplicates("__match_key",keep="first")
-                        id_by_key=dict(zip(im["__match_key"],im["__identity_key"]))
-                        name_by_key=dict(zip(im["__match_key"],im["__public_name"]))
-                        keys=list(id_by_key)
-                        resolved_ids=[]
-                        resolved_names=[]
-                        for _,rr in d.iterrows():
-                            raw=str(rr.get("Player","")).strip()
-                            nk=re.sub(r"[^a-z0-9]+","",raw.casefold())
-                            rid=id_by_key.get(nk)
-                            matched_key=nk
-                            if rid is None and nk and keys:
-                                matches=get_close_matches(nk,keys,n=2,cutoff=0.90)
-                                if len(matches)==1:
-                                    matched_key=matches[0]
-                                    rid=id_by_key[matched_key]
-                            resolved_ids.append(str(rid).strip() if rid else str(rr.get("Player_ID","")).strip())
-                            resolved_names.append(name_by_key.get(matched_key,raw))
-                        d["Player_ID"]=resolved_ids
-                        d["Player"]=resolved_names
-            except Exception:
-                pass
+                        im["__canonical_id"]=im["__canonical_id"].where(
+                            im["__canonical_id"].ne(""),
+                            im[id_col].astype(str).str.strip()
+                        )
+                    else:
+                        im["__canonical_id"]=im[id_col].astype(str).str.strip()
+
+                    im=im.loc[im["__name_key"].ne("")].drop_duplicates("__name_key",keep="first")
+                    name_map=dict(zip(im["__name_key"],im["__public_name"]))
+                    id_map=dict(zip(im["__name_key"],im["__canonical_id"]))
+                    slug_map=dict(zip(im["__slug_key"],im["__canonical_id"]))
+                    slug_name_map=dict(zip(im["__slug_key"],im["__public_name"]))
+                    name_keys=list(name_map)
+                    slug_keys=list(slug_map)
+
+                    resolved_ids=[]
+                    resolved_names=[]
+                    for _,rr in d.iterrows():
+                        raw_name=str(rr.get("Player","")).strip()
+                        raw_id=str(rr.get("Player_ID","")).strip()
+                        nk=_career_key(raw_name)
+                        rid=slug_map.get(nk)
+                        resolved_name=slug_name_map.get(nk)
+
+                        # Exact public-name match using the SAME normalization
+                        # as _canonical_identity_registry.
+                        if rid is None:
+                            rid=id_map.get(nk)
+                            resolved_name=name_map.get(nk)
+
+                        # Source slugs such as "nikola-joki" can be truncated.
+                        # Accept only a unique high-confidence match.
+                        if rid is None and nk and slug_keys:
+                            close=get_close_matches(nk,slug_keys,n=2,cutoff=0.90)
+                            if len(close)==1:
+                                rid=slug_map[close[0]]
+                                resolved_name=slug_name_map[close[0]]
+
+                        if rid is None and nk and name_keys:
+                            close=get_close_matches(nk,name_keys,n=2,cutoff=0.90)
+                            if len(close)==1:
+                                rid=id_map[close[0]]
+                                resolved_name=name_map[close[0]]
+
+                        if rid:
+                            resolved_ids.append(str(rid).strip())
+                            resolved_names.append(resolved_name or raw_name)
+                        else:
+                            resolved_ids.append(raw_id)
+                            resolved_names.append(raw_name)
+
+                    d["Player_ID"]=resolved_ids
+                    d["Player"]=resolved_names
+        except Exception as exc:
+            print("Career SDI public identity hydration failed:",repr(exc))
+
+        # Final fallback: use the canonical master identity for any row that
+        # could not be resolved above. Never replace an already-resolved public
+        # identity with a source slug.
+        try:
+            master=load_master_seasons()
+            mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+            mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+            if mpid and mname and not master.empty:
+                mm=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                mm["__master_id"]=mm[mpid].astype(str).str.strip()
+                mm["__master_name"]=mm[mname].astype(str).str.replace("*","",regex=False).str.strip()
+                mm=mm.drop_duplicates("__master_id",keep="first")
+                name_by_id=dict(zip(mm["__master_id"],mm["__master_name"]))
+                for idx,rr in d.iterrows():
+                    pid=str(rr.get("Player_ID","")).strip()
+                    if pid in name_by_id:
+                        d.at[idx,"Player"]=name_by_id[pid]
+        except Exception as exc:
+            print("Career SDI master identity fallback failed:",repr(exc))
+
         if search:
             d=d.loc[d["Player"].astype(str).str.contains(str(search),case=False,na=False)].copy()
         d=d.sort_values("_value_num",ascending=(sort_direction=="asc"),kind="stable")
@@ -10030,3 +10067,1081 @@ def _merge_team_competitive_context(rows):
             r["champion"]=_success_norm=="CHAMPION"
             r["made_finals"]=_success_norm in {"CHAMPION","MADE FINALS"}
             r["lost_conference_finals"]=_success_norm=="LOST CONFERENCE FINALS"
+            r["competitive_context_source"]="Basketball-Reference series cache + canonical team qualification"
+        elif r.get("playoff_status") is not None:
+            _st=str(r.get("playoff_status")).upper().strip()
+            if _st=="CONFERENCE FINALS":
+                _st="LOST CONFERENCE FINALS"
+            r["playoff_status"]=_st
+            r["playoff_finish"]=_st
+            r["team_success"]=_st
+            r["champion"]=_st=="CHAMPION"
+            r["made_finals"]=_st in {"CHAMPION","MADE FINALS"}
+            r["lost_conference_finals"]=_st=="LOST CONFERENCE FINALS"
+    return rows
+
+def _team_analytics_payload():
+    if TEAM_ANALYTICS_CACHE.exists():
+        try:
+            p=json.loads(TEAM_ANALYTICS_CACHE.read_text(encoding="utf-8"))
+            if p.get("version")==30 and p.get("season_types"):
+                return p
+        except Exception:
+            pass
+    return _build_team_analytics_cache()
+
+
+
+_TEAM_STAT_KEY_MAP = {
+    "rDRtg":"rdrtg","rORtg":"rortg","NRtg":"nrtg","Pace":"pace","rPace":"rpace",
+    "ORtg":"ortg","DRtg":"drtg","TS%":"tspct",
+    "eFG%":"efgpct","Offensive eFG%":"efgpct",
+    "3PAr":"threepar","TOV%":"tovpct","Offensive TOV%":"tovpct",
+    "ORB%":"orbpct","FTr":"ftr","Opp TOV%":"opp_tovpct","Opponent TOV%":"opp_tovpct",
+    "Opp eFG%":"opp_efgpct","Opponent eFG%":"opp_efgpct",
+    "rdrtg":"rdrtg","rortg":"rortg","nrtg":"nrtg","pace":"pace","rpace":"rpace","ortg":"ortg","drtg":"drtg",
+    "tspct":"tspct","efgpct":"efgpct","threepar":"threepar",
+    "tovpct":"tovpct","orbpct":"orbpct","ftr":"ftr","opp_tovpct":"opp_tovpct","opp_efgpct":"opp_efgpct"
+}
+_TEAM_DISPLAY_STATS = [
+    ("rDRtg","Relative DRtg","lower"),("rORtg","Relative ORtg","higher"),
+    ("NRtg","NRtg","higher"),("Pace","Pace","higher"),("rPace","Relative Pace","higher"),("ORtg","ORtg","higher"),
+    ("DRtg","DRtg","lower"),("TS%","TS%","higher"),
+    ("Offensive eFG%","Offensive eFG%","higher"),("3PAr","3PAr","higher"),
+    ("Offensive TOV%","Offensive TOV%","lower"),
+    ("ORB%","ORB%","higher"),("FTr","FTr","higher"),
+    ("Opp TOV%","Opponent TOV%","higher"),("Opp eFG%","Opponent eFG%","lower")
+]
+
+def _is_multi_team_label(team):
+    s=str(team or "").strip().upper()
+    return bool(re.fullmatch(r"[234]TM", s) or re.fullmatch(r"[234][- ]?TEAM", s))
+
+def _team_clean_rows(rows):
+    return [r for r in rows if not _is_multi_team_label(r.get("team"))]
+
+def _team_percentile(value, population, higher=True):
+    vals=pd.to_numeric(pd.Series(population),errors="coerce").dropna()
+    try:x=float(value)
+    except Exception:return None
+    if vals.empty:return None
+    if len(vals)==1:return 100.0
+    # Percentile is the percentage of qualified team-seasons at or below the
+    # value when higher is better; invert for lower-is-better statistics.
+    # Clamp the result because midpoint tie handling can otherwise produce
+    # values just above 100 when several teams share the maximum/minimum.
+    if higher:
+        raw=float((vals < x).sum() + 0.5*(vals == x).sum()) / float(len(vals)-1) * 100.0
+    else:
+        raw=float((vals > x).sum() + 0.5*(vals == x).sum()) / float(len(vals)-1) * 100.0
+    return max(0.0,min(100.0,raw))
+
+def _team_year_number(season):
+    return _season_end_year(season)
+
+def _team_era_key(season):
+    return _era_key(season)
+
+_TEAM_DISPLAY_NAMES = {
+    # Current / commonly used abbreviations
+    "ATL":"Atlanta Hawks","BOS":"Boston Celtics","BKN":"Brooklyn Nets",
+    "BRK":"Brooklyn Nets","CHA":"Charlotte Hornets","CHH":"Charlotte Hornets",
+    "CHI":"Chicago Bulls","CLE":"Cleveland Cavaliers","DAL":"Dallas Mavericks",
+    "DEN":"Denver Nuggets","DET":"Detroit Pistons","GSW":"Golden State Warriors",
+    "GS":"Golden State Warriors","HOU":"Houston Rockets","IND":"Indiana Pacers",
+    "LAC":"Los Angeles Clippers","LAL":"Los Angeles Lakers","MEM":"Memphis Grizzlies",
+    "MIA":"Miami Heat","MIL":"Milwaukee Bucks","MIN":"Minnesota Timberwolves",
+    "NOP":"New Orleans Pelicans","NOH":"New Orleans Hornets","NYK":"New York Knicks",
+    "NY":"New York Knicks","OKC":"Oklahoma City Thunder","ORL":"Orlando Magic",
+    "PHI":"Philadelphia 76ers","PHX":"Phoenix Suns","PHO":"Phoenix Suns",
+    "POR":"Portland Trail Blazers","SAC":"Sacramento Kings","SAS":"San Antonio Spurs",
+    "SA":"San Antonio Spurs","TOR":"Toronto Raptors","UTA":"Utah Jazz",
+    "WAS":"Washington Wizards","WSH":"Washington Wizards",
+    # Historical franchise abbreviations / legacy labels
+    "SEA":"Seattle SuperSonics","NJN":"New Jersey Nets","VAN":"Vancouver Grizzlies",
+    "CHH":"Charlotte Hornets","NO":"New Orleans Pelicans","NOK":"New Orleans/Oklahoma City Hornets",
+    "KCK":"Kansas City Kings","KCO":"Kansas City-Omaha Kings","CIN":"Cincinnati Royals",
+    "SDC":"San Diego Clippers","SD":"San Diego Clippers","BUF":"Buffalo Braves",
+    "BAL":"Baltimore Bullets","CAP":"Capital Bullets","WSB":"Washington Bullets",
+    "FTW":"Fort Wayne Pistons","SYR":"Syracuse Nationals","ROC":"Rochester Royals",
+    "STL":"St. Louis Hawks","MLH":"Milwaukee Hawks","TRI":"Tri-Cities Blackhawks",
+    "PHW":"Philadelphia Warriors","SFW":"San Francisco Warriors","CHZ":"Chicago Zephyrs",
+    "CHP":"Chicago Packers","BLB":"Baltimore Bullets","INO":"Indianapolis Olympians",
+    "WAT":"Waterloo Hawks",
+}
+
+def _clean_team_name(name):
+    s=str(name or "").strip()
+    s=re.sub(r"\s*\*$","",s).strip()
+    return _TEAM_DISPLAY_NAMES.get(s.upper(),s)
+
+def api_team_profile(team, season="", season_type="Regular Season", scope="season"):
+    p=_team_analytics_payload()
+    types=p.get("season_types",{})
+    if types:
+        typed=types.get(season_type,{"rows":[],"seasons":[]})
+        all_rows=_team_clean_rows(list(typed.get("rows",[])))
+    else:
+        all_rows=_team_clean_rows(list(p.get("rows",[])))
+
+    all_rows=[r for r in all_rows
+              if not re.match(r"^(?:2TM|3TM|4TM|TOT|TOTAL)(?:$|[\s_-])",
+                              str(r.get("team","")).strip(),re.I)]
+    for r in all_rows:
+        r["team"]=_clean_team_name(r.get("team"))
+    _merge_team_competitive_context(all_rows)
+
+    target=_clean_team_name(team)
+    target_key=_team_match_key(target)
+    matches=[r for r in all_rows if _team_match_key(r.get("team"))==target_key]
+    if season:
+        matches=[r for r in matches if str(r.get("season"))==str(season)]
+    if not matches:
+        return {"ready":False,"error":f"Team-season not found: {target} {season}",
+                "team":target,"season":season}
+
+    row=matches[0]
+    target_season=str(row.get("season",""))
+    era=_team_era_key(target_season)
+    populations={
+        "season":[r for r in all_rows if str(r.get("season"))==target_season],
+        "historical":all_rows,
+        "era":[r for r in all_rows if _team_era_key(r.get("season"))==era] if era else []
+    }
+    # Some team statistics did not exist as recorded statistics in the
+    # early NBA. The analytics source can contain backfilled/derived values,
+    # but the Team Profile should not present those metrics for seasons before
+    # their historical recording began. Keep this gate limited to the profile
+    # presentation layer so the underlying team analytics data remains intact.
+    season_end=_season_end_year(target_season)
+    # Basketball-Reference's NBA team Advanced/Four Factors tables begin in
+    # 1973-74 for TS%, eFG%, TOV%, ORB%, FTr and their defensive counterparts.
+    # Three-point rate begins with the 1979-80 three-point era. Do not expose
+    # later-recorded statistics on earlier team profiles even when a source
+    # contains a backfilled/derived value.
+    # Build a single consistent profile layer from RELATIVE team-season
+    # statistics. Relative values are percentage-point / rating-point
+    # differences from that season's league/team-season mean. Their
+    # percentiles are historical across all qualified team-seasons.
+    season_population=populations["season"]
+    historical_population=populations["historical"]
+    # Team Profile is intentionally built from relative team-season values.
+    # Relative ORtg/DRtg/Pace and the relative Four Factors are each measured
+    # against the team's season-wide team population mean, then percentile
+    # ranked historically across the corresponding relative values. NRtg is
+    # retained as a raw impact statistic with a historical percentile.
+    #
+    # IMPORTANT: percentile populations must use the same historical
+    # availability windows as the profile display. Backfilled/derived values
+    # from seasons before a statistic was actually recorded must not change
+    # the historical percentile distribution for that statistic.
+    relative_start={"rTS%":1974,"reFG%":1974,"rTOV%":1974,"rORB%":1974,
+                    "rFTr":1974,"rOpponent TOV%":1974,"rOpponent eFG%":1974,
+                    "r3PAr":1980}
+    rel_defs=[
+        ("rORtg","Relative ORtg","ortg","higher"),
+        ("rDRtg","Relative DRtg","drtg","lower"),
+        ("rPace","Relative Pace","pace","higher"),
+        ("rTS%","Relative TS%","tspct","higher"),
+        ("reFG%","Relative eFG%","efgpct","higher"),
+        ("r3PAr","Relative 3PAr","threepar","higher"),
+        ("rFTr","Relative FTr","ftr","higher"),
+        ("rTOV%","Relative TOV%","tovpct","lower"),
+        ("rORB%","Relative ORB%","orbpct","higher"),
+        ("rOpponent TOV%","Relative Opponent TOV%","opp_tovpct","higher"),
+        ("rOpponent eFG%","Relative Opponent eFG%","opp_efgpct","lower"),
+    ]
+    profile_relative=[]
+    # Cache each season mean once so profile requests remain cheap.
+    season_means={}
+    historical_rel_pop={k:[] for k,_,_,_ in rel_defs}
+    for rs in historical_population:
+        hs=str(rs.get("season") or "")
+        season_means.setdefault(hs,{})
+    for hs in list(season_means):
+        hp=[rr for rr in historical_population if str(rr.get("season") or "")==hs]
+        for key,label,raw,direction in rel_defs:
+            vals=[_num(rr.get(raw)) for rr in hp]
+            vals=[v for v in vals if v is not None]
+            season_means[hs][raw]=(sum(vals)/len(vals)) if vals else None
+    for rr in historical_population:
+        hs=str(rr.get("season") or "")
+        hs_year=_season_end_year(hs)
+        means=season_means.get(hs,{})
+        for key,label,raw,direction in rel_defs:
+            start_year=relative_start.get(key)
+            if start_year is not None and (hs_year is None or hs_year < start_year):
+                continue
+            x=_num(rr.get(raw)); m=means.get(raw)
+            if x is not None and m is not None:
+                delta=x-m
+                if key in {"rTS%","reFG%","r3PAr","rFTr","rTOV%","rORB%","rOpponent TOV%","rOpponent eFG%"}:
+                    # Canonical team exports are mixed historically: some
+                    # percentage fields are stored as fractions (0.2766),
+                    # while others are already percentage points (27.66).
+                    # Convert to percentage points only when the underlying
+                    # values are fractional. Otherwise a normal +2.766-point
+                    # ORB% difference would incorrectly become +276.6%.
+                    if max(abs(x), abs(m)) <= 1.5:
+                        delta *= 100.0
+                historical_rel_pop[key].append(delta)
+
+    for key,label,raw,direction in rel_defs:
+        value=_num(row.get(raw))
+        mean=season_means.get(target_season,{}).get(raw)
+        rel_value=(value-mean) if value is not None and mean is not None else None
+        # Ratio statistics are stored as fractions (e.g. .293). The profile
+        # contract displays the difference in percentage points, so .293-.202
+        # becomes +9.1%, not +0.091% or 0.0%.
+        if rel_value is not None and key in {"rTS%","reFG%","r3PAr","rFTr","rTOV%","rORB%","rOpponent TOV%","rOpponent eFG%"}:
+            # Match the source representation used by the target row and
+            # season mean: fraction -> percentage points; already-percent ->
+            # leave as percentage points.
+            if value is not None and mean is not None and max(abs(value), abs(mean)) <= 1.5:
+                rel_value *= 100.0
+        pct=_team_percentile(rel_value,historical_rel_pop[key],higher=(direction=="higher")) if rel_value is not None else None
+        profile_relative.append({"key":key,"label":label,"value":rel_value,"direction":direction,"percentiles":{"historical":pct}})
+
+    # NRtg remains a profile metric. Its percentile is historical so every
+    # profile value is evaluated against the same all-time team-season context.
+    nr_value=_num(row.get("nrtg"))
+    nr_pop=[_num(rr.get("nrtg")) for rr in historical_population]
+    nr_pop=[v for v in nr_pop if v is not None]
+    nr_pct=_team_percentile(nr_value,nr_pop,higher=True) if nr_value is not None else None
+    profile_relative.append({"key":"NRtg","label":"NRtg","value":nr_value,"direction":"higher","percentiles":{"historical":nr_pct}})
+
+    stats=[]
+    for item in profile_relative:
+        start_year=relative_start.get(item["key"])
+        if start_year is not None and (season_end is None or season_end < start_year):
+            continue
+        if item["value"] is None or item["percentiles"].get("historical") is None:
+            continue
+        stats.append(item)
+    return {"ready":True,"team":target,"season":target_season,
+            "season_type":season_type,"era":era,"era_label":_era_label(target_season),
+            "stats":stats,"row":row,
+            "population_sizes":{k:len(v) for k,v in populations.items()}}
+
+
+def api_team_analytics(search="",season="",season_type="Regular Season",
+                       statistic="rDRtg",direction="desc",limit=100,era=""):
+    try:p=_team_analytics_payload()
+    except Exception as exc:
+        return {"rows":[],"total":0,"seasons":[],"stats":TEAM_ANALYTICS_STATS,
+                "statistic":statistic,"direction":direction,"ready":False,
+                "error":f"{type(exc).__name__}: {exc}"}
+    types=p.get("season_types",{})
+    if types:
+        typed=types.get(season_type,{"rows":[],"seasons":[]})
+        rows=_team_clean_rows(list(typed.get("rows",[])))
+        rows=[r for r in rows if not re.match(r"^(?:2TM|3TM|4TM)(?:$|[\s_-])",str(r.get("team","")).strip(),re.I)]; seasons=typed.get("seasons",[])
+    else:
+        rows=_team_clean_rows(list(p.get("rows",[]))); rows=[r for r in rows if not re.match(r"^(?:2TM|3TM|4TM)(?:$|[\s_-])",str(r.get("team","")).strip(),re.I)]; seasons=p.get("seasons",[])
+    for r in rows:
+        r["team"]=_clean_team_name(r.get("team"))
+    _merge_team_competitive_context(rows)
+    if season and season not in ("All","all"):
+        rows=[r for r in rows if str(r.get("season"))==str(season)]
+    if era and era not in ("All","all"):
+        rows=[r for r in rows if _era_key(r.get("season"))==str(era)]
+    if search:
+        q=str(search).casefold(); rows=[r for r in rows if q in str(r.get("team","")).casefold()]
+    key=_TEAM_STAT_KEY_MAP.get(statistic,"rdrtg")
+    # For a franchise search the Team Database must remain exhaustive. Do not
+    # discard historical team-seasons merely because the selected statistic
+    # is unavailable; return the row with a null value so the UI can display
+    # the season and a dash for that statistic.
+    if not search:
+        rows=[r for r in rows if r.get(key) is not None]
+    if statistic in ("rDRtg","DRtg"):
+        effective_direction=(direction or "asc").lower()
+    else:
+        effective_direction=(direction or "desc").lower()
+    reverse=effective_direction in ("desc","high","highest")
+    if search:
+        rows.sort(key=lambda r: (r.get(key) is None, float(r.get(key,0) or 0)),
+                  reverse=reverse)
+    else:
+        rows.sort(key=lambda r:float(r.get(key,-1e99)),reverse=reverse)
+    # Provide the selected display key directly on each row so the frontend
+    # cannot accidentally look up the normalized cache key incorrectly.
+    for r in rows:
+        r[statistic]=r.get(key)
+    display_limit=(len(rows) if search else min(50,len(rows)))
+    return {"rows":rows[:display_limit],"total":len(rows),"displayed":display_limit,
+            "top_limit":50 if not search else None,"search_mode":bool(search),
+            "seasons":seasons,"stats":p.get("stats",[]),"statistic":statistic,
+            "statistic_key":key,"direction":direction,"source":p.get("source"),
+            "ready":True,"season_type":season_type,"era":era,
+            "eras":[{"value":k,"label":label} for k,_a,_b,label in ERA_DEFINITIONS]}
+
+
+def _team_match_key(name):
+    s=_clean_team_name(name).casefold()
+    s=re.sub(r"[^a-z0-9]+","",s)
+    aliases={
+        "okc":"oklahomacitythunder",
+        "seattle":"seattlesupersonics",
+        "nj":"brooklynnets",
+        "newjersey":"brooklynnets",
+        "la":"losangeles",
+        "lac":"losangelesclippers",
+        "lal":"losangeleslakers",
+        "gs":"goldenstatewarriors",
+        "gsw":"goldenstatewarriors",
+        "ny":"newyorkknicks",
+        "nyk":"newyorkknicks",
+        "phx":"phoenixsuns",
+        "pho":"phoenixsuns",
+        "sas":"sanantoniospurs",
+        "sa":"sanantoniospurs",
+        "utah":"utahjazz",
+        "uta":"utahjazz",
+        "den":"denvernuggets",
+        "mil":"milwaukeebucks",
+        "bos":"bostonceltics",
+        "chi":"chicagobulls",
+        "cle":"clevelandcavaliers",
+        "dal":"dallasmavericks",
+        "hou":"houstonrockets",
+        "mem":"memphisgrizzlies",
+        "mia":"miamiheat",
+        "min":"minnesotatimberwolves",
+        "orl":"orlandomagic",
+        "phi":"philadelphia76ers",
+        "por":"portlandtrailblazers",
+        "sac":"sacramentokings",
+        "tor":"torontoraptors",
+        "was":"washingtonwizards",
+        "atl":"atlantahawks",
+        "cha":"charlottehornets",
+        "det":"detroitpistons",
+        "ind":"indianapacers",
+        "nop":"neworleanspelicans",
+        "oklahomacity":"oklahomacitythunder",
+    }
+    return aliases.get(s,s)
+
+def api_teams(search="", season=None, season_type="Regular Season", era="", statistic="rDRtg", direction="asc"):
+    status=_ensure_team_index_build()
+    cached=_read_team_index_cache(season_type)
+    if cached is None:
+        return {"rows":[],"count":0,"seasons":[],"season":season or "All",
+                "ready":False,"building":status=="building","status":status,
+                "error":TEAM_BUILD_STATE.get("error") if status=="error" else None}
+    rows=list(cached.get("rows",[]))
+    # The database is an exhaustive historical team-season index, not a
+    # qualified-statistic population.
+    rows=[r for r in rows if not re.match(
+        r"^(?:2TM|3TM|4TM|TOT|TOTAL)(?:$|[\s_-])",
+        str(r.get("team","")).strip(),re.I)]
+    for r in rows:
+        r["team"]=_clean_team_name(r.get("team"))
+    if season and season not in {"All","all","Historical Percentile"}:
+        rows=[r for r in rows if str(r["season"])==str(season)]
+    if search:
+        q=str(search).casefold().strip()
+        rows=[r for r in rows
+              if q in str(r.get("team","")).casefold()
+              or q in _team_match_key(r.get("team")).casefold()]
+    if era and era not in {"All","all"}:
+        rows=[r for r in rows if _era_key(r.get("season"))==str(era)]
+
+    # Enrich exhaustive database rows with every available team-season
+    # statistic from the analytics dataset. The two sources can use different
+    # team labels, so match on normalized franchise identity + season.
+    try:
+        payload=_team_analytics_payload()
+        typed=payload.get("season_types",{}).get(season_type,{"rows":[]})
+        analytic_rows=_team_clean_rows(list(typed.get("rows",[])))
+        lookup={}
+        for ar in analytic_rows:
+            if re.match(r"^(?:2TM|3TM|4TM|TOT|TOTAL)(?:$|[\s_-])",
+                        str(ar.get("team","")).strip(),re.I):
+                continue
+            lookup[(_team_match_key(ar.get("team")),str(ar.get("season")))] = ar
+        for r in rows:
+            ar=lookup.get((_team_match_key(r.get("team")),str(r.get("season"))))
+            if ar:
+                # Keep the exhaustive database identity/season fields while
+                # layering all available analytics values onto the row.
+                for k,v in ar.items():
+                    if k not in ("team","season","season_type","source"):
+                        r[k]=v
+    except Exception:
+        pass
+
+    # Attach the canonical competitive-context / Team Success fields to the
+    # exhaustive team-season index consumed by the frontend season selector
+    # and Team Leaderboard. Keep this on the cached analytics path so it does
+    # not require a full source-data load per request.
+    try:
+        _merge_team_competitive_context(rows)
+    except Exception:
+        pass
+
+    # A franchise search is still exhaustive, but it should respect the
+    # selected statistic and sort direction. Seasons with no value remain in
+    # the database and are placed after seasons with valid values.
+    if search:
+        key=_TEAM_STAT_KEY_MAP.get(statistic, statistic)
+        effective_direction=("asc" if statistic in ("rDRtg","DRtg") else "desc") if not direction else direction.lower()
+        reverse=effective_direction in ("desc","high","highest")
+        def _rank_value(r):
+            v=r.get(key)
+            try:
+                return float(v)
+            except (TypeError,ValueError):
+                return None
+        rows.sort(
+            key=lambda r: (
+                _rank_value(r) is None,
+                _rank_value(r) if _rank_value(r) is not None else 0
+            ),
+            reverse=reverse
+        )
+    else:
+        rows.sort(key=lambda r:(_season_end_year(r.get("season")) or 9999,
+                               str(r.get("team",""))))
+    return {"rows":rows,"count":len(rows),"seasons":cached.get("seasons",[]),
+            "season":season or "All","ready":True,"building":False,"status":"ready",
+            "database":True,"total_team_seasons":len(cached.get("rows",[])),"era":era,"statistic":statistic,"direction":direction}
+
+
+def api_team_roster_profile(team, season=None, season_type="Regular Season"): 
+    roster_cache=TEAM_INDEX_CACHE.with_name("team_rosters_v1.json")
+    if roster_cache.exists():
+        try:
+            payload=json.loads(roster_cache.read_text(encoding="utf-8"))
+            key=f"{season_type}|||{team}|||{season or ''}"
+            if key in payload.get("rosters",{}):
+                r=payload["rosters"][key]
+                return {"team":team,"season":season,"players":r.get("players",[]),
+                        "player_count":len(r.get("players",[])),"ready":True}
+        except Exception:
+            pass
+    source=_load_team_source()
+    c=_team_columns(source) if source is not None else {"team":None,"season":None,"player":None,"pid":None,"mp":None,"pts":None}
+    if not c["team"] or not c["season"]:
+        return {"error":"Team data is unavailable in the canonical master dataset."}
+    d=source.copy()
+    d[c["team"]]=d[c["team"]].astype(str).str.strip()
+    m=d[c["team"]].str.casefold().eq(str(team).casefold())
+    if season: m &= d[c["season"]].astype(str).eq(str(season))
+    d=d[m].copy()
+    if d.empty:return {"team":team,"season":season,"players":[],"error":"Team-season not found."}
+    players=[]
+    for _,r in d.iterrows():
+        players.append({"player_id":clean(r[c["pid"]]) if c["pid"] else None,
+                        "player_name":clean(r[c["player"]]) if c["player"] else None,
+                        "minutes":clean(r[c["mp"]]) if c["mp"] else None,
+                        "points":clean(r[c["pts"]]) if c["pts"] else None})
+    return {"team":str(d[c["team"]].iloc[0]),"season":str(d[c["season"]].iloc[0]),
+            "players":players,"player_count":len(players)}
+
+class Handler(BaseHTTPRequestHandler):
+    def send_binary(self, status, body, content_type, cache_control="public, max-age=3600"):
+        self.send_response(status)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", cache_control)
+        self.send_header("Content-Length", str(len(body)))
+        try:
+            self.end_headers()
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+            return
+
+    def send_json(self, status, payload):
+        # JSON has no NaN/Infinity values. Pandas/numpy can produce these
+        # internally when a team-season Four-Factor field is unavailable;
+        # convert them to JSON null instead of emitting invalid JSON such as
+        # `"efgpct": NaN`, which breaks browser JSON.parse().
+        def _json_safe(v):
+            if isinstance(v, dict):
+                return {k:_json_safe(x) for k,x in v.items()}
+            if isinstance(v, (list, tuple)):
+                return [_json_safe(x) for x in v]
+            if isinstance(v, np.generic):
+                v=v.item()
+            if isinstance(v, float) and not np.isfinite(v):
+                return None
+            return v
+        payload=_json_safe(payload)
+        body = json.dumps(payload, ensure_ascii=False, allow_nan=False).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(body)))
+        try:
+            self.end_headers()
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+            # Browser/client closed the request. There is nothing left to send.
+            return
+
+    def do_GET(self):
+        try:
+            u = urlparse(self.path)
+            q = parse_qs(u.query)
+            if u.path == "/api/v1/playoff-peak-diagnostics":
+                pop=_playoff_peak_population()
+                return self.send_json(200, {
+                    "ok": True,
+                    "players_with_peak": len(pop),
+                    "sample": [
+                        {
+                            "player_id": v.get("player_id"),
+                            "player_name": v.get("player_name"),
+                            "seasons": v.get("seasons"),
+                            "sdi": v.get("sdi"),
+                            "sdi_percentile": v.get("sdi_percentile"),
+                        }
+                        for v in list(pop.values())[:10]
+                    ],
+                })
+            # FAST PUBLIC DATA LAYER: these endpoints use one indexed SQLite database
+            # and never touch the large research CSVs on the request path.
+            if u.path == "/api/v1/public/players" and public_search_players:
+                qv=q.get("q",[""])[0]
+                return self.send_json(200,{"players":public_search_players(qv,50),"public_layer":True})
+            if u.path == "/api/v1/public/players/curated" and public_search_players_batch:
+                raw=q.get("names",[""])[0]
+                names=[unquote(x).strip() for x in raw.split(",") if x.strip()]
+                return self.send_json(200,{"players":public_search_players_batch(names),"public_layer":True,"batch":True})
+            m=re.fullmatch(r"/api/v1/public/players/(.+?)/season-bundles",u.path)
+            if m:
+                requested=unquote(m.group(1))
+                requested_type=q.get("season_type",["Regular Season"])[0]
+                if str(requested_type).casefold() in {"playoffs","playoff","postseason"}:
+                    return self.send_json(200,api_playoff_season_bundles(requested))
+                if public_player_season_bundles:
+                    return self.send_json(200,public_player_season_bundles(requested,requested_type))
+            m=re.fullmatch(r"/api/v1/public/players/(.+?)/profile",u.path)
+            if m and public_player_season_bundle:
+                return self.send_json(200,public_player_season_bundle(unquote(m.group(1)),q.get("season",[""])[0],q.get("season_type",["Regular Season"])[0]))
+            if u.path == "/api/v1/public/big-board-companion" and big_board_companion:
+                raw_ids=q.get("player_ids",[""])[0]
+                player_ids=[unquote(x).strip() for x in raw_ids.split(",") if x.strip()]
+                return self.send_json(200,big_board_companion(q.get("statistic",["PTS_per75"])[0],q.get("season",["Historical Percentile"])[0],q.get("context",["Historical"])[0],player_ids,q.get("era",[""])[0]))
+            if u.path == "/api/v1/public/explorer" and public_explorer_population:
+                def _num(name):
+                    raw=q.get(name,[None])[0]
+                    if raw in (None, "", "null", "None"): return None
+                    try: return float(raw)
+                    except Exception: return None
+                xs=q.get("x_statistic",["PTS_per75"])[0]; ys=q.get("y_statistic",["rTS"])[0]
+                season_q=q.get("season",["Historical Percentile"])[0]; st=q.get("season_type",["Regular Season"])[0]
+                scope_q=q.get("scope",["single"])[0]; era_q=q.get("era",[""])[0]; search_q=q.get("search",[""])[0]
+                xmin,xmax,ymin,ymax=_num("x_min"),_num("x_max"),_num("y_min"),_num("y_max")
+                if str(st).casefold() in {"playoffs","playoff","postseason"} and str(scope_q).casefold()=="single":
+                    result=_api_playoff_explorer_population(xs,ys,season_q,era_q,search_q,xmin,xmax,ymin,ymax,100)
+                else:
+                    result=public_explorer_population(xs,ys,season_q,st,era_q,search_q,xmin,xmax,ymin,ymax,100,scope_q)
+                if result.get("fallback"):
+                    # Preserve the existing methodology for non-indexed views while
+                    # applying the new Explorer semantics: join the full X/Y result,
+                    # filter both axes, then rank/limit by X.
+                    requested_context = "Career" if scope_q=="career" else ("Historical" if scope_q=="five_year_peak" else ("Era" if scope_q=="era" else ("Era" if era_q else "Historical")))
+                    requested_season = None if scope_q in {"career","era","five_year_peak"} else season_q
+                    xb=api_big_board(requested_season,requested_context,xs,"desc",search_q,10000,scope_q,st,era_q)
+                    yb=api_big_board(requested_season,requested_context,ys,"desc",search_q,10000,scope_q,st,era_q)
+                    xrows=xb.get("rows",[]) if isinstance(xb,dict) else []; yrows=yb.get("rows",[]) if isinstance(yb,dict) else []
+                    key=lambda r:f"{r.get('player_id') or r.get('player_name')}|||{r.get('season_label') or r.get('season') or ''}"
+                    ym={key(r):r for r in yrows}; merged=[]
+                    for r in xrows:
+                        yr=ym.get(key(r)); xv, yv = (float(r.get("value")) if r.get("value") is not None else None), (float(yr.get("value")) if yr and yr.get("value") is not None else None)
+                        if xv is None or yv is None: continue
+                        if xmin is not None and xv<xmin or xmax is not None and xv>xmax or ymin is not None and yv<ymin or ymax is not None and yv>ymax: continue
+                        merged.append({'player_id':r.get('player_id'),'player_name':r.get('player_name'),'season':r.get('season'),'season_label':r.get('season_label') or r.get('season'),'xValue':xv,'yValue':yv,'headshot_url':None})
+                    merged.sort(key=lambda r:(-r['xValue'],str(r.get('player_name') or '').casefold()))
+                    total=len(merged); result={'rows':merged[:100],'count':min(total,100),'total':total,'population_total':total,'x_statistic':xs,'y_statistic':ys,'season':season_q,'season_type':st,'scope':scope_q,'era':era_q,'ranked_by':'x','rank_direction':'desc','public_layer':False,'available_bounds':{'xmin':min((r['xValue'] for r in merged),default=None),'xmax':max((r['xValue'] for r in merged),default=None),'ymin':min((r['yValue'] for r in merged),default=None),'ymax':max((r['yValue'] for r in merged),default=None)}}
+                if isinstance(result,dict) and isinstance(result.get("rows"),list):
+                    for row in result["rows"]:
+                        if not row.get("headshot_url"): row["headshot_url"]=_headshot_url_for(row.get("player_id"),row.get("player_name"))
+                return self.send_json(200,result)
+            if u.path == "/api/v1/public/big-board" and public_big_board:
+                _pb_stat=q.get("statistic",["PTS_per75"])[0]
+                _pb_season=q.get("season",["Historical Percentile"])[0]
+                _pb_context=q.get("context",["Historical"])[0]
+                _pb_era=q.get("era",[""])[0]
+                if str(_pb_season).casefold() in {"era average","era_average"} or (str(_pb_context).casefold()=="era" and _pb_era):
+                    return self.send_json(200,api_era_average_big_board(
+                        q.get("season_type",["Regular Season"])[0],_pb_era,_pb_stat,
+                        q.get("sort",["desc"])[0],q.get("search",[""])[0],
+                        int(q.get("limit",["100"])[0] or 100)))
+                return self.send_json(200,public_big_board(_pb_stat,_pb_season,_pb_context,q.get("sort",["desc"])[0],q.get("search",[""])[0],int(q.get("limit",["100"])[0] or 100),_pb_era))
+            if u.path == "/api/v1/public/teams" and public_teams:
+                _team_result=api_teams(
+                    search=q.get("search",[""])[0],
+                    season=q.get("season",[""])[0],
+                    season_type=q.get("season_type",["Regular Season"])[0],
+                    era=q.get("era",[""])[0],
+                    statistic=q.get("statistic",["rDRtg"])[0],
+                    direction=q.get("direction",["asc"])[0],
+                )
+                return self.send_json(200,_team_result)
+            if u.path == "/api/v1/health":
+                return self.send_json(200, {"ok": True})
+            if u.path == "/api/v1/diagnostics":
+                return self.send_json(200, {
+                    "ok": True,
+                    "root": str(ROOT),
+                    "paths": {k: str(v) for k,v in PATHS.items()},
+                    "exists": {k: bool(v.exists()) for k,v in PATHS.items()},
+                })
+            if u.path == "/api/v1/statistics":
+                return self.send_json(200, api_stat_registry())
+            if u.path == "/api/v1/compare-diagnostics":
+                try:
+                    per=load_canonical_percentiles()
+                    sc=choose_col(per,["Statistic","statistic","Stat","Statistic_Name","stat_name"])
+                    pc={c:percentile_column(per,c) for c in ("Season","Era","Historical")}
+                    return self.send_json(200,{
+                        "ok":True,
+                        "source":"canonical_long_format",
+                        "rows":int(len(per)),
+                        "statistics":int(per[sc].nunique()) if sc else 0,
+                        "percentile_columns":pc,
+                        "columns":[str(c) for c in per.columns if "percentile" in str(c).lower()],
+                    })
+                except Exception as e:
+                    return self.send_json(500,{"ok":False,"error":str(e),"type":type(e).__name__})
+            if u.path == "/api/v1/compare":
+                return self.send_json(200, api_compare_players(
+                    q.get("player_a", [""])[0],
+                    q.get("player_b", [""])[0],
+                    q.get("start_a", [None])[0],
+                    q.get("end_a", [None])[0],
+                    q.get("start_b", [None])[0],
+                    q.get("end_b", [None])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                    q.get("context", ["Season"])[0],
+                ))
+            if u.path == "/api/v1/big-board":
+                result = api_big_board(
+                    q.get("season", [None])[0],
+                    q.get("context", ["Historical"])[0],
+                    q.get("statistic", [None])[0],
+                    q.get("sort", ["desc"])[0],
+                    q.get("search", [None])[0],
+                    int(q.get("limit", ["100"])[0]),
+                    q.get("scope", ["single"])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                    q.get("era", [""])[0],
+                    str(q.get("companion", ["0"])[0]).casefold() in {"1","true","yes"},
+                    q.get("anchor_statistic", [None])[0],
+                )
+                # The scatter plot uses the Big Board as its observation
+                # source. Guarantee every observation carries the canonical
+                # website headshot, regardless of which board builder produced
+                # the row.
+                if isinstance(result, dict) and isinstance(result.get("rows"), list):
+                    for row in result["rows"]:
+                        if not row.get("headshot_url"):
+                            row["headshot_url"] = _headshot_url_for(
+                                row.get("player_id"), row.get("player_name")
+                            )
+                return self.send_json(200, result)
+            m = re.fullmatch(r"/api/v1/players/(.+?)/headshot", u.path)
+            if m:
+                requested=unquote(m.group(1))
+                url=_headshot_url_for(requested, requested)
+                if not url:
+                    return self.send_json(404, {"error":"Headshot not found"})
+                try:
+                    candidate_urls=[str(url)]
+                    last_error=None
+                    if candidate_urls and str(candidate_urls[0]).lower().startswith(("http://","https://")):
+                        for candidate_url in candidate_urls:
+                            try:
+                                req=Request(str(candidate_url), headers={
+                                    "User-Agent":"Mozilla/5.0 NBA-PER75/1.0",
+                                    "Accept":"image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+                                    "Referer":"https://www.basketball-reference.com/",
+                                })
+                                with urlopen(req, timeout=12) as resp:
+                                    body=resp.read()
+                                    ctype=resp.headers.get("Content-Type","image/jpeg").split(";")[0]
+                                if body and str(ctype).startswith("image/"):
+                                    break
+                            except Exception as exc:
+                                last_error=exc
+                                body=b""
+                                continue
+                        if not body:
+                            if last_error: raise last_error
+                            raise ValueError("Empty image response")
+                    else:
+                        fp=Path(str(url))
+                        if fp.is_absolute():
+                            rel=str(fp).lstrip("/\\")
+                            fp=(ROOT/"public"/rel).resolve()
+                        else:
+                            fp=(ROOT/fp).resolve()
+                        body=fp.read_bytes()
+                        ctype={"jpg":"image/jpeg","jpeg":"image/jpeg","png":"image/png","webp":"image/webp"}.get(fp.suffix.lower().lstrip("."),"application/octet-stream")
+                    if not body:
+                        raise ValueError("Empty image response")
+                    return self.send_binary(200,body,ctype)
+                except Exception as e:
+                    return self.send_json(404, {"error":"Headshot could not be loaded","type":type(e).__name__})
+            if u.path == "/api/v1/players":
+                return self.send_json(200, {"players": api_players(q.get("q", [""])[0])})
+            if u.path == "/api/v1/teams/analytics":
+                return self.send_json(200, api_team_analytics(
+                    q.get("search", [""])[0],
+                    q.get("season", [""])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                    q.get("statistic", ["rDRtg"])[0],
+                    q.get("direction", ["desc"])[0],
+                    int(q.get("limit", ["100"])[0] or 100),
+                    q.get("era", [""])[0]
+                ))
+            if u.path == "/api/v1/teams/profile":
+                return self.send_json(200, api_team_profile(
+                    q.get("team", [""])[0],
+                    q.get("season", [""])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                    q.get("scope", ["season"])[0]
+                ))
+            if u.path == "/api/v1/teams":
+                return self.send_json(200, api_teams(
+                    q.get("search", [""])[0],
+                    q.get("season", [""])[0] or None,
+                    q.get("season_type", ["Regular Season"])[0],
+                    q.get("era", [""])[0],
+                    q.get("statistic", ["rDRtg"])[0],
+                    q.get("direction", ["asc"])[0]
+                ))
+            m = re.fullmatch(r"/api/v1/teams/(.+)", u.path)
+            if m:
+                return self.send_json(200, api_team_roster_profile(
+                    unquote(m.group(1)),
+                    q.get("season", [""])[0] or None,
+                    q.get("season_type", ["Regular Season"])[0]
+                ))
+
+            m = re.fullmatch(r"/api/v1/players/(.+?)/seasons", u.path)
+            if m:
+                return self.send_json(200, api_player_seasons(
+                    unquote(m.group(1)),
+                    q.get("season_type", ["Regular Season"])[0],
+                ))
+            m = re.fullmatch(r"/api/v1/players/(.+?)/categories", u.path)
+            if m:
+                requested=unquote(m.group(1))
+                result=api_spider(
+                    requested,
+                    q.get("season", ["Career"])[0],
+                    q.get("context", ["Historical"])[0],
+                    q.get("stats", [None])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                )
+                return self.send_json(200, {
+                    "player_id": result.get("player",{}).get("player_id"),
+                    "Player": result.get("player",{}).get("player_name"),
+                    "data": result.get("category_axes",[]),
+                })
+            m = re.fullmatch(r"/api/v1/players/(.+?)/subcategories", u.path)
+            if m:
+                requested=unquote(m.group(1))
+                pid,pname=resolve_player_identity(requested)
+                result=api_spider(
+                    requested,
+                    q.get("season", ["Career"])[0],
+                    q.get("context", ["Historical"])[0],
+                    q.get("stats", [None])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                )
+                # Return the six category axes plus the underlying weighted
+                # subcategory definitions, using the canonical aggregation spec.
+                spec=load_exact_csv("aggregation_spec","player_subcategory_aggregation_spec_v1.csv")
+                rows=[]
+                if not spec.empty:
+                    cat=choose_col(spec,["Category"]); grp=choose_col(spec,["Group_ID","Group","Group_Id"])
+                    st=choose_col(spec,["Statistic","Stat"]); sw=choose_col(spec,["Statistic_Weight","Stat_Weight","Within_Group_Weight"])
+                    if all([cat,grp,st,sw]):
+                        for _,rr in spec.iterrows():
+                            rows.append({
+                                "Category":str(rr[cat]),
+                                "Subcategory":str(rr[grp]),
+                                "Statistic":str(rr[st]),
+                                "Statistic_Weight":float(rr[sw]) if pd.notna(rr[sw]) else None,
+                            })
+                return self.send_json(200, {
+                    "player_id":pid,"Player":pname,
+                    "data":rows,
+                    "category_axes":result.get("category_axes",[]),
+                })
+            m = re.fullmatch(r"/api/v1/players/(.+?)/context", u.path)
+            if m:
+                return self.send_json(200, api_context_profile(
+                    unquote(m.group(1)),
+                    q.get("season", [None])[0],
+                    q.get("context", ["Historical"])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                ))
+            m = re.fullmatch(r"/api/v1/players/(.+?)/spider", u.path)
+            if m:
+                return self.send_json(200, api_spider(
+                    unquote(m.group(1)),
+                    q.get("season", [None])[0],
+                    q.get("context", ["Historical"])[0],
+                    q.get("stats", [None])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                ))
+            m = re.fullmatch(r"/api/v1/players/(.+?)/profile", u.path)
+            if m:
+                return self.send_json(200, api_profile(
+                    unquote(m.group(1)),
+                    q.get("season", [None])[0],
+                    q.get("season_type", ["Regular Season"])[0],
+                ))
+            return self.send_json(404, {"error": "Route not found"})
+        except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+            return
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            try:
+                return self.send_json(500, {"error": str(e), "type": type(e).__name__})
+            except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+                return
+
+
+def _precompute_regular_peak_cache_if_missing():
+    """Build the regular 5-Year Peak JSON once when the API starts.
+
+    This moves the expensive league-wide calculation out of the user's click
+    path. Once written, profile requests read only the selected player's row.
+    """
+    path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks.json"
+    if path.exists():
+        return True
+    try:
+        builder_candidates=[
+            ROOT/"analysis"/"build_precomputed_5_year_peaks.py",
+            ROOT/"local_api"/"build_precomputed_5_year_peaks.py",
+        ]
+        builder=next((p for p in builder_candidates if p.exists()),None)
+        if builder:
+            import subprocess,sys
+            subprocess.run([sys.executable,str(builder)],cwd=str(ROOT),check=True,
+                           stdout=subprocess.DEVNULL,stderr=subprocess.STDOUT)
+            return path.exists()
+        # Fall back to the canonical single-player calculation already present
+        # in this API. This runs once at API startup and persists the results.
+        reg=_canonical_identity_registry()
+        if reg.empty:
+            return False
+        ic=identity_cols(reg)
+        if not ic.get("id") or not ic.get("name"):
+            return False
+        players=[]
+        total=len(reg)
+        for n,(_,rr) in enumerate(reg.iterrows(),1):
+            pid=clean(rr[ic["id"]])
+            pname=clean(rr[ic["name"]])
+            try:
+                result=_canonical_five_year_peak_profile(pid,pname)
+                if result and result.get("found"):
+                    p=result.get("profile",{}) or {}
+                    stats=result.get("statistic_values",{}) or {}
+                    # Persist only the compact fields required by the profile
+                    # fast path.
+                    packed={
+                        "player_id":pid,
+                        "player_name":pname,
+                        "peak_start_year":p.get("Peak_Start_Year"),
+                        "peak_end_year":p.get("Peak_End_Year"),
+                        "peak_seasons":p.get("Peak_Seasons",[]),
+                        "peak_era":p.get("Peak_Era"),
+                        "peak_sdi":p.get("Peak_SDI"),
+                        "statistics":stats,
+                    }
+                    players.append(packed)
+            except Exception:
+                continue
+        if players:
+            payload={"version":"regular_profile_peaks_v1",
+                     "player_count":len(players),"players":players}
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_text(json.dumps(payload,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+            return True
+    except Exception:
+        return False
+    return False
+
+def _preload_playoff_peak_cache():
+    """Warm the canonical playoff peak cache once at API startup."""
+    key="__playoff_peak_population_v1__"
+    if key in CACHE:
+        return CACHE[key]
+    population=_playoff_peak_population()
+    return population
+
+def _preload_big_board_cache():
+    """Warm the expensive regular-season Big Board path at API startup.
+
+    The first Big Board click should not pay the cost of locating/reading the
+    canonical percentile table and building the PTS/75 eligibility gate.
+    """
+    load_canonical_percentiles()
+    load_master_seasons()
+    _bref_master_eligibility("PTS_per75","Regular Season")
+    # Warm the exact default board used by the frontend.
+    api_big_board(
+        season="Historical Percentile",
+        context="Historical",
+        statistic="PTS_per75",
+        sort_direction="desc",
+        limit=100,
+        scope="single",
+        season_type="Regular Season",
+        era=None,
+    )
+    # Build the expensive multi-stat Peak/Era bundles in the background warm
+    # phase. The user should not pay this cost when changing a board selector.
+    # Warm Peak independently from Era. A failure in one scope must never
+    # invalidate the already-built Peak bundle or make the other Big Board
+    # scopes wait/fall back to on-demand computation.
+    try:
+        _five_year_peak_windows("Regular Season",None)
+        _five_year_peak_all_stat_values("Regular Season",None)
+        _five_year_peak_windows("Playoffs",None)
+        _five_year_peak_all_stat_values("Playoffs",None)
+        print("Big Board Peak bundles ready.")
+    except Exception as _e:
+        print("Big Board Peak warm failed:", repr(_e))
+    # Era Average is already served through its existing per-era cached path.
+    # Do not run the legacy all-era startup warm here: on some pandas builds
+    # its temporary weighting column can collide with a source-column label
+    # and raise KeyError("__w"). That warm is not required for the working
+    # Era selector and must not be allowed to generate a startup error or
+    # consume resources needed by the Peak bundle.
+    print("Big Board Era startup warm skipped (existing cached path retained).")
+
+if __name__ == "__main__":
+    print("NBA PER-75 Local API")
+    server=ThreadingHTTPServer((HOST, PORT), Handler)
+
+    # IMPORTANT: start accepting requests immediately. Previously the API did
+    # not bind to port 8000 until all Big Board / SDI / peak caches finished
+    # warming. The frontend could therefore fire its first profile request
+    # while nothing was listening, producing the misleading "Start the local
+    # API / API request failed (500)" state. Refreshing worked because startup
+    # had finished by then.
+    print("Listening at http://127.0.0.1:8000")
+    print("Leave this window running while using the website.")
+
+    def warm_caches():
+        try:
+            print("Warming Big Board data cache...")
+            _preload_big_board_cache()
+            print("Big Board cache ready.")
+        except Exception as e:
+            print("Big Board cache warm failed:", repr(e))
+
+        try:
+            print("Warming public profile data...")
+            if warm_public_profile_data is not None: warm_public_profile_data()
+            print("Public profile data ready.")
+        except Exception as e:
+            print("Public profile data warm failed:", repr(e))
+
+        try:
+            print("Warming NEW SDI v4 season index...")
+            _load_regular_sdi_v4_player_seasons()
+            print("NEW SDI v4 season index ready.")
+        except Exception as e:
+            print("NEW SDI v4 season index warm failed:", repr(e))
+
+        try:
+            print("Warming individual regular-season SDI cache...")
+            _warm_regular_season_spider_cache()
+            print("Individual regular-season SDI cache ready.")
+        except Exception as e:
+            print("Individual regular-season SDI cache warm failed:", repr(e))
+
+        try:
+            print("Warming playoff percentile cache...")
+            load_playoff_46_season()
+            load_playoff_percentile_long(career=False)
+            load_playoff_46_career()
+            load_playoff_percentile_long(career=True)
+            _warm_playoff_season_sdi_cache()
+            try:
+                _pc=_PLAYOFF_SEASON_SDI_CACHE or {}
+                print("Playoff individual-season SDI cache ready:", len(_pc.get("id",{})), "rows")
+            except Exception:
+                print("Playoff individual-season SDI cache ready.")
+            print("Playoff percentile cache ready.")
+        except Exception as e:
+            print("Playoff percentile cache warm failed:", repr(e))
+
+        try:
+            print("Warming precomputed playoff 5-Year Peak cache...")
+            _preload_playoff_peak_cache()
+            print("Playoff 5-Year Peak cache ready.")
+        except Exception as e:
+            print("Playoff 5-Year Peak cache warm failed:", repr(e))
+
+        try:
+            print("Warming regular 5-Year Peak cache...")
+            _load_precomputed_regular_peak_profile(requested_pid="__warm_only__")
+            _regular_peak_category_population()
+            _warm_regular_peak_sdi_spider_cache()
+            try:
+                _five_year_peak_windows("Regular Season", None)
+                _five_year_peak_windows("Playoffs", None)
+                # IMPORTANT: the window cache alone is not enough for the
+                # Big Board.  The first Peak selector previously still had to
+                # traverse every qualifying window and aggregate every stat.
+                # Materialize the complete statistic bundle during the warm
+                # phase so the selector itself is an in-memory lookup.
+                _five_year_peak_all_stat_values("Regular Season", None)
+                print("Regular 5-Year Peak Big Board bundle ready.")
+                _five_year_peak_all_stat_values("Playoffs", None)
+                print("Playoff 5-Year Peak Big Board bundle ready.")
+            except Exception as e:
+                print("Big Board peak-window/bundle cache warm failed:", repr(e))
+            print("Regular 5-Year Peak cache ready.")
+        except Exception as e:
+            print("Regular 5-Year Peak cache warm failed:", repr(e))
+
+        try:
+            print("Warming Career spider cache...")
+            _warm_regular_career_spider_cache()
+            print("Career spider cache ready.")
+        except Exception as e:
+            print("Career spider cache warm failed:", repr(e))
+
+        try:
+            print("Warming Career SDI spider axes...")
+            _warm_career_sdi_axes()
+            print("Career SDI spider axes ready.")
+        except Exception as e:
+            print("Career SDI spider warm failed:", repr(e))
+
+    import threading
+    threading.Thread(target=warm_caches, name="NBA-PER75-cache-warm", daemon=True).start()
+    server.serve_forever()
+
+
+
+def _sdi_v4_weighted_top_level(category_scores):
+    """Combine available SDI categories using the locked intended weights.
+
+    Missing categories are not assigned a 50th-percentile score. Their intended
+    weights are removed and the available category weights are renormalized.
+    """
+    w=SDI_V4_TOP_LEVEL_WEIGHTS
+    usable=[(float(category_scores[k]),float(weight)) for k,weight in w.items()
+            if k in category_scores and category_scores[k] is not None and pd.notna(category_scores[k])]
+    if not usable: return None
+    den=sum(weight for _,weight in usable)
+    return sum(value*weight for value,weight in usable)/den if den>0 else None
+
