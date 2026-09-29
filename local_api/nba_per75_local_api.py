@@ -7873,9 +7873,32 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
             # the numeric SDI artifact. Older production artifacts can contain
             # __pid/Player_ID without a public Player column.
             if not pid_col:
-                return {"rows":[],"count":0,"scope":"career","season_type":season_type,
-                        "statistic":"Statistical Dominance Index",
-                        "note":"Authoritative SDI v4 source is missing player identity columns."}
+                # Some deployed Career SDI artifacts contain the canonical
+                # player name but omit Player_ID. Recover the stable ID from
+                # the canonical master identity layer instead of rejecting
+                # an otherwise valid numeric Career SDI artifact.
+                if not name_col:
+                    return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                            "statistic":"Statistical Dominance Index",
+                            "note":"Authoritative SDI v4 source is missing player identity columns."}
+                try:
+                    master=load_master_seasons()
+                    mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                    mname=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                    if mpid and mname and not master.empty:
+                        names=master[[mpid,mname]].dropna(subset=[mpid]).copy()
+                        names["__name_key"]=names[mname].astype(str).str.replace(r"\\*+","",regex=True).str.strip().str.casefold()
+                        names["__pid"]=names[mpid].astype(str).str.strip()
+                        names=names.drop_duplicates("__name_key",keep="first")[["__name_key","__pid"]]
+                        src["__name_key"]=src[name_col].astype(str).str.replace(r"\\*+","",regex=True).str.strip().str.casefold()
+                        src=src.merge(names,on="__name_key",how="left").drop(columns=["__name_key"],errors="ignore")
+                        pid_col="__pid"
+                except Exception:
+                    pass
+                if not pid_col or "__pid" not in src.columns or src["__pid"].isna().all():
+                    return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                            "statistic":"Statistical Dominance Index",
+                            "note":"Authoritative SDI v4 source is missing player identity columns."}
             score_col="SDI_v4_WOWY" if (not is_playoff and "SDI_v4_WOWY" in src.columns) else "SDI_v4"
             src["__pid"]=src[pid_col].astype(str).str.strip()
             if name_col:
