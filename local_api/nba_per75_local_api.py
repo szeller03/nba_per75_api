@@ -7954,11 +7954,23 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         # precomputed season-SDI source. This avoids legacy playoff source IDs
         # (which may legitimately differ from the canonical SDI IDs).
         seasons=sdi_index.copy() if sdi_index is not None else pd.DataFrame()
-        if "G" not in seasons.columns and "games" in seasons.columns: seasons["G"]=seasons["games"]
-        if "MP" not in seasons.columns and "minutes" in seasons.columns: seasons["MP"]=seasons["minutes"]
+        # Normalize the participation fields from the authoritative SDI
+        # season artifact. Different generated versions have used G/games,
+        # GP/Games_Played, and MP/minutes/minutes_played; the career
+        # eligibility thresholds are unchanged.
+        if "G" not in seasons.columns:
+            g_col=col(seasons,["games","GP","Games_Played","GamesPlayed","Games","G_played","games_played"])
+            if g_col: seasons["G"]=seasons[g_col]
+        if "MP" not in seasons.columns:
+            mp_col=col(seasons,["minutes","Minutes","Minutes_Played","MinutesPlayed","minutes_played","MP_total"])
+            if mp_col: seasons["MP"]=seasons[mp_col]
+        if "G" not in seasons.columns or "MP" not in seasons.columns:
+            return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                    "statistic":"Statistical Dominance Index",
+                    "note":"Authoritative SDI v4 source is missing career participation fields."}
         seasons["G"]=pd.to_numeric(seasons["G"],errors="coerce").fillna(0)
         seasons["MP"]=pd.to_numeric(seasons["MP"],errors="coerce").fillna(0)
-        elig_pid_col=col(seasons,["Player_ID","PlayerId","PlayerID","player_id"])
+        elig_pid_col=col(seasons,["Player_ID","PlayerId","PlayerID","player_id","__pid"])
         if not elig_pid_col:
             return {"rows":[],"count":0,"scope":"career","season_type":season_type,
                     "statistic":"Statistical Dominance Index",
