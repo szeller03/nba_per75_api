@@ -2125,6 +2125,17 @@ def _load_regular_sdi_v4_player_seasons():
                 except Exception:
                     pass
 
+            # Do not trust an on-disk cache merely because it exists.
+            # Older compact artifacts can have identity/season fields but no
+            # usable SDI score column, which makes Career aggregation silently
+            # produce zero rows. If the score layer is invalid, fall through
+            # to the authoritative percentile-layer rebuild below.
+            score_src=col(d,["SDI_v4","SDI_v4_WOWY","Statistical_Dominance_Index","SDI"])
+            pid_valid=bool(col(d,["Player_ID","PlayerId","PlayerID","player_id","__pid"]))
+            season_valid=bool(col(d,["Season","season","SeasonEndYear","Season_End_Year","__season"]))
+            score_valid=bool(score_src) and pd.to_numeric(d[score_src],errors="coerce").notna().any()
+            if not (pid_valid and season_valid and score_valid):
+                raise ValueError("Stale regular SDI cache lacks a usable score layer")
             CACHE[key]=d
             return d
         except Exception:
