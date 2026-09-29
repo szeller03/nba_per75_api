@@ -7964,18 +7964,40 @@ def _sdi_big_board(season=None, context="Historical", sort_direction="desc",
         if "MP" not in seasons.columns:
             mp_col=col(seasons,["minutes","Minutes","Minutes_Played","MinutesPlayed","minutes_played","MP_total"])
             if mp_col: seasons["MP"]=seasons[mp_col]
-        if "G" not in seasons.columns or "MP" not in seasons.columns:
-            return {"rows":[],"count":0,"scope":"career","season_type":season_type,
-                    "statistic":"Statistical Dominance Index",
-                    "note":"Authoritative SDI v4 source is missing career participation fields."}
-        seasons["G"]=pd.to_numeric(seasons["G"],errors="coerce").fillna(0)
-        seasons["MP"]=pd.to_numeric(seasons["MP"],errors="coerce").fillna(0)
         elig_pid_col=col(seasons,["Player_ID","PlayerId","PlayerID","player_id","__pid"])
         if not elig_pid_col:
             return {"rows":[],"count":0,"scope":"career","season_type":season_type,
                     "statistic":"Statistical Dominance Index",
                     "note":"Authoritative SDI v4 source is missing player identity columns."}
-        elig=seasons.groupby(elig_pid_col).agg(G=("G","sum"),MP=("MP","sum")).reset_index()
+        # The authoritative SDI season artifact is the score source, but some
+        # generated versions intentionally omit participation columns. Career
+        # qualification must still use the canonical player-season universe;
+        # do not reject otherwise valid SDI scores just because that derived
+        # artifact is compact.
+        if "G" in seasons.columns and "MP" in seasons.columns:
+            seasons["G"]=pd.to_numeric(seasons["G"],errors="coerce").fillna(0)
+            seasons["MP"]=pd.to_numeric(seasons["MP"],errors="coerce").fillna(0)
+            elig=seasons.groupby(elig_pid_col).agg(G=("G","sum"),MP=("MP","sum")).reset_index()
+            if elig_pid_col != "Player_ID":
+                elig=elig.rename(columns={elig_pid_col:"Player_ID"})
+        elif not is_playoff:
+            master=load_master_seasons()
+            mpid=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+            mg=col(master,["G","Games","games"])
+            mmp=col(master,["MP","Minutes","minutes"])
+            if not (mpid and mg and mmp and not master.empty):
+                return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                        "statistic":"Statistical Dominance Index",
+                        "note":"Canonical player-season source is missing career participation fields."}
+            elig_src=master[[mpid,mg,mmp]].copy()
+            elig_src["G"]=pd.to_numeric(elig_src[mg],errors="coerce").fillna(0)
+            elig_src["MP"]=pd.to_numeric(elig_src[mmp],errors="coerce").fillna(0)
+            elig=elig_src.groupby(mpid).agg(G=("G","sum"),MP=("MP","sum")).reset_index()
+            elig=elig.rename(columns={mpid:"Player_ID"})
+        else:
+            return {"rows":[],"count":0,"scope":"career","season_type":season_type,
+                    "statistic":"Statistical Dominance Index",
+                    "note":"Authoritative playoff SDI source is missing career participation fields."}
         if elig_pid_col != "Player_ID":
             elig=elig.rename(columns={elig_pid_col:"Player_ID"})
         if is_playoff:
