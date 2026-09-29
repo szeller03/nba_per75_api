@@ -2992,7 +2992,7 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
     # PLAYER PROFILE ONLY: keep the canonical profile artifact on the exact
     # version used by the last known-good Player Profile build. The Big Board
     # has its own v2 peak bundle and is intentionally not changed here.
-    path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_wowy_canonical_v1.json"
+    path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_authoritative_v6.json"
     if not path.exists():
         try:
             candidates=list(ROOT.rglob("*.json"))
@@ -3004,7 +3004,7 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
     if path is None or not path.exists():
         return None
     try:
-        cache_key="__precomputed_regular_peak_profiles_v7_sdi_v4_authoritative__"
+        cache_key="__precomputed_regular_peak_profiles_v6_authoritative__"
         if cache_key in CACHE:
             payload=CACHE[cache_key]
         else:
@@ -3075,7 +3075,7 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
             "sdi":clean(hit.get("peak_sdi")),
             "raw_sdi":clean(hit.get("peak_sdi")),
             "source":"precomputed_5_year_peak_authoritative_v6",
-            "peak_cache_version":"regular_profile_peaks_wowy_canonical_v1",
+            "peak_cache_version":"regular_profile_peaks_authoritative_v6",
         }
     except Exception as e:
         return {"found":False,"available":False,"error":f"Precomputed peak dataset could not be read: {e}"}
@@ -3347,57 +3347,56 @@ def api_profile(requested, season, season_type="Regular Season"):
         pass
 
     profile = None
-    if not current.empty:
-        if is_career:
-            # Career is a true aggregation, not an arithmetic mean of season
-            # rows. For regular season use the canonical career table; playoff
-            # profiles are handled by api_playoff_profile above.
-            career_table=_build_regular_career_table()
-            cm=career_table.loc[career_table["Player_ID"].astype(str).eq(str(data_pid))] if not career_table.empty and pid is not None else pd.DataFrame()
-            if cm.empty and not career_table.empty:
-                cm=career_table.loc[career_table["Player"].astype(str).str.casefold().eq(str(pname).casefold())]
-            career={k:clean(v) for k,v in (cm.iloc[0].to_dict().items() if not cm.empty else [])}
-            if cm.empty:
-                # Preserve a valid player response even if a future data refresh
-                # temporarily lacks the career aggregate row.
-                career={"Player_ID":data_pid,"Player":pname}
-            career["Season"]="Career"
-            career_ast_tov=_career_recorded_ast_tov(player_id=data_pid, player_name=pname)
-            if career_ast_tov is not None:
-                career["AST_TOV"]=float(career_ast_tov)
-            career["Career_Seasons_Represented"]=int(cm.shape[0]) if not cm.empty else int(len(current))
-            career["Career_Qualification"]=("G >= 400 AND MP >= 10,000")
-            career["Qualified_Career"] = bool(pd.to_numeric(career.get("G", np.nan), errors="coerce") >= 400 and pd.to_numeric(career.get("MP", np.nan), errors="coerce") >= 10000)
-            career["Career_SDI_Qualified"] = career["Qualified_Career"]
+    if is_career:
+        # Career is a true aggregation, not an arithmetic mean of season
+        # rows. For regular season use the canonical career table; playoff
+        # profiles are handled by api_playoff_profile above.
+        career_table=_build_regular_career_table()
+        cm=career_table.loc[career_table["Player_ID"].astype(str).eq(str(data_pid))] if not career_table.empty and pid is not None else pd.DataFrame()
+        if cm.empty and not career_table.empty:
+            cm=career_table.loc[career_table["Player"].astype(str).str.casefold().eq(str(pname).casefold())]
+        career={k:clean(v) for k,v in (cm.iloc[0].to_dict().items() if not cm.empty else [])}
+        if cm.empty:
+            # Preserve a valid player response even if a future data refresh
+            # temporarily lacks the career aggregate row.
+            career={"Player_ID":data_pid,"Player":pname}
+        career["Season"]="Career"
+        career_ast_tov=_career_recorded_ast_tov(player_id=data_pid, player_name=pname)
+        if career_ast_tov is not None:
+            career["AST_TOV"]=float(career_ast_tov)
+        career["Career_Seasons_Represented"]=int(cm.shape[0]) if not cm.empty else int(len(current))
+        career["Career_Qualification"]=("G >= 400 AND MP >= 10,000")
+        career["Qualified_Career"] = bool(pd.to_numeric(career.get("G", np.nan), errors="coerce") >= 400 and pd.to_numeric(career.get("MP", np.nan), errors="coerce") >= 10000)
+        career["Career_SDI_Qualified"] = career["Qualified_Career"]
 
-            # Career overall SDI is an authoritative career-layer value. The
-            # existing Career spider already warms the same WOWY-aware source,
-            # but the Profile header also needs the scalar on the profile
-            # payload itself. Do not recompute Career SDI from season rows here.
-            try:
-                _warm_career_sdi_axes()
-                _career_sdi_item = (_CAREER_SDI_AXES or {}).get("id",{}).get(str(pid).strip())
-                if not _career_sdi_item and pname:
-                    _career_sdi_item = (_CAREER_SDI_AXES or {}).get("name",{}).get(
-                        str(pname).replace("*","").strip().casefold()
-                    )
-                if isinstance(_career_sdi_item,dict):
-                    _career_overall = _career_sdi_item.get("overall_sdi")
-                    if _career_overall is not None:
-                        career["Career_SDI_v4_WOWY"] = clean(_career_overall)
-                        career["SDI_v4_WOWY"] = clean(_career_overall)
-            except Exception:
-                pass
+        # Career overall SDI is an authoritative career-layer value. The
+        # existing Career spider already warms the same WOWY-aware source,
+        # but the Profile header also needs the scalar on the profile
+        # payload itself. Do not recompute Career SDI from season rows here.
+        try:
+            _warm_career_sdi_axes()
+            _career_sdi_item = (_CAREER_SDI_AXES or {}).get("id",{}).get(str(pid).strip())
+            if not _career_sdi_item and pname:
+                _career_sdi_item = (_CAREER_SDI_AXES or {}).get("name",{}).get(
+                    str(pname).replace("*","").strip().casefold()
+                )
+            if isinstance(_career_sdi_item,dict):
+                _career_overall = _career_sdi_item.get("overall_sdi")
+                if _career_overall is not None:
+                    career["Career_SDI_v4_WOWY"] = clean(_career_overall)
+                    career["SDI_v4_WOWY"] = clean(_career_overall)
+        except Exception:
+            pass
 
-            profile=career
+        profile=career
+    elif not current.empty:
+        if is_playoffs:
+            # One canonical player-season row is expected after identity
+            # integration. If an unintegrated raw source is used, preserve
+            # its first row rather than silently combining identities here.
+            profile={k:clean(v) for k,v in current.iloc[0].to_dict().items()}
         else:
-            if is_playoffs:
-                # One canonical player-season row is expected after identity
-                # integration. If an unintegrated raw source is used, preserve
-                # its first row rather than silently combining identities here.
-                profile={k:clean(v) for k,v in current.iloc[0].to_dict().items()}
-            else:
-                profile={k:clean(v) for k,v in current.iloc[0].to_dict().items()}
+            profile={k:clean(v) for k,v in current.iloc[0].to_dict().items()}
 
     # 46-stat rows: season-specific rows for a normal view. Career returns a
     # descriptive mean of the available season values; percentile columns are
