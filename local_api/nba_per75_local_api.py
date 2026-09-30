@@ -2273,6 +2273,8 @@ def _load_regular_sdi_v4_player_seasons():
     # artifact, before attempting any percentile-layer reconstruction.
     canonical_candidates=[
         ROOT/"regular_sdi_v4_wowy_player_seasons.csv",
+        _ESTABLISHED_ROOT/"regular_sdi_v4_wowy_player_seasons.csv",
+        _ESTABLISHED_ROOT/"NBA_Per75"/"regular_sdi_v4_wowy_player_seasons.csv",
         Path(__file__).resolve().parents[1]/"regular_sdi_v4_wowy_player_seasons.csv",
     ]
     if not cache_path.exists():
