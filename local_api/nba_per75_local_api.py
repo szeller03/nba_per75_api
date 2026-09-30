@@ -2177,6 +2177,10 @@ def api_playoff_profile(requested, season):
         "season_type":"Playoffs",
         "available_contexts":context_avail,
         "statistic_registry":PLAYOFF_STATS,
+        "career_sdi":clean(playoff_career_sdi) if is_career else None,
+        "career_sdi_percentile":clean(playoff_career_sdi_percentile) if is_career else None,
+        "category_axes":playoff_career_axes if is_career else [],
+        "sdi":clean(playoff_career_sdi) if is_career else None,
         "career_note":(
             "Career playoff values come from the finalized playoff career 46-stat layer. "
             "Career percentiles require G >= 50 and MP >= 1,500. Single-season playoff percentiles require G >= 4 and MP >= 75."
