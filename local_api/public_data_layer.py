@@ -397,8 +397,15 @@ def _career_sdi_summary():
 
 def _regular_peak_public(pid,player_name=''):
     try:
-        candidates=[p for p in ROOT.rglob('*.json') if 'regular_profile_peaks' in p.name.lower()]
-        candidates.sort(key=lambda p:(0 if 'canonical' in p.name.lower() else 1,len(str(p))))
+        # Player Profile 5-Year Peak must use the authoritative v6 artifact.
+        # Railway's persistent volume can hide image-bundled data, so check
+        # the bundled artifact explicitly before the mounted project tree.
+        bundled=Path(__file__).resolve().parents[1]/'bundled_data'/'regular_profile_peaks_authoritative_v6.json'
+        candidates=[bundled] if bundled.exists() else []
+        candidates += [p for p in ROOT.rglob('*.json') if 'regular_profile_peaks' in p.name.lower()]
+        seen=set()
+        candidates=[p for p in candidates if not (str(p) in seen or seen.add(str(p)))]
+        candidates.sort(key=lambda p:(0 if p.name=='regular_profile_peaks_authoritative_v6.json' and str(p)==str(bundled) else 1,len(str(p))))
         if not candidates: return None
         payload=json.loads(candidates[0].read_text(encoding='utf-8'))
         wanted=str(pid or '').strip(); nkey=norm(player_name)
