@@ -5187,19 +5187,13 @@ def _regular_peak_category_population():
         ("Impact / Value","SDI_impact_value"),
     ]}
 
-    path=None
-    for candidate in (
-        "regular_profile_peaks_wowy_canonical_v2.json",
-        "regular_profile_peaks_v4.json",
-        "regular_profile_peaks_v5.json",
-        "regular_profile_peaks.json",
-    ):
-        try:
-            path=next((x for x in ROOT.rglob(candidate) if x.is_file()),None)
-        except Exception:
-            path=None
-        if path is not None and path.exists():
-            break
+    # Always use the same authoritative v6 peak artifact as the Player Profile.
+    # Older mounted-tree artifacts can be stale and must never drive Peak SDI axes.
+    bundled=Path("/app/bundled_data/regular_profile_peaks_authoritative_v6.json")
+    path=bundled if bundled.exists() else None
+    if path is None:
+        local_bundled=Path(__file__).resolve().parents[1]/"bundled_data"/"regular_profile_peaks_authoritative_v6.json"
+        path=local_bundled if local_bundled.exists() else None
     if path is None or not path.exists():
         _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
         return empty
@@ -5308,19 +5302,13 @@ def _regular_peak_category_percentile_axes(peak):
     if cache_key in _REGULAR_PEAK_SDI_AXES_CACHE:
         return _REGULAR_PEAK_SDI_AXES_CACHE[cache_key]
 
-    path=None
-    for candidate in (
-        "regular_profile_peaks_wowy_canonical_v2.json",
-        "regular_profile_peaks_v4.json",
-        "regular_profile_peaks_v5.json",
-        "regular_profile_peaks.json",
-    ):
-        try:
-            path=next((x for x in ROOT.rglob(candidate) if x.is_file()),None)
-        except Exception:
-            path=None
-        if path is not None and path.exists():
-            break
+    # Always use the same authoritative v6 peak artifact as the Player Profile.
+    # Older mounted-tree artifacts can be stale and must never drive Peak SDI axes.
+    bundled=Path("/app/bundled_data/regular_profile_peaks_authoritative_v6.json")
+    path=bundled if bundled.exists() else None
+    if path is None:
+        local_bundled=Path(__file__).resolve().parents[1]/"bundled_data"/"regular_profile_peaks_authoritative_v6.json"
+        path=local_bundled if local_bundled.exists() else None
     if path is None or not path.exists():
         return []
 
