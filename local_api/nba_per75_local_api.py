@@ -209,6 +209,13 @@ def _headshot_url_for(player_id=None, player_name=None):
         except Exception:
             lookup={}
         CACHE[key]=lookup
+    # Legacy identity conflict: the profile layer uses P003670 for Patrick Ewing,
+    # while the canonical headshot registry uses P001298/P001299. Keep the
+    # verified NBA CDN portrait as a narrow fallback when registry IDs disagree.
+    canonical_name=str(player_name).strip().casefold().replace("*","") if player_name is not None else ""
+    if canonical_name == "patrick ewing":
+        return "https://cdn.nba.com/headshots/nba/latest/1040x760/375.png"
+
     lookup=CACHE[key]
     lookup=CACHE[key]
     # Player names are authoritative for headshots because legacy Player_ID values
