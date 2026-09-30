@@ -5214,9 +5214,10 @@ def _regular_peak_category_percentile_axes(peak):
     def peak_scores(pid,namekey,years):
         per_cat={label:[] for label,_ in mapping}
         for y in years:
-            axes=by_id.get((str(pid).strip(),str(_season_label_any(y)).strip())) if pid else None
+            season_year=int(y)
+            axes=by_id.get((str(pid).strip(),season_year)) if pid else None
             if axes is None and namekey:
-                axes=by_name.get((str(namekey).strip(),str(_season_label_any(y)).strip()))
+                axes=by_name.get((str(namekey).strip(),season_year))
             if not axes:
                 continue
             for ax in axes:
