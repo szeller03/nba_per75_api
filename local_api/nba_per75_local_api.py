@@ -4696,7 +4696,13 @@ def _playoff_sdi_category_axes_and_overall(pm, pct_col, context="Season", season
                     group_scores.append((sum(v*w for v,w in vals_w)/den,float(gspec.get("weight",0))))
             if group_scores:
                 den=sum(w for _,w in group_scores)
-                scores[category]=sum(v*w for v,w in group_scores)/den if den>0 else np.nan
+                _category_label={
+                    "scoring_volume":"Scoring Volume",
+                    "scoring_efficiency":"Scoring Efficiency",
+                    "creation_playmaking":"Creation & Playmaking",
+                    "rebounding":"Rebounding",
+                }.get(str(category),str(category))
+                scores[_category_label]=sum(v*w for v,w in group_scores)/den if den>0 else np.nan
         return scores
 
     target_scores=category_scores(pm)
