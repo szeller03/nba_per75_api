@@ -2280,11 +2280,12 @@ def _load_regular_sdi_v4_player_seasons():
         _ESTABLISHED_ROOT/"NBA_Per75"/"regular_sdi_v4_wowy_player_seasons.csv",
         Path(__file__).resolve().parents[1]/"regular_sdi_v4_wowy_player_seasons.csv",
     ]
-    if not cache_path.exists():
-        for canonical in canonical_candidates:
-            if canonical.exists():
-                cache_path=canonical
-                break
+    # Prefer the repository-shipped canonical artifact over the persistent
+    # compact cache. The compact cache can contain source IDs that do not map
+    # to the public P#### identity layer used by Player Profiles.
+    canonical_path=next((p for p in canonical_candidates if p.exists()),None)
+    if canonical_path is not None:
+        cache_path=canonical_path
 
     if cache_path.exists():
         try:
