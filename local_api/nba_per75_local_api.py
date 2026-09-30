@@ -220,6 +220,15 @@ def _headshot_url_for(player_id=None, player_name=None):
         return "https://cdn.nba.com/headshots/nba/latest/1040x760/375.png"
 
     lookup=CACHE[key]
+    candidate_ids=[]
+    if player_id is not None: candidate_ids.append(str(player_id).strip())
+    if player_name is not None:
+        name_key=str(player_name).strip().casefold().replace("*","")
+        for (kind, value), resolved in lookup.items():
+            if kind=="name" and value==name_key and resolved.startswith("/player_headshots_final_v1/"): candidate_ids.append(Path(resolved).stem)
+    for pid in dict.fromkeys(candidate_ids):
+        local_candidates=[_PROJECT_ROOT/"player_headshots_final_v1"/f"{pid}.png",ROOT/"public"/"player_headshots_final_v1"/f"{pid}.png",ROOT/"player_headshots_final_v1"/f"{pid}.png",_ESTABLISHED_ROOT/"public"/"player_headshots_final_v1"/f"{pid}.png",_ESTABLISHED_ROOT/"player_headshots_final_v1"/f"{pid}.png",Path("/app/player_headshots_final_v1")/f"{pid}.png"]
+        if any(p.exists() for p in local_candidates): return f"/player_headshots_final_v1/{pid}.png"
     # Player names are authoritative for headshots because legacy Player_ID values
     # can differ between the profile identity layer and the headshot registry.
     if player_name is not None:
