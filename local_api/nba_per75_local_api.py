@@ -2928,14 +2928,28 @@ def _playoff_season_index_table(source):
         gs["_gw"]=float(g["_gw"].iloc[0]); gs["_category"]=str(category); pieces.append(gs)
     if not pieces:return pd.DataFrame()
     groups=pd.concat(pieces,ignore_index=True)
-    groups["_top_weight"]=groups["_category"].map(PLAYOFF_SDI_TOP_LEVEL_WEIGHTS)
+    _category_label={
+        "scoring_volume":"Scoring Volume",
+        "scoring_efficiency":"Scoring Efficiency",
+        "creation_playmaking":"Creation & Playmaking",
+        "rebounding":"Rebounding",
+    }
+    groups["_category_public"]=groups["_category"].astype(str).map(_category_label).fillna(groups["_category"].astype(str))
+    groups["_top_weight"]=groups["_category_public"].map(PLAYOFF_SDI_TOP_LEVEL_WEIGHTS)
     groups=groups.dropna(subset=["_top_weight"])
     groups["_w"]=groups["_group_score"]*groups["_gw"]
     cat=(groups.groupby(base+ ["_category"],dropna=False)
          .agg(_weighted=("_w","sum"),_gw=("_gw","sum"))
          .reset_index())
     cat["_category_score"]=cat["_weighted"]/cat["_gw"].replace(0,np.nan)
-    cat["_top_weight"]=cat["_category"].map(PLAYOFF_SDI_TOP_LEVEL_WEIGHTS)
+    _category_label2={
+        "scoring_volume":"Scoring Volume",
+        "scoring_efficiency":"Scoring Efficiency",
+        "creation_playmaking":"Creation & Playmaking",
+        "rebounding":"Rebounding",
+    }
+    cat["_category_public"]=cat["_category"].astype(str).map(_category_label2).fillna(cat["_category"].astype(str))
+    cat["_top_weight"]=cat["_category_public"].map(PLAYOFF_SDI_TOP_LEVEL_WEIGHTS)
     cat=cat.dropna(subset=["_category_score","_top_weight"])
     cat["_weighted_category"]=cat["_category_score"]*cat["_top_weight"]
     out=(cat.groupby(base,dropna=False)
@@ -2945,7 +2959,7 @@ def _playoff_season_index_table(source):
     return out
 
 
-PLAYOFF_PEAK_CACHE_PATH = Path(__file__).resolve().parent / "cache" / "playoff_peak_v3_four_category.json"
+PLAYOFF_PEAK_CACHE_PATH = Path(__file__).resolve().parent / "cache" / "playoff_peak_v4_four_category_sdi.json"
 
 def _load_precomputed_playoff_peak_population():
     """Load the one-time playoff 5-Year Peak calculation from disk."""
@@ -3186,6 +3200,15 @@ def _playoff_peak_population():
     sdi_pcts=(100.0 if len(s)==1 else 100.0*(len(s)-ranks)/(len(s)-1)).tolist()
     for i,r in enumerate(rows):
         r["sdi_percentile"]=float(sdi_pcts[i])
+
+    try:
+        PLAYOFF_PEAK_CACHE_PATH.parent.mkdir(parents=True,exist_ok=True)
+        PLAYOFF_PEAK_CACHE_PATH.write_text(
+            json.dumps({"version":"playoff_peak_v4_four_category_sdi","rows":rows},ensure_ascii=False,separators=(",",":")),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
 
     CACHE[key]=result
     return result
@@ -4636,7 +4659,14 @@ def _build_playoff_sdi_v4_index():
            .reset_index())
     catdf["__category_score"]=catdf["__num"]/catdf["__den"].replace(0,np.nan)
     tw=PLAYOFF_SDI_TOP_LEVEL_WEIGHTS
-    catdf["__top_weight"]=catdf["__cat"].map(tw).astype(float)
+    _category_label3={
+        "scoring_volume":"Scoring Volume",
+        "scoring_efficiency":"Scoring Efficiency",
+        "creation_playmaking":"Creation & Playmaking",
+        "rebounding":"Rebounding",
+    }
+    catdf["__category_public"]=catdf["__cat"].astype(str).map(_category_label3).fillna(catdf["__cat"].astype(str))
+    catdf["__top_weight"]=catdf["__category_public"].map(tw).astype(float)
     catdf=catdf.dropna(subset=["__category_score","__top_weight"])
     catdf["__weighted_category"]=catdf["__category_score"]*catdf["__top_weight"]
     s=(catdf.groupby(base,sort=False)
@@ -4805,9 +4835,12 @@ def _availability_aware_category_axes(pm, pct_col, playoff=False):
     # either spelling in source files.
     _canon_category={
         "scoring volume":"Scoring Volume",
+        "scoring_volume":"Scoring Volume",
         "scoring efficiency":"Scoring Efficiency",
+        "scoring_efficiency":"Scoring Efficiency",
         "efficiency":"Scoring Efficiency",
         "creation / playmaking":"Creation & Playmaking",
+        "creation_playmaking":"Creation & Playmaking",
         "creation & playmaking":"Creation & Playmaking",
         "rebounding":"Rebounding",
         "defense":"Defense",
