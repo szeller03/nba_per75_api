@@ -3696,21 +3696,11 @@ def api_profile(requested, season, season_type="Regular Season"):
                 if not enriched.empty:
                     current=enriched
 
-    headshot = None
-    try:
-        hs = load("headshots", ["headshot_registry", "headshot"])
-        hm = filter_player(hs, pid if pid is not None else pname)
-        if hm.empty:
-            hm = filter_player(hs, pname)
-        if not hm.empty:
-            hc = col(hm, [
-                "Verified_Headshot_URL", "Headshot_URL", "HeadshotUrl",
-                "NBA_Headshot_URL", "CDN_URL", "Image_URL"
-            ])
-            if hc:
-                headshot = clean(hm.iloc[0][hc])
-    except Exception:
-        pass
+    # Player Profile headshots must use the same canonical resolver as every
+    # other profile surface. The legacy load("headshots") path can contain
+    # stale/conflicting Player_ID mappings and must not override the canonical
+    # NBA CDN / approved-PNG registry.
+    headshot = _headshot_url_for(pid, pname)
 
     profile = None
     if is_career:
