@@ -177,6 +177,8 @@ def _headshot_url_for(player_id=None, player_name=None):
         lookup={}
         candidates=[ROOT/"public"/"player_headshots_final_v1"/"player_headshot_registry_active_v1.csv",
                    ROOT/"player_headshots_final_v1"/"player_headshot_registry_active_v1.csv",
+                   _ESTABLISHED_ROOT/"public"/"player_headshots_final_v1"/"player_headshot_registry_final_v1.csv",
+                   _ESTABLISHED_ROOT/"player_headshots_final_v1"/"player_headshot_registry_final_v1.csv",
                    ROOT/"public"/"player_headshots_final_v1"/"player_headshot_registry_final_v1.csv",
                    ROOT/"player_headshots_final_v1"/"player_headshot_registry_final_v1.csv"]
         path=next((x for x in candidates if x.exists()),None)
