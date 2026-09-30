@@ -7,6 +7,7 @@ import json
 import math
 import re
 import hashlib
+import gzip
 from io import BytesIO
 import os
 import threading
@@ -40,6 +41,22 @@ ROOT = next(
     (p for p in _ROOT_CANDIDATES if (p / "player_subcategory_aggregation_v1" / "player_subcategory_aggregation_spec_v1.csv").exists()),
     next((p for p in _ROOT_CANDIDATES if (p / "data").exists()), _ESTABLISHED_ROOT),
 )
+
+# Railway deployment fallback: restore the canonical master CSV bundled in the
+# image before any API route can request the team master source.
+_BUNDLED_MASTER_ARCHIVE = Path("/app/bundled_data/nba_per75_master_v46.csv.gz")
+_BUNDLED_MASTER_TARGET = Path("/app/NBA_Per75/NBA_Per75/data/nba_per75_master_v46.csv")
+if _BUNDLED_MASTER_ARCHIVE.exists():
+    try:
+        _BUNDLED_MASTER_TARGET.parent.mkdir(parents=True, exist_ok=True)
+        with gzip.open(_BUNDLED_MASTER_ARCHIVE, "rb") as _src, _BUNDLED_MASTER_TARGET.open("wb") as _dst:
+            while True:
+                _chunk = _src.read(1024 * 1024)
+                if not _chunk:
+                    break
+                _dst.write(_chunk)
+    except Exception as _restore_exc:
+        print(f"Canonical master CSV restore failed: {_restore_exc}")
 HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", "8000"))
 
