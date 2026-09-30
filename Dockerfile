@@ -23,7 +23,7 @@ COPY player_profiles_v1/ ./player_profiles_v1/
 # persistent volume can contain an older copy, so the Career SDI builder must
 # have access to the repository-controlled specification shipped with this build.
 COPY player_subcategory_aggregation_v1/ ./player_subcategory_aggregation_v1/
-
+# Package the authoritative headshot registry used by the runtime resolver.\nCOPY player_headshots_final_v1/ ./player_headshots_final_v1/\n
 EXPOSE 10000
 
 CMD ["python", "local_api/nba_per75_local_api.py"]
