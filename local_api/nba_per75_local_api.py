@@ -3562,7 +3562,7 @@ def api_profile(requested, season, season_type="Regular Season"):
         career_ast_tov=_career_recorded_ast_tov(player_id=data_pid, player_name=pname)
         if career_ast_tov is not None:
             career["AST_TOV"]=float(career_ast_tov)
-        career["Career_Seasons_Represented"]=int(cm.shape[0]) if not cm.empty else int(len(current))
+        career["Career_Seasons_Represented"]=int(len(current)) if not current.empty else 0
         career["Career_Qualification"]=("G >= 400 AND MP >= 10,000")
         career["Qualified_Career"] = bool(pd.to_numeric(career.get("G", np.nan), errors="coerce") >= 400 and pd.to_numeric(career.get("MP", np.nan), errors="coerce") >= 10000)
         career["Career_SDI_Qualified"] = career["Qualified_Career"]
