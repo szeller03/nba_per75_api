@@ -2576,11 +2576,26 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                     if float(rr["__G"])>=math.ceil(.60*sched) and float(rr["__MP"])>=1400:
                         qualified.append(rr)
                 q=pd.DataFrame(qualified) if qualified else pd.DataFrame()
+
+                # Historical source safeguard: the profile/master season layer
+                # can contain duplicate identity rows or incomplete season-type
+                # labels. After resolving the canonical player by name, build
+                # the qualifying set from unique season rows and explicitly
+                # allow a single skipped/non-qualifying season inside the
+                # six-calendar-year peak span.
+                if not q.empty:
+                    q=q.sort_values("__season_year").drop_duplicates("__season_year",keep="last").reset_index(drop=True)
+
                 candidates=[]
-                for i in range(max(0,len(q)-4)):
-                    cand=q.iloc[i:i+5].copy()
-                    if len(cand)==5 and int(cand["__season_year"].iloc[-1])-int(cand["__season_year"].iloc[0])<=5:
-                        candidates.append(cand)
+                if len(q)>=5:
+                    years=q["__season_year"].astype(int).tolist()
+                    for i in range(len(q)-4):
+                        cand=q.iloc[i:i+5].copy()
+                        if len(cand)!=5:
+                            continue
+                        span=int(cand["__season_year"].iloc[-1])-int(cand["__season_year"].iloc[0])
+                        if span<=5:
+                            candidates.append(cand)
 
                 if candidates:
                     # Prefer an SDI field already present in the player's master
@@ -2673,11 +2688,26 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                     if float(rr["__G"])>=math.ceil(.60*sched) and float(rr["__MP"])>=1400:
                         qualified.append(rr)
                 q=pd.DataFrame(qualified) if qualified else pd.DataFrame()
+
+                # Historical source safeguard: the profile/master season layer
+                # can contain duplicate identity rows or incomplete season-type
+                # labels. After resolving the canonical player by name, build
+                # the qualifying set from unique season rows and explicitly
+                # allow a single skipped/non-qualifying season inside the
+                # six-calendar-year peak span.
+                if not q.empty:
+                    q=q.sort_values("__season_year").drop_duplicates("__season_year",keep="last").reset_index(drop=True)
+
                 candidates=[]
-                for i in range(max(0,len(q)-4)):
-                    cand=q.iloc[i:i+5].copy()
-                    if len(cand)==5 and int(cand["__season_year"].iloc[-1])-int(cand["__season_year"].iloc[0])<=5:
-                        candidates.append(cand)
+                if len(q)>=5:
+                    years=q["__season_year"].astype(int).tolist()
+                    for i in range(len(q)-4):
+                        cand=q.iloc[i:i+5].copy()
+                        if len(cand)!=5:
+                            continue
+                        span=int(cand["__season_year"].iloc[-1])-int(cand["__season_year"].iloc[0])
+                        if span<=5:
+                            candidates.append(cand)
                 if candidates:
                     sdi_map=_new_sdi_v4_for_player(pmatch,requested_pid=requested_pid,requested_name=requested_name)
                     pmatch["__sdi"]=pmatch["__season_year"].map(sdi_map)
