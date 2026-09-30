@@ -787,6 +787,28 @@ def _career_sdi_artifact_debug():
     return result
 
 
+def _ensure_authoritative_career_sdi_artifact():
+    """Materialize the authoritative Career SDI artifact when the Railway volume lacks it."""
+    path = _recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
+    if path is not None and path.exists():
+        return True
+    builder = ROOT / "local_api" / "build_career_sdi_v4_wowy_v2.py"
+    if not builder.exists():
+        raise RuntimeError(f"Career SDI builder is missing: {builder}")
+    import importlib.util
+    module_name = "_career_sdi_builder_runtime"
+    spec = importlib.util.spec_from_file_location(module_name, str(builder))
+    if spec is None or spec.loader is None:
+        raise RuntimeError("Could not load the Career SDI builder.")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.main()
+    path = _recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
+    if path is None or not path.exists():
+        raise RuntimeError("Career SDI builder completed without creating the authoritative artifact.")
+    return True
+
+
 def _warm_career_sdi_axes():
     """Index authoritative Career SDI axes once for instant Career spider requests."""
     global _CAREER_SDI_AXES
@@ -11354,11 +11376,14 @@ if __name__ == "__main__":
             print("Career spider cache warm failed:", repr(e))
 
         try:
+            print("Ensuring authoritative Career SDI artifact...")
+            _ensure_authoritative_career_sdi_artifact()
+            print("Authoritative Career SDI artifact ready.")
             print("Warming Career SDI spider axes...")
             _warm_career_sdi_axes()
             print("Career SDI spider axes ready.")
         except Exception as e:
-            print("Career SDI spider warm failed:", repr(e))
+            print("Career SDI artifact/spider warm failed:", repr(e))
 
     import threading
     threading.Thread(target=warm_caches, name="NBA-PER75-cache-warm", daemon=True).start()
