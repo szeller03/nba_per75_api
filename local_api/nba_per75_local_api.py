@@ -792,9 +792,19 @@ def _ensure_authoritative_career_sdi_artifact():
     path = _recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
     if path is not None and path.exists():
         return True
-    builder = ROOT / "local_api" / "build_career_sdi_v4_wowy_v2.py"
-    if not builder.exists():
-        raise RuntimeError(f"Career SDI builder is missing: {builder}")
+    # Railway's persistent volume can overlay the project root used by the
+    # runtime, so ROOT/local_api is not guaranteed to be the same directory as
+    # the code shipped in the container image. Prefer the running API's sibling
+    # directory, then the Docker image's /app/local_api, then ROOT/local_api.
+    builder_candidates = [
+        Path(__file__).resolve().with_name("build_career_sdi_v4_wowy_v2.py"),
+        Path("/app/local_api/build_career_sdi_v4_wowy_v2.py"),
+        ROOT / "local_api" / "build_career_sdi_v4_wowy_v2.py",
+    ]
+    builder = next((p for p in builder_candidates if p.exists()), None)
+    if builder is None:
+        tried = ", ".join(str(p) for p in builder_candidates)
+        raise RuntimeError(f"Career SDI builder is missing; tried: {tried}")
     import importlib.util
     module_name = "_career_sdi_builder_runtime"
     spec = importlib.util.spec_from_file_location(module_name, str(builder))
