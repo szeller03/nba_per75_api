@@ -5167,300 +5167,113 @@ _REGULAR_SEASON_SPIDER_CACHE_LOCK = threading.Lock()
 
 _REGULAR_PEAK_CATEGORY_POPULATION_CACHE = None
 
-def _regular_peak_category_population():
-    """Build the regular 5-Year Peak category populations once, vectorized.
-
-    This is a performance-only equivalent of the previous per-player/per-category
-    DataFrame filtering loop. It uses the same existing canonical peak JSON and
-    canonical SDI/WOWY season layer; no statistics or methodology are changed.
-    """
-    global _REGULAR_PEAK_CATEGORY_POPULATION_CACHE
-    if _REGULAR_PEAK_CATEGORY_POPULATION_CACHE is not None:
-        return _REGULAR_PEAK_CATEGORY_POPULATION_CACHE
-
-    empty={label:[] for label,_ in [
-        ("Scoring Volume","SDI_scoring_volume"),
-        ("Scoring Efficiency","SDI_scoring_efficiency"),
-        ("Creation / Playmaking","SDI_creation_playmaking"),
-        ("Rebounding","SDI_rebounding"),
-        ("Defense","SDI_defense"),
-        ("Impact / Value","SDI_impact_value"),
-    ]}
-
-    # Always use the same authoritative v6 peak artifact as the Player Profile.
-    # Older mounted-tree artifacts can be stale and must never drive Peak SDI axes.
-    bundled=Path("/app/bundled_data/regular_profile_peaks_authoritative_v6.json")
-    path=bundled if bundled.exists() else None
-    if path is None:
-        local_bundled=Path(__file__).resolve().parents[1]/"bundled_data"/"regular_profile_peaks_authoritative_v6.json"
-        path=local_bundled if local_bundled.exists() else None
-    if path is None or not path.exists():
-        _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
-        return empty
-
-    d=_load_canonical_regular_season_sdi_wowy()
-    if d.empty:
-        _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
-        return empty
-
-    try:
-        payload=json.loads(path.read_text(encoding="utf-8"))
-        players=payload.get("players",[]) or []
-        mapping=[
-            ("Scoring Volume","SDI_scoring_volume"),
-            ("Scoring Efficiency","SDI_scoring_efficiency"),
-            ("Creation / Playmaking","SDI_creation_playmaking"),
-            ("Rebounding","SDI_rebounding"),
-            ("Defense","SDI_defense"),
-            ("Impact / Value","SDI_impact_value"),
-        ]
-        sy=col(d,["SeasonEndYear","Season_End_Year","Year"])
-        pidc=col(d,["Player_ID","PlayerId","PlayerID","player_id"])
-        namec=col(d,["Player","Player_Name","Display_Name","player_name","Name"])
-        if not sy or (not pidc and not namec):
-            _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
-            return empty
-
-        cols=[sy]+[x for x in [pidc,namec]+[f for _,f in mapping] if x]
-        work=d[cols].copy()
-        work["__year"]=pd.to_numeric(work[sy],errors="coerce")
-        work=work.dropna(subset=["__year"]).copy()
-        work["__year"]=work["__year"].astype(int)
-        if pidc: work["__pid"]=work[pidc].astype(str).str.strip()
-        else: work["__pid"]=""
-        if namec: work["__namekey"]=work[namec].map(_normalize_peak_lookup_name)
-        else: work["__namekey"]=""
-
-        peak_rows=[]
-        for pl in players:
-            seasons=pl.get("peak_seasons") or pl.get("Peak_Seasons") or []
-            years=[_season_end_year(x) for x in seasons]
-            years=[int(y) for y in years if y is not None]
-            if len(years)<5:
-                continue
-            peak_rows.append({
-                "player_id":str(pl.get("player_id") or pl.get("Player_ID") or "").strip(),
-                "namekey":_normalize_peak_lookup_name(pl.get("player_name") or pl.get("Player") or pl.get("Name") or ""),
-                "years":years,
-            })
-
-        exploded=[]
-        for pl in peak_rows:
-            for y in pl["years"]:
-                exploded.append((pl["player_id"],pl["namekey"],y))
-        if not exploded:
-            _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
-            return empty
-
-        e=pd.DataFrame(exploded,columns=["__peak_pid","__peak_namekey","__year"])
-        # Prefer exact Player_ID matches when the peak cache uses the same ID
-        # namespace. Otherwise use the same normalized-name fallback as the
-        # original category_score() implementation.
-        id_match=e.merge(
-            work.loc[work["__pid"].ne(""),["__pid","__year"]+[f for _,f in mapping]],
-            left_on=["__peak_pid","__year"],right_on=["__pid","__year"],how="left",suffixes=("","_d")
-        )
-        id_has=id_match[[f for _,f in mapping]].notna().any(axis=1)
-        remaining=e.loc[~id_has].copy()
-        if not remaining.empty:
-            name_match=remaining.merge(
-                work[["__namekey","__year"]+[f for _,f in mapping]],
-                left_on=["__peak_namekey","__year"],right_on=["__namekey","__year"],how="left",suffixes=("","_d")
-            )
-            combined=pd.concat([id_match.loc[id_has,["__peak_pid","__peak_namekey","__year"]+[f for _,f in mapping],],
-                                name_match[["__peak_pid","__peak_namekey","__year"]+[f for _,f in mapping]]],ignore_index=True)
-        else:
-            combined=id_match.loc[id_has,["__peak_pid","__peak_namekey","__year"]+[f for _,f in mapping]]
-
-        grouped=combined.groupby(["__peak_pid","__peak_namekey"],sort=False)[[f for _,f in mapping]].mean(numeric_only=True)
-        for _,row in grouped.iterrows():
-            for label,field in mapping:
-                v=pd.to_numeric(row.get(field,np.nan),errors="coerce")
-                if pd.notna(v): empty[label].append(float(v))
-    except Exception:
-        # Preserve the prior behavior's safe empty result on cache-build errors.
-        _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
-        return empty
-
-    _REGULAR_PEAK_CATEGORY_POPULATION_CACHE=empty
-    return empty
-
-
-_REGULAR_PEAK_SDI_AXES_CACHE = {}
-
 def _regular_peak_category_percentile_axes(peak):
-    """Return percentile-only SDI axes for the exact canonical regular 5-Year Peak.
+    """Return the six percentile SDI axes for the authoritative regular 5-Year Peak.
 
-    The peak window is authoritative; this adapter only ranks the six category
-    SDI composites for that already-selected window. It never substitutes the
-    raw category score for the Profile-facing percentile.
+    Peak selection and the locked Peak SDI are authoritative elsewhere.  For the
+    spider, use the already-authoritative individual-season SDI cache as the
+    category source, then average the exact five selected seasons for each player
+    and percentile-rank those Peak composites against the same canonical Peak
+    population.  This avoids the legacy WOWY category columns entirely.
     """
     if not peak or not peak.get("found") or not peak.get("available"):
         return []
+
+    global _REGULAR_PEAK_SDI_AXES_CACHE
     p=peak.get("player") or {}
-    cache_key=(str(p.get("player_id") or "").strip(), _normalize_peak_lookup_name(p.get("player_name") or ""))
+    target_id=str(p.get("player_id") or peak.get("profile",{}).get("Player_ID") or "").strip()
+    target_name=_normalize_peak_lookup_name(p.get("player_name") or peak.get("profile",{}).get("Player") or "")
+    cache_key=(target_id,target_name)
     if cache_key in _REGULAR_PEAK_SDI_AXES_CACHE:
         return _REGULAR_PEAK_SDI_AXES_CACHE[cache_key]
 
-    # Always use the same authoritative v6 peak artifact as the Player Profile.
-    # Older mounted-tree artifacts can be stale and must never drive Peak SDI axes.
     bundled=Path("/app/bundled_data/regular_profile_peaks_authoritative_v6.json")
-    path=bundled if bundled.exists() else None
-    if path is None:
-        local_bundled=Path(__file__).resolve().parents[1]/"bundled_data"/"regular_profile_peaks_authoritative_v6.json"
-        path=local_bundled if local_bundled.exists() else None
-    if path is None or not path.exists():
+    path=bundled if bundled.exists() else (Path(__file__).resolve().parents[1]/"bundled_data"/"regular_profile_peaks_authoritative_v6.json")
+    if not path.exists():
         return []
 
-    d=_load_canonical_regular_season_sdi_wowy()
-    if d.empty:
-        return []
-    sy=col(d,["SeasonEndYear","Season_End_Year","Year"])
-    pidc=col(d,["Player_ID","PlayerId","PlayerID","player_id"])
-    namec=col(d,["Player","Player_Name","Display_Name","player_name","Name"])
-    if not sy or (not pidc and not namec):
-        return []
-    work=d.copy()
-    work["__year"]=pd.to_numeric(work[sy],errors="coerce")
-    work=work.dropna(subset=["__year"]).copy(); work["__year"]=work["__year"].astype(int)
-    if pidc: work["__pid"]=work[pidc].astype(str).str.strip()
-    else: work["__pid"]=""
-    if namec: work["__namekey"]=work[namec].map(_normalize_peak_lookup_name)
-    else: work["__namekey"]=""
-
-    mapping=[
-        ("Scoring Volume","SDI_scoring_volume"),
-        ("Scoring Efficiency","SDI_scoring_efficiency"),
-        ("Creation / Playmaking","SDI_creation_playmaking"),
-        ("Rebounding","SDI_rebounding"),
-        ("Defense","SDI_defense"),
-        ("Impact / Value","SDI_impact_value"),
-    ]
     try:
         payload=json.loads(path.read_text(encoding="utf-8"))
         players=payload.get("players",[]) or []
     except Exception:
         return []
-    if not players:
-        return []
 
-    target_id=str((peak.get("player") or {}).get("player_id") or peak.get("profile",{}).get("Player_ID") or "").strip()
-    target_name=_normalize_peak_lookup_name((peak.get("player") or {}).get("player_name") or peak.get("profile",{}).get("Player") or "")
-    target_seasons=list((peak.get("peak") or {}).get("seasons") or peak.get("profile",{}).get("Peak_Seasons") or [])
-    target_years=[_season_end_year(x) for x in target_seasons]
-    target_years=[int(y) for y in target_years if y is not None]
-    if not target_years:
-        return []
+    cache=_warm_regular_season_spider_cache() or {}
+    by_id=cache.get("id",{}) or {}
+    by_name=cache.get("name",{}) or {}
+    mapping=[
+        ("Scoring Volume","scoring_volume"),
+        ("Scoring Efficiency","scoring_efficiency"),
+        ("Creation / Playmaking","creation_playmaking"),
+        ("Rebounding","rebounding"),
+        ("Defense","defense"),
+        ("Impact / Value","impact_value"),
+    ]
 
-    def category_score(player_id, player_name, years, field):
-        sub=work.loc[work["__year"].isin(years)]
-        hit=pd.DataFrame()
-        if player_id:
-            hit=sub.loc[sub["__pid"].eq(str(player_id).strip())]
-        if hit.empty and player_name:
-            hit=sub.loc[sub["__namekey"].eq(_normalize_peak_lookup_name(player_name))]
-        if hit.empty or field not in hit.columns:
-            return np.nan
-        vals=pd.to_numeric(hit[field],errors="coerce").dropna()
-        if vals.empty:
-            return np.nan
-        # The canonical peak contains five seasons. Use the mean of the
-        # underlying season-level category composites for the selected window.
-        return float(vals.mean())
+    def peak_scores(pid,namekey,years):
+        per_cat={label:[] for label,_ in mapping}
+        for y in years:
+            axes=by_id.get((str(pid).strip(),str(_season_label_any(y)).strip())) if pid else None
+            if axes is None and namekey:
+                axes=by_name.get((str(namekey).strip(),str(_season_label_any(y)).strip()))
+            if not axes:
+                continue
+            for ax in axes:
+                label=str(ax.get("axis") or ax.get("label") or "")
+                raw=ax.get("score",ax.get("raw_score"))
+                if label not in per_cat:
+                    continue
+                try:
+                    val=float(raw)
+                    if np.isfinite(val):
+                        per_cat[label].append(val)
+                except Exception:
+                    pass
+        return {label:float(np.mean(vals)) for label,vals in per_cat.items() if vals}
 
-    pop=_regular_peak_category_population()
-
-    # Fallback: derive Peak category populations from the already-authoritative
-    # individual-season SDI cache when the legacy WOWY season table cannot expose
-    # the six SDI category columns. This uses the same locked season category
-    # percentiles and the exact v6 peak windows; it does not alter peak selection.
-    if not any(pop.values()):
-        try:
-            _warm_regular_season_spider_cache()
-            season_cache=_REGULAR_SEASON_SPIDER_CACHE or {}
-            payload_by_id=season_cache.get("id",{}) or {}
-            payload_by_name=season_cache.get("name",{}) or {}
-            fallback={label:[] for label,_ in mapping}
-            v6=json.loads(path.read_text(encoding="utf-8"))
-            for pl in (v6.get("players",[]) or []):
-                pid=str(pl.get("player_id") or pl.get("Player_ID") or "").strip()
-                namekey=_normalize_peak_lookup_name(pl.get("player_name") or pl.get("Player") or pl.get("Name") or "")
-                years=[_season_end_year(x) for x in (pl.get("peak_seasons") or pl.get("Peak_Seasons") or [])]
-                years=[int(y) for y in years if y is not None]
-                if len(years)<5: continue
-                axes_by_label={label:[] for label,_ in mapping}
-                for y in years:
-                    payload=payload_by_id.get((pid,y)) if pid else None
-                    if payload is None and namekey:
-                        payload=payload_by_name.get((namekey,y))
-                    if not payload: continue
-                    for ax in payload.get("category_axes",[]) or []:
-                        label=str(ax.get("axis") or ax.get("label") or "")
-                        raw=ax.get("score",ax.get("raw_score"))
-                        if label in axes_by_label:
-                            try:
-                                val=float(raw)
-                                if np.isfinite(val): axes_by_label[label].append(val)
-                            except Exception: pass
-                for label in fallback:
-                    if axes_by_label[label]:
-                        fallback[label].append(float(np.mean(axes_by_label[label])))
-            pop=fallback
-        except Exception as exc:
-            print("Regular Peak SDI fallback population failed:",repr(exc))
-
-    target_scores={}
-
-    # Calculate only the requested player's raw category scores from the exact
-    # canonical peak window, using the same ID-then-name resolution as before.
-    target_id=str((peak.get("player") or {}).get("player_id") or peak.get("profile",{}).get("Player_ID") or "").strip()
-    target_name=_normalize_peak_lookup_name((peak.get("player") or {}).get("player_name") or peak.get("profile",{}).get("Player") or "")
-    target_seasons=list((peak.get("peak") or {}).get("seasons") or peak.get("profile",{}).get("Peak_Seasons") or [])
-    target_years=[_season_end_year(x) for x in target_seasons]
-    target_years=[int(y) for y in target_years if y is not None]
-    if not target_years:
-        return []
-
-    d=_load_canonical_regular_season_sdi_wowy()
-    sy=col(d,["SeasonEndYear","Season_End_Year","Year"])
-    pidc=col(d,["Player_ID","PlayerId","PlayerID","player_id"])
-    namec=col(d,["Player","Player_Name","Display_Name","player_name","Name"])
-    if not sy or (not pidc and not namec):
-        return []
-    work=d.copy()
-    work["__year"]=pd.to_numeric(work[sy],errors="coerce")
-    work=work.loc[work["__year"].isin(target_years)].copy()
-    if pidc: work["__pid"]=work[pidc].astype(str).str.strip()
-    else: work["__pid"]=""
-    if namec: work["__namekey"]=work[namec].map(_normalize_peak_lookup_name)
-    else: work["__namekey"]=""
-    hit=work.loc[work["__pid"].eq(target_id)].copy() if target_id and pidc else pd.DataFrame()
-    if hit.empty and target_name and namec:
-        hit=work.loc[work["__namekey"].eq(target_name)].copy()
-    for label,field in mapping:
-        if field not in hit.columns:
+    population={label:[] for label,_ in mapping}
+    target_years=[]
+    target_found=False
+    for pl in players:
+        pid=str(pl.get("player_id") or pl.get("Player_ID") or "").strip()
+        namekey=_normalize_peak_lookup_name(pl.get("player_name") or pl.get("Player") or pl.get("Name") or "")
+        years=[_season_end_year(x) for x in (pl.get("peak_seasons") or pl.get("Peak_Seasons") or [])]
+        years=[int(y) for y in years if y is not None]
+        if len(years)<5:
             continue
-        v=pd.to_numeric(hit[field],errors="coerce").dropna()
-        if not v.empty:
-            target_scores[label]=float(v.mean())
+        scores=peak_scores(pid,namekey,years)
+        for label in population:
+            if label in scores:
+                population[label].append(scores[label])
+        if ((target_id and pid==target_id) or (not target_id and target_name and namekey==target_name)
+            or (target_name and namekey==target_name)):
+            target_years=years
+            target_found=True
 
+    if not target_found or not target_years:
+        return []
+
+    target_scores=peak_scores(target_id,target_name,target_years)
     axes=[]
-    for label,_field in mapping:
-        raw=target_scores.get(label,np.nan)
-        arr=np.asarray(pop[label],dtype=float)
+    for label,_ in mapping:
+        raw=target_scores.get(label)
+        arr=np.asarray(population.get(label,[]),dtype=float)
         arr=arr[np.isfinite(arr)]
-        if not np.isfinite(raw) or arr.size==0:
+        if raw is None or arr.size==0:
             continue
         pct=_percentile_rank_0_100(raw,arr)
-        axes.append({"axis":label,"label":label,
-                     "value":float(pct) if pct is not None else None,
-                     "score":float(raw),"raw_score":float(raw),
-                     "percentile":float(pct) if pct is not None else None})
+        axes.append({
+            "axis":label,"label":label,
+            "value":float(pct) if pct is not None else None,
+            "score":float(raw),"raw_score":float(raw),
+            "percentile":float(pct) if pct is not None else None
+        })
     _REGULAR_PEAK_SDI_AXES_CACHE[cache_key]=axes
     return axes
 
 
 def _warm_regular_peak_sdi_spider_cache():
+
     """Precompute the six category percentile axes for every canonical regular Peak.
 
     This is a read-only performance cache over the already-locked peak windows and
