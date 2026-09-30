@@ -94,9 +94,6 @@ def load_locked_spec():
         out[key] = groups
     return out
 
-SPEC = load_locked_spec()
-
-
 LOWER_IS_BETTER = {"TOV_per75", "TOV_pct", "PF_per75", "DRtg", "Relative_DRtg"}
 
 
