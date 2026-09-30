@@ -183,6 +183,7 @@ def _headshot_url_for(player_id=None, player_name=None):
         ROOT/"public"/"player_headshots_final_v1"/"player_headshot_registry_final_v1.csv",
         ROOT/"player_headshots_final_v1"/"player_headshot_registry_final_v1.csv"]
         path=next((x for x in candidates if x.exists()),None)
+        lookup={}
         try:
             if path is None: raise FileNotFoundError("active headshot registry not found")
             hs=pd.read_csv(path,low_memory=False)
@@ -216,7 +217,6 @@ def _headshot_url_for(player_id=None, player_name=None):
     if canonical_name == "patrick ewing":
         return "https://cdn.nba.com/headshots/nba/latest/1040x760/375.png"
 
-    lookup=CACHE[key]
     lookup=CACHE[key]
     # Player names are authoritative for headshots because legacy Player_ID values
     # can differ between the profile identity layer and the headshot registry.
