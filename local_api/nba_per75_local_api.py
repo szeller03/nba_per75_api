@@ -210,12 +210,17 @@ def _headshot_url_for(player_id=None, player_name=None):
             lookup={}
         CACHE[key]=lookup
     lookup=CACHE[key]
-    if player_id is not None:
-        u=lookup.get(("id",str(player_id).strip()))
-        if u: return u
+    lookup=CACHE[key]
+    # Player names are authoritative for headshots because legacy Player_ID values
+    # can differ between the profile identity layer and the headshot registry.
     if player_name is not None:
         u=lookup.get(("name",str(player_name).strip().casefold().replace("*","")))
         if u: return u
+    if player_id is not None:
+        u=lookup.get(("id",str(player_id).strip()))
+        if u: return u
+    return None
+
     return None
 
 TEAM_INDEX_CACHE = Path(__file__).resolve().parent / "cache" / "team_index_v1.json"
