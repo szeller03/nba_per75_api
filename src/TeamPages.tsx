@@ -142,13 +142,21 @@ export function TeamProfilePage({ team, onBack }: { team: string; onBack?: () =>
       </div>
       <div className="percentile-grid">
         {profileStats.map((item) => {
+          const rawItemValue = Number(item?.value);
           const percentile = Number(item?.percentiles?.historical);
-          if (!Number.isFinite(percentile)) return null;
+          // If the source did not record this statistic for the selected season,
+          // do not render an empty card at all.
+          if (!Number.isFinite(rawItemValue) || !Number.isFinite(percentile)) return null;
           const clamped = Math.max(0, Math.min(100, percentile));
           const tone = clamped >= 90 ? 'elite' : clamped >= 75 ? 'strong' : clamped >= 50 ? 'average' : clamped >= 25 ? 'below' : 'low';
           const rawValue = Number(item?.value);
-          const displayValue = Number.isFinite(rawValue)
-            ? (String(item?.key ?? '').includes('%') ? `${rawValue.toFixed(1)}%` : (rawValue > 0 ? '+' : '') + rawValue.toFixed(1))
+          const metricKey = String(item?.key ?? '');
+          const isPercentageMetric = /(?:%|pct)/i.test(metricKey);
+          const normalizedValue = isPercentageMetric && Number.isFinite(rawValue) && Math.abs(rawValue) <= 1.5
+            ? rawValue * 100
+            : rawValue;
+          const displayValue = Number.isFinite(normalizedValue)
+            ? (isPercentageMetric ? `${normalizedValue.toFixed(1)}%` : (normalizedValue > 0 ? '+' : '') + normalizedValue.toFixed(1))
             : '—';
           return (
             <div className="percentile-card" key={item.key}>
