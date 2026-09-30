@@ -53,9 +53,20 @@ def load_locked_spec():
     The top-level category weights remain the explicit 22/20/20/10.5/22/5.5
     weights above. The CSV controls the within-category/group/statistic weights.
     """
-    spec_path = ROOT / "player_subcategory_aggregation_v1" / "player_subcategory_aggregation_spec_v1.csv"
-    if not spec_path.exists():
-        raise RuntimeError(f"Missing authoritative SDI aggregation spec: {spec_path}")
+    # The SDI specification is a repository-controlled application artifact,
+    # not a generated Railway-volume dataset. Prefer the exact spec shipped with
+    # this commit so a stale persistent-volume copy cannot silently reintroduce
+    # retired statistics such as Relative_DRtg into the Career SDI input set.
+    spec_candidates = [
+        _PROJECT_ROOT / "player_subcategory_aggregation_v1" / "player_subcategory_aggregation_spec_v1.csv",
+        ROOT / "player_subcategory_aggregation_v1" / "player_subcategory_aggregation_spec_v1.csv",
+    ]
+    spec_path = next((p for p in spec_candidates if p.exists()), None)
+    if spec_path is None:
+        raise RuntimeError(
+            "Missing authoritative SDI aggregation spec. Checked: " +
+            "; ".join(str(p) for p in spec_candidates)
+        )
     df = pd.read_csv(spec_path, low_memory=False)
     cat = col(df, ["Category"])
     group = col(df, ["Group_ID", "Group", "Group_Id"])
@@ -224,9 +235,15 @@ def main():
             ).to_dict()
             qualified[_stat] = qualified["Player_ID"].astype(str).str.strip().map(_rate_map)
 
+    # Validate the complete required SDI input set in one pass. Never stop at
+    # the first missing column; this makes deployment diagnostics actionable.
+    missing_inputs = [stat for stat in stats if stat not in qualified.columns]
+    if missing_inputs:
+        raise RuntimeError(
+            "Canonical Career table is missing SDI inputs: " + ", ".join(missing_inputs)
+        )
+
     for stat in stats:
-        if stat not in qualified.columns:
-            raise RuntimeError(f"Canonical Career table is missing SDI input: {stat}")
         pct[stat] = percentile(qualified[stat], higher=stat not in LOWER_IS_BETTER)
 
     # Evidence gate for historically sparse tracking statistics.
