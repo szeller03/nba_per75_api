@@ -3562,7 +3562,37 @@ def api_profile(requested, season, season_type="Regular Season"):
         career_ast_tov=_career_recorded_ast_tov(player_id=data_pid, player_name=pname)
         if career_ast_tov is not None:
             career["AST_TOV"]=float(career_ast_tov)
-        career["Career_Seasons_Represented"]=int(len(current)) if not current.empty else 0
+        # Career season count must come from the underlying player-season source, not
+        # the one-row career aggregate and not the profile-view frame (which can
+        # legitimately be empty for Career because the aggregate is built separately).
+        career_seasons_represented=0
+        try:
+            _career_season_source=load_master_seasons()
+            _career_pid_col=col(_career_season_source,["Player_ID","PlayerId","PlayerID","player_id"])
+            _career_name_col=col(_career_season_source,["Player","Player_Name","Display_Name","player_name","Name"])
+            _career_season_col=col(_career_season_source,["Season","season","Season_ID","SeasonEndYear","Season_End_Year"])
+            _career_type_col=col(_career_season_source,["Season_Type","season_type","SeasonType"])
+            if _career_pid_col:
+                _career_rows=_career_season_source.loc[
+                    _career_season_source[_career_pid_col].astype(str).eq(str(data_pid))
+                ].copy()
+            elif _career_name_col:
+                _career_rows=_career_season_source.loc[
+                    _career_season_source[_career_name_col].astype(str).str.strip().str.casefold().eq(str(pname).strip().casefold())
+                ].copy()
+            else:
+                _career_rows=pd.DataFrame()
+            if _career_type_col and not _career_rows.empty:
+                _career_rows=_career_rows.loc[
+                    ~_career_rows[_career_type_col].astype(str).str.casefold().isin({"playoffs","playoff","postseason"})
+                ].copy()
+            if _career_season_col and not _career_rows.empty:
+                career_seasons_represented=int(
+                    _career_rows[_career_season_col].dropna().astype(str).nunique()
+                )
+        except Exception:
+            career_seasons_represented=0
+        career["Career_Seasons_Represented"]=career_seasons_represented
         career["Career_Qualification"]=("G >= 400 AND MP >= 10,000")
         career["Qualified_Career"] = bool(pd.to_numeric(career.get("G", np.nan), errors="coerce") >= 400 and pd.to_numeric(career.get("MP", np.nan), errors="coerce") >= 10000)
         career["Career_SDI_Qualified"] = career["Qualified_Career"]
