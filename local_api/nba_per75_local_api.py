@@ -2265,6 +2265,22 @@ def _load_regular_sdi_v4_player_seasons():
     if key in CACHE:
         return CACHE[key]
     cache_path=ROOT/"local_api"/"cache"/"regular_sdi_v4_new_formula_player_seasons.csv"
+
+    # The repository also ships the authoritative season-level SDI v4 artifact.
+    # Railway images previously omitted this file, leaving the 5-Year Peak
+    # selector without season-level SDI when the compact runtime cache was
+    # absent. Prefer the compact runtime cache, then the canonical shipped
+    # artifact, before attempting any percentile-layer reconstruction.
+    canonical_candidates=[
+        ROOT/"regular_sdi_v4_wowy_player_seasons.csv",
+        Path(__file__).resolve().parents[1]/"regular_sdi_v4_wowy_player_seasons.csv",
+    ]
+    if not cache_path.exists():
+        for canonical in canonical_candidates:
+            if canonical.exists():
+                cache_path=canonical
+                break
+
     if cache_path.exists():
         try:
             d=pd.read_csv(cache_path,low_memory=False)
