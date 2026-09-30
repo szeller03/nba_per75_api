@@ -25,8 +25,10 @@ COPY player_profiles_v1/ ./player_profiles_v1/
 COPY player_subcategory_aggregation_v1/ ./player_subcategory_aggregation_v1/
 # Package the authoritative headshot registry used by the runtime resolver.
 COPY player_headshots_final_v1/ ./player_headshots_final_v1/
-# Package the canonical master CSV archive. The runtime restores it to the
-# persistent Railway volume before starting the API.
+# The 584 uploaded/verified PNG headshots are committed at repository root.
+# Copy them into the runtime directory so the uploaded PNGs are authoritative.
+COPY *.png ./player_headshots_final_v1/
+# Package the canonical master CSV archive.
 COPY nba_per75_master_v46.csv.gz ./bundled_data/nba_per75_master_v46.csv.gz
 COPY data/precomputed_5_year_peak/regular_profile_peaks_authoritative_v6.json ./bundled_data/regular_profile_peaks_authoritative_v6.json
 
