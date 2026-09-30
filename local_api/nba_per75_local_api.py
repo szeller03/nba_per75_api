@@ -707,6 +707,86 @@ _REGULAR_CAREER_SPIDER_LOCK = threading.Lock()
 _CAREER_SDI_AXES = None
 _CAREER_SDI_LOCK = threading.Lock()
 
+
+def _career_sdi_artifact_debug():
+    """Read-only diagnostics for the frozen Career SDI artifact/runtime discovery."""
+    result={
+        "expected_filename":"regular_career_sdi_v4_wowy_rts.csv",
+        "expected_path":None,
+        "exists":False,
+        "selected_source":None,
+        "columns":[],
+        "resolved_columns":{},
+        "jokic_match":[],
+        "jokic_row":None,
+    }
+    try:
+        path=_recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
+        result["expected_path"]=str(path) if path is not None else None
+        if path is not None and path.exists():
+            result["exists"]=True
+            result["selected_source"]=str(path)
+        else:
+            candidates=[]
+            try:
+                for candidate in ROOT.rglob("*.csv"):
+                    try:
+                        cols=pd.read_csv(candidate,nrows=0).columns.tolist()
+                    except Exception:
+                        continue
+                    norm={re.sub(r"[^a-z0-9]","",str(x).lower()) for x in cols}
+                    has_overall=any(x in norm for x in {
+                        "sdiv4wowy","careersdiv4wowy","careersdiv4","sdiv4"
+                    })
+                    has_categories=sum(any(token in x for token in {
+                        "careerscoringvolume","careerscoringefficiency",
+                        "careercreationplaymaking","careerrebounding",
+                        "careerdefense","careerimpactvalue"
+                    }) for x in norm)
+                    if has_overall or has_categories >= 3:
+                        candidates.append((candidate,cols,has_overall,has_categories))
+            except Exception:
+                pass
+            if candidates:
+                candidates.sort(key=lambda x:(x[2],x[3]),reverse=True)
+                path=candidates[0][0]
+                result["selected_source"]=str(path)
+                result["discovered_candidates"]=[
+                    {"path":str(p),"has_overall":bool(o),"category_matches":int(n)}
+                    for p,_,o,n in candidates[:10]
+                ]
+        if path is None or not path.exists():
+            return result
+        sd=pd.read_csv(path,low_memory=False)
+        result["columns"]=[str(x) for x in sd.columns.tolist()]
+        result["resolved_columns"]={
+            "player_id":col(sd,["Player_ID","PlayerId","PlayerID","player_id"]),
+            "player_name":col(sd,["Player","Player_Name","Display_Name","player_name","Name"]),
+            "Scoring Volume":col(sd,["Career_scoring_volume"]),
+            "Scoring Efficiency":col(sd,["Career_scoring_efficiency"]),
+            "Creation & Playmaking":col(sd,["Career_creation_playmaking"]),
+            "Rebounding":col(sd,["Career_rebounding"]),
+            "Defense":col(sd,["Career_defense"]),
+            "Impact & Value":col(sd,["Career_impact_value"]),
+            "overall":col(sd,["Career_SDI_v4_WOWY","SDI_v4_WOWY","Career_SDI_v4","SDI_v4"]),
+        }
+        pidcol=result["resolved_columns"]["player_id"]
+        namecol=result["resolved_columns"]["player_name"]
+        mask=pd.Series(False,index=sd.index)
+        if pidcol:
+            mask=sd[pidcol].astype(str).str.strip().eq("P003562")
+        if namecol:
+            nmask=sd[namecol].astype(str).str.replace("*","",regex=False).str.strip().map(_normalize_peak_lookup_name).eq("nikola jokic")
+            mask=mask|nmask
+        hit=sd.loc[mask]
+        result["jokic_match"]=[str(x) for x in hit.index.tolist()]
+        if not hit.empty:
+            result["jokic_row"]=hit.iloc[0].to_dict()
+    except Exception as exc:
+        result["error"]=f"{type(exc).__name__}: {exc}"
+    return result
+
+
 def _warm_career_sdi_axes():
     """Index authoritative Career SDI axes once for instant Career spider requests."""
     global _CAREER_SDI_AXES
@@ -11045,6 +11125,8 @@ class Handler(BaseHTTPRequestHandler):
                     q.get("stats", [None])[0],
                     q.get("season_type", ["Regular Season"])[0],
                 ))
+            if u.path == "/api/v1/debug/career-sdi-artifact":
+                return self.send_json(200, _career_sdi_artifact_debug())
             m = re.fullmatch(r"/api/v1/players/(.+?)/profile", u.path)
             if m:
                 return self.send_json(200, api_profile(
