@@ -5369,6 +5369,46 @@ def _regular_peak_category_percentile_axes(peak):
         return float(vals.mean())
 
     pop=_regular_peak_category_population()
+
+    # Fallback: derive Peak category populations from the already-authoritative
+    # individual-season SDI cache when the legacy WOWY season table cannot expose
+    # the six SDI category columns. This uses the same locked season category
+    # percentiles and the exact v6 peak windows; it does not alter peak selection.
+    if not any(pop.values()):
+        try:
+            _warm_regular_season_spider_cache()
+            season_cache=_REGULAR_SEASON_SPIDER_CACHE or {}
+            payload_by_id=season_cache.get("id",{}) or {}
+            payload_by_name=season_cache.get("name",{}) or {}
+            fallback={label:[] for label,_ in mapping}
+            v6=json.loads(path.read_text(encoding="utf-8"))
+            for pl in (v6.get("players",[]) or []):
+                pid=str(pl.get("player_id") or pl.get("Player_ID") or "").strip()
+                namekey=_normalize_peak_lookup_name(pl.get("player_name") or pl.get("Player") or pl.get("Name") or "")
+                years=[_season_end_year(x) for x in (pl.get("peak_seasons") or pl.get("Peak_Seasons") or [])]
+                years=[int(y) for y in years if y is not None]
+                if len(years)<5: continue
+                axes_by_label={label:[] for label,_ in mapping}
+                for y in years:
+                    payload=payload_by_id.get((pid,y)) if pid else None
+                    if payload is None and namekey:
+                        payload=payload_by_name.get((namekey,y))
+                    if not payload: continue
+                    for ax in payload.get("category_axes",[]) or []:
+                        label=str(ax.get("axis") or ax.get("label") or "")
+                        raw=ax.get("score",ax.get("raw_score"))
+                        if label in axes_by_label:
+                            try:
+                                val=float(raw)
+                                if np.isfinite(val): axes_by_label[label].append(val)
+                            except Exception: pass
+                for label in fallback:
+                    if axes_by_label[label]:
+                        fallback[label].append(float(np.mean(axes_by_label[label])))
+            pop=fallback
+        except Exception as exc:
+            print("Regular Peak SDI fallback population failed:",repr(exc))
+
     target_scores={}
 
     # Calculate only the requested player's raw category scores from the exact
