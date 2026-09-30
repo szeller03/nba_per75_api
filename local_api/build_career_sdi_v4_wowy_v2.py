@@ -170,6 +170,21 @@ def main():
         else:
             prof_path = ROOT / "player_profiles_v1" / "player_season_profiles.csv"
             if not prof_path.exists():
+                # The canonical profile layer may live one level outside the
+                # resolved data root on Railway's persistent volume. Locate
+                # the exact canonical filename rather than substituting or
+                # reconstructing TRB_pct from incomplete career totals.
+                search_roots = [_ESTABLISHED_ROOT, _PROJECT_ROOT, Path("/app")]
+                prof_path = None
+                for search_root in search_roots:
+                    try:
+                        hit = next(search_root.rglob("player_season_profiles.csv"), None)
+                    except Exception:
+                        hit = None
+                    if hit is not None and hit.is_file():
+                        prof_path = hit
+                        break
+            if prof_path is None or not prof_path.exists():
                 raise RuntimeError(
                     "Canonical Career table is missing SDI input: TRB_pct and "
                     "the canonical player-season profile layer is unavailable "
