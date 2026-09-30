@@ -2724,7 +2724,10 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                              "Peak_Era":_era_key(int(cand["__season_year"].min())),
                              "Peak_SDI":best[0]}
                         for stat in stats:
-                            row[stat]=clean(_era_average_statistic(cand,stat,ERA_AVERAGE_PER75_REGULAR,ERA_AVERAGE_ADDITIVE,ERA_AVERAGE_DENOMS))
+                            value=_era_average_statistic(cand,stat,ERA_AVERAGE_PER75_REGULAR,ERA_AVERAGE_ADDITIVE,ERA_AVERAGE_DENOMS)
+                            if stat=="DREB_pct" and pd.notna(value) and abs(float(value))<=1.5:
+                                value=float(value)*100.0
+                            row[stat]=clean(value)
 
                         # Rank each Peak statistic against the exact canonical
                         # 5-Year Peak population used by the Big Board. This is a
@@ -2838,7 +2841,10 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                              "Peak_Start_Year":int(cand["__season_year"].min()),"Peak_End_Year":int(cand["__season_year"].max()),
                              "Peak_Seasons":[_season_label_any(y) for y in cand["__season_year"].tolist()],"Peak_Era":_era_key(int(cand["__season_year"].min())),"Peak_SDI":best[0]}
                         for stat in stats:
-                            row[stat]=clean(_era_average_statistic(cand,stat,ERA_AVERAGE_PER75_REGULAR,ERA_AVERAGE_ADDITIVE,ERA_AVERAGE_DENOMS))
+                            value=_era_average_statistic(cand,stat,ERA_AVERAGE_PER75_REGULAR,ERA_AVERAGE_ADDITIVE,ERA_AVERAGE_DENOMS)
+                            if stat=="DREB_pct" and pd.notna(value) and abs(float(value))<=1.5:
+                                value=float(value)*100.0
+                            row[stat]=clean(value)
                         result={"found":True,"available":True,"player":{"player_id":requested_pid,"player_name":row["Player"]},"profile":row,
                                 "statistic_values":{k:row.get(k) for k in stats},"percentiles":[{"Statistic":stat,"Value":row.get(stat),"Peak_Value":row.get(stat),"Peak_Percentile":None} for stat in stats],
                                 "seasons":["5-Year Peak"],"season":"5-Year Peak","season_type":"Regular Season","is_five_year_peak":True,
@@ -4949,7 +4955,10 @@ def _percentile_rank_0_100(value, population, higher=True):
         better=float((arr < v).sum())
     else:
         better=float((arr > v).sum())
-    return float(100.0*better/(arr.size-1))
+    # Numerical/tie edge cases can otherwise produce a value slightly above
+    # 100 when the target is outside the finite population. A percentile is
+    # always bounded to the canonical 0-100 display range.
+    return float(np.clip(100.0*better/(arr.size-1),0.0,100.0))
 
 
 def _regular_profile_raw_category_scores(season):
