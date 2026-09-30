@@ -2608,6 +2608,14 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                 if not q.empty:
                     q=q.sort_values("__season_year").drop_duplicates("__season_year",keep="last").reset_index(drop=True)
 
+                # SDI must be attached to q BEFORE candidate windows are copied.
+                # Each cand below is a DataFrame copy, so assigning __sdi to q
+                # afterward does not propagate into existing candidates.
+                sdi_map=_new_sdi_v4_for_player(
+                    match, requested_pid=requested_pid, requested_name=requested_name
+                )
+                q["__sdi"]=q["__season_year"].map(sdi_map)
+
                 candidates=[]
                 if len(q)>=5:
                     years=q["__season_year"].astype(int).tolist()
@@ -2620,15 +2628,10 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                             candidates.append(cand)
 
                 if candidates:
-                    # Prefer an SDI field already present in the player's master
-                    # rows. Only fall back to the dominance file if necessary.
-                    # NEW SDI v4: use the locked six-category/equal-top-level
-                    # formula from config/statistical_index_v4_locked.json.
-                    sdi_map=_new_sdi_v4_for_player(
-                        match, requested_pid=requested_pid, requested_name=requested_name
-                    )
+                    # Prefer the authoritative NEW SDI v4 season map.
+                    # The qualifying DataFrame already received __sdi above,
+                    # before its candidate windows were copied.
                     match["__sdi"]=match["__season_year"].map(sdi_map)
-                    q["__sdi"]=q["__season_year"].map(sdi_map)
 
                     best=None
                     for cand in candidates:
