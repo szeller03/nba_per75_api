@@ -2266,12 +2266,15 @@ def _load_regular_sdi_v4_player_seasons():
         return CACHE[key]
     cache_path=ROOT/"local_api"/"cache"/"regular_sdi_v4_new_formula_player_seasons.csv"
 
-    # The repository also ships the authoritative season-level SDI v4 artifact.
-    # Railway images previously omitted this file, leaving the 5-Year Peak
-    # selector without season-level SDI when the compact runtime cache was
-    # absent. Prefer the compact runtime cache, then the canonical shipped
-    # artifact, before attempting any percentile-layer reconstruction.
+    # The repository ships the authoritative season-level SDI v4 artifact.
+    # Railway mounts its persistent volume at /app/NBA_Per75, so any artifact
+    # packaged underneath that directory is hidden at runtime by the volume.
+    # Keep the bundled copy outside the mounted tree and prefer it for the
+    # Player Profile 5-Year Peak selector when the persistent compact cache
+    # cannot resolve the public player identity.
+    bundled_canonical=Path(__file__).resolve().parents[1]/"bundled_data"/"regular_sdi_v4_wowy_player_seasons.csv"
     canonical_candidates=[
+        bundled_canonical,
         ROOT/"regular_sdi_v4_wowy_player_seasons.csv",
         _ESTABLISHED_ROOT/"regular_sdi_v4_wowy_player_seasons.csv",
         _ESTABLISHED_ROOT/"NBA_Per75"/"regular_sdi_v4_wowy_player_seasons.csv",
