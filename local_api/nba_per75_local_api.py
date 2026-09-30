@@ -3362,6 +3362,9 @@ def _load_precomputed_regular_peak_profile(requested_pid=None, requested_name=No
     # version used by the last known-good Player Profile build. The Big Board
     # has its own v2 peak bundle and is intentionally not changed here.
     path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_authoritative_v6.json"
+    bundled_path=Path("/app/bundled_data/regular_profile_peaks_authoritative_v6.json")
+    if not path.exists() and bundled_path.exists():
+        path=bundled_path
     if not path.exists():
         return None
     try:
@@ -11118,6 +11121,8 @@ class Handler(BaseHTTPRequestHandler):
                 requested=unquote(q.get("player",[""])[0]).strip()
                 pid,pname=resolve_player_identity(requested)
                 root_path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_authoritative_v6.json"
+                bundled_peak_path=Path("/app/bundled_data/regular_profile_peaks_authoritative_v6.json")
+                effective_peak_path=root_path if root_path.exists() else bundled_peak_path
                 established_path=_ESTABLISHED_ROOT / "regular_sdi_v4_wowy_player_seasons.csv"
                 established_nested_path=_ESTABLISHED_ROOT / "NBA_Per75" / "regular_sdi_v4_wowy_player_seasons.csv"
                 code_sibling_path=Path(__file__).resolve().parents[1] / "regular_sdi_v4_wowy_player_seasons.csv"
@@ -11129,8 +11134,8 @@ class Handler(BaseHTTPRequestHandler):
                     "resolved_player_name":pname,
                     "root":str(ROOT),
                     "established_root":str(_ESTABLISHED_ROOT),
-                    "authoritative_peak_path":str(root_path),
-                    "authoritative_peak_exists":root_path.exists(),
+                    "authoritative_peak_path":str(effective_peak_path),
+                    "authoritative_peak_exists":effective_peak_path.exists(),
                     "season_sdi_candidates":[
                         {"path":str(ROOT / "regular_sdi_v4_wowy_player_seasons.csv"),"exists":(ROOT / "regular_sdi_v4_wowy_player_seasons.csv").exists()},
                         {"path":str(established_path),"exists":established_path.exists()},
