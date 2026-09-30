@@ -5166,6 +5166,7 @@ _REGULAR_SEASON_SPIDER_CACHE = None
 _REGULAR_SEASON_SPIDER_CACHE_LOCK = threading.Lock()
 
 _REGULAR_PEAK_CATEGORY_POPULATION_CACHE = None
+_REGULAR_PEAK_SDI_AXES_CACHE = {}
 
 def _regular_peak_category_percentile_axes(peak):
     """Return the six percentile SDI axes for the authoritative regular 5-Year Peak.
