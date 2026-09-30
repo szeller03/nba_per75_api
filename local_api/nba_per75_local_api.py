@@ -2652,13 +2652,28 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                         for stat in stats:
                             row[stat]=clean(_era_average_statistic(cand,stat,ERA_AVERAGE_PER75_REGULAR,ERA_AVERAGE_ADDITIVE,ERA_AVERAGE_DENOMS))
 
-                        # Peak percentiles are populated from the already-built
-                        # Big Board statistic populations when available; if not,
-                        # return the values immediately and let the UI render them.
+                        # Rank each Peak statistic against the exact canonical
+                        # 5-Year Peak population used by the Big Board. This is a
+                        # presentation percentile only; it does not affect Peak
+                        # window selection or Peak SDI.
                         pcts=[]
+                        try:
+                            peak_bundle=_five_year_peak_all_stat_values("Regular Season",None)
+                        except Exception:
+                            peak_bundle={}
+                        lower_stats={"TOV_per75","TOV_pct","DRtg","Relative_DRtg"}
                         for stat in stats:
+                            value=pd.to_numeric(pd.Series([row.get(stat)]),errors="coerce").iloc[0]
+                            pct=None
+                            pop_df=peak_bundle.get(stat) if isinstance(peak_bundle,dict) else None
+                            if pd.notna(value) and isinstance(pop_df,pd.DataFrame) and not pop_df.empty and "_value_num" in pop_df.columns:
+                                vals=pd.to_numeric(pop_df["_value_num"],errors="coerce").dropna().to_numpy(dtype=float)
+                                vals=vals[np.isfinite(vals)]
+                                if vals.size:
+                                    higher=stat not in lower_stats
+                                    pct=_percentile_rank_0_100(float(value),vals,higher=higher)
                             pcts.append({"Statistic":stat,"Value":row.get(stat),"Peak_Value":row.get(stat),
-                                         "Peak_Percentile":None})
+                                         "Peak_Percentile":float(pct) if pct is not None else None})
                         result={"found":True,"available":True,
                                 "player":{"player_id":requested_pid,"player_name":row["Player"]},
                                 "profile":row,"statistic_values":{k:row.get(k) for k in stats},
