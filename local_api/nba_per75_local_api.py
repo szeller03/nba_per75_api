@@ -5220,7 +5220,15 @@ def _regular_peak_category_percentile_axes(peak):
                 axes=by_name.get((str(namekey).strip(),season_year))
             if not axes:
                 continue
+            # The regular-season spider cache stores response payloads, with
+            # the six SDI axes nested under "category_axes".
+            if isinstance(axes, dict):
+                axes=axes.get("category_axes",[]) or []
+            if not isinstance(axes, (list,tuple)):
+                continue
             for ax in axes:
+                if not isinstance(ax, dict):
+                    continue
                 label=str(ax.get("axis") or ax.get("label") or "")
                 raw=ax.get("score",ax.get("raw_score"))
                 if label not in per_cat:
