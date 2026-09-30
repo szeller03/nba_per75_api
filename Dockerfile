@@ -28,6 +28,7 @@ COPY player_headshots_final_v1/ ./player_headshots_final_v1/
 # Package the canonical master CSV archive. The runtime restores it to the
 # persistent Railway volume before starting the API.
 COPY nba_per75_master_v46.csv.gz ./bundled_data/nba_per75_master_v46.csv.gz
+COPY data/precomputed_5_year_peak/regular_profile_peaks_authoritative_v6.json ./bundled_data/regular_profile_peaks_authoritative_v6.json
 
 EXPOSE 10000
 
