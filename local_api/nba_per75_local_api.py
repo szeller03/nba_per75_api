@@ -4831,8 +4831,8 @@ def _load_canonical_regular_season_sdi_wowy():
     return d
 
 
-def _percentile_rank_0_100(value, population):
-    """Return a 0-100 same-season percentile with the maximum fixed at 100."""
+def _percentile_rank_0_100(value, population, higher=True):
+    """Return a 0-100 percentile, with 100 representing the better direction."""
     try:
         v=float(value)
     except Exception:
@@ -4842,8 +4842,11 @@ def _percentile_rank_0_100(value, population):
         return None
     if arr.size==1:
         return 100.0
-    less=float((arr < v).sum())
-    return float(100.0*less/(arr.size-1))
+    if higher:
+        better=float((arr < v).sum())
+    else:
+        better=float((arr > v).sum())
+    return float(100.0*better/(arr.size-1))
 
 
 def _regular_profile_raw_category_scores(season):
