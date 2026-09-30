@@ -10969,6 +10969,126 @@ class Handler(BaseHTTPRequestHandler):
         try:
             u = urlparse(self.path)
             q = parse_qs(u.query)
+            if u.path == "/api/v1/regular-peak-diagnostics":
+                requested=unquote(q.get("player",[""])[0]).strip()
+                pid,pname=resolve_player_identity(requested)
+                root_path=ROOT / "data" / "precomputed_5_year_peak" / "regular_profile_peaks_authoritative_v6.json"
+                established_path=_ESTABLISHED_ROOT / "regular_sdi_v4_wowy_player_seasons.csv"
+                established_nested_path=_ESTABLISHED_ROOT / "NBA_Per75" / "regular_sdi_v4_wowy_player_seasons.csv"
+                code_sibling_path=Path(__file__).resolve().parents[1] / "regular_sdi_v4_wowy_player_seasons.csv"
+
+                result={
+                    "ok":True,
+                    "requested":requested,
+                    "resolved_player_id":pid,
+                    "resolved_player_name":pname,
+                    "root":str(ROOT),
+                    "established_root":str(_ESTABLISHED_ROOT),
+                    "authoritative_peak_path":str(root_path),
+                    "authoritative_peak_exists":root_path.exists(),
+                    "season_sdi_candidates":[
+                        {"path":str(ROOT / "regular_sdi_v4_wowy_player_seasons.csv"),"exists":(ROOT / "regular_sdi_v4_wowy_player_seasons.csv").exists()},
+                        {"path":str(established_path),"exists":established_path.exists()},
+                        {"path":str(established_nested_path),"exists":established_nested_path.exists()},
+                        {"path":str(code_sibling_path),"exists":code_sibling_path.exists()},
+                    ],
+                }
+
+                try:
+                    idx=_load_regular_sdi_v4_player_seasons()
+                    result["season_sdi_rows"]=int(len(idx))
+                    result["season_sdi_columns"]=[str(x) for x in idx.columns[:20]]
+                    if not idx.empty:
+                        m=idx.iloc[0:0].copy()
+                        if pid is not None and "__pid" in idx.columns:
+                            m=idx.loc[idx["__pid"].astype(str).str.strip().eq(str(pid).strip())].copy()
+                        if m.empty and pname and "Player" in idx.columns:
+                            wanted=str(pname).replace("*","").strip().casefold()
+                            m=idx.loc[idx["Player"].astype(str).str.replace(r"\*+","",regex=True).str.strip().str.casefold().eq(wanted)].copy()
+                        result["season_sdi_player_rows"]=int(len(m))
+                        if not m.empty:
+                            result["season_sdi_player_sample"]=[
+                                {
+                                    "season":int(r["__season"]) if pd.notna(r.get("__season")) else None,
+                                    "season_label":clean(r.get("Season")),
+                                    "player_id":clean(r.get("__pid")),
+                                    "player":clean(r.get("Player")),
+                                    "sdi_v4":clean(r.get("SDI_v4")),
+                                }
+                                for _,r in m.sort_values("__season").iterrows()
+                            ]
+                except Exception as exc:
+                    result["season_sdi_error"]=f"{type(exc).__name__}: {exc}"
+
+                try:
+                    master=load_master_seasons()
+                    pcol=col(master,["Player","Player_Name","Display_Name","player_name","Name"])
+                    pidcol=col(master,["Player_ID","PlayerId","PlayerID","player_id"])
+                    scol=col(master,["Season","season","Season_ID","SeasonEndYear","Season_End_Year"])
+                    stcol=col(master,["Season_Type","SeasonType","season_type","Phase"])
+                    gcol=col(master,["G","Games","games"])
+                    mpcol=col(master,["MP","Minutes","minutes"])
+                    work=master.copy()
+                    if stcol:
+                        work=work.loc[work[stcol].astype(str).str.strip().str.casefold().isin({"regular season","regular","reg season"})].copy()
+                    match=work.iloc[0:0].copy()
+                    if pidcol and pid is not None:
+                        match=work.loc[work[pidcol].astype(str).str.strip().eq(str(pid).strip())].copy()
+                    if pcol and pname:
+                        wanted=str(pname).replace("*","").strip().casefold()
+                        nmatch=work.loc[work[pcol].astype(str).str.replace(r"\*+","",regex=True).str.strip().str.casefold().eq(wanted)].copy()
+                        if match.empty or len(match)<5:
+                            match=nmatch
+                    if pcol and scol and gcol and mpcol and not match.empty:
+                        match["__season_year"]=match[scol].map(_season_end_year)
+                        match["__G"]=pd.to_numeric(match[gcol],errors="coerce")
+                        match["__MP"]=pd.to_numeric(match[mpcol],errors="coerce")
+                        match=match.dropna(subset=["__season_year"]).copy()
+                        match["__season_year"]=match["__season_year"].astype(int)
+                        match=match.sort_values(["__season_year","__MP"],ascending=[True,False]).drop_duplicates(["__season_year"],keep="first")
+                        schedule=match.groupby("__season_year")["__G"].max().dropna().to_dict()
+                        qualified=[]
+                        for _,rr in match.iterrows():
+                            sched=float(schedule.get(int(rr["__season_year"]),82) or 82)
+                            if float(rr["__G"])>=math.ceil(.60*sched) and float(rr["__MP"])>=1400:
+                                qualified.append(rr)
+                        qdf=pd.DataFrame(qualified) if qualified else pd.DataFrame()
+                        candidates=[]
+                        if not qdf.empty:
+                            qdf=qdf.sort_values("__season_year").drop_duplicates("__season_year",keep="last").reset_index(drop=True)
+                            years=qdf["__season_year"].astype(int).tolist()
+                            for j in range(len(years)-4):
+                                cand=qdf.iloc[j:j+5].copy()
+                                if int(cand["__season_year"].iloc[-1])-int(cand["__season_year"].iloc[0])<=5:
+                                    candidates.append(cand)
+                        sdi_map=_new_sdi_v4_for_player(match,requested_pid=pid,requested_name=pname)
+                        result["master_regular_rows"]=int(len(match))
+                        result["qualifying_seasons"]=[int(x) for x in qdf["__season_year"].tolist()] if not qdf.empty else []
+                        result["qualifying_season_count"]=int(len(qdf))
+                        result["candidate_windows"]=[
+                            [int(x) for x in cand["__season_year"].tolist()] for cand in candidates
+                        ]
+                        result["season_sdi_map_count"]=int(len(sdi_map))
+                        result["season_sdi_map"]={str(k):clean(v) for k,v in sorted(sdi_map.items())}
+                        scored=[]
+                        for cand in candidates:
+                            vals=pd.to_numeric(cand["__season_year"].map(sdi_map),errors="coerce").dropna().tolist()
+                            scored.append({
+                                "seasons":[int(x) for x in cand["__season_year"].tolist()],
+                                "sdi_values":[clean(x) for x in vals],
+                                "mean_sdi":float(np.mean(vals)) if len(vals)==5 else None,
+                                "complete_sdi":len(vals)==5,
+                            })
+                        result["scored_windows"]=scored
+                    else:
+                        result["master_regular_rows"]=int(len(match))
+                        result["qualifying_seasons"]=[]
+                        result["qualifying_season_count"]=0
+                        result["candidate_windows"]=[]
+                except Exception as exc:
+                    result["master_error"]=f"{type(exc).__name__}: {exc}"
+
+                return self.send_json(200,result)
             if u.path == "/api/v1/playoff-peak-diagnostics":
                 pop=_playoff_peak_population()
                 return self.send_json(200, {
