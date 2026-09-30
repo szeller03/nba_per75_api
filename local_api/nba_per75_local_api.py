@@ -1047,8 +1047,15 @@ def _career_sdi_axes(pid=None, pname=None):
     # percentiles. This keeps raw SDI in `score` while `value` is explicitly
     # the percentile consumed by the Profile UI.
     pop={}
-    for payload_axes in (cache.get("id",{}) or {}).values():
+    for payload in (cache.get("id",{}) or {}).values():
+        # Career cache entries are dictionaries containing an "axes" list and
+        # the overall SDI. Iterate the actual axes list; iterating the dict
+        # itself yields string keys and raises on a.get(...), which previously
+        # caused the Profile route to swallow the exception and return [].
+        payload_axes = payload.get("axes",[]) if isinstance(payload,dict) else payload
         for a in payload_axes or []:
+            if not isinstance(a,dict):
+                continue
             label=str(a.get("axis") or a.get("label") or "")
             if label.casefold()=="defense":
                 continue
