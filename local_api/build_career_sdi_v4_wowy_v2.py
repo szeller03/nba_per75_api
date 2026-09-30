@@ -22,9 +22,17 @@ import pandas as pd
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _ESTABLISHED_ROOT = Path(os.environ.get("NBA_PER75_ROOT", str(_PROJECT_ROOT)))
-ROOT = next(
-    (p for p in (_ESTABLISHED_ROOT, _PROJECT_ROOT) if (p / "data").exists()),
+# Match the API's canonical Railway volume layout. The persistent volume is
+# currently mounted as /app/NBA_Per75 and contains the project at its nested
+# /app/NBA_Per75/NBA_Per75 root.
+_ROOT_CANDIDATES = [
+    _ESTABLISHED_ROOT / "NBA_Per75",
     _ESTABLISHED_ROOT,
+    _PROJECT_ROOT,
+]
+ROOT = next(
+    (p for p in _ROOT_CANDIDATES if (p / "player_subcategory_aggregation_v1" / "player_subcategory_aggregation_spec_v1.csv").exists()),
+    next((p for p in _ROOT_CANDIDATES if (p / "data").exists()), _ESTABLISHED_ROOT),
 )
 sys.path.insert(0, str(_PROJECT_ROOT / "local_api"))
 import nba_per75_local_api as api
