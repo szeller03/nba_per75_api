@@ -42,21 +42,6 @@ ROOT = next(
     next((p for p in _ROOT_CANDIDATES if (p / "data").exists()), _ESTABLISHED_ROOT),
 )
 
-# Railway deployment fallback: restore the canonical master CSV bundled in the
-# image before any API route can request the team master source.
-_BUNDLED_MASTER_ARCHIVE = Path("/app/bundled_data/nba_per75_master_v46.csv.gz")
-_BUNDLED_MASTER_TARGET = Path("/app/NBA_Per75/NBA_Per75/data/nba_per75_master_v46.csv")
-if _BUNDLED_MASTER_ARCHIVE.exists():
-    try:
-        _BUNDLED_MASTER_TARGET.parent.mkdir(parents=True, exist_ok=True)
-        with gzip.open(_BUNDLED_MASTER_ARCHIVE, "rb") as _src, _BUNDLED_MASTER_TARGET.open("wb") as _dst:
-            while True:
-                _chunk = _src.read(1024 * 1024)
-                if not _chunk:
-                    break
-                _dst.write(_chunk)
-    except Exception as _restore_exc:
-        print(f"Canonical master CSV restore failed: {_restore_exc}")
 HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", "8000"))
 
@@ -9863,13 +9848,20 @@ def _load_team_source():
     key="__team_source_v3__"
     if key in CACHE:return CACHE[key]
     f=find_csv(PATHS["master"],["nba_per75_master","master"])
-    if not f: raise FileNotFoundError(f"No master CSV found: {PATHS['master']}")
-    header=pd.read_csv(f,nrows=0,low_memory=False)
+    source_kwargs={}
+    if not f:
+        bundled=Path("/app/bundled_data/nba_per75_master_v46.csv.gz")
+        if bundled.exists():
+            f=bundled
+            source_kwargs={"compression":"gzip"}
+        else:
+            raise FileNotFoundError(f"No master CSV found: {PATHS['master']}")
+    header=pd.read_csv(f,nrows=0,low_memory=False,**source_kwargs)
     c=_team_columns(header)
     if not c["team"] or not c["season"]:
         CACHE[key]=None;return None
     wanted=list(dict.fromkeys([x for x in [c["team"],c["season"],c["player"],c["pid"],c["mp"],c["pts"],c["wins"],c["losses"]] if x]))
-    CACHE[key]=pd.read_csv(f,usecols=wanted,low_memory=False)
+    CACHE[key]=pd.read_csv(f,usecols=wanted,low_memory=False,**source_kwargs)
     return CACHE[key]
 
 
