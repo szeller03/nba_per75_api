@@ -99,6 +99,9 @@ def col(df, candidates):
     return None
 
 
+SPEC = load_locked_spec()
+
+
 def percentile(series, higher=True):
     s = pd.to_numeric(series, errors="coerce")
     valid = s.dropna()
