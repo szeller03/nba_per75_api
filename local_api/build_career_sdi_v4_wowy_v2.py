@@ -157,62 +157,72 @@ def main():
 
     stats = sorted({s for groups in SPEC.values() for group in groups.values() for s in group["statistics"]})
     pct = {}
-    # Some canonical career files do not materialize TRB% even though the
-    # player-season profile layer carries the canonical season-level TRB%.
-    # Resolve that field before percentile generation rather than failing the
-    # entire rebuild. Prefer a direct canonical career alias when present;
-    # otherwise construct the career rate as an MP-weighted aggregation of the
-    # canonical regular-season player-season TRB% values.
-    if "TRB_pct" not in qualified.columns:
-        trb_alias = col(qualified, ["TRB_pct", "TRB%", "TRB_pct.1"])
-        if trb_alias:
-            qualified["TRB_pct"] = pd.to_numeric(qualified[trb_alias], errors="coerce")
-        else:
-            prof_path = ROOT / "player_profiles_v1" / "player_season_profiles.csv"
-            if not prof_path.exists():
-                # The canonical profile layer may live one level outside the
-                # resolved data root on Railway's persistent volume. Locate
-                # the exact canonical filename rather than substituting or
-                # reconstructing TRB_pct from incomplete career totals.
-                search_roots = [_ESTABLISHED_ROOT, _PROJECT_ROOT, Path("/app")]
-                prof_path = None
-                for search_root in search_roots:
-                    try:
-                        hit = next(search_root.rglob("player_season_profiles.csv"), None)
-                    except Exception:
-                        hit = None
-                    if hit is not None and hit.is_file():
-                        prof_path = hit
-                        break
-            if prof_path is None or not prof_path.exists():
+    # Some canonical career files do not materialize TRB%/DREB%. These are
+    # canonical player-season rate statistics, so derive the Career values as
+    # MP-weighted aggregations from the exact regular-season profile layer.
+    # Prefer a direct canonical Career field when it exists; only fall back to
+    # the profile layer for missing fields. This keeps the rebuild evidence-aware
+    # without reconstructing percentage definitions from incomplete totals.
+    missing_rate_stats = []
+    for _stat in ["TRB_pct", "DREB_pct"]:
+        if _stat not in qualified.columns:
+            _alias = col(qualified, [_stat, _stat.replace("_pct", "%"), _stat + ".1"])
+            if _alias:
+                qualified[_stat] = pd.to_numeric(qualified[_alias], errors="coerce")
+            else:
+                missing_rate_stats.append(_stat)
+
+    if missing_rate_stats:
+        prof_path = ROOT / "player_profiles_v1" / "player_season_profiles.csv"
+        if not prof_path.exists():
+            # The canonical profile layer may live outside the resolved data
+            # root on Railway. Locate the exact canonical filename rather than
+            # substituting or reconstructing these rates from incomplete totals.
+            search_roots = [_ESTABLISHED_ROOT, _PROJECT_ROOT, Path("/app")]
+            prof_path = None
+            for search_root in search_roots:
+                try:
+                    hit = next(search_root.rglob("player_season_profiles.csv"), None)
+                except Exception:
+                    hit = None
+                if hit is not None and hit.is_file():
+                    prof_path = hit
+                    break
+        if prof_path is None or not prof_path.exists():
+            raise RuntimeError(
+                "Canonical Career table is missing SDI input: " + ", ".join(missing_rate_stats) +
+                " and the canonical player-season profile layer is unavailable for deriving them."
+            )
+
+        prof = pd.read_csv(prof_path, low_memory=False)
+        pst = col(prof, ["Season_Type", "SeasonType", "season_type", "Phase"])
+        if pst:
+            vals = prof[pst].astype(str).str.strip().str.casefold()
+            prof = prof.loc[vals.isin({"regular season", "regular", "reg season"})].copy()
+        pp_id = col(prof, ["Player_ID", "PlayerId", "PlayerID", "player_id"])
+        pp_mp = col(prof, ["MP", "Minutes", "minutes"])
+        if not pp_id or not pp_mp:
+            raise RuntimeError(
+                "Canonical player-season profile layer is missing Player_ID or MP, "
+                "which is required to derive Career SDI rate inputs."
+            )
+
+        prof["__pid"] = prof[pp_id].astype(str).str.strip()
+        prof["__mp"] = pd.to_numeric(prof[pp_mp], errors="coerce")
+        prof = prof.loc[prof["__mp"].notna() & prof["__mp"].gt(0)].copy()
+        for _stat in missing_rate_stats:
+            _pc = col(prof, [_stat, _stat.replace("_pct", "%"), _stat + ".1"])
+            if not _pc:
                 raise RuntimeError(
-                    "Canonical Career table is missing SDI input: TRB_pct and "
-                    "the canonical player-season profile layer is unavailable "
-                    "for deriving it."
+                    f"Canonical player-season profile layer is missing SDI input: {_stat}."
                 )
-            prof = pd.read_csv(prof_path, low_memory=False)
-            pst = col(prof, ["Season_Type", "SeasonType", "season_type", "Phase"])
-            if pst:
-                vals = prof[pst].astype(str).str.strip().str.casefold()
-                prof = prof.loc[vals.isin({"regular season", "regular", "reg season"})].copy()
-            pp_id = col(prof, ["Player_ID", "PlayerId", "PlayerID", "player_id"])
-            pp_mp = col(prof, ["MP", "Minutes", "minutes"])
-            pp_trb = col(prof, ["TRB_pct", "TRB%", "TRB_pct.1"])
-            if not pp_id or not pp_mp or not pp_trb:
-                raise RuntimeError(
-                    "Canonical Career table is missing SDI input: TRB_pct and "
-                    "the player-season profile layer does not contain the fields "
-                    "needed to derive it."
-                )
-            prof["__pid"] = prof[pp_id].astype(str).str.strip()
-            prof["__mp"] = pd.to_numeric(prof[pp_mp], errors="coerce")
-            prof["__trb_pct"] = pd.to_numeric(prof[pp_trb], errors="coerce")
-            prof = prof.loc[prof["__mp"].notna() & prof["__mp"].gt(0) & prof["__trb_pct"].notna()].copy()
-            trb_map = prof.groupby("__pid", sort=False).apply(
-                lambda g: float((g["__trb_pct"] * g["__mp"]).sum() / g["__mp"].sum()),
+            prof["__rate"] = pd.to_numeric(prof[_pc], errors="coerce")
+            _valid = prof.loc[prof["__rate"].notna()].copy()
+            _rate_map = _valid.groupby("__pid", sort=False).apply(
+                lambda g: float((g["__rate"] * g["__mp"]).sum() / g["__mp"].sum()),
                 include_groups=False,
             ).to_dict()
-            qualified["TRB_pct"] = qualified["Player_ID"].astype(str).str.strip().map(trb_map)
+            qualified[_stat] = qualified["Player_ID"].astype(str).str.strip().map(_rate_map)
 
     for stat in stats:
         if stat not in qualified.columns:
