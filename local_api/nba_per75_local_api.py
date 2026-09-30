@@ -27,15 +27,18 @@ import numpy as np
 # NBA_Per75 directory first, with a nearby-folder fallback for copied projects.
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _ESTABLISHED_ROOT = Path(os.environ.get("NBA_PER75_ROOT", str(_PROJECT_ROOT)))
+# Railway's persistent volume contains the canonical project one directory
+# deeper than NBA_PER75_ROOT in the current deployment layout:
+#   /app/NBA_Per75/NBA_Per75/<data/spec/profile files>
+# Resolve that layout explicitly before falling back to the image root.
 _ROOT_CANDIDATES = [
-    # Railway mounts the canonical NBA_Per75 data tree separately from the
-    # Docker image. Prefer it when it contains the production data directory.
+    _ESTABLISHED_ROOT / "NBA_Per75",
     _ESTABLISHED_ROOT,
     _PROJECT_ROOT,
 ]
 ROOT = next(
-    (p for p in _ROOT_CANDIDATES if (p / "data").exists()),
-    _ESTABLISHED_ROOT,
+    (p for p in _ROOT_CANDIDATES if (p / "player_subcategory_aggregation_v1" / "player_subcategory_aggregation_spec_v1.csv").exists()),
+    next((p for p in _ROOT_CANDIDATES if (p / "data").exists()), _ESTABLISHED_ROOT),
 )
 HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", "8000"))
