@@ -188,8 +188,6 @@ const INVALID_HISTORICAL_CDN_FALLBACKS = {
   "P000048":"https://cdn.nba.com/headshots/nba/latest/1040x760/154.png"
 };
 function _canonicalHistoricalHeadshot(player,name="") {
-  const supplied=player?.headshot_url || player?.Headshot_URL || player?.headshot || "";
-  if(String(supplied).startsWith("/player_headshots_final_v1/")) return supplied;
   const override=CREATE_T75_HEADSHOT_OVERRIDES[_nameKey(name)];
   const id=player?.player_id || player?.Player_ID || player?.id || "";
   const key=String(id||"");
