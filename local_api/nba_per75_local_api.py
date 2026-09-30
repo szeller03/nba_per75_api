@@ -2083,6 +2083,46 @@ def api_playoff_profile(requested, season):
             per=final_long
         pm=_playoff_player_match(per,pid,pname)
         percentiles=[{k:clean(v) for k,v in r.items()} for r in pm.to_dict("records")]
+
+        # Career playoff SDI must come from the same locked four-category
+        # playoff formula used by the playoff SDI spider/season index.  The
+        # finalized Career percentile layer is the input; no season-average
+        # or regular-season SDI value is reused here.
+        playoff_career_axes=[]
+        playoff_career_sdi=None
+        playoff_career_sdi_percentile=None
+        try:
+            _career_pct_col=percentile_column(pm,"Career")
+            if not _career_pct_col:
+                _career_pct_col=col(pm,["Career_Percentile"])
+            playoff_career_axes,playoff_career_sdi,playoff_career_sdi_percentile=(
+                _playoff_sdi_category_axes_and_overall(
+                    pm,
+                    _career_pct_col,
+                    context="Career",
+                    season="Career",
+                    pid=pid,
+                    pname=pname,
+                )
+            )
+        except Exception:
+            playoff_career_axes=[]
+            playoff_career_sdi=None
+            playoff_career_sdi_percentile=None
+
+        if playoff_career_sdi is not None:
+            profile["Career_SDI_v4_WOWY"]=clean(playoff_career_sdi)
+            profile["SDI_v4_WOWY"]=clean(playoff_career_sdi)
+            profile["Career_Playoff_SDI"]=clean(playoff_career_sdi)
+
+        # Playoff Career qualification is independent of regular-season
+        # qualification: the finalized playoff career percentile layer uses
+        # G >= 50 and MP >= 1,500.
+        _career_g=pd.to_numeric(profile.get("G"),errors="coerce")
+        _career_mp=pd.to_numeric(profile.get("MP"),errors="coerce")
+        profile["Qualified_Career"]=bool(pd.notna(_career_g) and pd.notna(_career_mp) and _career_g>=50 and _career_mp>=1500)
+        profile["Career_SDI_Qualified"]=bool(profile["Qualified_Career"] and playoff_career_sdi is not None)
+
         context_avail={"Season":False,"Era":False,"Historical":False,"Career":True}
         raw_rows=cm
     else:
