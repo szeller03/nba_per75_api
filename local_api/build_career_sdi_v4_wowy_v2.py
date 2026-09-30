@@ -16,12 +16,17 @@ The output is written to:
 A timestamped backup is created first when the existing output exists.
 """
 from pathlib import Path
-import json, shutil, sys
+import json, shutil, sys, os
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "local_api"))
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
+_ESTABLISHED_ROOT = Path(os.environ.get("NBA_PER75_ROOT", str(_PROJECT_ROOT)))
+ROOT = next(
+    (p for p in (_ESTABLISHED_ROOT, _PROJECT_ROOT) if (p / "data").exists()),
+    _ESTABLISHED_ROOT,
+)
+sys.path.insert(0, str(_PROJECT_ROOT / "local_api"))
 import nba_per75_local_api as api
 from audit_career_sdi_v2 import build_career_wowy
 
