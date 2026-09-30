@@ -2423,6 +2423,19 @@ def _new_sdi_v4_for_player(match, requested_pid=None, requested_name=None):
             if mm:
                 m=idx.loc[idx["__pid"].astype(str).str.strip().isin(mm)].copy()
 
+    # Final identity fallback: the authoritative SDI season cache can contain
+    # a source/alias Player_ID that differs from the website/master identity
+    # (for example, a clean historical identity and an asterisked source row).
+    # When the requested canonical name is present directly in the SDI cache,
+    # use that name match rather than requiring the cache ID to match the
+    # website/master ID. This preserves the season-level SDI values and only
+    # changes identity resolution.
+    if m.empty and requested_name and "Player" in idx.columns:
+        wanted=str(requested_name).replace("*","").strip().casefold()
+        m=idx.loc[
+            idx["Player"].astype(str).str.replace(r"\*+","",regex=True).str.strip().str.casefold().eq(wanted)
+        ].copy()
+
     if m.empty:
         return {}
 
