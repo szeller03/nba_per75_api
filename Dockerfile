@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY local_api/ ./local_api/
 # Package the authoritative regular-season SDI v4 season index used by
 # Player Profile 5-Year Peak selection when the compact Railway cache is absent.
-COPY regular_sdi_v4_wowy_player_seasons.csv ./NBA_Per75/NBA_Per75/regular_sdi_v4_wowy_player_seasons.csv
+COPY regular_sdi_v4_wowy_player_seasons.csv ./bundled_data/regular_sdi_v4_wowy_player_seasons.csv
 # The Career SDI builder uses this canonical player-season profile layer
 # to derive TRB_pct when the career aggregate does not materialize it.
 # Railway's persistent volume does not supply repository files to the image,
