@@ -835,7 +835,11 @@ def _warm_career_sdi_axes():
         # Career category scores are a frozen/authoritative layer. Search the
         # project tree for that exact legacy source so a data-folder relocation
         # cannot silently trigger a recomputation from the active SDI formula.
-        path = _recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
+        # The debug artifact endpoint and Career SDI builder define this exact
+        # file as authoritative. Prefer it explicitly so an older duplicate CSV
+        # elsewhere under the Railway volume cannot win the recursive lookup.
+        _expected_career_sdi = ROOT / "data" / "regular_career_sdi_v4_wowy_rts.csv"
+        path = _expected_career_sdi if _expected_career_sdi.exists() else _recursive_file(["regular_career_sdi_v4_wowy_rts.csv"])
         # Also discover the canonical career SDI export by schema.  Several
         # finalized builds used a descriptive filename rather than the legacy
         # filename above; the data itself is authoritative and must not be
@@ -5469,7 +5473,19 @@ def api_spider(requested, season=None, context="Historical", stats=None, season_
             try:
                 _overall_item=(_CAREER_SDI_AXES or {}).get("id",{}).get(req)
                 if _overall_item is None:
-                    _overall_item=(_CAREER_SDI_AXES or {}).get("name",{}).get(req.replace("*","").strip().casefold())
+                    _name_key=req.replace("*","").strip().casefold()
+                    _overall_item=(_CAREER_SDI_AXES or {}).get("name",{}).get(_name_key)
+                if _overall_item is None:
+                    try:
+                        _resolved_pid,_resolved_name=resolve_player_identity(req)
+                        if _resolved_pid:
+                            _overall_item=(_CAREER_SDI_AXES or {}).get("id",{}).get(str(_resolved_pid).strip())
+                        if _overall_item is None and _resolved_name:
+                            _overall_item=(_CAREER_SDI_AXES or {}).get("name",{}).get(
+                                str(_resolved_name).replace("*","").strip().casefold()
+                            )
+                    except Exception:
+                        pass
                 if isinstance(_overall_item,dict):
                     _ov=_overall_item.get("overall_sdi")
                     if _ov is not None:
