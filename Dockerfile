@@ -31,4 +31,4 @@ COPY nba_per75_master_v46.csv.gz ./bundled_data/nba_per75_master_v46.csv.gz
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "mkdir -p /app/NBA_Per75/NBA_Per75/data && gzip -dc /app/bundled_data/nba_per75_master_v46.csv.gz > /app/NBA_Per75/NBA_Per75/data/nba_per75_master_v46.csv && test -s /app/NBA_Per75/NBA_Per75/data/nba_per75_master_v46.csv && exec python local_api/nba_per75_local_api.py"]
+CMD ["python", "local_api/nba_per75_local_api.py"]
