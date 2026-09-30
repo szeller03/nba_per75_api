@@ -535,11 +535,22 @@ def api_players(q):
 def load_master_seasons():
     """Authoritative player-season universe plus first-class individual WOWY stats."""
     f=PATHS["master"]
+    read_kwargs={}
     if not f.exists():
-        return pd.DataFrame()
+        # Railway mounts its persistent volume at /app/NBA_Per75, which can
+        # hide repository-bundled data. The canonical master is also shipped
+        # outside that mount as a gzip archive.
+        bundled=Path("/app/bundled_data/nba_per75_master_v46.csv.gz")
+        if bundled.exists():
+            f=bundled
+            read_kwargs={"compression":"gzip"}
+        else:
+            return pd.DataFrame()
     key="__master_seasons__"
     if key not in CACHE:
-        CACHE[key]=_merge_wowy_into_player_seasons(pd.read_csv(f,low_memory=False))
+        CACHE[key]=_merge_wowy_into_player_seasons(
+            pd.read_csv(f,low_memory=False,**read_kwargs)
+        )
     return CACHE[key]
 
 def _load_wowy_stat_layer():
