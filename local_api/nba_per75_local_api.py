@@ -2628,6 +2628,7 @@ def _canonical_five_year_peak_profile(requested_pid=None, requested_name=None):
                         match, requested_pid=requested_pid, requested_name=requested_name
                     )
                     match["__sdi"]=match["__season_year"].map(sdi_map)
+                    q["__sdi"]=q["__season_year"].map(sdi_map)
 
                     best=None
                     for cand in candidates:
