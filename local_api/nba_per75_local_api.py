@@ -28,8 +28,10 @@ import numpy as np
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _ESTABLISHED_ROOT = Path(os.environ.get("NBA_PER75_ROOT", str(_PROJECT_ROOT)))
 _ROOT_CANDIDATES = [
-    _PROJECT_ROOT,
+    # Railway mounts the canonical NBA_Per75 data tree separately from the
+    # Docker image. Prefer it when it contains the production data directory.
     _ESTABLISHED_ROOT,
+    _PROJECT_ROOT,
 ]
 ROOT = next(
     (p for p in _ROOT_CANDIDATES if (p / "data").exists()),
